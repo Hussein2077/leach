@@ -11,7 +11,7 @@ final Widget child;
         SizedBox(
             width: AppSize.screenWidth,
             height: AppSize.screenHeight,
-            child: Image.asset(AssetPath.welcomeImage2, )),
+            child: Image.asset(AssetPath.welcomeImage2,fit: BoxFit.fill, )),
         child
       ],
     );

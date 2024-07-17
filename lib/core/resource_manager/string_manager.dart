@@ -1,7 +1,6 @@
 class StringManager {
 
-
-//////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
   static const String userTokenKey = "User Token Key";
 
   static const String ifStudent = "ifStudent";
@@ -11,5 +10,79 @@ class StringManager {
   static const String login    = "Login";
   static const String register     = "Register";
   static const String loginToContinue      = "Login to continue using the app";
+
+  static const String emailOrPhoneNumber = "Email/Phone Number";
+  static const String enterEmailOrPhoneNumber = "Enter your email/phone number";
+  static const String password = "Password";
+  static const String enterPassword = "Enter password";
+  static const String forgotPassword = "Forgot Password?";
+  static const String enterPersonalInformation = "Enter your personal information";
+  static const String username = "Username";
+  static const String email = "Email";
+  static const String confirmPassword = "Confirm password";
+  static const String country = "Country";
+  static const String city = "City";
+  static const String selectYourCountry = "Select your country";
+  static const String selectYourCity = "Select your city";
+  static const String resetPassword = "Reset Password";
+  static const String enterYourInformation = "Enter Your Information";
+  static const String orLoginWith = "OR login with";
+  static const String addPet = "Add Pet";
+  static const String findPetForAdoption = "Find Pet for Adoption";
+  static const String code = "Code";
+  static const String enterVerificationCode = "Enter verification code";
+  static const String didntReceiveCode = "Didn’t receive your code?";
+  static const String resendCode = "Resend code";
+  static const String dog = "Dog";
+  static const String cat = "Cat";
+  static const String typeOfPet = "Type of Pet";
+  static const String catBreed = "Cat Breed";
+  static const String enterYourCatsInformation = "Enter your cat’s information";
+  static const String selectYourCatsBreed = "Select your cat’s breed";
+  static const String pureBred = "Pure Bred";
+  static const String mixedBreed = "Mixed Breed";
+  static const String secondBreed = "Second Breed";
+  static const String selectYourCatsSecondBreed = "Select your cat’s second breed";
+  static const String typeAgeAndWeightOfDog = "Type the Age and Weight of the Dog";
+  static const String age = "Age";
+  static const String weightKg = "Weight/Kg";
+  static const String gender = "Gender";
+  static const String male = "Male";
+  static const String female = "Female";
+  static const String size = "Size";
+  static const String small = "Small";
+  static const String medium = "Medium";
+  static const String large = "Large";
+  static const String chunky = "Chunky";
+  static const String breedingExperience = "Breeding experience";
+  static const String yes = "Yes";
+  static const String no = "No";
+  static const String addAPicture = "Add a picture";
+  static const String addPictureOfMedicalPassport = "Add a picture of medical passport";
+  static const String next = "Next";
+  static const String dogBreed = "Dog Breed";
+  static const String enterYourDogsInformation = "Enter your dog’s information";
+  static const String selectYourDogsBreed = "Select your dog’s breed";
+
+  static const String howTo = "How To";
+  static const String groomYourPet = "Groom Your Pet";
+  static const String trainYourPet = "Train Your Pet";
+  static const String trainYourDog = "Train Your Dog";
+  static const String clickerTraining = "Clicker Training";
+  static const String crateTraining = "Crate Training";
+  static const String pottyTraining = "Potty Training";
+  static const String steps = "Steps";
+  static const String welcome = "Welcome";
+  static const String posts = "Posts";
+  static const String breeding = "Breeding";
+  static const String playdates = "Playdates";
+  static const String adoption = "Adoption";
+  static const String booking = "Booking";
+  static const String changePicture = "Change Picture";
+  static const String enterInformation = "Enter Information";
+  static const String editBio = "Edit Bio";
+  static const String friends = "Friends";
+  static const String messages = "Messages";
+  static const String turnOffCommenting = "Turn off commenting";
 
 }
