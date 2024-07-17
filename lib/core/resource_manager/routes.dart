@@ -3,10 +3,13 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:leach/core/service/navigator_services.dart';
 import 'package:leach/core/service/service_locator.dart';
+import 'package:leach/features/auth/presentation/login_screen.dart';
+import 'package:leach/features/auth/presentation/welcome_screen.dart';
 
 
 class Routes {
   static const String login = "/login";
+  static const String welcomePage = "/welcomePage";
   static const String splash = "/splash";
   static const String main = "/main";
 }
@@ -21,8 +24,14 @@ class RouteGenerator {
       case Routes.login:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const SizedBox(),
+                const LoginScreen(),
             transitionsBuilder: customAnimate);
+        case Routes.welcomePage:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const WelcomePage(),
+            transitionsBuilder: customAnimate);
+
 
     }
     return unDefinedRoute(

@@ -36,8 +36,8 @@ class MainButton extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(padding ?? 0),
       child: SizedBox(
-        height: height ?? AppSize.defaultSize! * 4.5,
-        width: width ?? AppSize.screenWidth! * .9,
+        height: height ?? AppSize.defaultSize! * 6,
+        width: width ?? AppSize.defaultSize! * 35.8,
         child: ElevatedButton(
           onPressed: onTap,
           style: ElevatedButton.styleFrom(
@@ -52,7 +52,7 @@ class MainButton extends StatelessWidget {
                   ? CustomText(
                       text: text,
                       color: textColor,
-                      fontSize: fontSize ?? AppSize.defaultSize! * 1.5,
+                      fontSize: fontSize ?? AppSize.defaultSize! * 2,
                       fontWeight: fontWeight,
                     )
                   : Row(

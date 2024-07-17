@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/utils/app_size.dart';
 class CustomText extends StatelessWidget {
   final String text;
@@ -36,7 +37,7 @@ class CustomText extends StatelessWidget {
       style: TextStyle(
         height: lineHeight,
 
-        color: color ?? Colors.black,
+        color: color ?? AppColors.primaryColor,
         decoration: textDecoration ?? TextDecoration.none,
 
             fontSize: fontSize??AppSize.defaultSize! * 1.4,

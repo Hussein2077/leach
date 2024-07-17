@@ -75,7 +75,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RouteGenerator.getRoute,
         navigatorKey: getIt<NavigationService>().navigatorKey,
-        initialRoute: Routes.splash,
+        initialRoute: Routes.welcomePage,
         // token == null || token == 'noToken' ? Routes.login : Routes.main,
         theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
