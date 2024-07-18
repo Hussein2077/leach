@@ -3,15 +3,26 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:leach/core/service/navigator_services.dart';
 import 'package:leach/core/service/service_locator.dart';
+import 'package:leach/features/auth/presentation/forgot_password/code_page.dart';
+import 'package:leach/features/auth/presentation/forgot_password/forgot_password.dart';
+import 'package:leach/features/auth/presentation/forgot_password/reset_password_screen.dart';
 import 'package:leach/features/auth/presentation/login_screen.dart';
+import 'package:leach/features/auth/presentation/sign_up/register.dart';
 import 'package:leach/features/auth/presentation/welcome_screen.dart';
-
+import 'package:leach/features/profile/presentation/add_pet/add_pet_screen.dart';
+import 'package:leach/features/profile/presentation/add_pet/type_of_pet.dart';
 
 class Routes {
   static const String login = "/login";
   static const String welcomePage = "/welcomePage";
   static const String splash = "/splash";
   static const String main = "/main";
+  static const String signUp = "/signUp";
+  static const String forgotPasswordScreen = "/ForgotPasswordScreen";
+  static const String otpCode = "/otpCode";
+  static const String  resetPassword = "/resetPassword";
+  static const String  addPetScreen = "/addPetScreen";
+  static const String  TypeOfPetScreen  = "/TypeOfPetScreen";
 }
 
 class RouteGenerator {
@@ -19,19 +30,46 @@ class RouteGenerator {
 
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
-
-
       case Routes.login:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const LoginScreen(),
             transitionsBuilder: customAnimate);
-        case Routes.welcomePage:
+      case Routes.welcomePage:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const WelcomePage(),
             transitionsBuilder: customAnimate);
-
+      case Routes.signUp:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const SignUpScreen(),
+            transitionsBuilder: customAnimate);
+      case Routes.forgotPasswordScreen:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const ForgotPasswordScreen(),
+            transitionsBuilder: customAnimate);
+        case Routes.otpCode:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const CodeScreen(),
+            transitionsBuilder: customAnimate);
+        case Routes.resetPassword:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const ResetPasswordScreen(),
+            transitionsBuilder: customAnimate);
+        case Routes.addPetScreen:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const AddPetScreen(),
+            transitionsBuilder: customAnimate);
+        case Routes.TypeOfPetScreen:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const TypeOfPetScreen(),
+            transitionsBuilder: customAnimate);
 
     }
     return unDefinedRoute(
@@ -52,8 +90,9 @@ class RouteGenerator {
                   onPressed: () {
                     // Stay in the app
                     Navigator.of(context).pushNamedAndRemoveUntil(
-                        Routes.main, (route) => false,
-                         );
+                      Routes.main,
+                      (route) => false,
+                    );
                   },
                   child: const Text('Cancel'),
                 ),
@@ -89,4 +128,3 @@ Widget customAnimate(BuildContext context, Animation<double> animation,
     child: child,
   );
 }
-

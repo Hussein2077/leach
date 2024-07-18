@@ -80,7 +80,7 @@ class _MyAppState extends State<MyApp> {
         theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
-            scaffoldBackgroundColor: const Color.fromRGBO(250, 250, 250, 1)),
+            scaffoldBackgroundColor: const Color.fromRGBO(248, 250, 255, 1)),
       ),
     );
   }

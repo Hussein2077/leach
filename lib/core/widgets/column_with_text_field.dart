@@ -17,6 +17,7 @@ class ColumnWithTextField extends StatefulWidget {
     this.labelText,
     this.hintText,
     this.suffixIcon,
+    this.child,
     this.keyboardType = TextInputType.text, this.formKey,
   });
   final  GlobalKey<FormState>? formKey ;
@@ -29,6 +30,7 @@ class ColumnWithTextField extends StatefulWidget {
   final bool readOnly;
   final bool obscureText;
   final Widget? suffixIcon;
+  final Widget? child;
   final void Function()? onTap;
   final TextInputType keyboardType;
 
@@ -45,7 +47,7 @@ class _ColumnWithTextFieldState extends State<ColumnWithTextField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          height: AppSize.defaultSize! * 2,
+          height: AppSize.defaultSize! * 2.5,
         ),
         CustomText(
           text:
@@ -58,9 +60,10 @@ class _ColumnWithTextFieldState extends State<ColumnWithTextField> {
         SizedBox(
           height: AppSize.defaultSize! * .3,
         ),
+
         SizedBox(
             width: widget.width ?? AppSize.screenWidth! * .9,
-             child: CustomTextField(
+             child: widget.child?? CustomTextField(
               formKey: widget.formKey,
               height: widget.height ?? AppSize.defaultSize! * 6.5,
               controller: widget.controller,
@@ -73,6 +76,7 @@ class _ColumnWithTextFieldState extends State<ColumnWithTextField> {
               keyboardType: widget.keyboardType,
               maxLines: 1,
             )),
+
       ],
     );
   }

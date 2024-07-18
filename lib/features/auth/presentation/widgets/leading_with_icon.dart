@@ -3,22 +3,25 @@ import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/leading_icon.dart';
 class LeadingWithIcon extends StatelessWidget {
-  const LeadingWithIcon({super.key});
-
+  const LeadingWithIcon({super.key, this.color, this.withIcon = true });
+  final Color? color;
+  final bool withIcon;
   @override
   Widget build(BuildContext context) {
     return   Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const LeadingIcon(),
+          LeadingIcon(color: color,),
+        // if (withIcon)
         const Spacer(
           flex: 10,
         ),
+        if (withIcon)
         Padding(
           padding:   EdgeInsets.only(top: AppSize.defaultSize! * 2),
           child: Image.asset(AssetPath.authIcon),
-        ),
+        ),  if (withIcon)
         const Spacer(
           flex: 12,
         ),

@@ -23,7 +23,7 @@ class CustomTextField extends StatefulWidget {
   final GlobalKey<FormState>? formKey;
 
   const CustomTextField({
-    Key? key,
+    super.key,
     this.labelText,
     this.controller,
     this.keyboardType = TextInputType.text,
@@ -42,7 +42,7 @@ class CustomTextField extends StatefulWidget {
     this.fillColor,
     this.onChanged,
     this.textStyle
-  }) : super(key: key);
+  });
 
   @override
   _CustomTextFieldState createState() => _CustomTextFieldState();

@@ -13,12 +13,19 @@ class StringManager {
 
   static const String emailOrPhoneNumber = "Email/Phone Number";
   static const String enterEmailOrPhoneNumber = "Enter your email/phone number";
+  static const String enterEmail = "Enter your email";
+  static const String enterPhone = "Enter your phone number";
   static const String password = "Password";
+  static const String newPassword  = "New Password";
   static const String enterPassword = "Enter password";
+  static const String enterNewPassword  = "Enter new password";
+  static const String enterConfirmPassword  = "Enter confirm password";
+
   static const String forgotPassword = "Forgot Password?";
   static const String enterPersonalInformation = "Enter your personal information";
   static const String username = "Username";
   static const String email = "Email";
+  static const String phoneNumber = "Phone Number";
   static const String confirmPassword = "Confirm password";
   static const String country = "Country";
   static const String city = "City";
@@ -84,5 +91,6 @@ class StringManager {
   static const String friends = "Friends";
   static const String messages = "Messages";
   static const String turnOffCommenting = "Turn off commenting";
+  static const String enterUsername = "Enter your name";
 
 }

@@ -75,7 +75,9 @@ class WelcomePage extends StatelessWidget {
                   ),
                   MainButton(
                     text: StringManager.register.tr(),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.signUp);
+                    },
                     color: Colors.white,
                   )
                 ],
