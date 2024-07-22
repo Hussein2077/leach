@@ -51,6 +51,7 @@ class StringManager {
   static const String secondBreed = "Second Breed";
   static const String selectYourCatsSecondBreed = "Select your cat’s second breed";
   static const String typeAgeAndWeightOfDog = "Type the Age and Weight of the Dog";
+  static const String typeAgeAndWeightOfCat = "Type the Age and Weight of the Cat";
   static const String age = "Age";
   static const String weightKg = "Weight/Kg";
   static const String gender = "Gender";
@@ -61,6 +62,9 @@ class StringManager {
   static const String medium = "Medium";
   static const String large = "Large";
   static const String chunky = "Chunky";
+  static const String giant = "Giant";
+  static List<String> sizeList = [small, medium, large, chunky];
+  static List<String> sizeListDog = [small, medium, large, giant ];
   static const String breedingExperience = "Breeding experience";
   static const String yes = "Yes";
   static const String no = "No";

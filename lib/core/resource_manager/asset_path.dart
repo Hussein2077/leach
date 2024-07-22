@@ -14,7 +14,12 @@ class AssetPath {
   static const String apple       = '$pathImage/apple.svg';
   static const String cat         = '$pathImage/cat.png';
   static const String dog          = '$pathImage/dog.png';
-
+  static const String sCat          = '$pathImage/s_cat.png';
+  static const String mCat          = '$pathImage/m_cat.png';
+  static const String lCat         = '$pathImage/l_cat.png';
+  static const String cCat         = '$pathImage/c_cat.png';
+  static const String cameraIcon         = '$pathImage/camera.png';
+  static List<String> listCat = [sCat, mCat, lCat, cCat];
 
 
 }

@@ -44,7 +44,7 @@ class AddPetScreen extends StatelessWidget {
                     size: AppSize.defaultSize! * 8,
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, Routes.TypeOfPetScreen);
+                    Navigator.pushNamed(context, Routes.typeOfPetScreen);
                   },
                 ),
               ),

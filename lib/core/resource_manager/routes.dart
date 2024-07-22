@@ -9,7 +9,10 @@ import 'package:leach/features/auth/presentation/forgot_password/reset_password_
 import 'package:leach/features/auth/presentation/login_screen.dart';
 import 'package:leach/features/auth/presentation/sign_up/register.dart';
 import 'package:leach/features/auth/presentation/welcome_screen.dart';
+import 'package:leach/features/main_screen.dart';
 import 'package:leach/features/profile/presentation/add_pet/add_pet_screen.dart';
+import 'package:leach/features/profile/presentation/add_pet/cat_bread.dart';
+import 'package:leach/features/profile/presentation/add_pet/dog_bread.dart';
 import 'package:leach/features/profile/presentation/add_pet/type_of_pet.dart';
 
 class Routes {
@@ -22,7 +25,10 @@ class Routes {
   static const String otpCode = "/otpCode";
   static const String  resetPassword = "/resetPassword";
   static const String  addPetScreen = "/addPetScreen";
-  static const String  TypeOfPetScreen  = "/TypeOfPetScreen";
+  static const String  typeOfPetScreen  = "/TypeOfPetScreen";
+  static const String  catBread  = "/CatBread";
+  static const String    dogBread  = "/dogBread";
+
 }
 
 class RouteGenerator {
@@ -34,6 +40,10 @@ class RouteGenerator {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const LoginScreen(),
+            transitionsBuilder: customAnimate);   case Routes.main:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const MainScreen( ),
             transitionsBuilder: customAnimate);
       case Routes.welcomePage:
         return PageRouteBuilder(
@@ -65,10 +75,20 @@ class RouteGenerator {
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const AddPetScreen(),
             transitionsBuilder: customAnimate);
-        case Routes.TypeOfPetScreen:
+        case Routes.typeOfPetScreen:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const TypeOfPetScreen(),
+            transitionsBuilder: customAnimate);
+        case Routes.catBread:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const CatBread(),
+            transitionsBuilder: customAnimate);
+        case Routes.dogBread:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const  DogBread(),
             transitionsBuilder: customAnimate);
 
     }

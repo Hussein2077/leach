@@ -11,133 +11,188 @@ import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 class MainScreen extends StatefulWidget {
   const MainScreen({
     super.key,
-    required this.userID,
   });
 
   static int mainIndex = 0;
-  final String userID;
 
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
-  late PersistentTabController _controller;
-
-  List<Widget> _buildScreens() {
-    return [
-
-    ];
-  }
-
-  // List<PersistentBottomNavBarItem> _navBarsItems() {
-  //   return [
-  //     PersistentBottomNavBarItem(
-  //       icon:Image.asset(AssetPath.home,
-  //         width: AppSize.defaultSize! * 2,
-  //         height: AppSize.defaultSize! * 2,
-  //         color: AppColors.secondaryColor,
-  //       ),
-  //       inactiveIcon: Image.asset(
-  //         AssetPath.home,
-  //         width: AppSize.defaultSize! * 2.1,
-  //         height: AppSize.defaultSize! * 2.1,
-  //         color: Colors.white,
-  //       ),
-  //
-  //       title: StringManager.home.tr(),
-  //       textStyle: TextStyle(fontSize: AppSize.defaultSize! * 1.2),
-  //       activeColorPrimary: AppColors.secondaryColor,
-  //       inactiveColorPrimary: CupertinoColors.white,
-  //     ),
-  //     PersistentBottomNavBarItem(
-  //       icon: Image.asset(
-  //         AssetPath.application,
-  //         width: AppSize.defaultSize! * 2,
-  //         height: AppSize.defaultSize! * 2,
-  //       ),
-  //       title: StringManager.applications.tr(),
-  //       inactiveIcon: Image.asset(
-  //         AssetPath.application,
-  //         width: AppSize.defaultSize! * 2,
-  //         height: AppSize.defaultSize! * 2,
-  //         color: Colors.white,
-  //       ),
-  //       textStyle: TextStyle(fontSize: AppSize.defaultSize! * 1.2),
-  //       activeColorPrimary: AppColors.secondaryColor,
-  //       inactiveColorPrimary: CupertinoColors.white,
-  //     ),
-  //     PersistentBottomNavBarItem(
-  //       icon:Image.asset(AssetPath.company,
-  //         width: AppSize.defaultSize! * 2,
-  //         height: AppSize.defaultSize! * 2,
-  //         color: AppColors.secondaryColor,
-  //   ),
-  //       inactiveIcon: Image.asset(
-  //         AssetPath.company,
-  //         width: AppSize.defaultSize! * 2,
-  //         height: AppSize.defaultSize! * 2,
-  //         color: Colors.white,
-  //       ),
-  //
-  //       title: StringManager.companies.tr(),
-  //       activeColorPrimary: AppColors.secondaryColor,
-  //       inactiveColorPrimary: CupertinoColors.white,
-  //       textStyle: TextStyle(fontSize: AppSize.defaultSize! * 1.2),
-  //     ),
-  //     PersistentBottomNavBarItem(
-  //       icon:Image.asset(AssetPath.profile,
-  //         width: AppSize.defaultSize! * 2,
-  //         height: AppSize.defaultSize! * 2,
-  //         color: AppColors.secondaryColor,
-  //       ),
-  //       inactiveIcon: Image.asset(
-  //         AssetPath.profile,
-  //         width: AppSize.defaultSize! * 2,
-  //         height: AppSize.defaultSize! * 2,
-  //         color: Colors.white,
-  //       ),
-  //       title: StringManager.profile.tr(),
-  //       textStyle: TextStyle(fontSize: AppSize.defaultSize! * 1.2),
-  //       activeColorPrimary: AppColors.secondaryColor,
-  //       inactiveColorPrimary: CupertinoColors.white,
-  //     ),
-  //   ];
-  // }
-
-  @override
-  void initState() {
-
-    _controller = PersistentTabController(initialIndex: MainScreen.mainIndex);
-    super.initState();
-  }
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    AppSize().init(context);
-    return Scaffold(
-      // drawerScrimColor: AppColors.greyColor,
-      body: PersistentTabView(
-        context,
-        navBarHeight: AppSize.defaultSize! * 5.5,
-        controller: _controller,
-        screens: _buildScreens(),
-        // items: _navBarsItems(),
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
 
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        floatingActionButton: Container(
+          width: AppSize.defaultSize! * 8,
+          height:   AppSize.defaultSize! * 8,
+          decoration:   BoxDecoration(
+            shape: BoxShape.circle,
+            color: AppColors.primaryColor,
+          ),
 
-        // backgroundColor: AppColors.homeColor,
-
-        handleAndroidBackButtonPress: true,
-
-        resizeToAvoidBottomInset: true,
-        stateManagement: true,
-        decoration: NavBarDecoration(
-          borderRadius: BorderRadius.circular(AppSize.defaultSize!),
-          // colorBehindNavBar: AppColors.homeColor,
+          child: FloatingActionButton.extended(
+              onPressed: () {
+                setState(() {
+                  selectedIndex = 0;
+                });
+              },
+              backgroundColor: AppColors.primaryColor,
+              shape: const CircleBorder(),
+              label: const Icon(
+                CupertinoIcons.house_fill,
+                color: Colors.white,
+              )),
         ),
+        floatingActionButtonLocation:
+        FloatingActionButtonLocation.centerDocked,
+        bottomNavigationBar: BottomAppBar(
+          //bottom navigation bar on scaffold
+          color: const Color.fromRGBO(149, 225, 140, 0.6627450980392157),
+          shape: const CircularNotchedRectangle(), //shape of notch
+          notchMargin:
+          10,
+          child: SizedBox(
+            height: 53,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 5),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Center(
+                    child: InkWell(
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () {
+                        setState(() {
+                          selectedIndex = 0;
+                        });
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            CupertinoIcons.house_fill,
 
-        navBarStyle:
-            NavBarStyle.style1,  ),
+                          ),
+                          Text(
+                            "الرئيسية",
+                            style: TextStyle( fontSize: 12),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: InkWell(
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () {
+                        setState(() {
+                          selectedIndex = 1;
+                        });
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.sensors,
+
+                            size: 25,
+                          ),
+                          Text(
+                            "البث المباشر",
+
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 50,
+                  ),
+                  Center(
+                    child: InkWell(
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () {
+                        setState(() {
+                          selectedIndex = 2;
+                        });
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.favorite,
+
+                          ),
+                          Text(
+                            "المفضلة",
+
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: InkWell(
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () {
+                        setState(() {
+                          selectedIndex = 3;
+                        });
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.person,
+
+                            size: 25,
+                          ),
+                          Text(
+                            "الحساب",
+
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        body: getScreen(),
+      ),
     );
+  }
+
+  Widget getScreen() {
+    if (selectedIndex == 0) {
+      return SizedBox();
+    } else if (selectedIndex == 1) {
+      return SizedBox(
+      );
+    } else if (selectedIndex == 2) {
+      return SizedBox();
+    } else {
+      return SizedBox();
+    }
   }
 }

@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
+import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
@@ -23,7 +24,7 @@ class TypeOfPetScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            LeadingIcon(
+            const LeadingIcon(
               color: AppColors.primaryColor,
             ),
             SizedBox(
@@ -42,12 +43,19 @@ class TypeOfPetScreen extends StatelessWidget {
                   ),
                   LargeButton(
                       text: StringManager.dog.tr(),
+                      onPressed: () {
+                        Navigator.pushNamed(context, Routes.dogBread);
+                      },
+
                       child: Image.asset(AssetPath.dog)),
                   SizedBox(
                     height: AppSize.defaultSize! * 3,
                   ),
                   LargeButton(
                       text: StringManager.cat.tr(),
+                      onPressed: () {
+                        Navigator.pushNamed(context, Routes.catBread);
+                      },
                       child: Image.asset(AssetPath.cat)),
                 ],
               ),
