@@ -86,10 +86,11 @@ class StringManager {
   static const String welcome = "Welcome";
   static const String posts = "Posts";
   static const String breeding = "Breeding";
-  static const String playdates = "Playdates";
+  static const String playDates = "PlayDates";
   static const String adoption = "Adoption";
   static const String booking = "Booking";
-  static const String changePicture = "Change Picture";
+  static List<String>listOfPosts  =[posts,breeding,playDates,adoption,booking,howTo];
+    static const String changePicture = "Change Picture";
   static const String enterInformation = "Enter Information";
   static const String editBio = "Edit Bio";
   static const String friends = "Friends";
