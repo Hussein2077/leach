@@ -92,5 +92,9 @@ class StringManager {
   static const String messages = "Messages";
   static const String turnOffCommenting = "Turn off commenting";
   static const String enterUsername = "Enter your name";
+  static const String availableSpecialists = "Available Training Specialist";
+  static const String microchip = "Microchip";
+
+
 
 }
