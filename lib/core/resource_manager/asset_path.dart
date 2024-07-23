@@ -16,6 +16,9 @@ class AssetPath {
   static const String dog          = '$pathImage/dog.png';
   static const String doctor          = '$pathImage/doctor.png';
   static const String doctor2          = '$pathImage/doctor2.png';
-
+  static const String address          = '$pathImage/address.png';
+  static const String phone          = '$pathImage/phone.png';
+  static const String fees          = '$pathImage/fees.png';
+  static const String handIcon          = '$pathImage/hand_icon.png';
 
 }
