@@ -9,6 +9,7 @@ import 'package:leach/features/auth/presentation/forgot_password/reset_password_
 import 'package:leach/features/auth/presentation/login_screen.dart';
 import 'package:leach/features/auth/presentation/sign_up/register.dart';
 import 'package:leach/features/auth/presentation/welcome_screen.dart';
+import 'package:leach/features/doctors.dart';
 import 'package:leach/features/main_screen.dart';
 import 'package:leach/features/profile/presentation/add_pet/add_pet_screen.dart';
 import 'package:leach/features/profile/presentation/add_pet/cat_bread.dart';
@@ -29,6 +30,8 @@ class Routes {
   static const String  catBread  = "/CatBread";
   static const String    dogBread  = "/dogBread";
 
+  static const String  TypeOfPetScreen  = "/TypeOfPetScreen";
+  static const String  doctor  = "/Doctors";
 }
 
 class RouteGenerator {
@@ -79,6 +82,11 @@ class RouteGenerator {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const TypeOfPetScreen(),
+            transitionsBuilder: customAnimate);
+        case Routes.doctor:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const Doctors(),
             transitionsBuilder: customAnimate);
         case Routes.catBread:
         return PageRouteBuilder(

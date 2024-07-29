@@ -30,5 +30,11 @@ class AssetPath {
   static const String      arm          = '$pathImage/dfbdzfbdf.png';
   static List<String> listCat = [sCat, mCat, lCat, cCat];
 
+  static const String doctor          = '$pathImage/doctor.png';
+  static const String doctor2          = '$pathImage/doctor2.png';
+  static const String address          = '$pathImage/address.png';
+  static const String phone          = '$pathImage/phone.png';
+  static const String fees          = '$pathImage/fees.png';
+  static const String handIcon          = '$pathImage/hand_icon.png';
 
 }
