@@ -7,6 +7,7 @@ import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/background.dart';
 import 'package:leach/features/home/home_screen.dart';
+import 'package:leach/features/posts/posts_screen.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
@@ -159,9 +160,7 @@ class _MainScreenState extends State<MainScreen> {
 
   Widget getScreen() {
     if (selectedIndex == 0) {
-      return Container(
-        color: Colors.green,
-      );
+      return  const PostsScreen();
     } else if (selectedIndex == 1) {
       return Container(
         color: Colors.red,
