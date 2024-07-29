@@ -64,12 +64,15 @@ class StringManager {
   static const String breedingExperience = "Breeding experience";
   static const String yes = "Yes";
   static const String no = "No";
+
+
   static const String addAPicture = "Add a picture";
   static const String addPictureOfMedicalPassport = "Add a picture of medical passport";
   static const String next = "Next";
   static const String dogBreed = "Dog Breed";
   static const String enterYourDogsInformation = "Enter your dog’s information";
   static const String selectYourDogsBreed = "Select your dog’s breed";
+  static const String selectYourDogsSecondBreed = "Select your dog’s second breed";
 
   static const String howTo = "How To";
   static const String groomYourPet = "Groom Your Pet";
@@ -99,5 +102,22 @@ class StringManager {
   static const String fees = "Fees";
   static const String phone = "Phone";
   static const String book = "Book";
+  static const String selectYesOrNO = "Select yes or no";
+  static const String availableForAdoption = "Available for adoption";
+  static const String availableForBreeding = "Available for breeding";
+  static const String availableForPlayDates = "Available for playdates";
+
+  static const String   petTemperaments = "Pet Temperaments";
+  static const String   selectTemperaments = "Select temperaments";
+  static const String friendly = "Friendly";
+  static const String calm = "Calm";
+  static const String playful = "Playful";
+  static const String aggressive = "Aggressive";
+  static const String save = "Save";
+  static const String   isYourPetNeutered = "Is your pet neutered";
+  static const String   isYourPetSpayed = "Is your pet spayed";
+
+  static const String   add3Pictures = "Add 3 pictures of your pet";
+
 
 }
