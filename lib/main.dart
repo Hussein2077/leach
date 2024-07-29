@@ -9,6 +9,7 @@ import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/utils/methods.dart';
 import 'package:leach/features/auth/presentation/controller/login_bloc/login_with_email_and_password_bloc.dart';
 import 'package:leach/features/auth/presentation/controller/sign_up_bloc/sign_up_with_email_and_password_bloc.dart';
+import 'package:leach/features/main_screen_bloc.dart';
 
 String? token;
 
@@ -58,6 +59,8 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => getIt<SignUpWithEmailAndPasswordBloc>(),
+        ), BlocProvider(
+          create: (context) => getIt<MainScreenBloc>(),
         ),
       ],
       child: MaterialApp(
@@ -67,7 +70,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RouteGenerator.getRoute,
         navigatorKey: getIt<NavigationService>().navigatorKey,
-        initialRoute: Routes.signUp,
+        initialRoute: Routes.main,
         // token == null || token == 'noToken' ? Routes.login : Routes.main,
         theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

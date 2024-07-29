@@ -85,6 +85,8 @@ class StringManager {
   static const String steps = "Steps";
   static const String welcome = "Welcome";
   static const String posts = "Posts";
+  static const String   points = "Points";
+  static const String   badges  = "Badges";
   static const String breeding = "Breeding";
   static const String playDates = "PlayDates";
   static const String adoption = "Adoption";
@@ -96,6 +98,7 @@ class StringManager {
   static const String friends = "Friends";
   static const String messages = "Messages";
   static const String turnOffCommenting = "Turn off commenting";
+  static const String   comment = "Comment";
   static const String enterUsername = "Enter your name";
   static const String availableSpecialists = "Available Training Specialist";
   static const String microchip = "Microchip";

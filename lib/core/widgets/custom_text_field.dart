@@ -80,11 +80,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
           hintText: widget.hintText,
           hintStyle: widget.hintStyle??TextStyle(
             fontSize: AppSize.defaultSize! * 1.3,
+
             color: AppColors.greyColor,
           ),
 
           suffixIcon: widget.suffixIcon,
-          contentPadding: EdgeInsets.symmetric(vertical: AppSize.defaultSize!*2, horizontal:  AppSize.defaultSize!),
+          contentPadding: EdgeInsets.symmetric(vertical: AppSize.defaultSize!*1, horizontal:  AppSize.defaultSize!),
           labelStyle: widget.labelStyle ?? TextStyle(
             color: AppColors.greyColor,
             fontSize: AppSize.screenHeight! * .015,
@@ -100,18 +101,18 @@ class _CustomTextFieldState extends State<CustomTextField> {
             borderRadius:
                 BorderRadius.all(Radius.circular(AppSize.defaultSize! * 2.5)),
             borderSide:
-                BorderSide(color: AppColors.greyColor.withOpacity(.4)),
+                const BorderSide(color: AppColors.greyColor ),
           ),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(
                   Radius.circular(AppSize.defaultSize! * 2.5)),
               borderSide:
-                  BorderSide(color: AppColors.primaryColor.withOpacity(.4))),
+                  const BorderSide(color: AppColors.primaryColor  )),
           disabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(
                   Radius.circular(AppSize.defaultSize! * 2.5)),
               borderSide:
-                  BorderSide(color: AppColors.greyColor.withOpacity(.4))),
+                  const BorderSide(color: AppColors.greyColor )),
         ),
         controller: widget.controller,
 

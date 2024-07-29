@@ -2,12 +2,14 @@ import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/background.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/large_botton.dart';
+import 'package:leach/features/main_screen_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -40,7 +42,7 @@ class HomeScreen extends StatelessWidget {
                           color: Colors.white,
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       IconButton(
                           onPressed: () {},
                           icon: Icon(
@@ -82,6 +84,11 @@ class HomeScreen extends StatelessWidget {
                         child: LargeButton(
                           text: StringManager.listOfPosts[index].tr(),
                           child: null,
+                          onPressed:  () {
+                            context
+                                .read<MainScreenBloc>()
+                                .add(const ChangeTabEvent(0));
+                          },
 
                         ),
                       );

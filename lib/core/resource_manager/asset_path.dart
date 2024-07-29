@@ -29,12 +29,20 @@ class AssetPath {
   static const String      menu         = '$pathImage/menu.png';
   static const String      arm          = '$pathImage/dfbdzfbdf.png';
   static List<String> listCat = [sCat, mCat, lCat, cCat];
-
   static const String doctor          = '$pathImage/doctor.png';
   static const String doctor2          = '$pathImage/doctor2.png';
   static const String address          = '$pathImage/address.png';
   static const String phone          = '$pathImage/phone.png';
   static const String fees          = '$pathImage/fees.png';
   static const String handIcon          = '$pathImage/hand_icon.png';
+  static const String testPosts           = '$pathImage/test.png';
+  static const String testPosts2           = '$pathImage/test2.png';
+  static const String testPosts3           = '$pathImage/test3.svg';
+  static const String  petLeg            = '$pathImage/bet_leg.svg';
+  static const String  pet2Leg            = '$pathImage/pet_2legs.svg';
+  static const String medal            = '$pathImage/medal.svg';
+  static const String like            = '$pathImage/like.png';
+  static const String postsIcon             = '$pathImage/posts icon.png';
+  static const String comment            = '$pathImage/comment.png';
 
 }
