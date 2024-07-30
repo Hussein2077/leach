@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
-import 'package:leach/core/widgets/icon_with_matrial.dart';
-import 'package:leach/features/main_screen_bloc.dart';
 import 'package:leach/features/profile/presentation/profile/posts_container.dart';
 import 'package:leach/features/profile/presentation/widget/medals_abd_freinds.dart';
 import 'package:leach/features/profile/presentation/widget/pet_or_profile.dart';
 import 'package:leach/features/profile/presentation/widget/profile_app_bar.dart';
 import 'package:leach/features/profile/presentation/widget/profile_user_row.dart';
-
-class PersonalProfile extends StatelessWidget {
-  const PersonalProfile({super.key});
+class PetProfile extends StatelessWidget {
+  const PetProfile({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +25,12 @@ class PersonalProfile extends StatelessWidget {
               SizedBox(
                 height: AppSize.defaultSize! * 3,
               ),
-              const ProfileUserRow(),
+                ProfileUserRow(
+                  name:'Kiwi ' ,
+                  userName: '@Kiwithedog',
+                  kind: 'German Shepherd  ',
+                  image: AssetPath.testPosts4,
+                ),
               SizedBox(
                 height: AppSize.defaultSize! ,
               ),
@@ -53,7 +54,7 @@ class PersonalProfile extends StatelessWidget {
                   textAlign: TextAlign.start,
                 ),
               ),
-              const MedalsAbdFriends(),
+              const MedalsAbdFriends(pet: true,),
             ],
           ),
         ),

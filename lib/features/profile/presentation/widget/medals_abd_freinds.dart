@@ -7,11 +7,29 @@ import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/large_botton.dart';
 
 class MedalsAbdFriends extends StatelessWidget {
-  const MedalsAbdFriends({super.key});
-
+  const MedalsAbdFriends({super.key, this.pet=false});
+final   bool? pet;
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return pet!?
+    Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        buildMedal(
+            text: "3 Y", image: AssetPath.years, name: StringManager.age),
+        SizedBox(
+          width: AppSize.defaultSize!,
+        ),
+        buildMedal(
+            text: "6K", image: AssetPath.weight, name: StringManager.weight),
+        SizedBox(
+          width: AppSize.defaultSize!,
+        ),
+        buildMedal(
+            text: "Fem", image: AssetPath.gender, name: StringManager.gender),
+      ],
+    )
+        :Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         buildMedal(

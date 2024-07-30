@@ -40,6 +40,9 @@ class AssetPath {
   static const String testPosts4          = '$pathImage/test4.png';
   static const String  petLeg            = '$pathImage/bet_leg.svg';
   static const String  pet2Leg            = '$pathImage/pet_2legs.svg';
+  static const String   years            = '$pathImage/years.svg';
+  static const String  weight            = '$pathImage/weight.svg';
+  static const String  gender            = '$pathImage/gender.svg';
   static const String medal            = '$pathImage/medal.svg';
   static const String like            = '$pathImage/like.png';
   static const String postsIcon             = '$pathImage/posts icon.png';

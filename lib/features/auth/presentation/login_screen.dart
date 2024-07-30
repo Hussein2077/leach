@@ -105,7 +105,10 @@ class _LoginScreenState extends State<LoginScreen> {
               Center(
                 child: MainButton(
                   text: StringManager.login.tr(),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context,  Routes.main);
+
+                  },
                   textColor: Colors.white,
                 ),
               ),

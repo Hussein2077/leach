@@ -54,6 +54,7 @@ class StringManager {
   static const String typeAgeAndWeightOfCat = "Type the Age and Weight of the Cat";
   static const String age = "Age";
   static const String weightKg = "Weight/Kg";
+  static const String weight = "Weight";
   static const String gender = "Gender";
   static const String male = "Male";
   static const String female = "Female";
