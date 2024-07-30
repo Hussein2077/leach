@@ -57,4 +57,16 @@ class AssetPath {
 
   static const String dogIcon          = '$pathImage/dog_icon.png';
   static const String catIcon          = '$pathImage/cat_icon.png';
+  static const String leftArrow          = '$pathImage/left_arrow.png';
+  static const String rightArrow          = '$pathImage/right_arrow.png';
+  static const String editProfileIcon          = '$pathImage/edit_profile_icon.png';
+  static const String resetPasswordIcon          = '$pathImage/reset_password.png';
+  static const String profilePrivacy          = '$pathImage/profile_privacy.png';
+  static const String help          = '$pathImage/help.png';
+  static const String bell          = '$pathImage/bell.png';
+  static const String bellPlus          = '$pathImage/bellPlus.png';
+  static const String message          = '$pathImage/message.png';
+  static const String x          = '$pathImage/x.png';
+  static const String signOut          = '$pathImage/signOut.png';
+  static const String backgroundImage          = '$pathImage/background_image.png';
 }

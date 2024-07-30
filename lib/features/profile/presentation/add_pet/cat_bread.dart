@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
+import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/check_box.dart';
@@ -33,6 +34,7 @@ class CatBread extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const LeadingWithIcon(
+              image: AssetPath.catIcon,
               color: AppColors.primaryColor,
             ),
             CustomText(
@@ -152,7 +154,9 @@ class CatBread extends StatelessWidget {
               height: AppSize.defaultSize! *2,
             ),
             MainButton(text: StringManager.next . tr(),
-onTap: (){},
+onTap: (){
+              Navigator.pushNamed(context, Routes.catBreed2);
+},
 textColor: Colors.white,
             ),
             SizedBox(

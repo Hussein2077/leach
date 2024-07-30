@@ -34,6 +34,7 @@ class DogBread extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const LeadingWithIcon(
+                  image: AssetPath.dogIcon,
                   color: AppColors.primaryColor,
                 ),
                 CustomText(
@@ -154,7 +155,7 @@ class DogBread extends StatelessWidget {
                 ),
                 MainButton(text: StringManager.next . tr(),
                   onTap: (){
-                      Navigator.pushNamed(context,  Routes.main);
+                      Navigator.pushNamed(context,  Routes.dogBreed2);
                   },
                   textColor: Colors.white,
                 ),
