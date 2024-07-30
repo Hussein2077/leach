@@ -13,8 +13,7 @@ import 'package:leach/core/widgets/leading_icon.dart';
 import 'package:leach/core/widgets/main_button.dart';
 import 'package:leach/features/auth/presentation/widgets/country_drop_down.dart';
 import 'package:leach/features/auth/presentation/widgets/leading_with_icon.dart';
-import 'package:leach/features/profile/presentation/widget/male_or_female.dart';
-import 'package:leach/features/profile/presentation/widget/size_row.dart';
+
 import '../widget/circular_checkbox.dart';
 
 class CatBreed2 extends StatefulWidget {
