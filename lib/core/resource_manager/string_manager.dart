@@ -95,7 +95,7 @@ class StringManager {
   static const String playDates = "PlayDates";
   static const String adoption = "Adoption";
   static const String booking = "Booking";
-  static List<String>listOfPosts  =[posts,breeding,playDates,adoption,booking,howTo];
+  static List<String>listOfPosts  =[posts,breeding,booking,howTo];
     static const String changePicture = "Change Picture";
   static const String enterInformation = "Enter Information";
   static const String editBio = "Edit Bio";

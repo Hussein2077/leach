@@ -88,9 +88,12 @@ class RouteGenerator {
                 const AddPetScreen(),
             transitionsBuilder: customAnimate);
         case Routes.typeOfPetScreen:
+          bool? isFromBreeding = settings.arguments as bool?;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const TypeOfPetScreen(),
+                  TypeOfPetScreen(
+                    isFromBreeding:isFromBreeding??false,
+                ),
             transitionsBuilder: customAnimate);
         case Routes.doctor:
         return PageRouteBuilder(

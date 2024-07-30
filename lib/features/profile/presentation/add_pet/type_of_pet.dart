@@ -10,8 +10,8 @@ import 'package:leach/core/widgets/large_botton.dart';
 import 'package:leach/core/widgets/leading_icon.dart';
 
 class TypeOfPetScreen extends StatelessWidget {
-  const TypeOfPetScreen({super.key});
-
+  const TypeOfPetScreen({super.key,   this.isFromBreeding=false});
+final bool isFromBreeding;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +44,9 @@ class TypeOfPetScreen extends StatelessWidget {
                   LargeButton(
                       text: StringManager.dog.tr(),
                       onPressed: () {
-                        Navigator.pushNamed(context, Routes.dogBread);
+                        if(!isFromBreeding) {
+                          Navigator.pushNamed(context, Routes.dogBread);
+                        }
                       },
 
                       child: Image.asset(AssetPath.dog)),
@@ -54,7 +56,9 @@ class TypeOfPetScreen extends StatelessWidget {
                   LargeButton(
                       text: StringManager.cat.tr(),
                       onPressed: () {
-                        Navigator.pushNamed(context, Routes.catBread);
+                        if(!isFromBreeding) {
+                          Navigator.pushNamed(context, Routes.catBread);
+                        }
                       },
                       child: Image.asset(AssetPath.cat)),
                 ],
