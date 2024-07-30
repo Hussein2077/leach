@@ -65,4 +65,5 @@ class AssetPath {
   static const String message          = '$pathImage/message.png';
   static const String x          = '$pathImage/x.png';
   static const String signOut          = '$pathImage/signOut.png';
+  static const String backgroundImage          = '$pathImage/background_image.png';
 }
