@@ -19,6 +19,7 @@ import 'package:leach/features/profile/presentation/add_pet/dog_bread.dart';
 import 'package:leach/features/profile/presentation/add_pet/dog_breed2.dart';
 import 'package:leach/features/profile/presentation/add_pet/dog_breed3.dart';
 import 'package:leach/features/profile/presentation/add_pet/type_of_pet.dart';
+import 'package:leach/features/profile/presentation/profile/side_bar.dart';
 
 class Routes {
   static const String login = "/login";
@@ -39,6 +40,7 @@ class Routes {
   static const String  catBreed3  = "/CatBreed3";
   static const String    dogBreed2  = "/dogBreed2";
   static const String    dogBreed3  = "/dogBreed3";
+  static const String    sidebar  = "/side_bar";
 }
 
 class RouteGenerator {
@@ -125,6 +127,12 @@ class RouteGenerator {
             pageBuilder: (context, animation, secondaryAnimation) =>
             const  CatBreed3(),
             transitionsBuilder: customAnimate);
+      case Routes.sidebar:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const  SideBar(),
+            transitionsBuilder: customAnimate);
+
 
     }
     return unDefinedRoute(

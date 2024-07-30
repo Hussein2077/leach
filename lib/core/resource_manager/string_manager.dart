@@ -127,5 +127,14 @@ class StringManager {
 
   static const String   add3Pictures = "Add 3 pictures of your pet";
 
+  static const String   editProfile = "Edit Profile";
+  static const String   accountPrivacy = "Account Privacy";
+  static const String   help = "Help";
+  static const String   subscriptionPlan = "Subscription Plan";
+  static const String   activity = "Activity";
+  static const String   notificationSettings = "Notification Settings";
+  static const String   languages = "Languages";
+  static const String   signOut = "Sign Out";
+  static const String   deleteAccount = "Delete Account";
 
 }
