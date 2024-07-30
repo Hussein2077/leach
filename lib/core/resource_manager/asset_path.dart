@@ -38,11 +38,13 @@ class AssetPath {
   static const String testPosts           = '$pathImage/test.png';
   static const String testPosts2           = '$pathImage/test2.png';
   static const String testPosts3           = '$pathImage/test3.svg';
+  static const String testPosts4          = '$pathImage/test4.png';
   static const String  petLeg            = '$pathImage/bet_leg.svg';
   static const String  pet2Leg            = '$pathImage/pet_2legs.svg';
   static const String medal            = '$pathImage/medal.svg';
   static const String like            = '$pathImage/like.png';
   static const String postsIcon             = '$pathImage/posts icon.png';
   static const String comment            = '$pathImage/comment.png';
+  static const String add            = '$pathImage/add.png';
 
 }

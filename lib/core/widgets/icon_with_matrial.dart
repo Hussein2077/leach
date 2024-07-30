@@ -2,10 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/utils/app_size.dart';
 class IconWithMaterial extends StatelessWidget {
-  const IconWithMaterial({super.key, required this.imagePath, this.color, this.color2});
+  const IconWithMaterial({super.key, required this.imagePath, this.color, this.color2,
+
+  this.height,
+  this.width,
+
+  });
 final String imagePath;
 final Color? color;
 final Color? color2;
+final double? width;
+final double? height;
   @override
   Widget build(BuildContext context) {
     return    Material(
@@ -17,8 +24,8 @@ final Color? color2;
         child: Image.asset(
           imagePath,
           color:color2?? AppColors.primaryColor,
-          width: AppSize.defaultSize! * 1.5,
-          height: AppSize.defaultSize! * 1.5 ,
+          width:width?? AppSize.defaultSize! * 1.5,
+          height:height?? AppSize.defaultSize! * 1.5 ,
         ),
       ),
     );

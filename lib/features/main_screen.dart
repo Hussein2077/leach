@@ -1,19 +1,13 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
-import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/background.dart';
 import 'package:leach/features/home/home_screen.dart';
 import 'package:leach/features/main_screen_bloc.dart';
 import 'package:leach/features/posts/posts_screen.dart';
 import 'package:leach/features/profile/presentation/profile/profile.dart';
-
-import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
-
 class MainScreen extends StatefulWidget {
   const MainScreen({
     super.key,
@@ -26,6 +20,13 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  @override
+  void initState() {
+    context
+        .read<MainScreenBloc>()
+        .add(const ChangeTabEvent(4));
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
@@ -97,7 +98,7 @@ class _MainScreenState extends State<MainScreen> {
                           },
                           icon: Image.asset(
                             AssetPath.postsIcon,
-                            color: context.read<MainScreenBloc>() == 0
+                            color: context.read<MainScreenBloc>() == '0'
                                 ? Colors.grey
                                 : Colors.white,
                           )),
