@@ -13,7 +13,11 @@ import 'package:leach/features/doctors.dart';
 import 'package:leach/features/main_screen.dart';
 import 'package:leach/features/profile/presentation/add_pet/add_pet_screen.dart';
 import 'package:leach/features/profile/presentation/add_pet/cat_bread.dart';
+import 'package:leach/features/profile/presentation/add_pet/cat_breed2.dart';
+import 'package:leach/features/profile/presentation/add_pet/cat_breed3.dart';
 import 'package:leach/features/profile/presentation/add_pet/dog_bread.dart';
+import 'package:leach/features/profile/presentation/add_pet/dog_breed2.dart';
+import 'package:leach/features/profile/presentation/add_pet/dog_breed3.dart';
 import 'package:leach/features/profile/presentation/add_pet/type_of_pet.dart';
 
 class Routes {
@@ -29,9 +33,12 @@ class Routes {
   static const String  typeOfPetScreen  = "/TypeOfPetScreen";
   static const String  catBread  = "/CatBread";
   static const String    dogBread  = "/dogBread";
-
   static const String  TypeOfPetScreen  = "/TypeOfPetScreen";
   static const String  doctor  = "/Doctors";
+  static const String  catBreed2  = "/CatBreed2";
+  static const String  catBreed3  = "/CatBreed3";
+  static const String    dogBreed2  = "/dogBreed2";
+  static const String    dogBreed3  = "/dogBreed3";
 }
 
 class RouteGenerator {
@@ -97,6 +104,26 @@ class RouteGenerator {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const  DogBread(),
+            transitionsBuilder: customAnimate);
+      case Routes.dogBreed2:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const  DogBreed2(),
+            transitionsBuilder: customAnimate);
+      case Routes.dogBreed3:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const  DogBreed3(),
+            transitionsBuilder: customAnimate);
+      case Routes.catBreed2:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const  CatBreed2(),
+            transitionsBuilder: customAnimate);
+      case Routes.catBreed3:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const  CatBreed3(),
             transitionsBuilder: customAnimate);
 
     }

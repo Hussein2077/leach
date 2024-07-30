@@ -28,7 +28,6 @@ class AssetPath {
   static const String      homeBackground2         = '$pathImage/Home page – 1.png';
   static const String      menu         = '$pathImage/menu.png';
   static const String      arm          = '$pathImage/dfbdzfbdf.png';
-  static List<String> listCat = [sCat, mCat, lCat, cCat];
   static const String doctor          = '$pathImage/doctor.png';
   static const String doctor2          = '$pathImage/doctor2.png';
   static const String address          = '$pathImage/address.png';
@@ -46,5 +45,13 @@ class AssetPath {
   static const String postsIcon             = '$pathImage/posts icon.png';
   static const String comment            = '$pathImage/comment.png';
   static const String add            = '$pathImage/add.png';
+  static const String sDog          = '$pathImage/s_dog.png';
+  static const String mDog          = '$pathImage/m_dog.png';
+  static const String lDog         = '$pathImage/l_dog.png';
+  static const String cDog         = '$pathImage/c_dog.png';
+  static List<String> listCat = [sCat, mCat, lCat, cCat];
+  static List<String> listDog = [sDog, lDog, mDog, cDog];
 
+  static const String dogIcon          = '$pathImage/dog_icon.png';
+  static const String catIcon          = '$pathImage/cat_icon.png';
 }
