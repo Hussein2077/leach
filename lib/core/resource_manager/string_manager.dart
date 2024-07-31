@@ -137,5 +137,10 @@ class StringManager {
   static const String   languages = "Languages";
   static const String   signOut = "Sign Out";
   static const String   deleteAccount = "Delete Account";
-
+  static const String   activityAndHistory = "Activity and History";
+  static const String   likes = "Likes";
+  static const String   matches = "Matches";
+  static const String   timeSpent = "Time Spent";
+  static const String   myProfile = "My Profile";
+  static const String   petProfile = "Pet Profile";
 }
