@@ -59,7 +59,10 @@ class PetProfile extends StatelessWidget {
           ),
         ),
         const PetOrProfile(),
-        const Spacer(),
+
+        SizedBox(
+              height: AppSize.defaultSize,
+        ),
         const PostsContainer()
       ],
     );

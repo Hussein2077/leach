@@ -21,7 +21,9 @@ class LeadingWithIcon extends StatelessWidget {
         if (withIcon)
         Padding(
           padding:   EdgeInsets.only(top: AppSize.defaultSize! * 2),
-          child: Image.asset(image??AssetPath.authIcon),
+          child: Image.asset(image??AssetPath.authIcon,
+
+          ),
         ),  if (withIcon)
         const Spacer(
           flex: 12,

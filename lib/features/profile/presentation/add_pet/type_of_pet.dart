@@ -47,6 +47,9 @@ final bool isFromBreeding;
                         if(!isFromBreeding) {
                           Navigator.pushNamed(context, Routes.dogBread);
                         }
+                        else{
+                          Navigator.pushNamed(context, Routes.breedingScreen);
+                        }
                       },
 
                       child: Image.asset(AssetPath.dog)),
@@ -58,6 +61,9 @@ final bool isFromBreeding;
                       onPressed: () {
                         if(!isFromBreeding) {
                           Navigator.pushNamed(context, Routes.catBread);
+                        }
+                        else{
+                          Navigator.pushNamed(context, Routes.breedingScreen);
                         }
                       },
                       child: Image.asset(AssetPath.cat)),

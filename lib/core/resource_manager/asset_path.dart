@@ -37,6 +37,7 @@ class AssetPath {
   static const String testPosts           = '$pathImage/test.png';
   static const String testPosts2           = '$pathImage/test2.png';
   static const String testPosts3           = '$pathImage/test3.svg';
+  static const String testPosts6           = '$pathImage/test6.png';
   static const String testPosts4          = '$pathImage/test4.png';
   static const String  petLeg            = '$pathImage/bet_leg.svg';
   static const String  pet2Leg            = '$pathImage/pet_2legs.svg';
@@ -52,6 +53,7 @@ class AssetPath {
   static const String mDog          = '$pathImage/m_dog.png';
   static const String lDog         = '$pathImage/l_dog.png';
   static const String cDog         = '$pathImage/c_dog.png';
+  static const String dogFace          = '$pathImage/dog_face.png';
   static List<String> listCat = [sCat, mCat, lCat, cCat];
   static List<String> listDog = [sDog, lDog, mDog, cDog];
 
@@ -69,4 +71,6 @@ class AssetPath {
   static const String x          = '$pathImage/x.png';
   static const String signOut          = '$pathImage/signOut.png';
   static const String backgroundImage          = '$pathImage/background_image.png';
+  static const String calender          = '$pathImage/calender.png';
+  static const String calender2          = '$pathImage/calender2.png';
 }

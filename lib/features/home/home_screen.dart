@@ -31,7 +31,9 @@ class _HomeScreenState extends State<HomeScreen> {
       () {
       Navigator.pushNamed(context, Routes.typeOfPetScreen,arguments: true);
       },
-      () {},
+      () {
+        Navigator.pushNamed(context, Routes.bookingScreen);
+      },
       () {},
     ];
     super.initState();

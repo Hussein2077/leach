@@ -107,6 +107,7 @@ class StringManager {
   static const String availableSpecialists = "Available Training Specialist";
   static const String microchip = "Microchip";
   static const String veterinarian = "Veterinarian specialized";
+  static const String veternarians  = "Veternarians";
   static const String address = "Address";
   static const String fees = "Fees";
   static const String phone = "Phone";
@@ -137,5 +138,6 @@ class StringManager {
   static const String   languages = "Languages";
   static const String   signOut = "Sign Out";
   static const String   deleteAccount = "Delete Account";
+  static const String   trainingCenters  = "Training Centers";
 
 }

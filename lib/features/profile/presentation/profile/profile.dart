@@ -31,7 +31,7 @@ class PersonalProfile extends StatelessWidget {
               ),
               const ProfileUserRow(),
               SizedBox(
-                height: AppSize.defaultSize! ,
+                height: AppSize.defaultSize!,
               ),
               Divider(
                 color: Colors.white,
@@ -46,7 +46,7 @@ class PersonalProfile extends StatelessWidget {
                 width: AppSize.screenWidth! * .7,
                 child: CustomText(
                   text:
-                  '''Pet parent to German Shepherd, Kiwi. Enjoys park walks and adventures with Kiwi.''',
+                      '''Pet parent to German Shepherd, Kiwi. Enjoys park walks and adventures with Kiwi.''',
                   fontSize: AppSize.defaultSize! * 1.5,
                   color: Colors.white,
                   maxLines: 6,
@@ -58,7 +58,9 @@ class PersonalProfile extends StatelessWidget {
           ),
         ),
         const PetOrProfile(),
-        const Spacer(),
+        SizedBox(
+          height: AppSize.defaultSize!,
+        ),
         const PostsContainer()
       ],
     );
