@@ -120,6 +120,8 @@ class StringManager {
 
   static const String   petTemperaments = "Pet Temperaments";
   static const String   selectTemperaments = "Select temperaments";
+  static const String   selectDate  = "Select Date";
+  static const String   selectTime   = "Select Time Slot";
   static const String friendly = "Friendly";
   static const String calm = "Calm";
   static const String playful = "Playful";

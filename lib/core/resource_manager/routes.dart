@@ -12,6 +12,8 @@ import 'package:leach/features/auth/presentation/welcome_screen.dart';
 import 'package:leach/features/doctors.dart';
 import 'package:leach/features/home/componant/booking.dart';
 import 'package:leach/features/home/componant/breeding.dart';
+import 'package:leach/features/home/componant/review.dart';
+import 'package:leach/features/home/widgets/calender.dart';
 import 'package:leach/features/main_screen.dart';
 import 'package:leach/features/profile/presentation/add_pet/add_pet_screen.dart';
 import 'package:leach/features/profile/presentation/add_pet/cat_bread.dart';
@@ -56,6 +58,8 @@ class Routes {
 
   static const String    myPetProfile  = "/my_pet_profile";
   static const String    editProfile  = "/edit_profile";
+  static const String    calenderScreen  = "/CalenderScreen";
+  static const String    reviewScreen  = "/ReviewScreen";
 }
 
 class RouteGenerator {
@@ -184,6 +188,16 @@ class RouteGenerator {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
             const  BookingScreen(),
+            transitionsBuilder: customAnimate);
+        case Routes.calenderScreen:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const  CalenderScreen(),
+            transitionsBuilder: customAnimate);
+        case Routes.reviewScreen:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const  ReviewScreen(),
             transitionsBuilder: customAnimate);
 
 
