@@ -77,6 +77,7 @@ class StringManager {
   static const String dogBreed = "Dog Breed";
   static const String enterYourDogsInformation = "Enter your dog’s information";
   static const String selectYourDogsBreed = "Select your dog’s breed";
+  static const String selectPreferredVet  = "Select Preferred Vet";
   static const String selectYourDogsSecondBreed = "Select your dog’s second breed";
 
   static const String howTo = "How To";

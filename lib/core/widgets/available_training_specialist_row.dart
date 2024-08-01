@@ -38,7 +38,7 @@ mainAxisAlignment: MainAxisAlignment.start,
           child: CustomText(
             text: text,
             fontSize: AppSize.defaultSize! *2,
-            maxLines: 1,textAlign: TextAlign.start,
+            maxLines: 2,textAlign: TextAlign.start,
           ),
         ),
 
