@@ -95,7 +95,7 @@ class StringManager {
   static const String playDates = "PlayDates";
   static const String adoption = "Adoption";
   static const String booking = "Booking";
-  static List<String>listOfPosts  =[posts,breeding,playDates,adoption,booking,howTo];
+  static List<String>listOfPosts  =[posts,breeding,booking,howTo];
     static const String changePicture = "Change Picture";
   static const String enterInformation = "Enter Information";
   static const String editBio = "Edit Bio";
@@ -107,6 +107,7 @@ class StringManager {
   static const String availableSpecialists = "Available Training Specialist";
   static const String microchip = "Microchip";
   static const String veterinarian = "Veterinarian specialized";
+  static const String veternarians  = "Veternarians";
   static const String address = "Address";
   static const String fees = "Fees";
   static const String phone = "Phone";
@@ -137,6 +138,8 @@ class StringManager {
   static const String   languages = "Languages";
   static const String   signOut = "Sign Out";
   static const String   deleteAccount = "Delete Account";
+  static const String   trainingCenters  = "Training Centers";
+
   static const String   activityAndHistory = "Activity and History";
   static const String   likes = "Likes";
   static const String   matches = "Matches";

@@ -30,7 +30,7 @@ class Doctors extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              LeadingWithIcon(image: AssetPath.handIcon,),
+              const LeadingWithIcon(image: AssetPath.handIcon,),
               CustomText(
                 text: StringManager.availableSpecialists.tr(),
                 fontSize: AppSize.defaultSize! * 4,

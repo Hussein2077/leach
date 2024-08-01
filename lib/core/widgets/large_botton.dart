@@ -43,9 +43,10 @@ class LargeButton extends StatelessWidget {
           if (child != null) child!,
           CustomText(
             text: text,
-            fontSize:fontSize ?? AppSize.defaultSize! * 4,
+            fontSize:fontSize ?? AppSize.defaultSize! * 3.8,
             fontWeight: FontWeight.w700,
             color: AppColors.primaryColor,
+            maxLines: 2,
           ),
         ],
       ),

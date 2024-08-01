@@ -8,6 +8,7 @@ import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/service/navigator_services.dart';
 import 'package:leach/core/service/service_locator.dart';
+import 'package:leach/core/utils/app_size.dart';
 
 import 'package:leach/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -60,7 +61,11 @@ class Methods {
     return language;
   }
 
-
+  EdgeInsetsGeometry paddingCustom= EdgeInsets.only(
+    left: AppSize.defaultSize??10 * 2,
+    right: AppSize.defaultSize??10 * 2,
+    top: AppSize.defaultSize??10 * 6,
+  );
 
 }
 
