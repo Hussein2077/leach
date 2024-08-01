@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -19,15 +20,15 @@ import 'package:leach/features/profile/presentation/widget/side_bar_row.dart';
 
 
 
-class AccountPrivacyBar extends StatefulWidget {
-  const AccountPrivacyBar({super.key});
+class AccountPrivacy extends StatefulWidget {
+  const AccountPrivacy({super.key});
 
   @override
-  State<AccountPrivacyBar> createState() => _AccountPrivacyBarState();
+  State<AccountPrivacy> createState() => _AccountPrivacyState();
 }
 
-class _AccountPrivacyBarState extends State<AccountPrivacyBar> {
-
+class _AccountPrivacyState extends State<AccountPrivacy> {
+bool isSwitched = false;
 
   @override
   Widget build(BuildContext context) {
@@ -81,18 +82,35 @@ class _AccountPrivacyBarState extends State<AccountPrivacyBar> {
 
           Row(
             children: [
-              Switch(
-                // thumb color (round icon)
+              Material(
 
-                activeColor: Colors.white,
-                activeTrackColor: Colors.cyan,
-                inactiveThumbColor: Colors.blueGrey.shade600,
-                inactiveTrackColor: Colors.grey.shade400,
-                splashRadius: 50.0,
-                // boolean variable value
-                value: true,
-                // changes the state of the switch
-                onChanged: (value) => setState(() => value = !value),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(AppSize.defaultSize! * 30))),
+                elevation: 40,
+                color: Colors.transparent,
+                // shadowColor: Colors.transparent,
+                child: Transform.scale(
+                  scale: AppSize.defaultSize! * 0.08,
+                  child: Switch(
+                    // thumb color (round icon)
+
+                    activeColor: Colors.blue,
+                    activeTrackColor: Colors.white,
+                    inactiveThumbColor: Colors.blue,
+                    inactiveTrackColor: Colors.white,
+
+                    // boolean variable value
+                    value: isSwitched,
+                    // changes the state of the switch
+                    onChanged: (value) {
+
+                      setState(() {
+                        isSwitched = value;
+
+
+                      });
+                    },
+                  ),
+                ),
               ),
 
               CustomText(

@@ -21,9 +21,12 @@ import 'package:leach/features/profile/presentation/add_pet/dog_bread.dart';
 import 'package:leach/features/profile/presentation/add_pet/dog_breed2.dart';
 import 'package:leach/features/profile/presentation/add_pet/dog_breed3.dart';
 import 'package:leach/features/profile/presentation/add_pet/type_of_pet.dart';
-import 'package:leach/features/profile/presentation/profile/Account_privacy_bar.dart';
+import 'package:leach/features/profile/presentation/profile/account_privacy.dart';
+import 'package:leach/features/profile/presentation/profile/activity_and_history.dart';
+import 'package:leach/features/profile/presentation/profile/my_pet_profile.dart';
 import 'package:leach/features/profile/presentation/profile/pet_details.dart';
 import 'package:leach/features/profile/presentation/profile/side_bar.dart';
+import 'package:leach/features/profile/presentation/profile/edit_profile.dart';
 
 class Routes {
   static const String login = "/login";
@@ -48,7 +51,11 @@ class Routes {
   static const String    breedingScreen  = "/BreedingScreen";
   static const String    bookingScreen  = "/BookingScreen";
   static const String    petDetails  = "/petDetails";
-  static const String    accountPrivacyBar  = "/account_privacy_bar";
+  static const String    accountPrivacy  = "/account_privacy";
+  static const String    activityAndHistory  = "/activity_and_history";
+
+  static const String    myPetProfile  = "/my_pet_profile";
+  static const String    editProfile  = "/edit_profile";
 }
 
 class RouteGenerator {
@@ -148,10 +155,25 @@ class RouteGenerator {
             pageBuilder: (context, animation, secondaryAnimation) =>
             const  PetDetails(),
             transitionsBuilder: customAnimate);
-      case Routes.accountPrivacyBar:
+      case Routes.accountPrivacy:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-            const  AccountPrivacyBar(),
+            const  AccountPrivacy(),
+            transitionsBuilder: customAnimate);
+      case Routes.activityAndHistory:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const  ActivityAndHistory(),
+            transitionsBuilder: customAnimate);
+      case Routes.myPetProfile:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const  MyPetProfile(),
+            transitionsBuilder: customAnimate);
+      case Routes.editProfile:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const  EditProfile(),
             transitionsBuilder: customAnimate);
         case Routes.breedingScreen:
         return PageRouteBuilder(

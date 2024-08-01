@@ -73,4 +73,10 @@ class AssetPath {
   static const String backgroundImage          = '$pathImage/background_image.png';
   static const String calender          = '$pathImage/calender.png';
   static const String calender2          = '$pathImage/calender2.png';
+  static const String matches          = '$pathImage/matches.png';
+  static const String timeIcon          = '$pathImage/timeIcon.png';
+  static const String homeBackground3          = '$pathImage/Edit profile – 1.png';
+  static const String profileIcon          = '$pathImage/profile_icon.png';
+  static const String petPawIcon          = '$pathImage/pet_paw_icon.png';
+  static const String whiteProfileIcon          = '$pathImage/profile_icon.png';
 }
