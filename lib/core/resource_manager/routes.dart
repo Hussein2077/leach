@@ -21,6 +21,8 @@ import 'package:leach/features/profile/presentation/add_pet/dog_bread.dart';
 import 'package:leach/features/profile/presentation/add_pet/dog_breed2.dart';
 import 'package:leach/features/profile/presentation/add_pet/dog_breed3.dart';
 import 'package:leach/features/profile/presentation/add_pet/type_of_pet.dart';
+import 'package:leach/features/profile/presentation/profile/Account_privacy_bar.dart';
+import 'package:leach/features/profile/presentation/profile/pet_details.dart';
 import 'package:leach/features/profile/presentation/profile/side_bar.dart';
 
 class Routes {
@@ -45,6 +47,8 @@ class Routes {
   static const String    sidebar  = "/side_bar";
   static const String    breedingScreen  = "/BreedingScreen";
   static const String    bookingScreen  = "/BookingScreen";
+  static const String    petDetails  = "/petDetails";
+  static const String    accountPrivacyBar  = "/account_privacy_bar";
 }
 
 class RouteGenerator {
@@ -138,6 +142,16 @@ class RouteGenerator {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
             const  SideBar(),
+            transitionsBuilder: customAnimate);
+      case Routes.petDetails:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const  PetDetails(),
+            transitionsBuilder: customAnimate);
+      case Routes.accountPrivacyBar:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const  AccountPrivacyBar(),
             transitionsBuilder: customAnimate);
         case Routes.breedingScreen:
         return PageRouteBuilder(
