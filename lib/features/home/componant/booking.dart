@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
+import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/utils/methods.dart';
@@ -22,7 +23,7 @@ class BookingScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              LeadingWithIcon(
+              const LeadingWithIcon(
                 image: AssetPath.calender2,
               ),
               CustomText(
@@ -35,9 +36,13 @@ class BookingScreen extends StatelessWidget {
                   children: [
                     LargeButton(
                       text: StringManager.veternarians,
+                      onPressed: (){
+                        Navigator.pushNamed(context, Routes.doctor);
+                      },
                       child: Image.asset(
                         AssetPath.petProfile,
                         color: AppColors.primaryColor,
+
                       ),
                     ),
                     SizedBox(
