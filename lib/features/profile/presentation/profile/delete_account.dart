@@ -82,16 +82,15 @@ class DeleteAccount extends StatelessWidget {
             ),
             
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Center(
-                child: Image.asset(AssetPath.deleteContainer,
+         Stack(
+           children: [
+             Image.asset(AssetPath.blueContainer,
 
-                ),
-              ),
-            ],
-          )
+             )
+           ],
+
+
+         )
 
 
 
