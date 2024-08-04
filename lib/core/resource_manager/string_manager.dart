@@ -173,4 +173,5 @@ class StringManager {
   static const String   choosePaymentOption       = "Choose Payment Option";
   static const String   debitCreditCard        = "Debit / Credit Card";
   static const String   cash                  = "Cash ";
+  static const String   areYouSure = "Are you sure you want to delete your account?";
 }

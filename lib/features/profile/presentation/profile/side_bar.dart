@@ -64,7 +64,7 @@ class SideBar extends StatelessWidget {
             height: AppSize.defaultSize! * 3,
           ),
           SideBarRow(image:AssetPath.resetPasswordIcon,text: StringManager.resetPassword.tr(),onTap: () {
-            Navigator.pushNamed(context, Routes.accountPrivacy);
+
           },),
           SizedBox(
             height: AppSize.defaultSize! * 0.7,
@@ -100,7 +100,7 @@ class SideBar extends StatelessWidget {
             height: AppSize.defaultSize! * 3,
           ),
           SideBarRow(image:AssetPath.bellPlus,text: StringManager.subscriptionPlan.tr(),onTap: () {
-            Navigator.pushNamed(context, Routes.accountPrivacy);
+
           },),
           SizedBox(
             height: AppSize.defaultSize! * 0.7,
@@ -134,7 +134,7 @@ class SideBar extends StatelessWidget {
             height: AppSize.defaultSize! * 3,
           ),
           SideBarRow(image:AssetPath.bell,text: StringManager.notificationSettings.tr(),onTap: () {
-            Navigator.pushNamed(context, Routes.accountPrivacy);
+
           },),
           SizedBox(
             height: AppSize.defaultSize! * 0.7,
@@ -151,7 +151,7 @@ class SideBar extends StatelessWidget {
             height: AppSize.defaultSize! * 3,
           ),
           SideBarRow(image:AssetPath.signOut,text: StringManager.signOut.tr(),onTap: () {
-            Navigator.pushNamed(context, Routes.accountPrivacy);
+
           },),
           SizedBox(
             height: AppSize.defaultSize! * 0.7,
