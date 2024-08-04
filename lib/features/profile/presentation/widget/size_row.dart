@@ -45,10 +45,11 @@ padding: EdgeInsets.zero,
                 ),
                 SizedBox(height: AppSize.defaultSize! ,),
                 CustomText(text: !isDog?StringManager.sizeList[index].toString():StringManager.sizeListDog[index].toString(),
-                fontSize: AppSize.defaultSize!  ,
+                fontSize: AppSize.defaultSize! *1.4 ,
                 color: AppColors.greyColor
 
                 ),
+
               ],
             ),
           );

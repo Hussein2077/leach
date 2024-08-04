@@ -149,6 +149,24 @@ class StringManager {
   static const String   timeSpent = "Time Spent";
   static const String   myProfile = "My Profile";
   static const String   petProfile = "Pet Profile";
+  static const String   name = "Name";
+  static const String   enterYourName = "Enter Your Name";
+  static const String   optional = "Optional";
+  static const String   userName = "UserName";
+  static const String   enterUserName = "Enter UserName";
+  static const String   enterNewBio = "Enter new bio";
+  static const String   smallCatkilos = "< 0.5 Kg";
+
+
+
+  static const String   smallDogkilos = "< 10 Kg";
+  static const String   mediumDogkilos = "11-26 Kg";
+  static const String   largeDogkilos = "27-45 Kg";
+  static const String   giantDogkilos = ">45 Kg";
+
+
+
+  static List<String> sizeListDogKilos = [smallDogkilos, mediumDogkilos, largeDogkilos, giantDogkilos ];
   static const String   date    = "Date";
   static const String   time     = "Time";
   static const String   confirmAppointment      = "Confirm Appointment";

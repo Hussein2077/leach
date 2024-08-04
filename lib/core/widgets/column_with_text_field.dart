@@ -19,6 +19,7 @@ class ColumnWithTextField extends StatefulWidget {
     this.suffixIcon,
     this.child,
     this.keyboardType = TextInputType.text, this.formKey,
+    this.rightText
   });
   final  GlobalKey<FormState>? formKey ;
 
@@ -33,7 +34,7 @@ class ColumnWithTextField extends StatefulWidget {
   final Widget? child;
   final void Function()? onTap;
   final TextInputType keyboardType;
-
+  final String? rightText;
   final TextEditingController? controller;
 
   @override
@@ -49,12 +50,23 @@ class _ColumnWithTextFieldState extends State<ColumnWithTextField> {
         SizedBox(
           height: AppSize.defaultSize! * 2.5,
         ),
-        CustomText(
-          text:
-          widget.text,
-          fontSize: AppSize.defaultSize! * 2,
-          color: AppColors.primaryColor,
+        Row(
+          children: [
+            CustomText(
+              text:
+              widget.text,
+              fontSize: AppSize.defaultSize! * 2,
+              color: AppColors.primaryColor,
 
+            ),
+Spacer(),
+if(widget.rightText!=null)
+            CustomText(
+              text: widget.rightText!,
+              fontSize: AppSize.defaultSize! * 1,
+              color: AppColors.greyColor,
+            ),
+          ],
         ),
 
         SizedBox(

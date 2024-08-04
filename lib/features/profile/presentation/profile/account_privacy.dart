@@ -33,7 +33,7 @@ bool isSwitched = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(248,255,250,1),
+
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -85,7 +85,7 @@ bool isSwitched = false;
               Material(
 
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(AppSize.defaultSize! * 30))),
-                elevation: 40,
+                elevation: 60,
                 color: Colors.transparent,
                 // shadowColor: Colors.transparent,
                 child: Transform.scale(

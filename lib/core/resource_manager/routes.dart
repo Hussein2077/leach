@@ -26,6 +26,8 @@ import 'package:leach/features/profile/presentation/add_pet/dog_breed3.dart';
 import 'package:leach/features/profile/presentation/add_pet/type_of_pet.dart';
 import 'package:leach/features/profile/presentation/profile/account_privacy.dart';
 import 'package:leach/features/profile/presentation/profile/activity_and_history.dart';
+import 'package:leach/features/profile/presentation/profile/delete_account.dart';
+import 'package:leach/features/profile/presentation/profile/edit_pet_profile.dart';
 import 'package:leach/features/profile/presentation/profile/my_pet_profile.dart';
 import 'package:leach/features/profile/presentation/profile/pet_details.dart';
 import 'package:leach/features/profile/presentation/profile/side_bar.dart';
@@ -59,6 +61,8 @@ class Routes {
 
   static const String    myPetProfile  = "/my_pet_profile";
   static const String    editProfile  = "/edit_profile";
+  static const String    editPetProfile  = "/edit_pet_profile";
+  static const String    deleteAccount  = "/delete_account";
   static const String    calenderScreen  = "/CalenderScreen";
   static const String    reviewScreen  = "/ReviewScreen";
   static const String    cashOrCredit  = "/cashOrCredit";
@@ -186,10 +190,15 @@ class RouteGenerator {
             pageBuilder: (context, animation, secondaryAnimation) =>
             const  BreedingScreen(),
             transitionsBuilder: customAnimate);
-        case Routes.bookingScreen:
+        case Routes.editPetProfile:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-            const  BookingScreen(),
+            const  EditPetProfile(),
+            transitionsBuilder: customAnimate);
+      case Routes.deleteAccount:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const  DeleteAccount(),
             transitionsBuilder: customAnimate);
         case Routes.calenderScreen:
         return PageRouteBuilder(
@@ -206,7 +215,6 @@ class RouteGenerator {
             pageBuilder: (context, animation, secondaryAnimation) =>
             const  CashOrCredit(),
             transitionsBuilder: customAnimate);
-
 
     }
     return unDefinedRoute(

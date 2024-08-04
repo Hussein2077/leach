@@ -82,4 +82,6 @@ class AssetPath {
   static const String addPet           = '$pathImage/add_pet.png';
   static const String clock            = '$pathImage/clock.png';
   static const String debit             = '$pathImage/debit.png';
+  static const String deleteContainer          = '$pathImage/deleteContainer2.png';
+
 }
