@@ -120,6 +120,8 @@ class StringManager {
 
   static const String   petTemperaments = "Pet Temperaments";
   static const String   selectTemperaments = "Select temperaments";
+  static const String   selectDate  = "Select Date";
+  static const String   selectTime   = "Select Time Slot";
   static const String friendly = "Friendly";
   static const String calm = "Calm";
   static const String playful = "Playful";
@@ -165,4 +167,10 @@ class StringManager {
 
 
   static List<String> sizeListDogKilos = [smallDogkilos, mediumDogkilos, largeDogkilos, giantDogkilos ];
+  static const String   date    = "Date";
+  static const String   time     = "Time";
+  static const String   confirmAppointment      = "Confirm Appointment";
+  static const String   choosePaymentOption       = "Choose Payment Option";
+  static const String   debitCreditCard        = "Debit / Credit Card";
+  static const String   cash                  = "Cash ";
 }

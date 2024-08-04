@@ -79,6 +79,9 @@ class AssetPath {
   static const String profileIcon          = '$pathImage/profile_icon.png';
   static const String petPawIcon          = '$pathImage/pet_paw_icon.png';
   static const String whiteProfileIcon          = '$pathImage/profile_icon.png';
+  static const String addPet           = '$pathImage/add_pet.png';
+  static const String clock            = '$pathImage/clock.png';
+  static const String debit             = '$pathImage/debit.png';
   static const String deleteContainer          = '$pathImage/deleteContainer2.png';
 
 }

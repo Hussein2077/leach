@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
         context.read<MainScreenBloc>().add(const ChangeTabEvent(0));
       },
       () {
-      Navigator.pushNamed(context, Routes.typeOfPetScreen,arguments: true);
+        Navigator.pushNamed(context, Routes.typeOfPetScreen, arguments: true);
       },
       () {
         Navigator.pushNamed(context, Routes.bookingScreen);
@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(
                         width: AppSize.screenWidth! * .5,
                         child: CustomText(
-                          text: StringManager.welcome + ', Hussein',
+                          text: '${StringManager.welcome}, Hussein',
                           fontWeight: FontWeight.w700,
                           maxLines: 2,
                           textAlign: TextAlign.start,
@@ -90,10 +90,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                    height: AppSize.screenHeight! * .63,
+                    height: AppSize.screenHeight! * .6,
                     width: AppSize.screenWidth!,
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Colors.transparent,
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(AppSize.defaultSize! * 4),
                             topRight:
@@ -118,15 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 )
               ],
             ),
-            Positioned(
-                top: AppSize.defaultSize! * 21,
-                left: AppSize.defaultSize! * 5.3,
-                child: Image.asset(AssetPath.arm)),
-            Positioned(
-                top: AppSize.defaultSize! * 21,
-                right: AppSize.defaultSize! * 5.3,
-                child: Transform.rotate(
-                    angle: -3.14 / 12.0, child: Image.asset(AssetPath.arm))),
+
           ],
         ),
       ),
