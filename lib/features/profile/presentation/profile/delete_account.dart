@@ -20,8 +20,8 @@ import 'package:leach/features/profile/presentation/widget/side_bar_row.dart';
 
 
 
-class ActivityAndHistory extends StatelessWidget {
-  const ActivityAndHistory({super.key});
+class DeleteAccount extends StatelessWidget {
+  const DeleteAccount({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,11 +51,11 @@ class ActivityAndHistory extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.only(  left: AppSize.defaultSize! * 2.2,),
-                  child: Image.asset(AssetPath.message,),
+                  child: Image.asset(AssetPath.x,),
                 ),
                 SizedBox(width: AppSize.defaultSize! * 1.2,),
                 CustomText(
-                  text: StringManager.activityAndHistory.tr(),
+                  text: StringManager.deleteAccount.tr(),
                   fontSize: AppSize.defaultSize! * 2,
 
                   maxLines: 1,
@@ -79,59 +79,18 @@ class ActivityAndHistory extends StatelessWidget {
             SizedBox(
               height: AppSize.defaultSize! * 3,
             ),
-            SideBarRow(image:AssetPath.like,text: StringManager.likes.tr(),onTap: () {
-              Navigator.pushNamed(context, Routes.accountPrivacy);
-            },),
-            SizedBox(
-              height: AppSize.defaultSize! * 0.7,
-            ),
-            Divider(
-              color: Colors.black, //color of divider
-              height: 5, //height spacing of divider
-              thickness: 0.6, //thickness of divier line
-              indent: AppSize.defaultSize! * 2.2, //spacing at the start of divider
-              endIndent: AppSize.defaultSize! * 2.8, //spacing at the end of divider
-            ),
+            
 
-            SizedBox(
-              height: AppSize.defaultSize! * 3,
-            ),
-            SideBarRow(image:AssetPath.matches,text: StringManager.matches.tr(),onTap: () {
-              Navigator.pushNamed(context, Routes.accountPrivacy);
-            },),
-            SizedBox(
-              height: AppSize.defaultSize! * 0.7,
-            ),
-            Divider(
-              color: Colors.black, //color of divider
-              height: 5, //height spacing of divider
-              thickness: 0.6, //thickness of divier line
-              indent: AppSize.defaultSize! * 2.2, //spacing at the start of divider
-              endIndent: AppSize.defaultSize! * 2.8, //spacing at the end of divider
-            ) ,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Center(
+                child: Image.asset(AssetPath.deleteContainer,
 
-
-
-            SizedBox(
-              height: AppSize.defaultSize! * 3,
-            ),
-            SideBarRow(image:AssetPath.timeIcon,text: StringManager.timeSpent.tr(),onTap: () {
-              Navigator.pushNamed(context, Routes.accountPrivacy);
-            },),
-            SizedBox(
-              height: AppSize.defaultSize! * 0.7,
-            ),
-            Divider(
-              color: Colors.black, //color of divider
-              height: 5, //height spacing of divider
-              thickness: 0.6, //thickness of divier line
-              indent: AppSize.defaultSize! * 2.2, //spacing at the start of divider
-              endIndent: AppSize.defaultSize! * 2.8, //spacing at the end of divider
-            ),
-
-            SizedBox(
-              height: AppSize.defaultSize! * 3,
-            ),
+                ),
+              ),
+            ],
+          )
 
 
 

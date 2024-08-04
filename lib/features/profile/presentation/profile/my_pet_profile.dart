@@ -73,7 +73,7 @@ class MyPetProfile extends StatelessWidget {
               InkWell(
                 onTap: (){
                   // lesa
-                  Navigator.pushNamed(context, Routes.sidebar);
+                  Navigator.pushNamed(context, Routes.editPetProfile);
 
                 },
                 child: Padding(

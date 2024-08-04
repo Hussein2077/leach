@@ -44,7 +44,7 @@ class MainButton extends StatelessWidget {
             padding: EdgeInsets.zero,
             backgroundColor: color ?? AppColors.primaryColor,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppSize.defaultSize! * 2),
+              borderRadius: BorderRadius.circular(AppSize.defaultSize! * 4),
             ),
           ),
           child: child2 ??

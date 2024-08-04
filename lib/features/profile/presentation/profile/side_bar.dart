@@ -168,7 +168,7 @@ class SideBar extends StatelessWidget {
             height: AppSize.defaultSize! * 3,
           ),
           SideBarRow(image:AssetPath.x,text: StringManager.deleteAccount.tr(),onTap: () {
-            Navigator.pushNamed(context, Routes.accountPrivacy);
+            Navigator.pushNamed(context, Routes.deleteAccount);
           }),
           SizedBox(
             height: AppSize.defaultSize! * 0.7,
