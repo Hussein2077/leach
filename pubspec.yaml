@@ -99,6 +99,10 @@ flutter:
         - asset: asset/fonts/Brodien-Medium.otf
         - asset: asset/fonts/Gully-CDLight.ttf
           weight: 700
+    - family: Gully
+      fonts:
+        - asset: asset/fonts/Gully-CDLight.ttf
+
   # fonts:
   #   - family: Schyler
   #     fonts:

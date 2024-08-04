@@ -40,10 +40,10 @@ class CashOrCredit extends StatelessWidget {
                   elevation: 10,
                   borderRadius: BorderRadius.circular(AppSize.defaultSize!*1.5 ),
                   color: Colors.white,
-                  child: Center(
-                    child: SizedBox(
-                      height: AppSize.defaultSize! * 17,
-                      width: AppSize.defaultSize! * 15,
+                  child: SizedBox(
+                    height: AppSize.defaultSize! * 17,
+                    width: AppSize.defaultSize! * 15,
+                    child: Center(
                       child: CustomText(text: StringManager.debitCreditCard.tr(),
                         fontSize: AppSize.defaultSize! * 3,
                         fontWeight: FontWeight.w700,
@@ -51,7 +51,7 @@ class CashOrCredit extends StatelessWidget {
 
                         textAlign: TextAlign.center
                         ,
-                      )
+                      ),
                     ),
                   ),
                 ),
@@ -59,19 +59,19 @@ class CashOrCredit extends StatelessWidget {
                   elevation: 10,
                   borderRadius: BorderRadius.circular(AppSize.defaultSize!  *1.5 ),
                   color: Colors.white,
-                  child: Center(
-                    child: SizedBox(
-                      height: AppSize.defaultSize! * 17,
-                      width: AppSize.defaultSize! * 15,
-                      child: CustomText(text: StringManager.debitCreditCard.tr(),
+                  child: SizedBox(
+                    height: AppSize.defaultSize! * 17,
+                    width: AppSize.defaultSize! * 15,
+                    child: Center(
+                      child: CustomText(text: StringManager.cash.tr(),
                         fontSize: AppSize.defaultSize! * 3,
                         fontWeight: FontWeight.w700,
                         maxLines: 2,
 
                         textAlign: TextAlign.center
                         ,
-                      )
-                    ),
+                      ),
+                    )
                   ),
                 ),
               ],

@@ -9,6 +9,7 @@ import 'package:leach/features/auth/presentation/forgot_password/reset_password_
 import 'package:leach/features/auth/presentation/login_screen.dart';
 import 'package:leach/features/auth/presentation/sign_up/register.dart';
 import 'package:leach/features/auth/presentation/welcome_screen.dart';
+import 'package:leach/features/chat/chat_details.dart';
 import 'package:leach/features/doctors.dart';
 import 'package:leach/features/home/componant/booking.dart';
 import 'package:leach/features/home/componant/breeding.dart';
@@ -41,31 +42,32 @@ class Routes {
   static const String signUp = "/signUp";
   static const String forgotPasswordScreen = "/ForgotPasswordScreen";
   static const String otpCode = "/otpCode";
-  static const String  resetPassword = "/resetPassword";
-  static const String  addPetScreen = "/addPetScreen";
-  static const String  typeOfPetScreen  = "/TypeOfPetScreen";
-  static const String  catBread  = "/CatBread";
-  static const String    dogBread  = "/dogBread";
-  static const String  TypeOfPetScreen  = "/TypeOfPetScreen";
-  static const String  doctor  = "/Doctors";
-  static const String  catBreed2  = "/CatBreed2";
-  static const String  catBreed3  = "/CatBreed3";
-  static const String    dogBreed2  = "/dogBreed2";
-  static const String    dogBreed3  = "/dogBreed3";
-  static const String    sidebar  = "/side_bar";
-  static const String    breedingScreen  = "/BreedingScreen";
-  static const String    bookingScreen  = "/BookingScreen";
-  static const String    petDetails  = "/petDetails";
-  static const String    accountPrivacy  = "/account_privacy";
-  static const String    activityAndHistory  = "/activity_and_history";
+  static const String resetPassword = "/resetPassword";
+  static const String addPetScreen = "/addPetScreen";
+  static const String typeOfPetScreen = "/TypeOfPetScreen";
+  static const String catBread = "/CatBread";
+  static const String dogBread = "/dogBread";
+  static const String TypeOfPetScreen = "/TypeOfPetScreen";
+  static const String doctor = "/Doctors";
+  static const String catBreed2 = "/CatBreed2";
+  static const String catBreed3 = "/CatBreed3";
+  static const String dogBreed2 = "/dogBreed2";
+  static const String dogBreed3 = "/dogBreed3";
+  static const String sidebar = "/side_bar";
+  static const String breedingScreen = "/BreedingScreen";
+  static const String bookingScreen = "/BookingScreen";
+  static const String petDetails = "/petDetails";
+  static const String accountPrivacy = "/account_privacy";
+  static const String activityAndHistory = "/activity_and_history";
 
-  static const String    myPetProfile  = "/my_pet_profile";
-  static const String    editProfile  = "/edit_profile";
-  static const String    editPetProfile  = "/edit_pet_profile";
-  static const String    deleteAccount  = "/delete_account";
-  static const String    calenderScreen  = "/CalenderScreen";
-  static const String    reviewScreen  = "/ReviewScreen";
-  static const String    cashOrCredit  = "/cashOrCredit";
+  static const String myPetProfile = "/my_pet_profile";
+  static const String editProfile = "/edit_profile";
+  static const String editPetProfile = "/edit_pet_profile";
+  static const String deleteAccount = "/delete_account";
+  static const String calenderScreen = "/CalenderScreen";
+  static const String reviewScreen = "/ReviewScreen";
+  static const String cashOrCredit = "/cashOrCredit";
+  static const String chatDetails  = "/ChatDetails";
 }
 
 class RouteGenerator {
@@ -77,10 +79,11 @@ class RouteGenerator {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const LoginScreen(),
-            transitionsBuilder: customAnimate);   case Routes.main:
+            transitionsBuilder: customAnimate);
+      case Routes.main:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const MainScreen( ),
+                const MainScreen(),
             transitionsBuilder: customAnimate);
       case Routes.welcomePage:
         return PageRouteBuilder(
@@ -97,130 +100,134 @@ class RouteGenerator {
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const ForgotPasswordScreen(),
             transitionsBuilder: customAnimate);
-        case Routes.otpCode:
+      case Routes.otpCode:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const CodeScreen(),
             transitionsBuilder: customAnimate);
-        case Routes.resetPassword:
+      case Routes.resetPassword:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const ResetPasswordScreen(),
             transitionsBuilder: customAnimate);
-        case Routes.addPetScreen:
+      case Routes.addPetScreen:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const AddPetScreen(),
             transitionsBuilder: customAnimate);
-        case Routes.typeOfPetScreen:
-          bool? isFromBreeding = settings.arguments as bool?;
+      case Routes.typeOfPetScreen:
+        bool? isFromBreeding = settings.arguments as bool?;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                  TypeOfPetScreen(
-                    isFromBreeding:isFromBreeding??false,
+                TypeOfPetScreen(
+                  isFromBreeding: isFromBreeding ?? false,
                 ),
             transitionsBuilder: customAnimate);
-        case Routes.doctor:
+      case Routes.doctor:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const Doctors(),
             transitionsBuilder: customAnimate);
-        case Routes.catBread:
+      case Routes.catBread:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const CatBread(),
             transitionsBuilder: customAnimate);
-        case Routes.dogBread:
+      case Routes.dogBread:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const  DogBread(),
+                const DogBread(),
             transitionsBuilder: customAnimate);
       case Routes.dogBreed2:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-            const  DogBreed2(),
+                const DogBreed2(),
             transitionsBuilder: customAnimate);
       case Routes.dogBreed3:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-            const  DogBreed3(),
+                const DogBreed3(),
             transitionsBuilder: customAnimate);
       case Routes.catBreed2:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-            const  CatBreed2(),
+                const CatBreed2(),
             transitionsBuilder: customAnimate);
       case Routes.catBreed3:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-            const  CatBreed3(),
+                const CatBreed3(),
             transitionsBuilder: customAnimate);
       case Routes.sidebar:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-            const  SideBar(),
+                const SideBar(),
             transitionsBuilder: customAnimate);
       case Routes.petDetails:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-            const  PetDetails(),
+                const PetDetails(),
             transitionsBuilder: customAnimate);
       case Routes.accountPrivacy:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-            const  AccountPrivacy(),
+                const AccountPrivacy(),
             transitionsBuilder: customAnimate);
       case Routes.activityAndHistory:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-            const  ActivityAndHistory(),
+                const ActivityAndHistory(),
             transitionsBuilder: customAnimate);
       case Routes.myPetProfile:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-            const  MyPetProfile(),
+                const MyPetProfile(),
             transitionsBuilder: customAnimate);
       case Routes.editProfile:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-            const  EditProfile(),
+                const EditProfile(),
             transitionsBuilder: customAnimate);
-        case Routes.breedingScreen:
+      case Routes.breedingScreen:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-            const  BreedingScreen(),
+                const BreedingScreen(),
             transitionsBuilder: customAnimate);
-        case Routes.editPetProfile:
+      case Routes.editPetProfile:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-            const  EditPetProfile(),
+                const EditPetProfile(),
             transitionsBuilder: customAnimate);
       case Routes.deleteAccount:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-            const  DeleteAccount(),
+                const DeleteAccount(),
             transitionsBuilder: customAnimate);
-        case Routes.calenderScreen:
+      case Routes.calenderScreen:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-            const  CalenderScreen(),
+                const CalenderScreen(),
             transitionsBuilder: customAnimate);
-        case Routes.reviewScreen:
+      case Routes.reviewScreen:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-            const  ReviewScreen(),
+                const ReviewScreen(),
             transitionsBuilder: customAnimate);
-        case Routes.cashOrCredit:
+      case Routes.cashOrCredit:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-            const  CashOrCredit(),
+                const CashOrCredit(),
             transitionsBuilder: customAnimate);
-        case Routes.bookingScreen:
+      case Routes.bookingScreen:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-            const  BookingScreen(),
+                const BookingScreen(),
             transitionsBuilder: customAnimate);
-
+      case Routes.chatDetails:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const ChatDetails(),
+            transitionsBuilder: customAnimate);
     }
     return unDefinedRoute(
         getIt<NavigationService>().navigatorKey.currentContext!);

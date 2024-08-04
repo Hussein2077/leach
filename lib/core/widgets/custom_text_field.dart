@@ -80,7 +80,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           hintText: widget.hintText,
           hintStyle: widget.hintStyle??TextStyle(
             fontSize: AppSize.defaultSize! * 1.3,
-
+fontFamily: 'Gully',
             color: AppColors.greyColor,
           ),
 

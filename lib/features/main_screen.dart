@@ -4,6 +4,7 @@ import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/background.dart';
+import 'package:leach/features/chat/chat_list.dart';
 import 'package:leach/features/home/home_screen.dart';
 import 'package:leach/features/main_screen_bloc.dart';
 import 'package:leach/features/posts/posts_screen.dart';
@@ -31,153 +32,145 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return  BlocBuilder<MainScreenBloc, MainScreenState>(
-        builder: (context, state) {
-          final selectedIndex =
-          state is TabChangedState ? state.selectedIndex : 4;
+    return BlocBuilder<MainScreenBloc, MainScreenState>(
+      builder: (context, state) {
+        final selectedIndex =
+            state is TabChangedState ? state.selectedIndex : 4;
         return LayoutBuilder(builder: (context, constraints) {
-          final isKeyboardOpen = MediaQuery
-              .of(context)
-              .viewInsets
-              .bottom > 0;
+          final isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
           return SizedBox(
             width: double.infinity,
             height: double.infinity,
             child: Scaffold(
-              backgroundColor: Colors.transparent,
-              floatingActionButton: isKeyboardOpen
-                  ? null
-                  : Material(
-                elevation: 0,
-                shape: const CircleBorder(),
-                color: AppColors.primaryColor,
-                child: Padding(
-                  padding: EdgeInsets.all(AppSize.defaultSize! * .8),
-                  child: Container(
-                    width: AppSize.defaultSize! * 8,
-                    height: AppSize.defaultSize! * 8,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.primaryColor,
-                    ),
-                    child: FloatingActionButton.extended(
-                        onPressed: () {
-                          context
-                              .read<MainScreenBloc>()
-                              .add(const ChangeTabEvent(4));
-                        },
+                backgroundColor: Colors.transparent,
+                floatingActionButton: isKeyboardOpen
+                    ? null
+                    : Material(
                         elevation: 0,
-                        focusElevation: 0,
-                        backgroundColor: AppColors.primaryColor,
                         shape: const CircleBorder(),
-                        disabledElevation: 0,
-                        label: Image.asset(
-                          AssetPath.home,
-                          width: AppSize.defaultSize! * 6,
-                          height: AppSize.defaultSize! * 6,
-                        )),
-                  ),
-                ),
-              ),
-              floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
-              bottomNavigationBar: BottomAppBar(
-                color: AppColors.primaryColor,
-                shape: const CircularNotchedRectangle(), //shape of notch
-                notchMargin: -15,
-                child: SizedBox(
-                  height: AppSize.defaultSize! * 10,
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: AppSize.defaultSize! * 3),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Center(
-                          child: IconButton(
-                              focusColor: AppColors.greyColor,
-                              hoverColor: AppColors.greyColor,
-                              padding: EdgeInsets.zero,
-                              highlightColor: Colors.transparent,
-                              onPressed: () {
-                                context
-                                    .read<MainScreenBloc>()
-                                    .add(const ChangeTabEvent(0));
-                              },
-                              icon: Image.asset(
-                                AssetPath.postsIcon,
-                                color: context.read<MainScreenBloc>() == '0'
-                                    ? Colors.grey
-                                    : Colors.white,
-                              )),
+                        color: AppColors.primaryColor,
+                        child: Padding(
+                          padding: EdgeInsets.all(AppSize.defaultSize! * .8),
+                          child: Container(
+                            width: AppSize.defaultSize! * 8,
+                            height: AppSize.defaultSize! * 8,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColors.primaryColor,
+                            ),
+                            child: FloatingActionButton.extended(
+                                onPressed: () {
+                                  context
+                                      .read<MainScreenBloc>()
+                                      .add(const ChangeTabEvent(4));
+                                },
+                                elevation: 0,
+                                focusElevation: 0,
+                                backgroundColor: AppColors.primaryColor,
+                                shape: const CircleBorder(),
+                                disabledElevation: 0,
+                                label: Image.asset(
+                                  AssetPath.home,
+                                  width: AppSize.defaultSize! * 6,
+                                  height: AppSize.defaultSize! * 6,
+                                )),
+                          ),
                         ),
-                        Center(
-                          child: InkWell(
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () {
-                                context
-                                    .read<MainScreenBloc>()
-                                    .add(const ChangeTabEvent(1));
-                              },
-                              child: Image.asset(
-                                AssetPath.chat,
-                                width: AppSize.defaultSize! * 4,
-                                height: AppSize.defaultSize! * 4,
-                              )),
-                        ),
-                        SizedBox(
-                          width: AppSize.defaultSize! * 5,
-                        ),
-                        Center(
-                          child: InkWell(
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () {
-                                context
-                                    .read<MainScreenBloc>()
-                                    .add(const ChangeTabEvent(2));
-                              },
-                              child: Image.asset(
-                                AssetPath.petProfile,
-                                width: AppSize.defaultSize! * 4,
-                                height: AppSize.defaultSize! * 4,
-                              )),
-                        ),
-                        Center(
-                          child: InkWell(
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () {
-                                context
-                                    .read<MainScreenBloc>()
-                                    .add(const ChangeTabEvent(3));
-                              },
-                              child: Image.asset(
-                                AssetPath.profile,
-                                width: AppSize.defaultSize! * 4,
-                                height: AppSize.defaultSize! * 4,
-                              )),
-                        ),
-                      ],
+                      ),
+                floatingActionButtonLocation:
+                    FloatingActionButtonLocation.centerDocked,
+                bottomNavigationBar: BottomAppBar(
+                  color: AppColors.primaryColor,
+                  shape: const CircularNotchedRectangle(), //shape of notch
+                  notchMargin: -15,
+                  child: SizedBox(
+                    height: AppSize.defaultSize! * 10,
+                    child: Padding(
+                      padding:
+                          EdgeInsets.only(bottom: AppSize.defaultSize! * 3),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Center(
+                            child: IconButton(
+                                focusColor: AppColors.greyColor,
+                                hoverColor: AppColors.greyColor,
+                                padding: EdgeInsets.zero,
+                                highlightColor: Colors.transparent,
+                                onPressed: () {
+                                  context
+                                      .read<MainScreenBloc>()
+                                      .add(const ChangeTabEvent(0));
+                                },
+                                icon: Image.asset(
+                                  AssetPath.postsIcon,
+                                  color: context.read<MainScreenBloc>() == '0'
+                                      ? Colors.grey
+                                      : Colors.white,
+                                )),
+                          ),
+                          Center(
+                            child: InkWell(
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () {
+                                  context
+                                      .read<MainScreenBloc>()
+                                      .add(const ChangeTabEvent(1));
+                                },
+                                child: Image.asset(
+                                  AssetPath.chat,
+                                  width: AppSize.defaultSize! * 4,
+                                  height: AppSize.defaultSize! * 4,
+                                )),
+                          ),
+                          SizedBox(
+                            width: AppSize.defaultSize! * 5,
+                          ),
+                          Center(
+                            child: InkWell(
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () {
+                                  context
+                                      .read<MainScreenBloc>()
+                                      .add(const ChangeTabEvent(2));
+                                },
+                                child: Image.asset(
+                                  AssetPath.petProfile,
+                                  width: AppSize.defaultSize! * 4,
+                                  height: AppSize.defaultSize! * 4,
+                                )),
+                          ),
+                          Center(
+                            child: InkWell(
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () {
+                                  context
+                                      .read<MainScreenBloc>()
+                                      .add(const ChangeTabEvent(3));
+                                },
+                                child: Image.asset(
+                                  AssetPath.profile,
+                                  width: AppSize.defaultSize! * 4,
+                                  height: AppSize.defaultSize! * 4,
+                                )),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              body:
-
-
-                    BackgroundScreen(
-                    image: AssetPath.homeBackground,
-                    child: getScreen(selectedIndex),
-                  )
-
-
-            ),
+                body: BackgroundScreen(
+                  image: AssetPath.homeBackground,
+                  child: getScreen(selectedIndex),
+                )),
           );
         });
       },
@@ -188,9 +181,7 @@ class _MainScreenState extends State<MainScreen> {
     if (selectedIndex == 0) {
       return const PostsScreen();
     } else if (selectedIndex == 1) {
-      return Container(
-        color: Colors.red,
-      );
+      return ChatList();
     } else if (selectedIndex == 2) {
       return const BackgroundScreen(
         image: AssetPath.homeBackground,

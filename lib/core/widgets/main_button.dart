@@ -52,7 +52,7 @@ class MainButton extends StatelessWidget {
                   ? CustomText(
                       text: text,
                       color: textColor,
-                      fontSize: fontSize ?? AppSize.defaultSize! * 2,
+                      fontSize: fontSize ?? AppSize.defaultSize! * 3,
                       fontWeight: fontWeight,
                     )
                   : Row(

@@ -36,7 +36,7 @@ class CustomText extends StatelessWidget {
       text,
       style: TextStyle(
         height: lineHeight,
-fontFamily: 'Brodien',
+fontFamily:fontFamily?? 'Brodien',
         color: color ?? AppColors.primaryColor,
         decoration: textDecoration ?? TextDecoration.none,
 
