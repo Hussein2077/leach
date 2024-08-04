@@ -32,6 +32,7 @@ class Doctors extends StatelessWidget {
                 text: StringManager.availableSpecialists.tr(),
                 fontSize: AppSize.defaultSize! * 4,
                 fontWeight: FontWeight.w700,
+                
                 maxLines: 2,
                 textAlign: TextAlign.start,
               ),
