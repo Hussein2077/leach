@@ -59,6 +59,7 @@ class DeleteAccount extends StatelessWidget {
                   fontSize: AppSize.defaultSize! * 2,
 
                   maxLines: 1,
+                  
                   textAlign: TextAlign.start,
                 ),
                 Spacer(),
