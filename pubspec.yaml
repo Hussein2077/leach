@@ -95,9 +95,9 @@ flutter:
   fonts:
     - family: Brodian
       fonts:
-        - asset: asset/fonts/Brodien-Bold.ttf
-        - asset: asset/fonts/Brodien-Medium.ttf
-        - asset: asset/fonts/Gully-CDLight.ttf
+        - asset: asset\fonts/Brodien-Bold.ttf
+        - asset: asset\fonts/Brodien-Medium.ttf
+        - asset: asset\fonts/Gully-CDLight.ttf
 
   # fonts:
   #   - family: Schyler

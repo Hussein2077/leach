@@ -75,6 +75,7 @@ class _MyAppState extends State<MyApp> {
         theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
+            fontFamily: 'Brodian',
             scaffoldBackgroundColor: const Color.fromRGBO(248, 250, 255, 1)),
       ),
     );
