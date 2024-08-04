@@ -92,7 +92,13 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-
+  fonts:
+    - family: Brodien
+      fonts:
+        - asset: asset/fonts/Brodien-Bold.otf
+        - asset: asset/fonts/Brodien-Medium.otf
+        - asset: asset/fonts/Gully-CDLight.ttf
+          weight: 700
   # fonts:
   #   - family: Schyler
   #     fonts:
