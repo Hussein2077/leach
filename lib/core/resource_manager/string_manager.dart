@@ -149,4 +149,10 @@ class StringManager {
   static const String   timeSpent = "Time Spent";
   static const String   myProfile = "My Profile";
   static const String   petProfile = "Pet Profile";
+  static const String   date    = "Date";
+  static const String   time     = "Time";
+  static const String   confirmAppointment      = "Confirm Appointment";
+  static const String   choosePaymentOption       = "Choose Payment Option";
+  static const String   debitCreditCard        = "Debit / Credit Card";
+  static const String   cash                  = "Cash ";
 }

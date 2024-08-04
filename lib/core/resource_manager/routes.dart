@@ -12,6 +12,7 @@ import 'package:leach/features/auth/presentation/welcome_screen.dart';
 import 'package:leach/features/doctors.dart';
 import 'package:leach/features/home/componant/booking.dart';
 import 'package:leach/features/home/componant/breeding.dart';
+import 'package:leach/features/home/componant/cash_or_credit.dart';
 import 'package:leach/features/home/componant/review.dart';
 import 'package:leach/features/home/widgets/calender.dart';
 import 'package:leach/features/main_screen.dart';
@@ -60,6 +61,7 @@ class Routes {
   static const String    editProfile  = "/edit_profile";
   static const String    calenderScreen  = "/CalenderScreen";
   static const String    reviewScreen  = "/ReviewScreen";
+  static const String    cashOrCredit  = "/cashOrCredit";
 }
 
 class RouteGenerator {
@@ -198,6 +200,11 @@ class RouteGenerator {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
             const  ReviewScreen(),
+            transitionsBuilder: customAnimate);
+        case Routes.cashOrCredit:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const  CashOrCredit(),
             transitionsBuilder: customAnimate);
 
 
