@@ -215,6 +215,11 @@ class RouteGenerator {
             pageBuilder: (context, animation, secondaryAnimation) =>
             const  CashOrCredit(),
             transitionsBuilder: customAnimate);
+        case Routes.bookingScreen:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const  BookingScreen(),
+            transitionsBuilder: customAnimate);
 
     }
     return unDefinedRoute(
