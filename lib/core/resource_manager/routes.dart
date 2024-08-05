@@ -70,13 +70,6 @@ class Routes {
   static const String    calenderScreen  = "/CalenderScreen";
   static const String    reviewScreen  = "/ReviewScreen";
   static const String    cashOrCredit  = "/cashOrCredit";
-  static const String myPetProfile = "/my_pet_profile";
-  static const String editProfile = "/edit_profile";
-  static const String editPetProfile = "/edit_pet_profile";
-  static const String deleteAccount = "/delete_account";
-  static const String calenderScreen = "/CalenderScreen";
-  static const String reviewScreen = "/ReviewScreen";
-  static const String cashOrCredit = "/cashOrCredit";
   static const String chatDetails  = "/ChatDetails";
 }
 

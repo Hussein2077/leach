@@ -86,6 +86,5 @@ class AssetPath {
   static const String blueContainer          = '$pathImage/blue_container2.svg';
   static const String mayaExpression          = '$pathImage/Maya Expressions-155.svg';
   static const String mayaExpression2          = '$pathImage/Maya Expressions-15.svg';
-  static const String blueContainer          = '$pathImage/blue_container.png';
   static const String         search     = '$pathImage/search.png';
 }
