@@ -34,6 +34,8 @@ import 'package:leach/features/profile/presentation/profile/pet_details.dart';
 import 'package:leach/features/profile/presentation/profile/side_bar.dart';
 import 'package:leach/features/profile/presentation/profile/edit_profile.dart';
 
+import 'package:leach/features/profile/presentation/profile/delete_account_2.dart';
+
 class Routes {
   static const String login = "/login";
   static const String welcomePage = "/welcomePage";
@@ -60,6 +62,14 @@ class Routes {
   static const String accountPrivacy = "/account_privacy";
   static const String activityAndHistory = "/activity_and_history";
 
+  static const String    myPetProfile  = "/my_pet_profile";
+  static const String    editProfile  = "/edit_profile";
+  static const String    editPetProfile  = "/edit_pet_profile";
+  static const String    deleteAccount  = "/delete_account";
+  static const String    deleteAccount2  = "/delete_account_2";
+  static const String    calenderScreen  = "/CalenderScreen";
+  static const String    reviewScreen  = "/ReviewScreen";
+  static const String    cashOrCredit  = "/cashOrCredit";
   static const String myPetProfile = "/my_pet_profile";
   static const String editProfile = "/edit_profile";
   static const String editPetProfile = "/edit_pet_profile";
@@ -193,7 +203,7 @@ class RouteGenerator {
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const BreedingScreen(),
             transitionsBuilder: customAnimate);
-      case Routes.editPetProfile:
+        case Routes.editPetProfile:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const EditPetProfile(),
@@ -227,6 +237,11 @@ class RouteGenerator {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const ChatDetails(),
+            transitionsBuilder: customAnimate);
+      case Routes.deleteAccount2:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const  DeleteAccount2(),
             transitionsBuilder: customAnimate);
     }
     return unDefinedRoute(

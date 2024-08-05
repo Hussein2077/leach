@@ -182,4 +182,14 @@ class StringManager {
   static const String debitCreditCard = "Debit / Credit Card";
   static const String cash = "Cash ";
   static const String searchName  = "Search Name ";
+
+
+  static List<String> sizeListDogKilos = [smallDogkilos, mediumDogkilos, largeDogkilos, giantDogkilos ];
+  static const String   date    = "Date";
+  static const String   time     = "Time";
+  static const String   confirmAppointment      = "Confirm Appointment";
+  static const String   choosePaymentOption       = "Choose Payment Option";
+  static const String   debitCreditCard        = "Debit / Credit Card";
+  static const String   cash                  = "Cash ";
+  static const String   areYouSure = "Are you sure you want to delete your account?";
 }
