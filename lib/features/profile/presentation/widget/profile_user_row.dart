@@ -3,15 +3,17 @@ import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
+import 'package:leach/features/profile/presentation/friends/friends_view.dart';
 
 class ProfileUserRow extends StatelessWidget {
-  const ProfileUserRow({super.key, this.name, this.userName, this.kind,this.image});
+  const ProfileUserRow(
+      {super.key, this.name, this.userName, this.kind, this.image,   this.friendsView=false});
 
   final String? name;
   final String? userName;
   final String? kind;
   final String? image;
-
+final bool friendsView;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -19,13 +21,12 @@ class ProfileUserRow extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CircleAvatar(
-          radius: AppSize.defaultSize!*4 ,
+          radius: AppSize.defaultSize! * 4,
           backgroundColor: Colors.transparent,
           child: Image.asset(
-          image??  AssetPath.doctor,
+            image ?? AssetPath.doctor,
             width: AppSize.defaultSize! * 8.2,
             height: AppSize.defaultSize! * 8.2,
-
           ),
         ),
         Column(
@@ -65,13 +66,30 @@ class ProfileUserRow extends StatelessWidget {
                       color: Colors.white,
                       textAlign: TextAlign.start,
                       maxLines: 2,
-
                     ),
                   ),
                 ],
               )
           ],
         ),
+        if(friendsView)
+        const Spacer(),
+        if(friendsView)
+        Column(
+          children: [
+            IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                  size: AppSize.defaultSize! * 3,
+                )),
+            CustomText(
+              text: 'Add Friend',
+              color: Colors.white,
+            )
+          ],
+        )
       ],
     );
   }

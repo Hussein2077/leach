@@ -6,8 +6,8 @@ import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/icon_with_matrial.dart';
 
 class ChatListItem extends StatelessWidget {
-  const ChatListItem({super.key});
-
+  const ChatListItem({super.key,   this.chatDetails=true});
+final bool chatDetails;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,7 +21,7 @@ class ChatListItem extends StatelessWidget {
             padding: EdgeInsets.symmetric(
                 vertical: AppSize.defaultSize! * 1),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment:     chatDetails? CrossAxisAlignment.start:CrossAxisAlignment.center,
               children: [
                 IconWithMaterial(
                   imagePath: AssetPath.profile,
@@ -43,6 +43,7 @@ class ChatListItem extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                         textAlign: TextAlign.start,
                         fontSize: AppSize.defaultSize! * 1.8),
+                    if(chatDetails)
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
@@ -68,7 +69,9 @@ class ChatListItem extends StatelessWidget {
                     ),
                   ],
                 ),
+                if(chatDetails)
                 const Spacer(),
+                if(chatDetails)
                 CustomText(
                     text: "10:30",
                     color: AppColors.greyColor,

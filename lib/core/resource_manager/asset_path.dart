@@ -38,6 +38,7 @@ class AssetPath {
   static const String testPosts2           = '$pathImage/test2.png';
   static const String testPosts3           = '$pathImage/test3.svg';
   static const String testPosts6           = '$pathImage/test6.png';
+  static const String testPosts7           = '$pathImage/test7.png';
   static const String testPosts4          = '$pathImage/test4.png';
   static const String  petLeg            = '$pathImage/bet_leg.svg';
   static const String  pet2Leg            = '$pathImage/pet_2legs.svg';
@@ -87,4 +88,6 @@ class AssetPath {
   static const String mayaExpression          = '$pathImage/Maya Expressions-155.svg';
   static const String mayaExpression2          = '$pathImage/Maya Expressions-15.svg';
   static const String         search     = '$pathImage/search.png';
+  static const String         menuFriend      = '$pathImage/menu_f.png';
+  static const String         curved      = '$pathImage/curved.png';
 }

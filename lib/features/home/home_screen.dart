@@ -34,7 +34,9 @@ class _HomeScreenState extends State<HomeScreen> {
       () {
         Navigator.pushNamed(context, Routes.bookingScreen);
       },
-      () {},
+      () {
+        Navigator.pushNamed(context, Routes.howTo);
+      },
     ];
     super.initState();
   }

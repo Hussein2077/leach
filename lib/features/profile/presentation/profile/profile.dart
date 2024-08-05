@@ -5,7 +5,7 @@ import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/icon_with_matrial.dart';
 import 'package:leach/features/main_screen_bloc.dart';
-import 'package:leach/features/profile/presentation/profile/posts_container.dart';
+import 'package:leach/features/profile/presentation/profile/widgets/posts_container.dart';
 import 'package:leach/features/profile/presentation/widget/medals_abd_freinds.dart';
 import 'package:leach/features/profile/presentation/widget/pet_or_profile.dart';
 import 'package:leach/features/profile/presentation/widget/profile_app_bar.dart';
@@ -61,7 +61,7 @@ class PersonalProfile extends StatelessWidget {
         SizedBox(
           height: AppSize.defaultSize!,
         ),
-        const PostsContainer()
+        const Expanded(child: PostsContainer())
       ],
     );
   }

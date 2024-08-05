@@ -5,8 +5,9 @@ import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/leading_icon.dart';
 class ChatAppBar extends StatelessWidget {
-  const ChatAppBar({super.key, required this.text,   this.leadingIcon=true});
+  const ChatAppBar({super.key, required this.text,   this.leadingIcon=true, this.image});
 final String text ;
+final String? image ;
 final bool leadingIcon ;
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ final bool leadingIcon ;
 
         ),
         const Spacer(),
-        Image.asset(AssetPath.chat,color: AppColors.primaryColor,)
+        Image.asset(image??AssetPath.chat,color: AppColors.primaryColor,)
       ],
     );
   }

@@ -37,6 +37,7 @@ class StringManager {
   static const String enterYourInformation = "Enter Your Information";
   static const String orLoginWith = "OR login with";
   static const String addPet = "Add Pet";
+  static const String addPhoto  = "Add Photo";
   static const String findPetForAdoption = "Find Pet for Adoption";
   static const String code = "Code";
   static const String enterVerificationCode = "Enter verification code";
@@ -96,6 +97,7 @@ class StringManager {
   static const String steps = "Steps";
   static const String welcome = "Welcome";
   static const String posts = "Posts";
+  static const String post = "Post";
   static const String points = "Points";
   static const String badges = "Badges";
   static const String breeding = "Breeding";
@@ -183,4 +185,7 @@ class StringManager {
   static const String cash = "Cash ";
   static const String searchName  = "Search Name ";
   static const String   areYouSure = "Are you sure you want to delete your account?";
+  static const String   newPost  = "New Post";
+  static const String   writeCaption   = "Write a Caption";
+  static const String   addMorePhotos    = "Add more photos ";
 }

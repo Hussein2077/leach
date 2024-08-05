@@ -18,7 +18,7 @@ import 'package:leach/features/profile/presentation/widget/profile_app_bar.dart'
 import 'package:leach/features/profile/presentation/widget/profile_user_row.dart';
 import 'package:leach/features/profile/presentation/widget/side_bar_row.dart';
 
-import 'posts_container.dart';
+import 'widgets/posts_container.dart';
 
 class MyPetProfile extends StatelessWidget {
   const MyPetProfile({super.key});

@@ -14,6 +14,7 @@ import 'package:leach/features/doctors.dart';
 import 'package:leach/features/home/componant/booking.dart';
 import 'package:leach/features/home/componant/breeding.dart';
 import 'package:leach/features/home/componant/cash_or_credit.dart';
+import 'package:leach/features/home/componant/how_to.dart';
 import 'package:leach/features/home/componant/review.dart';
 import 'package:leach/features/home/widgets/calender.dart';
 import 'package:leach/features/main_screen.dart';
@@ -25,16 +26,21 @@ import 'package:leach/features/profile/presentation/add_pet/dog_bread.dart';
 import 'package:leach/features/profile/presentation/add_pet/dog_breed2.dart';
 import 'package:leach/features/profile/presentation/add_pet/dog_breed3.dart';
 import 'package:leach/features/profile/presentation/add_pet/type_of_pet.dart';
-import 'package:leach/features/profile/presentation/profile/account_privacy.dart';
-import 'package:leach/features/profile/presentation/profile/activity_and_history.dart';
-import 'package:leach/features/profile/presentation/profile/delete_account.dart';
-import 'package:leach/features/profile/presentation/profile/edit_pet_profile.dart';
+import 'package:leach/features/profile/presentation/friends/friends_screen.dart';
+import 'package:leach/features/profile/presentation/friends/friends_view.dart';
+import 'package:leach/features/profile/presentation/posts_and_pet_view/posts_view_profile.dart';
+import 'package:leach/features/profile/presentation/profile/componant/account_privacy.dart';
+import 'package:leach/features/profile/presentation/profile/componant/activity_and_history.dart';
+import 'package:leach/features/profile/presentation/profile/componant/add_photo_for_pet.dart';
+import 'package:leach/features/profile/presentation/profile/componant/add_post.dart';
+import 'package:leach/features/profile/presentation/profile/componant/delete_account.dart';
+import 'package:leach/features/profile/presentation/profile/componant/edit_pet_profile.dart';
 import 'package:leach/features/profile/presentation/profile/my_pet_profile.dart';
 import 'package:leach/features/profile/presentation/profile/pet_details.dart';
 import 'package:leach/features/profile/presentation/profile/side_bar.dart';
-import 'package:leach/features/profile/presentation/profile/edit_profile.dart';
+import 'package:leach/features/profile/presentation/profile/componant/edit_profile.dart';
 
-import 'package:leach/features/profile/presentation/profile/delete_account_2.dart';
+import 'package:leach/features/profile/presentation/profile/componant/delete_account_2.dart';
 
 class Routes {
   static const String login = "/login";
@@ -71,6 +77,12 @@ class Routes {
   static const String    reviewScreen  = "/ReviewScreen";
   static const String    cashOrCredit  = "/cashOrCredit";
   static const String chatDetails  = "/ChatDetails";
+  static const String  friends   = "/friends";
+  static const String  friendsView   = "/friendsView";
+  static const String  postsViewProfile    = "/PostsViewProfile";
+  static const String  addPost     = "/addPost";
+  static const String  addPhotoForPet      = "/AddPhotoForPet";
+  static const String  howTo       = "/howTo";
 }
 
 class RouteGenerator {
@@ -235,6 +247,36 @@ class RouteGenerator {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
             const  DeleteAccount2(),
+            transitionsBuilder: customAnimate);
+      case Routes.friends:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const  FriendsScreen(),
+            transitionsBuilder: customAnimate);
+      case Routes.friendsView:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const   FriendsView(),
+            transitionsBuilder: customAnimate);
+      case Routes.postsViewProfile:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const   PostsViewProfile(),
+            transitionsBuilder: customAnimate);
+      case Routes.addPost:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const   AddPost(),
+            transitionsBuilder: customAnimate);
+      case Routes.addPhotoForPet:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const   AddPhotoForPet(),
+            transitionsBuilder: customAnimate);
+        case Routes.howTo:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const   HowTo(),
             transitionsBuilder: customAnimate);
     }
     return unDefinedRoute(
