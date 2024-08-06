@@ -188,4 +188,6 @@ class StringManager {
   static const String   newPost  = "New Post";
   static const String   writeCaption   = "Write a Caption";
   static const String   addMorePhotos    = "Add more photos ";
+  static const String   difficultyLevel     = "Difficulty Level";
+  static const String   tips      = "Tips";
 }

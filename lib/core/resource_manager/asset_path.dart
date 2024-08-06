@@ -90,4 +90,8 @@ class AssetPath {
   static const String         search     = '$pathImage/search.png';
   static const String         menuFriend      = '$pathImage/menu_f.png';
   static const String         curved      = '$pathImage/curved.png';
+  static const String         howTo       = '$pathImage/how_to.png';
+  static const String         rate        = '$pathImage/rate.png';
+  static const String           vista        = '$pathImage/Vista.png';
+  static const String           withVista         = '$pathImage/with_vista.png';
 }

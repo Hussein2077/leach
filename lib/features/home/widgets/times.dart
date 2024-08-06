@@ -59,7 +59,8 @@ class _TimesState extends State<Times> {
                       child: CustomText(
                         text: times[index],
                         fontSize: AppSize.defaultSize! * 1.5,
-                        color: Colors.black,
+                        color:selected.contains(index)  ?Colors.white : Colors.black,
+                        fontFamily: 'Gully',
                       ))),
             ),
           );
