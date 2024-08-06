@@ -5,6 +5,7 @@ import 'package:leach/core/service/navigator_services.dart';
 import 'package:leach/core/service/service_locator.dart';
 import 'package:leach/features/auth/presentation/forgot_password/code_page.dart';
 import 'package:leach/features/auth/presentation/forgot_password/forgot_password.dart';
+import 'package:leach/features/auth/presentation/forgot_password/reset_password_from_profile.dart';
 import 'package:leach/features/auth/presentation/forgot_password/reset_password_screen.dart';
 import 'package:leach/features/auth/presentation/login_screen.dart';
 import 'package:leach/features/auth/presentation/sign_up/register.dart';
@@ -28,6 +29,9 @@ import 'package:leach/features/profile/presentation/add_pet/dog_breed3.dart';
 import 'package:leach/features/profile/presentation/add_pet/type_of_pet.dart';
 import 'package:leach/features/profile/presentation/friends/friends_screen.dart';
 import 'package:leach/features/profile/presentation/friends/friends_view.dart';
+import 'package:leach/features/profile/presentation/friends/report.dart';
+import 'package:leach/features/profile/presentation/friends/specific_messages_report.dart';
+import 'package:leach/features/profile/presentation/friends/submit_report.dart';
 import 'package:leach/features/profile/presentation/posts_and_pet_view/posts_view_profile.dart';
 import 'package:leach/features/profile/presentation/profile/componant/account_privacy.dart';
 import 'package:leach/features/profile/presentation/profile/componant/activity_and_history.dart';
@@ -83,6 +87,11 @@ class Routes {
   static const String  addPost     = "/addPost";
   static const String  addPhotoForPet      = "/AddPhotoForPet";
   static const String  howTo       = "/howTo";
+  static const String  resetPasswordFromProfile      = "/reset_password_from_profile";
+  static const String  specificMessagesReport      = "/specific_messages_report";
+  static const String  submitReport      = "/submit_report";
+  static const String  reportView      = "/report_view";
+
 }
 
 class RouteGenerator {
@@ -277,6 +286,26 @@ class RouteGenerator {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
             const   HowTo(),
+            transitionsBuilder: customAnimate);
+      case Routes.resetPasswordFromProfile:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const   ResetPasswordScreenFromProfile(),
+            transitionsBuilder: customAnimate);
+      case Routes.specificMessagesReport:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const   SpecificMessagesReport(),
+            transitionsBuilder: customAnimate);
+      case Routes.submitReport:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const   SubmitReport(),
+            transitionsBuilder: customAnimate);
+      case Routes.reportView:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const   ReportView(),
             transitionsBuilder: customAnimate);
     }
     return unDefinedRoute(

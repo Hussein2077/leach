@@ -20,6 +20,7 @@ class StringManager {
   static const String newPassword = "New Password";
   static const String enterPassword = "Enter password";
   static const String enterNewPassword = "Enter new password";
+  static const String enterOldPassword = "Enter old password";
   static const String enterConfirmPassword = "Enter confirm password";
 
   static const String forgotPassword = "Forgot Password?";
@@ -190,4 +191,30 @@ class StringManager {
   static const String   addMorePhotos    = "Add more photos ";
   static const String   difficultyLevel     = "Difficulty Level";
   static const String   tips      = "Tips";
+  static const String oldPassword = "Old Password";
+  static const String reportUser = "Report user";
+  static const String blockUser = "Block user";
+  static const String unfriendUser = "Unfriend user";
+  static const String specificMessages = "Specific messages from user";
+  static const String other = "Other";
+  static const String block = "Block";
+
+  static const String nudityOrSexualActivity = "Nudity or sexual activity";
+  static const String hateSpeechOrSymbols = "Hate Speech or symbols";
+
+  static const String scamOrFraud = "Scam or fraud";
+  static const String spam = "Spam";
+
+  static const String bullyingOrHarassment = "Bullying or harassment";
+
+  static const String cancel = "Cancel";
+  static const String areYouSureYouWantToBlockThisUser = "Are you sure you want to block this user?";
+  static const String selectaProblemToReport = "Select a problem to report";
+  static const String submitYourReport = "Submit your report to make our leash family feel safe";
+  static const String submitReport = "Submit Report";
+  static const String reportSubmitted = "Report Submitted";
+
+
+
+
 }

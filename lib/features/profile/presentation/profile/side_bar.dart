@@ -64,7 +64,7 @@ class SideBar extends StatelessWidget {
             height: AppSize.defaultSize! * 3,
           ),
           SideBarRow(image:AssetPath.resetPasswordIcon,text: StringManager.resetPassword.tr(),onTap: () {
-
+            Navigator.pushNamed(context, Routes.resetPasswordFromProfile);
           },),
           SizedBox(
             height: AppSize.defaultSize! * 0.7,
