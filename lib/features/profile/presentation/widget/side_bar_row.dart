@@ -8,16 +8,16 @@ import 'package:leach/core/widgets/cutom_text.dart';
 
 class SideBarRow extends StatelessWidget {
 
-  final String image;
+  final String? image;
   final String text;
-
+  final Color? color;
 
 final void Function()? onTap;
   const SideBarRow({super.key,
 
-    required this.image,
+     this.image,
     required this.text,
-
+    this.color,
     this.onTap
 });
 
@@ -30,15 +30,32 @@ final void Function()? onTap;
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          if(image!=null)
+
+
+
           Padding(
             padding: EdgeInsets.only(  left: AppSize.defaultSize! * 2.2,),
-            child: Image.asset(image,),
+            child: Image.asset(image!,),
           ),
           SizedBox(width: AppSize.defaultSize! * 1.2,),
+          if(image==null)
+          Padding(
+            padding: EdgeInsets.only(  left: AppSize.defaultSize! * 2.2,),
+            child: CustomText(
+              text: text,
+              fontSize: AppSize.defaultSize! * 2,
+              color: color,
+
+              maxLines: 1,
+              textAlign: TextAlign.start,
+            ),
+          ),
+          if(image!=null)
           CustomText(
             text: text,
             fontSize: AppSize.defaultSize! * 2,
-
+            color: color,
             maxLines: 1,
             textAlign: TextAlign.start,
           ),
@@ -47,6 +64,8 @@ final void Function()? onTap;
             padding:  EdgeInsets.only(right:AppSize.defaultSize! * 2.5),
             child: Image.asset(AssetPath.rightArrow),
           ),
+
+
         ],
       ),
     );
