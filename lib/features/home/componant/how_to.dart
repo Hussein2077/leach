@@ -19,10 +19,8 @@ class HowTo extends StatelessWidget {
                 width: AppSize.screenWidth,
                 fit: BoxFit.fitWidth,
               ),
-
             ],
           ),
-
           ),
           Expanded(child: SizedBox()),
           Transform.rotate(
