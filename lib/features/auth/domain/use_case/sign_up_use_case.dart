@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:leach/core/base_use_case/base_use_case.dart';
 import 'package:leach/core/error/failure.dart';
-import 'package:leach/core/resource_manager/themes/enums.dart';
+import 'package:leach/core/resource_manager/enums.dart';
 import 'package:leach/features/auth/domain/repo/base_repo.dart';
 
 class SignUpWithEmailAndPasswordUseCase

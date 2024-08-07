@@ -1,6 +1,6 @@
 
 import 'package:equatable/equatable.dart';
-import 'package:leach/core/resource_manager/themes/enums.dart';
+import 'package:leach/core/resource_manager/enums.dart';
 
 abstract class BaseChangePasswordEvent extends Equatable {
   const BaseChangePasswordEvent();

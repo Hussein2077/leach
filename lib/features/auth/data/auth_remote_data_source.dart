@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
-import 'package:leach/core/resource_manager/themes/enums.dart';
+import 'package:leach/core/resource_manager/enums.dart';
 import 'package:leach/core/utils/api_helper.dart';
 import 'package:leach/core/utils/constant_api.dart';
 import 'package:leach/core/utils/methods.dart';

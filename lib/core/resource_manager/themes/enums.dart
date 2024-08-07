@@ -1,5 +1,0 @@
-enum PhoneOrEmail {
-  phone,
-  email,
-
-}
