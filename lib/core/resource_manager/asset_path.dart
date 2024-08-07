@@ -97,4 +97,7 @@ class AssetPath {
   static const String         rate        = '$pathImage/rate.png';
   static const String           vista        = '$pathImage/Vista.png';
   static const String           withVista         = '$pathImage/with_vista.png';
+  static const String           mayaMP4         = '$pathImage/Mayaaa.gif';
+  static const String             maya1MP4         = '$pathImage/mmaayyy_1.gif';
+  static const String             vistaMP4          = '$pathImage/vistaaaa.gif';
 }

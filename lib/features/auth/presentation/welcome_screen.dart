@@ -17,6 +17,7 @@ class WelcomePage extends StatelessWidget {
     AppSize().init(context);
     return Scaffold(
       body: BackgroundScreen(
+image: AssetPath.maya1MP4,
         child: Align(
           alignment: Alignment.bottomCenter,
           child: Container(

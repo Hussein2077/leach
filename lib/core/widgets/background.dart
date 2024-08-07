@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/utils/app_size.dart';
 class BackgroundScreen extends StatelessWidget {
-  const BackgroundScreen({super.key, required this.child, this.image});
+  const BackgroundScreen({super.key, required this.child, this.image,});
 final Widget child;
 final String? image  ;
   @override
@@ -12,7 +12,9 @@ final String? image  ;
         SizedBox(
             width: AppSize.screenWidth,
             height: AppSize.screenHeight,
-            child: Image.asset(image??AssetPath.welcomeImage2,fit: BoxFit.fill, )),
+            child: FittedBox(
+                fit: BoxFit.cover,
+                child: Image.asset(image??AssetPath.welcomeImage2,fit: BoxFit.fill, ))),
         child
       ],
     );
