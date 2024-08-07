@@ -97,4 +97,10 @@ class AssetPath {
   static const String         rate        = '$pathImage/rate.png';
   static const String           vista        = '$pathImage/Vista.png';
   static const String           withVista         = '$pathImage/with_vista.png';
+  static const String           howToIcon         = '$pathImage/how_to_icon.png';
+  static const String           groom         = '$pathImage/groom.png';
+  static const String           handPaw         = '$pathImage/hand_paw.png';
+  static const String           dogSmall         = '$pathImage/dog_small.png';
+  static const String           edit         = '$pathImage/edit.png';
+  static const String           messageX         = '$pathImage/messageX.png';
 }

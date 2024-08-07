@@ -6,5 +6,8 @@ enum PhoneOrEmail {
 enum TypeOfPetNavigator {
  dogBread,
   breadingScreen,
+  groomingScreen,
+  trainingScreen,
+
 
 }

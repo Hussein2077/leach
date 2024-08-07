@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
+import 'package:leach/core/resource_manager/enums.dart';
 import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
@@ -10,8 +11,9 @@ import 'package:leach/core/widgets/large_botton.dart';
 import 'package:leach/core/widgets/leading_icon.dart';
 
 class TypeOfPetScreen extends StatelessWidget {
-  const TypeOfPetScreen({super.key,   this.isFromBreeding=false});
-final bool isFromBreeding;
+  const TypeOfPetScreen({super.key, required this.typeOfPetNavigator});
+
+final TypeOfPetNavigator typeOfPetNavigator;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,12 +46,26 @@ final bool isFromBreeding;
                   LargeButton(
                       text: StringManager.dog.tr(),
                       onPressed: () {
-                        if(!isFromBreeding) {
-                          Navigator.pushNamed(context, Routes.dogBread);
-                        }
-                        else{
+                        switch(typeOfPetNavigator){
+
+
+
+                          case TypeOfPetNavigator.dogBread:
+                            Navigator.pushNamed(context, Routes.dogBread);
+                          case TypeOfPetNavigator.breadingScreen:
                           Navigator.pushNamed(context, Routes.breedingScreen);
+                          case TypeOfPetNavigator.groomingScreen:
+
+                            case TypeOfPetNavigator.trainingScreen:
+                          Navigator.pushNamed(context, Routes.trainYourDog);
+
                         }
+                        // if(!isFromBreeding) {
+                        //   Navigator.pushNamed(context, Routes.dogBread);
+                        // }
+                        // else{
+                        //   Navigator.pushNamed(context, Routes.breedingScreen);
+                        // }
                       },
 
                       child: Image.asset(AssetPath.dog)),
@@ -59,12 +75,26 @@ final bool isFromBreeding;
                   LargeButton(
                       text: StringManager.cat.tr(),
                       onPressed: () {
-                        if(!isFromBreeding) {
-                          Navigator.pushNamed(context, Routes.catBread);
-                        }
-                        else{
+                        switch(typeOfPetNavigator){
+
+
+
+                          case TypeOfPetNavigator.dogBread:
+                            Navigator.pushNamed(context, Routes.catBread);
+                          case TypeOfPetNavigator.breadingScreen:
                           Navigator.pushNamed(context, Routes.breedingScreen);
+                          case TypeOfPetNavigator.groomingScreen:
+                          // TODO: Handle this case.
+                          case TypeOfPetNavigator.trainingScreen:
+                          Navigator.pushNamed(context, Routes.breedingScreen);
+
                         }
+                        // if(!isFromBreeding) {
+                        //   Navigator.pushNamed(context, Routes.catBread);
+                        // }
+                        // else{
+                        //   Navigator.pushNamed(context, Routes.breedingScreen);
+                        // }
                       },
                       child: Image.asset(AssetPath.cat)),
                 ],

@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
+import 'package:leach/core/resource_manager/enums.dart';
 import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
@@ -29,13 +30,13 @@ class _HomeScreenState extends State<HomeScreen> {
         context.read<MainScreenBloc>().add(const ChangeTabEvent(0));
       },
       () {
-        Navigator.pushNamed(context, Routes.typeOfPetScreen, arguments: true);
+        Navigator.pushNamed(context, Routes.typeOfPetScreen, arguments: TypeOfPetNavigator.breadingScreen);
       },
       () {
         Navigator.pushNamed(context, Routes.bookingScreen);
       },
       () {
-        Navigator.pushNamed(context, Routes.howTo);
+        Navigator.pushNamed(context, Routes.selectHowTo);
       },
     ];
     super.initState();

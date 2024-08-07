@@ -1,6 +1,9 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
+import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/utils/methods.dart';
 import 'package:leach/core/widgets/background.dart';
@@ -12,6 +15,9 @@ import 'package:leach/features/profile/presentation/widget/medals_abd_freinds.da
 import 'package:leach/features/profile/presentation/widget/pet_or_profile.dart';
 import 'package:leach/features/profile/presentation/widget/profile_app_bar.dart';
 import 'package:leach/features/profile/presentation/widget/profile_user_row.dart';
+import 'package:leach/features/profile/presentation/widget/side_bar_row.dart';
+
+import '../../../../core/resource_manager/routes.dart';
 
 class PostsViewProfile extends StatefulWidget {
   const PostsViewProfile({super.key});
@@ -20,7 +26,98 @@ class PostsViewProfile extends StatefulWidget {
   State<PostsViewProfile> createState() => _PostsViewProfileState();
 }
 
+void _showEditDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return DropdownButton2(
+        alignment: Alignment.topCenter,
+
+
+        items: [],
+        // child:
+        //
+        //
+        //
+        //     Divider(
+        //       color: Colors.black,
+        //       height: 5,
+        //       thickness: 0.6,
+        //       indent: AppSize.defaultSize! * 2.2,
+        //       endIndent: AppSize.defaultSize! * 2.8,
+        //     ),
+        //     SizedBox(
+        //       height: AppSize.defaultSize! * 0.7,
+        //     ),
+        //     SideBarRow(
+        //       image: AssetPath.messageX,
+        //       text: StringManager.turnOffCommenting.tr(),
+        //
+        //       onTap: () {
+        //         Navigator.of(context).pop();
+        //         // _showBlockDialog(context);
+        //       },
+        //     ),
+        //     Divider(
+        //       color: Colors.black,
+        //       height: 5,
+        //       thickness: 0.6,
+        //       indent: AppSize.defaultSize! * 2.2,
+        //       endIndent: AppSize.defaultSize! * 2.8,
+        //     ),
+        //     SizedBox(
+        //       height: AppSize.defaultSize! * 0.7,
+        //     ),
+        //     SideBarRow(
+        //       image: AssetPath.x,
+        //       text: StringManager.deletePost.tr(),
+        //
+        //       onTap: () {
+        //         Navigator.of(context).pop();
+        //
+        //       },
+        //     ),
+        //     Divider(
+        //       color: Colors.black,
+        //       height: 5,
+        //       thickness: 0.6,
+        //       indent: AppSize.defaultSize! * 2.2,
+        //       endIndent: AppSize.defaultSize! * 2.8,
+        //     ),
+
+
+      );
+    },
+  );
+}
+
 class _PostsViewProfileState extends State<PostsViewProfile> {
+  late List<SideBarRow> items;
+  @override
+  initState() {
+    items = [
+      SideBarRow(
+        image: AssetPath.edit,
+        text: StringManager.editPost.tr(),
+
+        onTap: () {
+          Navigator.pushNamed(context, Routes.trainYourDog);
+          // _showReportDialog(context);
+
+
+        },
+      ),
+
+
+
+
+
+    ];
+    super.initState();
+
+
+  }
+
   bool isLiked = false;
   @override
   Widget build(BuildContext context) {
@@ -66,10 +163,10 @@ class _PostsViewProfileState extends State<PostsViewProfile> {
                             children: [
                               IconButton(
                                 onPressed: () {
-
+                                  _showEditDialog(context);
                                 },
                                 icon: Image.asset(AssetPath.menuFriend,color: AppColors.primaryColor,),
-                                color: Colors.white,
+
                               ),
                             ],
                           ),

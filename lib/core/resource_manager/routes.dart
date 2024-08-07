@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:leach/core/resource_manager/enums.dart';
 import 'package:leach/core/service/navigator_services.dart';
 import 'package:leach/core/service/service_locator.dart';
 import 'package:leach/features/auth/presentation/forgot_password/code_page.dart';
@@ -17,6 +18,8 @@ import 'package:leach/features/home/componant/breeding.dart';
 import 'package:leach/features/home/componant/cash_or_credit.dart';
 import 'package:leach/features/home/componant/how_to.dart';
 import 'package:leach/features/home/componant/review.dart';
+import 'package:leach/features/home/componant/select_how_to.dart';
+import 'package:leach/features/home/componant/trainYourDog.dart';
 import 'package:leach/features/home/widgets/calender.dart';
 import 'package:leach/features/main_screen.dart';
 import 'package:leach/features/profile/presentation/add_pet/add_pet_screen.dart';
@@ -91,7 +94,8 @@ class Routes {
   static const String  specificMessagesReport      = "/specific_messages_report";
   static const String  submitReport      = "/submit_report";
   static const String  reportView      = "/report_view";
-
+  static const String  selectHowTo      = "/select_how_to";
+  static const String  trainYourDog      = "/train_your_dog";
 }
 
 class RouteGenerator {
@@ -140,11 +144,11 @@ class RouteGenerator {
                 const AddPetScreen(),
             transitionsBuilder: customAnimate);
       case Routes.typeOfPetScreen:
-        bool? isFromBreeding = settings.arguments as bool?;
+        TypeOfPetNavigator typeOfPetNavigator = settings.arguments as TypeOfPetNavigator;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 TypeOfPetScreen(
-                  isFromBreeding: isFromBreeding ?? false,
+                  typeOfPetNavigator: typeOfPetNavigator,
                 ),
             transitionsBuilder: customAnimate);
       case Routes.doctor:
@@ -306,6 +310,16 @@ class RouteGenerator {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
             const   ReportView(),
+            transitionsBuilder: customAnimate);
+      case Routes.selectHowTo:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const   SelectHowTo(),
+            transitionsBuilder: customAnimate);
+      case Routes.trainYourDog:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const   TrainYourDog(),
             transitionsBuilder: customAnimate);
     }
     return unDefinedRoute(
