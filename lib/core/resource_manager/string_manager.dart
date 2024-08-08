@@ -213,7 +213,9 @@ class StringManager {
   static const String submitYourReport = "Submit your report to make our leash family feel safe";
   static const String submitReport = "Submit Report";
   static const String reportSubmitted = "Report Submitted";
-
+  static const String editPost = "Edit Post";
+  static const String turnOffComments = "Turn off comments";
+  static const String deletePost = "Delete Post";
 
 
 

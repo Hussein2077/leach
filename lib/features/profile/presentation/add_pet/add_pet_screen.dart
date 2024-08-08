@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
+import 'package:leach/core/resource_manager/enums.dart';
 import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
@@ -44,7 +45,7 @@ class AddPetScreen extends StatelessWidget {
                     size: AppSize.defaultSize! * 8,
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, Routes.typeOfPetScreen);
+                    Navigator.pushNamed(context, Routes.typeOfPetScreen, arguments: TypeOfPetNavigator.dogBread);
                   },
                 ),
               ),
