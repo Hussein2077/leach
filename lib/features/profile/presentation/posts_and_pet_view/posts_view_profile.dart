@@ -7,14 +7,8 @@ import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/utils/methods.dart';
 import 'package:leach/core/widgets/background.dart';
-import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/icon_with_matrial.dart';
 import 'package:leach/core/widgets/leading_icon.dart';
-import 'package:leach/features/profile/presentation/profile/widgets/posts_container.dart';
-import 'package:leach/features/profile/presentation/widget/medals_abd_freinds.dart';
-import 'package:leach/features/profile/presentation/widget/pet_or_profile.dart';
-import 'package:leach/features/profile/presentation/widget/profile_app_bar.dart';
-import 'package:leach/features/profile/presentation/widget/profile_user_row.dart';
 import 'package:leach/features/profile/presentation/widget/side_bar_row.dart';
 
 import '../../../../core/resource_manager/routes.dart';
@@ -26,99 +20,134 @@ class PostsViewProfile extends StatefulWidget {
   State<PostsViewProfile> createState() => _PostsViewProfileState();
 }
 
-void _showEditDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return DropdownButton2(
-        alignment: Alignment.topCenter,
-
-
-        items: [],
-        // child:
-        //
-        //
-        //
-        //     Divider(
-        //       color: Colors.black,
-        //       height: 5,
-        //       thickness: 0.6,
-        //       indent: AppSize.defaultSize! * 2.2,
-        //       endIndent: AppSize.defaultSize! * 2.8,
-        //     ),
-        //     SizedBox(
-        //       height: AppSize.defaultSize! * 0.7,
-        //     ),
-        //     SideBarRow(
-        //       image: AssetPath.messageX,
-        //       text: StringManager.turnOffCommenting.tr(),
-        //
-        //       onTap: () {
-        //         Navigator.of(context).pop();
-        //         // _showBlockDialog(context);
-        //       },
-        //     ),
-        //     Divider(
-        //       color: Colors.black,
-        //       height: 5,
-        //       thickness: 0.6,
-        //       indent: AppSize.defaultSize! * 2.2,
-        //       endIndent: AppSize.defaultSize! * 2.8,
-        //     ),
-        //     SizedBox(
-        //       height: AppSize.defaultSize! * 0.7,
-        //     ),
-        //     SideBarRow(
-        //       image: AssetPath.x,
-        //       text: StringManager.deletePost.tr(),
-        //
-        //       onTap: () {
-        //         Navigator.of(context).pop();
-        //
-        //       },
-        //     ),
-        //     Divider(
-        //       color: Colors.black,
-        //       height: 5,
-        //       thickness: 0.6,
-        //       indent: AppSize.defaultSize! * 2.2,
-        //       endIndent: AppSize.defaultSize! * 2.8,
-        //     ),
-
-
-      );
-    },
-  );
-}
-
 class _PostsViewProfileState extends State<PostsViewProfile> {
   late List<SideBarRow> items;
+  SideBarRow? selectedValue;
+
+  List<DropdownMenuItem<SideBarRow>> _addDividersAfterItems(List<SideBarRow> items) {
+    final List<DropdownMenuItem<SideBarRow>> menuItems = [];
+    for (final SideBarRow item in items) {
+      menuItems.addAll(
+        [
+          DropdownMenuItem<SideBarRow>(
+            value: item,
+            child: item,
+          ),
+
+
+        ],
+      );
+    }
+    return menuItems;
+  }
+
+  void _showTurnOffCommentingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppSize.defaultSize! * 4),
+          ),
+          contentPadding: EdgeInsets.all(AppSize.defaultSize! * 3),
+          backgroundColor: Color.fromRGBO(246, 255, 255, 1),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                StringManager.turnOffCommenting.tr(),
+                style: TextStyle(
+                  fontSize: AppSize.defaultSize! * 2.5,
+                  color: AppColors.primaryColor,
+                ),
+              ),
+              SizedBox(height: AppSize.defaultSize! * 2),
+              Text(
+                "Are you sure you want to turn off commenting on this post?",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: AppSize.defaultSize! * 2,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(height: AppSize.defaultSize! * 3),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop(); // Dismiss dialog
+                    },
+                    child: Text("Cancel"),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey[400],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(AppSize.defaultSize! * 2),
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop(); // Dismiss dialog
+                      // Add your logic to turn off commenting here
+                    },
+                    child: Text("Turn Off"),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primaryColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(AppSize.defaultSize! * 2),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+
   @override
-  initState() {
+  void initState() {
     items = [
+      // SideBarRow(
+      //   isMenu: true,
+      //   onTap: () {
+      //     Navigator.of(context).pop();
+      //   },
+      // ),
       SideBarRow(
+        textSize: AppSize.defaultSize! * 2.8,
         image: AssetPath.edit,
         text: StringManager.editPost.tr(),
-
         onTap: () {
-          Navigator.pushNamed(context, Routes.trainYourDog);
-          // _showReportDialog(context);
-
-
+          Navigator.pushNamed(context, Routes.editPost);
         },
       ),
-
-
-
-
-
+      SideBarRow(
+        textSize: AppSize.defaultSize! * 2.8,
+        image: AssetPath.messageX,
+        text: StringManager.turnOffCommenting.tr(),
+        onTap: () {
+          Navigator.of(context).pop();
+        },
+      ),
+      SideBarRow(
+        textSize: AppSize.defaultSize! * 2.8,
+        image: AssetPath.x,
+        text: StringManager.deletePost.tr(),
+        onTap: () {
+          Navigator.of(context).pop();
+        },
+      ),
     ];
     super.initState();
-
-
   }
 
   bool isLiked = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -144,29 +173,55 @@ class _PostsViewProfileState extends State<PostsViewProfile> {
               height: AppSize.defaultSize! * 3,
             ),
             Expanded(
-                child: Container(
-              width: AppSize.screenWidth!,
-              decoration: BoxDecoration(
-                  color: Colors.white,
+              child: Container(
+                width: AppSize.screenWidth!,
+                decoration: BoxDecoration(
+                  color:  Color.fromRGBO(246, 255, 255,1),
                   borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(AppSize.defaultSize! * 4),
-                      topRight: Radius.circular(AppSize.defaultSize! * 4))),
-                  child: Padding(
-                    padding:   EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 3),
-                    child: ListView.builder(
-                        padding: EdgeInsets.zero,
-                        itemBuilder: (context, index) {
+                    topLeft: Radius.circular(AppSize.defaultSize! * 4),
+                    topRight: Radius.circular(AppSize.defaultSize! * 4),
+                  ),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 3),
+                  child: ListView.builder(
+                    padding: EdgeInsets.zero,
+                    itemBuilder: (context, index) {
                       return Column(
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              IconButton(
-                                onPressed: () {
-                                  _showEditDialog(context);
-                                },
-                                icon: Image.asset(AssetPath.menuFriend,color: AppColors.primaryColor,),
+                              SizedBox(
+                                height: AppSize.defaultSize!  * 3,
+                              ),
+                              DropdownButtonHideUnderline(
+                                child: DropdownButton2<SideBarRow>(
+                                  customButton: Image.asset(
+                                    AssetPath.menuFriend,
+                                    color: AppColors.primaryColor,
+                                  ),
+                                  items: _addDividersAfterItems(items),
+                                  value: selectedValue,
+                                  onChanged: (SideBarRow? value) {
+                                    setState(() {
+                                      selectedValue = value;
+                                      value?.onTap?.call();
+                                    });
+                                  },
+                                  dropdownStyleData: DropdownStyleData(
 
+                                    width: AppSize.screenWidth!,
+
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(AppSize.defaultSize! * 4),
+                                      color: const Color.fromRGBO(246, 255, 255,1),
+                                    ),
+
+
+                                  ),
+
+                                ),
                               ),
                             ],
                           ),
@@ -177,41 +232,42 @@ class _PostsViewProfileState extends State<PostsViewProfile> {
                           Row(
                             children: [
                               InkWell(
-                                  onTap: () {
-                                    isLiked = !isLiked;
-                                    setState(() {});
-                                  },
-                                  borderRadius:
-                                  BorderRadius.circular(AppSize.defaultSize! * 1.5),
-                                  child: IconWithMaterial(
-                                    imagePath: AssetPath.like,
-                                    color: isLiked ? AppColors.primaryColor : null,
-                                    elevation: 3,
-                                    color2: isLiked ? Colors.white : null,
-                                    width:  AppSize.defaultSize! * 2,
-                                    height:  AppSize.defaultSize! * 2,
-                                  )),
+                                onTap: () {
+                                  isLiked = !isLiked;
+                                  setState(() {});
+                                },
+                                borderRadius: BorderRadius.circular(AppSize.defaultSize! * 1.5),
+                                child: IconWithMaterial(
+                                  imagePath: AssetPath.like,
+                                  color: isLiked ? AppColors.primaryColor : null,
+                                  elevation: 3,
+                                  color2: isLiked ? Colors.white : null,
+                                  width: AppSize.defaultSize! * 2,
+                                  height: AppSize.defaultSize! * 2,
+                                ),
+                              ),
                               SizedBox(
                                 width: AppSize.defaultSize!,
                               ),
                               InkWell(
-                                  onTap: () {},
-                                  borderRadius:
-                                  BorderRadius.circular(AppSize.defaultSize! * 1.5),
-                                  child:   IconWithMaterial(
-                                    imagePath: AssetPath.comment,
-                                    elevation: 3,
-                                    width:  AppSize.defaultSize! * 2,
-                                    height:  AppSize.defaultSize! * 2,
-                                  )),
-
+                                onTap: () {},
+                                borderRadius: BorderRadius.circular(AppSize.defaultSize! * 1.5),
+                                child: IconWithMaterial(
+                                  imagePath: AssetPath.comment,
+                                  elevation: 3,
+                                  width: AppSize.defaultSize! * 2,
+                                  height: AppSize.defaultSize! * 2,
+                                ),
+                              ),
                             ],
                           ),
                         ],
                       );
-                    }),
+                    },
                   ),
-            ))
+                ),
+              ),
+            )
           ],
         ),
       ),

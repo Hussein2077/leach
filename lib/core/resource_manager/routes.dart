@@ -35,6 +35,7 @@ import 'package:leach/features/profile/presentation/friends/friends_view.dart';
 import 'package:leach/features/profile/presentation/friends/report.dart';
 import 'package:leach/features/profile/presentation/friends/specific_messages_report.dart';
 import 'package:leach/features/profile/presentation/friends/submit_report.dart';
+import 'package:leach/features/profile/presentation/posts_and_pet_view/edit_post.dart';
 import 'package:leach/features/profile/presentation/posts_and_pet_view/posts_view_profile.dart';
 import 'package:leach/features/profile/presentation/profile/componant/account_privacy.dart';
 import 'package:leach/features/profile/presentation/profile/componant/activity_and_history.dart';
@@ -96,6 +97,7 @@ class Routes {
   static const String  reportView      = "/report_view";
   static const String  selectHowTo      = "/select_how_to";
   static const String  trainYourDog      = "/train_your_dog";
+  static const String  editPost      = "/edit_post";
 }
 
 class RouteGenerator {
@@ -320,6 +322,11 @@ class RouteGenerator {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
             const   TrainYourDog(),
+            transitionsBuilder: customAnimate);
+      case Routes.editPost:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const   EditPost(),
             transitionsBuilder: customAnimate);
     }
     return unDefinedRoute(
