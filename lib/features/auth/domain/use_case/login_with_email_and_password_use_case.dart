@@ -22,12 +22,12 @@ class LoginWithEmailAndPasswordUseCase
 }
 
 class AuthModel {
-  final String phone;
+  final String phoneOrEmail;
   final String? password;
   final String? socialID;
 
   AuthModel({
-    required this.phone,
+    required this.phoneOrEmail ,
     this.password,
     this.socialID,
   });

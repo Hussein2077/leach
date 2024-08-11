@@ -25,7 +25,7 @@ class SignUpModel {
   final String? email;
   final String? phone;
   final String? password;
-  final String? country;
+  final String? area;
   final String? city;
   final String? name;
 
@@ -34,7 +34,7 @@ class SignUpModel {
      this.email,
      this.phone,
      this.password,
-     this.country,
+     this.area,
      this.city,
      this.name,
 

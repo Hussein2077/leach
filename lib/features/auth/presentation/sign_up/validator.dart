@@ -14,11 +14,11 @@ String? validateSignUpForm({
   if (userName.isEmpty) {
     return 'Username cannot be empty';
   }
-  if (email.isEmpty) {
-    return 'Email cannot be empty';
-  }
-  if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(email)) {
-    return 'Enter a valid email address';
+
+  if(email.isNotEmpty){
+    if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(email)) {
+      return 'Enter a valid email address';
+    }
   }
   if (phone.isEmpty) {
     return 'Phone number cannot be empty';

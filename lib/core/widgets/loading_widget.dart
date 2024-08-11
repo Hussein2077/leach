@@ -1,17 +1,22 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:leach/core/resource_manager/asset_path.dart';
+import 'package:leach/core/utils/app_size.dart';
 
 class LoadingWidget extends StatelessWidget {
   const LoadingWidget({super.key, this.height, this.width, this.size});
-final double? height;
-final double? width;
-final double? size;
+
+  final double? height;
+  final double? width;
+  final double? size;
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: SizedBox(
-        height:height,
-        width:width,
-
+        height: height,
+        width: width,
       ),
     );
   }
@@ -29,22 +34,25 @@ class LoadingOverlay {
   OverlayEntry? _overlayEntry;
 
   void show(BuildContext context) {
-    if (_overlayEntry != null) return; // Prevent multiple overlays
+    if (_overlayEntry != null) return; // Prevhu  ent multiple overlays
 
     _overlayEntry = _createOverlayEntry();
     Overlay.of(context).insert(_overlayEntry!);
   }
 
   void hide() {
-    _overlayEntry?.remove();
-    _overlayEntry = null;
+    if (_overlayEntry != null) {
+      _overlayEntry?.remove();
+      _overlayEntry = null;
+    }
   }
 
   OverlayEntry _createOverlayEntry() {
     return OverlayEntry(
       builder: (context) => Positioned.fill(
         child: Container(
-          color: Colors.black.withOpacity(0.5), // Semi-transparent background
+          color: Colors.black.withOpacity(0.5),
+          // Semi-transparent background
           child: const Center(
             child: LoadingAnimation(),
           ),
@@ -84,7 +92,11 @@ class LoadingAnimationState extends State<LoadingAnimation>
   Widget build(BuildContext context) {
     return RotationTransition(
       turns: _controller,
-      child: Image.asset('assets/loading_image.png'), // Replace with your asset path
+      child: Image.asset(
+        AssetPath.loading,
+        height: AppSize.defaultSize! * 7,
+        width: AppSize.defaultSize! * 7,
+      ), // Replace with your asset path
     );
   }
 }

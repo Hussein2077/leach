@@ -21,7 +21,7 @@ class LoginWithEmailAndPasswordBloc extends Bloc<
         const LoginWithEmailAndPasswordLoadingState(),
       );
       final result = await loginWithEmailAndPasswordUseCase
-          .call(AuthModel(phone: event.email, password: event.password));
+          .call(AuthModel(phoneOrEmail: event.phoneOrEmail, password: event.password));
       result.fold(
         (l) => emit(
           LoginWithEmailAndPasswordSuccessMessageState(

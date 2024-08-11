@@ -106,7 +106,12 @@ class DioHelper {
       case 500:
         throw ServerException();
       case 401:
-        throw UnauthorizedException();
+        if (response?.data.runtimeType == String) {
+          throw ErrorModelException(errorMessage: response!.data);
+        } else {
+          throw ErrorModelException.fromJson(response!.data);
+        }
+
       default:
         // throw ServerException();
         if (response?.data.runtimeType == String) {

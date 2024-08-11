@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:leach/core/models/profile_data_model.dart';
 import 'package:leach/core/utils/api_helper.dart';
@@ -26,9 +28,9 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
   Future<UserModel> loginWithEmailAndPassword(AuthModel authModel) async {
     final Options options = await DioHelper().options();
     final body = {
-      'phoneNumber': authModel.phone,
+      'identifier': authModel.phoneOrEmail,
       "password": authModel.password,
-      "userRole": "User",
+
     };
     try {
       final response = await Dio().post(
@@ -36,7 +38,7 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
         data: body,
         options: options,
       );
-      UserModel jsonData = response.data['data'];
+      UserModel jsonData = UserModel.fromMap(response.data['data']['user']);
       SharedPreferences preferences = await SharedPreferences.getInstance();
 
       await Methods.instance
@@ -54,11 +56,11 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
     final body = {
       'password': signUpModel.password,
       'phone_number': signUpModel.phone,
-      'userRole': 'User',
-      'country': signUpModel.country,
+      'area': signUpModel.area,
       'city': signUpModel.city,
       'username': signUpModel.userName,
       'email': signUpModel.email,
+      'name': signUpModel.name
     };
 
     try {
@@ -67,7 +69,10 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
         data: body,
         options: options,
       );
-      UserModel jsonData = response.data;
+      log('messagemessagemessage');
+
+      UserModel jsonData = UserModel.fromMap(response.data['data']['user']);
+
       await Methods.instance
           .saveUserToken(authToken: response.data['data']['token']);
       if (response.data['data']['token'] == null) {

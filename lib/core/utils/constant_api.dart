@@ -7,9 +7,9 @@ class ConstantApi {
 
   static getPdf(String url) => 'https://api.intrn.app/Intrn/UsersCVs/$url';
   static const String signUp = "${baseUrl}register";
+  static const String login = "${baseUrl}login";
 
 //////////////////////////////
-  static const String login = "${baseUrl}New";
   static const String deleteAccount = "${baseUrl}New";
   static const String sendCode = "${baseUrl}NewAu";
   static const String sendCodeToEmail =

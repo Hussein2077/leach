@@ -70,13 +70,12 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RouteGenerator.getRoute,
         navigatorKey: getIt<NavigationService>().navigatorKey,
-        initialRoute: Routes.welcomePage,
-        // token == null || token == 'noToken' ? Routes.login : Routes.main,
+        initialRoute:
+        token == null || token == 'noToken' ? Routes.welcomePage : Routes.main,
         theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
             fontFamily: 'Brodien',
-
             scaffoldBackgroundColor: const Color.fromRGBO(248, 250, 255, 1)),
       ),
     );

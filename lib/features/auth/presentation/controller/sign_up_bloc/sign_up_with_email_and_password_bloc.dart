@@ -18,7 +18,7 @@ class SignUpWithEmailAndPasswordBloc extends Bloc<
       final result = await signUpWithEmailAndPasswordUseCase.call(SignUpModel(
         password: event.password,
         phone: event.phone,
-        country: event.country,
+        area: event.country,
         city: event.city,
         name: event.name,
         userName: event.userName,

@@ -52,27 +52,27 @@ class UserModel {
   factory UserModel.fromMap(Map<String, dynamic> map) {
     if (_instance == null) {
       _instance = UserModel(
-        id: map['user']['id']?.toString(),
-        email: map['user']['email'],
-        name: map['user']['name'],
-        phoneNumber: map['user']['phone_number'],
-        username: map['user']['username'],
-        city: map['user']['city'],
-        area: map['user']['area'],
-        uuid: map['user']['uuid'],
-        token: map['user']['token'],
+        id: map['id']?.toString(),
+        email: map['email'],
+        name: map['name'],
+        phoneNumber: map['phone_number'],
+        username: map['username'],
+        city: map['city'],
+        area: map['area'],
+        uuid: map['uuid'],
+        token: map['token'],
       );
     } else {
       _instance?.setNewUserData(
-        id: map['user']['id']?.toString(),
-        email: map['user']['email'],
-        name: map['user']['name'],
-        phoneNumber: map['user']['phone_number'],
-        username: map['user']['username'],
-        city: map['user']['city'],
-        area: map['user']['area'],
-        uuid: map['user']['uuid'],
-        token: map['user']['token'],
+        id: map['id']?.toString(),
+        email: map['email'],
+        name: map['name'],
+        phoneNumber: map['phone_number'],
+        username: map['username'],
+        city: map['city'],
+        area: map['area'],
+        uuid: map['uuid'],
+        token: map['token'],
       );
     }
     return _instance!;

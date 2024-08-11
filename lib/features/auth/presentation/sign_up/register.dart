@@ -26,17 +26,19 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  bool isVisiblePassword =  true;
-  bool isVisibleConfirmPassword =  true;
+  bool isVisiblePassword = true;
+  bool isVisibleConfirmPassword = true;
 
-late TextEditingController emailController;
-late TextEditingController passwordController;
-late TextEditingController confirmPasswordController;
- late TextEditingController nameController;
- late TextEditingController usernameController ;
+  late TextEditingController emailController;
+  late TextEditingController passwordController;
+  late TextEditingController confirmPasswordController;
+  late TextEditingController nameController;
+  late TextEditingController usernameController;
+
   late TextEditingController phoneController;
-String? country;
-String? city ;
+  String? country;
+  String? city;
+
   @override
   void initState() {
     emailController = TextEditingController();
@@ -56,6 +58,7 @@ String? city ;
     nameController.dispose();
     usernameController.dispose();
     phoneController.dispose();
+     LoadingOverlay().hide();
     super.dispose();
   }
 
@@ -65,13 +68,15 @@ String? city ;
         SignUpWithEmailAndPasswordState>(
       listener: (context, state) {
         if (state is SignUpWithEmailAndPasswordSuccessMessageState) {
-
-
+          LoadingOverlay().hide();
           Navigator.pushNamedAndRemoveUntil(
-              context, Routes.main, (route) => false, );
+            context,
+            Routes.main,
+            (route) => false,
+          );
         } else if (state is SignUpWithEmailAndPasswordErrorMessageState) {
-
-          errorSnackBar(context,  state.errorMessage);
+          LoadingOverlay().hide();
+          errorSnackBar(context, state.errorMessage);
         } else if (state is SignUpWithEmailAndPasswordLoadingState) {
           LoadingOverlay().show(context);
         }
@@ -102,7 +107,8 @@ String? city ;
                   text: StringManager.name.tr(),
                   hintText: StringManager.name.tr(),
                   controller: nameController,
-                ),  ColumnWithTextField(
+                ),
+                ColumnWithTextField(
                   text: StringManager.username.tr(),
                   hintText: StringManager.enterUsername.tr(),
                   controller: usernameController,
@@ -111,13 +117,11 @@ String? city ;
                   text: StringManager.email.tr(),
                   controller: emailController,
                   keyboardType: TextInputType.emailAddress,
-
                   hintText: StringManager.enterEmail.tr(),
                 ),
                 ColumnWithTextField(
                   text: StringManager.phoneNumber.tr(),
                   keyboardType: TextInputType.phone,
-
                   hintText: StringManager.enterPhone.tr(),
                   controller: phoneController,
                 ),
@@ -167,9 +171,9 @@ String? city ;
                 }),
                 ColumnWithTextField(
                   text: StringManager.country.tr(),
-                  child:   CountryDropDown(
+                  child: CountryDropDown(
                     countryOrCity: const ['Egypt'],
-                    onChanged:  (String? value) {
+                    onChanged: (String? value) {
                       setState(() {
                         country = value;
                       });
@@ -179,13 +183,13 @@ String? city ;
                 ColumnWithTextField(
                   text: StringManager.city.tr(),
                   child: CountryDropDown(
-                    countryOrCity:StringManager.citiesInEgypt  ,
-                  onChanged:  (String? value) {
-                    setState(() {
-                      city = value;
-                    });
-                  },
-                  hint:   StringManager.selectYourCity.tr(),
+                    countryOrCity: StringManager.citiesInEgypt,
+                    onChanged: (String? value) {
+                      setState(() {
+                        city = value;
+                      });
+                    },
+                    hint: StringManager.selectYourCity.tr(),
                   ),
                 ),
                 SizedBox(height: AppSize.defaultSize! * 3),
@@ -205,9 +209,10 @@ String? city ;
                       );
 
                       if (errorMessage != null) {
-                     errorSnackBar(context,   errorMessage);
+                        errorSnackBar(context, errorMessage);
                       } else {
-                        BlocProvider.of<SignUpWithEmailAndPasswordBloc>(context).add(
+                        BlocProvider.of<SignUpWithEmailAndPasswordBloc>(context)
+                            .add(
                           SignUpWithEmailAndPasswordEvent(
                             name: nameController.text,
                             userName: usernameController.text,
@@ -219,7 +224,6 @@ String? city ;
                           ),
                         );
                       }
-
                     },
                     textColor: Colors.white,
                   ),

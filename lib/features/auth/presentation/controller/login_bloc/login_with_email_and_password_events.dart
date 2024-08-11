@@ -9,12 +9,12 @@ abstract class BaseLoginWithEmailAndPasswordEvent extends Equatable {
 
 class LoginWithEmailAndPasswordEvent
     extends BaseLoginWithEmailAndPasswordEvent {
-  final String email;
+  final String phoneOrEmail;
 
   final String password;
 
   const LoginWithEmailAndPasswordEvent(
-      {required this.email, required this.password});
+      {required this.phoneOrEmail, required this.password});
 }
 
 class DeleteAccountEvent extends BaseLoginWithEmailAndPasswordEvent {}

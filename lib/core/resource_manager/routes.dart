@@ -12,7 +12,7 @@ import 'package:leach/features/auth/presentation/login_screen.dart';
 import 'package:leach/features/auth/presentation/sign_up/register.dart';
 import 'package:leach/features/auth/presentation/welcome_screen.dart';
 import 'package:leach/features/chat/chat_details.dart';
-import 'package:leach/features/doctors.dart';
+import 'package:leach/features/home/doctors.dart';
 import 'package:leach/features/home/componant/booking.dart';
 import 'package:leach/features/home/componant/breeding.dart';
 import 'package:leach/features/home/componant/cash_or_credit.dart';

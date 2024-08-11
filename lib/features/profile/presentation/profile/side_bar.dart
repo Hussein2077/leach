@@ -8,7 +8,10 @@ import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
+import 'package:leach/core/service/navigator_services.dart';
+import 'package:leach/core/service/service_locator.dart';
 import 'package:leach/core/utils/app_size.dart';
+import 'package:leach/core/utils/methods.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/icon_with_matrial.dart';
 import 'package:leach/core/widgets/large_botton.dart';
@@ -17,6 +20,7 @@ import 'package:leach/features/profile/presentation/widget/medals_abd_freinds.da
 import 'package:leach/features/profile/presentation/widget/profile_app_bar.dart';
 import 'package:leach/features/profile/presentation/widget/profile_user_row.dart';
 import 'package:leach/features/profile/presentation/widget/side_bar_row.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 
@@ -150,8 +154,15 @@ class SideBar extends StatelessWidget {
           SizedBox(
             height: AppSize.defaultSize! * 3,
           ),
-          SideBarRow(image:AssetPath.signOut,text: StringManager.signOut.tr(),onTap: () {
+          SideBarRow(image:AssetPath.signOut,text: StringManager.signOut.tr(),onTap: () async {
+            await Methods.instance.saveUserToken(authToken: null);
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            await prefs.clear();
 
+            Navigator.of(
+                getIt<NavigationService>().navigatorKey.currentContext!)
+                .pushNamedAndRemoveUntil(
+                Routes.welcomePage, (Route<dynamic> route) => false);
           },),
           SizedBox(
             height: AppSize.defaultSize! * 0.7,
