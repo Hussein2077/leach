@@ -216,6 +216,38 @@ class StringManager {
   static const String editPost = "Edit Post";
   static const String turnOffComments = "Turn off comments";
   static const String deletePost = "Delete Post";
+  static const  List<String> citiesInEgypt = [
+    "Cairo",
+    "Alexandria",
+    "Giza",
+    "Shubra El Kheima",
+    "Port Said",
+    "Suez",
+    "Luxor",
+    "Asyut",
+    "Mansoura",
+    "Tanta",
+    "Zagazig",
+    "Ismailia",
+    "Faiyum",
+    "Minya",
+    "Damietta",
+    "Aswan",
+    "Damanhur",
+    "Beni Suef",
+    "Hurghada",
+    "Qena",
+    "Sohag",
+    "Sharm El Sheikh",
+    "Banha",
+    "Arish",
+    "Mahalla El Kubra",
+    "Beni Mazar",
+    "Kafr El Sheikh",
+    "Helwan",
+    "Marsa Matruh",
+    "Al-Minya"
+  ];
 
 
 

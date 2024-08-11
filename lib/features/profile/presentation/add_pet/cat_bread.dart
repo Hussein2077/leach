@@ -50,7 +50,7 @@ class CatBread extends StatelessWidget {
             ColumnWithTextField(
               text: StringManager.catBreed.tr(),
               child: CountryDropDown(
-                text: StringManager.selectYourCatsBreed.tr(),
+                hint: StringManager.selectYourCatsBreed.tr(),
               ),
             ),
             SizedBox(
@@ -72,7 +72,7 @@ class CatBread extends StatelessWidget {
             ColumnWithTextField(
               text: StringManager.secondBreed.tr(),
               child: CountryDropDown(
-                text: StringManager.selectYourCatsSecondBreed.tr(),
+                hint: StringManager.selectYourCatsSecondBreed.tr(),
               ),
             ),
             SizedBox(
