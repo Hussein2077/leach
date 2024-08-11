@@ -8,7 +8,8 @@ import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 
 class CountryDropDown extends StatefulWidget {
-  const CountryDropDown({super.key, this.countryOrCity, this.onChanged, this.hint});
+  const CountryDropDown(
+      {super.key, this.countryOrCity, this.onChanged, this.hint});
 
   final List<String>? countryOrCity;
   final String? hint;
@@ -20,6 +21,7 @@ class CountryDropDown extends StatefulWidget {
 
 class _CountryDropDownState extends State<CountryDropDown> {
   String? value;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -68,16 +70,14 @@ class _CountryDropDownState extends State<CountryDropDown> {
               ),
             ),
           ),
-          items: widget.countryOrCity!.map((String value) {
+          items: widget.countryOrCity?.map((String value) {
             return DropdownMenuItem<String>(
               value: value,
               child: Padding(
                 padding: EdgeInsets.only(left: AppSize.defaultSize!),
                 child: CustomText(
-                text:   value,
-
-                    fontSize: AppSize.defaultSize! * 1.3,
-
+                  text: value,
+                  fontSize: AppSize.defaultSize! * 1.3,
                 ),
               ),
             );

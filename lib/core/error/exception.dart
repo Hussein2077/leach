@@ -4,7 +4,7 @@ class ErrorModelException implements Exception {
   ErrorModelException({required this.errorMessage});
 
   factory ErrorModelException.fromJson(Map<String, dynamic> json) {
-    return ErrorModelException(errorMessage: json['message']);
+    return ErrorModelException(errorMessage: json['message'].toString().split('%').last);
   }
 }
 class SiginGoogleException implements Exception {}

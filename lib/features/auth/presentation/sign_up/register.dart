@@ -71,7 +71,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           LoadingOverlay().hide();
           Navigator.pushNamedAndRemoveUntil(
             context,
-            Routes.main,
+            Routes.addPetScreen,
             (route) => false,
           );
         } else if (state is SignUpWithEmailAndPasswordErrorMessageState) {

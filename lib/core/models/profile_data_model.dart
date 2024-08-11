@@ -7,7 +7,10 @@ class UserModel {
   String? city;
   String? area;
   String? uuid;
-  String? token;
+  String? image ;
+  String? bio ;
+  String? accountStatus ;
+  bool? privateAccount ;
 
   static UserModel? _instance;
 
@@ -20,7 +23,10 @@ class UserModel {
     this.city,
     this.area,
     this.uuid,
-    this.token,
+    this.image,
+    this.bio,
+    this.accountStatus,
+    this.privateAccount
   });
 
   void clearInstance() {
@@ -36,7 +42,11 @@ class UserModel {
     String? city,
     String? area,
     String? uuid,
-    String? token,
+    String? image
+    ,  String? bio ,
+    String? accountStatus ,
+    bool? privateAccount ,
+
   }) {
     this.id = id ?? this.id;
     this.email = email ?? this.email;
@@ -46,33 +56,42 @@ class UserModel {
     this.city = city ?? this.city;
     this.area = area ?? this.area;
     this.uuid = uuid ?? this.uuid;
-    this.token = token ?? this.token;
+    this.image = image ?? this.image;
+    this.bio = bio ?? this.bio;
+    this.accountStatus = accountStatus ?? this.accountStatus;
+    this.privateAccount = privateAccount ?? this.privateAccount;
   }
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     if (_instance == null) {
       _instance = UserModel(
         id: map['id']?.toString(),
-        email: map['email'],
-        name: map['name'],
-        phoneNumber: map['phone_number'],
-        username: map['username'],
-        city: map['city'],
-        area: map['area'],
-        uuid: map['uuid'],
-        token: map['token'],
+        email: map['email']??'',
+        name: map['name'] ?? '',
+        phoneNumber: map['phone_number']?? '',
+        username: map['username']?? '',
+        city: map['city']?? '',
+        area: map['area']?? '',
+        uuid: map['uuid']?? '',
+        image: map['profile_picture']?? '',
+        bio: map['bio']?? '',
+        accountStatus: map['account_status']?? '',
+        privateAccount: map['private_account']  ==0 ? false: true,
       );
     } else {
       _instance?.setNewUserData(
         id: map['id']?.toString(),
-        email: map['email'],
-        name: map['name'],
-        phoneNumber: map['phone_number'],
-        username: map['username'],
-        city: map['city'],
-        area: map['area'],
-        uuid: map['uuid'],
-        token: map['token'],
+        email: map['email']?? '',
+        name: map['name']?? '',
+        phoneNumber: map['phone_number']?? '',
+        username: map['username']?? '',
+        city: map['city']?? '',
+        area: map['area']?? '',
+        uuid: map['uuid']?? '',
+        image: map['profile_picture']?? '',
+        bio: map['bio']?? '',
+        accountStatus: map['account_status']?? '',
+        privateAccount: map['private_account']==0 ? false: true,
       );
     }
     return _instance!;
