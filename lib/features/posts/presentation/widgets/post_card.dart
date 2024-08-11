@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
+import 'package:leach/core/widgets/cached_network_image.dart';
 import 'package:leach/core/widgets/custom_text_field.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/icon_with_matrial.dart';
+import 'package:leach/features/posts/data/models/posts_model.dart';
 
 class PostCard extends StatefulWidget {
-  const PostCard({super.key, this.imagePath});
-
-  final String? imagePath;
+  final PostData postData;
+  const PostCard({super.key, required this.postData});
 
   @override
   State<PostCard> createState() => _PostCardState();
@@ -30,12 +30,19 @@ class _PostCardState extends State<PostCard> {
           child: Row(
             children: [
 
-              const IconWithMaterial(imagePath: AssetPath.profile),
+              CachedNetworkCustom(
+                url: widget.postData.user?.profilePicture??"",
+                width: AppSize.defaultSize! * 3,
+                height: AppSize.defaultSize! * 3,
+                radius: AppSize.defaultSize! * 3,
+              ),
+
               SizedBox(
                 width: AppSize.defaultSize!,
               ),
+
               CustomText(
-                text: '@3amk2077',
+                text: widget.postData.user?.username??"",
                 fontSize: AppSize.defaultSize! * 2,
                 color: AppColors.primaryColor,
               )
@@ -45,11 +52,13 @@ class _PostCardState extends State<PostCard> {
         SizedBox(
           height: AppSize.defaultSize! * 2,
         ),
-        Image.asset(
-          widget.imagePath ?? AssetPath.testPosts,
+
+        CachedNetworkCustom(
+          url: widget.postData.picture??"",
           width: AppSize.screenWidth!,
-          fit: BoxFit.fill,
+          height: AppSize.defaultSize! * 20,
         ),
+
         SizedBox(
           height: AppSize.defaultSize! * 3,
         ),

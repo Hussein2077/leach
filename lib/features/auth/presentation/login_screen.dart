@@ -51,8 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return  BlocListener<LoginWithEmailAndPasswordBloc,
-        LoginWithEmailAndPasswordState>(
+    return BlocListener<LoginWithEmailAndPasswordBloc, LoginWithEmailAndPasswordState>(
       listener: (context, state) {
         if (state is LoginWithEmailAndPasswordSuccessMessageState) {
           LoadingOverlay().hide();
