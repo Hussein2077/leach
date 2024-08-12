@@ -33,7 +33,7 @@ log('${petProfileModel.name} name');
     log('${petProfileModel.pictures} pictures');
     log('${petProfileModel.traits} traits');
     log('${petProfileModel.subtraits} subtraits');
-    log('${petProfileModel.pictures} pictures');
+    log('${petProfileModel.breedSize} petProfileModel.breedSize');
 
 
 
@@ -53,7 +53,7 @@ log('${petProfileModel.name} name');
         'name': petProfileModel.name,
         'gender': petProfileModel.gender,
         'pet_type': petProfileModel.petType,
-        'pure_bred': petProfileModel.pureBred,
+        'pure_bred': petProfileModel.pureBred?1:0,
         'breed': petProfileModel.breed,
         'second_breed': petProfileModel.secondBreed,
         'date_of_birth': petProfileModel.dateOfBirth,
@@ -68,7 +68,7 @@ log('${petProfileModel.name} name');
       filename:petProfileModel.medicalPassport!.path.split('/').last.toString(),
       contentType: MediaType("image", "jpeg")),
         'breeding_available':   petProfileModel.breedingAvailable?1:0,
-          // 'size': petProfileModel.traits,
+          'size': petProfileModel.breedSize,
 
       });
     }

@@ -32,6 +32,9 @@ class PetProfileModel  extends Equatable{
   final List<Trait>? traitsFromApi;
   final List<SubTrait>? subtraitsFromApi;
   final List<Picture>? picturesFromApi;
+  final String? breedSize;
+
+
   const PetProfileModel({
     required this.username,
     required this.name,
@@ -61,6 +64,8 @@ class PetProfileModel  extends Equatable{
     this.picturesFromApi,
     this.medicalPassportFromApi,
     this.profilePictureFromApi,
+    this.breedSize,
+
   });
 
   factory PetProfileModel.fromMap(Map<String, dynamic> map) {
@@ -93,27 +98,7 @@ class PetProfileModel  extends Equatable{
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'username': username,
-      'name': name,
-      'gender': gender,
-      'pet_type': petType,
-      'pure_bred': pureBred,
-      'breed': breed,
-      'second_breed': secondBreed,
-      'date_of_birth': dateOfBirth,
-      'weight': weight,
-      'breeding_experience': breedingExperience,
-      'neutered_spayed': neuteredSpayed,
-      'profile_picture': profilePicture,
-      'medical_passport': medicalPassport,
-      'breeding_available': breedingAvailable,
-      'pictures[]': pictures,
-      'traits[]': traits,
-      'subtraits[]': subtraits,
-    };
-  }
+
 
   @override
   // TODO: implement props

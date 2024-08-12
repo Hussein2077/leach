@@ -33,6 +33,7 @@ class CreatePetBloc extends Bloc<BaseCreatePetEvent, CreatePetState> {
 
         traits: event.traits,
         subtraits: event.subtraits,
+        breedSize:  event.breedSize,
         pictures: event.pictures,
 
         bio: event.bio,

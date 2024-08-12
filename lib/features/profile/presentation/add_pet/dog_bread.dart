@@ -216,8 +216,7 @@ class _DogBreadState extends State<DogBread> {
                           CustomTextField(
                             width: AppSize.screenWidth! * 0.42,
                             hintText: StringManager.weightKg.tr(),
-                            controller:
-                            weightController,
+                            controller: weightController,
                             keyboardType: TextInputType.number,
                           ),
                         ],
@@ -337,42 +336,54 @@ class _DogBreadState extends State<DogBread> {
                           breed: state.selectKind ?? '',
                           secondBreed: state.selectSecondKind,
                           dateOfBirth: state.selectedDate != null
-                              ? DateFormat('yyyy-MM-dd').format(state.selectedDate!)
+                              ? DateFormat('yyyy-MM-dd')
+                                  .format(state.selectedDate!)
                               : '',
-                          weight: double.parse(weightController.text.isEmpty ? '0.0': weightController.text),
+                          weight: double.parse(weightController.text.isEmpty
+                              ? '0.0'
+                              : weightController.text),
                           breedingExperience: state.breedingExperience ?? false,
                           neuteredSpayed: state.neuteredSpayed ?? false,
                           breedingAvailable: state.breedingAvailable ?? false,
                           pictures: state.pickedImages,
                         );
 
-                        if (isValid==null) {
+                        if (isValid == null) {
                           BlocProvider.of<CreatePetBloc>(context).add(
                             CreatePetEvent(
                               username: usernameController.text,
                               name: nameController.text,
-                              gender: state.isMale == true ? 'Male' : 'Female',
+                              gender: state.isMale == true ? 'MALE' : 'FEMALE',
                               petType: 'DOG',
                               pureBred: state.isPureBredSelected ?? false,
                               breed: state.selectKind ?? '',
                               secondBreed: state.selectSecondKind ?? '',
-
                               dateOfBirth: state.selectedDate != null
-                                  ? DateFormat('yyyy-MM-dd').format(state.selectedDate!)
+                                  ? DateFormat('yyyy-MM-dd')
+                                      .format(state.selectedDate!)
                                   : '',
-                              weight: double.parse(weightController.text.isEmpty ? '0.0': weightController.text),
-                              breedingExperience: state.breedingExperience ?? false,
+                              weight: double.parse(weightController.text.isEmpty
+                                  ? '0.0'
+                                  : weightController.text),
+                              breedingExperience:
+                                  state.breedingExperience ?? false,
                               neuteredSpayed: state.neuteredSpayed ?? false,
                               profilePicture: state.pickedImages.first,
-                              medicalPassport:  state.passportImageFile,
-                              breedingAvailable: state.breedingAvailable ?? false,
+                              medicalPassport: state.passportImageFile,
+                              breedingAvailable:
+                                  state.breedingAvailable ?? false,
                               pictures: state.pickedImages,
+                              breedSize: (state.sizeSelectedIndex == 0
+                                      ? "SMALL"
+                                      : state.sizeSelectedIndex == 1
+                                          ? "MEDIUM":state.sizeSelectedIndex == 2?"LARGE"
+                                          : "GIANT")
+                                  .toString(),
                             ),
                           );
                         } else {
-                          errorSnackBar(context,  isValid);
+                          errorSnackBar(context, isValid);
                         }
-
                       },
                       textColor: Colors.white,
                     ),
@@ -388,6 +399,7 @@ class _DogBreadState extends State<DogBread> {
       ),
     );
   }
+
   String? validateForm({
     required String username,
     required String name,
@@ -431,6 +443,4 @@ class _DogBreadState extends State<DogBread> {
     }
     return null; // Returns null if all validations pass
   }
-
-
 }

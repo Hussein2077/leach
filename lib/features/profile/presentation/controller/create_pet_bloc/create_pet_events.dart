@@ -31,7 +31,7 @@ class CreatePetEvent
   final List<File> pictures;
 
   final String? bio;
-
+final String breedSize;
   const CreatePetEvent({
     required this.username,
     required this.name,
@@ -48,6 +48,7 @@ class CreatePetEvent
     this.medicalPassport,
     required this.breedingAvailable,
     required this.pictures,
+    required this.breedSize,
       this.traits,
       this.subtraits,
 
