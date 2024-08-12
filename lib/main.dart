@@ -13,6 +13,8 @@ import 'package:leach/features/main_screen_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/comment_manager/comment_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/get_posts_manager/get_posts_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/like_post_manager/like_post_bloc.dart';
+import 'package:leach/features/profile/presentation/controller/create_pet_bloc/create_pet_bloc.dart';
+import 'package:leach/features/profile/presentation/controller/dogBreadBloc/bloc.dart';
 
 String? token;
 
@@ -75,6 +77,11 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => getIt<LikePostsBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<CreatePetBloc>(),
+        ),   BlocProvider(
+          create: (context) => getIt<DogBreadCubit>(),
         ),
       ],
       child: MaterialApp(

@@ -25,7 +25,7 @@ class PetProfile extends StatelessWidget {
               SizedBox(
                 height: AppSize.defaultSize! * 3,
               ),
-                ProfileUserRow(
+                const ProfileUserRow(
                   name:'Kiwi ' ,
                   userName: '@Kiwithedog',
                   kind: 'German Shepherd  ',

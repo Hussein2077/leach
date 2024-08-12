@@ -7,8 +7,8 @@ import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/main_button.dart';
 
 class MaleOrFemale extends StatefulWidget {
-  const MaleOrFemale({super.key});
-
+  const MaleOrFemale({super.key,this.onValueChange});
+final  Function(bool)? onValueChange;
   @override
   State<MaleOrFemale> createState() => _MaleOrFemaleState();
 }
@@ -24,6 +24,7 @@ class _MaleOrFemaleState extends State<MaleOrFemale> {
         InkWell(
           onTap: () {
             isMale = true;
+              widget.onValueChange?.call(isMale);
             setState(() {});
           },
           borderRadius: BorderRadius.circular(AppSize.defaultSize! * 2),
@@ -47,6 +48,8 @@ class _MaleOrFemaleState extends State<MaleOrFemale> {
         InkWell(
           onTap: () {
             isMale = false;
+            widget.onValueChange?.call(isMale);
+
             setState(() {});
           },
           borderRadius: BorderRadius.circular(AppSize.defaultSize! * 2),

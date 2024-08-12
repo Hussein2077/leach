@@ -22,6 +22,7 @@ class StringManager {
   static const String enterNewPassword = "Enter new password";
   static const String enterOldPassword = "Enter old password";
   static const String enterConfirmPassword = "Enter confirm password";
+  static const String fileTooBig = "File too big";
 
   static const String forgotPassword = "Forgot Password?";
   static const String enterPersonalInformation =
@@ -74,6 +75,7 @@ class StringManager {
   static List<String> sizeList = [small, medium, large, chunky];
   static List<String> sizeListDog = [small, medium, large, giant];
   static const String breedingExperience = "Breeding experience";
+  static const String neuteredSpayed  = "Neutered/Spayed ";
   static const String yes = "Yes";
   static const String no = "No";
 

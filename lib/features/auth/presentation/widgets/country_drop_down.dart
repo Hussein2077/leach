@@ -57,7 +57,7 @@ class _CountryDropDownState extends State<CountryDropDown> {
           underline: const SizedBox(),
           onChanged: (String? newValue) {
             setState(() {
-              widget.onChanged!(newValue);
+              widget.onChanged?.call(newValue);
               value = newValue;
             });
           },

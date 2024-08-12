@@ -8,8 +8,8 @@ void errorSnackBar(BuildContext context, String message) {
 
   // Adjust the bottom margin based on keyboard visibility
   double bottomMargin = isKeyboardVisible
-      ? MediaQuery.of(context).viewInsets.bottom + AppSize.defaultSize! * 14 // Just above the keyboard
-      : AppSize.screenHeight! * .9; // Default margin when keyboard is not visible
+      ? MediaQuery.of(context).viewInsets.bottom + AppSize.defaultSize! * 2 // Just above the keyboard
+      : AppSize.defaultSize! * 10; // Default margin when keyboard is not visible
 
   final snackBar = SnackBar(
     content: Center(
@@ -21,10 +21,10 @@ void errorSnackBar(BuildContext context, String message) {
     ),
     duration: const Duration(seconds: 3),
     shape: const StadiumBorder(),
-    margin: EdgeInsets.only(
+    margin: EdgeInsets.symmetric(
+      horizontal: AppSize.screenWidth! * .1,
+    ).copyWith(
       bottom: bottomMargin,
-      left: AppSize.screenWidth! * .1,
-      right: AppSize.screenWidth! * .1,
     ),
     backgroundColor: Colors.red.withOpacity(.9),
     behavior: SnackBarBehavior.floating,

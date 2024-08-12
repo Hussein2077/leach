@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 
 class PetProfileModel  extends Equatable{
@@ -8,25 +10,28 @@ class PetProfileModel  extends Equatable{
   final bool pureBred;
   final String breed;
   final String? secondBreed;
-  final String dateOfBirth;
+  final String? dateOfBirth;
   final double weight;
   final bool breedingExperience;
   final bool neuteredSpayed;
-  final String? profilePicture;
-  final String? medicalPassport;
+  final File? profilePicture;
+  final String? profilePictureFromApi;
+  final File? medicalPassport;
+  final String? medicalPassportFromApi;
   final bool breedingAvailable;
-  final bool adoptionAvailable;
-  final List<Trait> traits;
-  final List<SubTrait> subtraits;
-  final List<Picture> pictures;
-  final int id;
-  final String uuid;
-  final int userId;
+  final List<int>? traits;
+  final List<int>? subtraits;
+  final List<File>? pictures;
+  final int? id;
+  final String? uuid;
+  final int? userId;
 
-  final int age;
+  final int? age;
 
   final String? bio;
-
+  final List<Trait>? traitsFromApi;
+  final List<SubTrait>? subtraitsFromApi;
+  final List<Picture>? picturesFromApi;
   const PetProfileModel({
     required this.username,
     required this.name,
@@ -42,15 +47,20 @@ class PetProfileModel  extends Equatable{
     this.profilePicture,
     this.medicalPassport,
     required this.breedingAvailable,
-    required this.adoptionAvailable,
-    required this.pictures,
-    required this.traits,
-    required this.subtraits,
-    required this.id,
-    required this.uuid,
-    required this.userId,
-    required this.age,
+
+      this.pictures,
+      this.traits,
+      this.subtraits,
+      this.id,
+      this.uuid,
+      this.userId,
+      this.age,
     this.bio,
+    this.traitsFromApi,
+    this.subtraitsFromApi,
+    this.picturesFromApi,
+    this.medicalPassportFromApi,
+    this.profilePictureFromApi,
   });
 
   factory PetProfileModel.fromMap(Map<String, dynamic> map) {
@@ -70,16 +80,16 @@ class PetProfileModel  extends Equatable{
       weight: map['weight'],
       breedingExperience: map['breeding_experience'],
       neuteredSpayed: map['neutered_spayed'],
-      profilePicture: map['profile_picture'],
-      medicalPassport: map['medical_passport'],
+      profilePictureFromApi: map['profile_picture'],
+      medicalPassportFromApi: map['medical_passport'],
       bio: map['bio'],
       breedingAvailable: map['breeding_available'],
-      adoptionAvailable: map['adoption_available'],
-      traits: List<Trait>.from(map['traits']?.map((x) => Trait.fromMap(x))),
-      subtraits: List<SubTrait>.from(
+      traitsFromApi: List<Trait>.from(map['traits']?.map((x) => Trait.fromMap(x))),
+      subtraitsFromApi: List<SubTrait>.from(
           map['subtraits']?.map((x) => SubTrait.fromMap(x))),
-      pictures:
+      picturesFromApi:
       List<Picture>.from(map['pictures']?.map((x) => Picture.fromMap(x))),
+
     );
   }
 
@@ -99,7 +109,6 @@ class PetProfileModel  extends Equatable{
       'profile_picture': profilePicture,
       'medical_passport': medicalPassport,
       'breeding_available': breedingAvailable,
-      'adoption_available': adoptionAvailable,
       'pictures[]': pictures,
       'traits[]': traits,
       'subtraits[]': subtraits,
@@ -123,7 +132,6 @@ class PetProfileModel  extends Equatable{
     profilePicture,
     medicalPassport,
     breedingAvailable,
-    adoptionAvailable,
     pictures,
     traits,
     subtraits,

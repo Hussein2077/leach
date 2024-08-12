@@ -37,12 +37,12 @@ class ProfileUserRow extends StatelessWidget {
               height: AppSize.defaultSize! * 8.2,
             ),
           ),
-        if (image != null&&image!.isNotEmpty)
-          CachedNetworkCustom(
-            url: image ?? "",
-            width: AppSize.defaultSize! * 8.2,
-            height: AppSize.defaultSize! * 8.2,
-          ),
+        // if (image != null&&image!.isNotEmpty)
+        //   CachedNetworkCustom(
+        //     url: image ?? "",
+        //     width: AppSize.defaultSize! * 8.2,
+        //     height: AppSize.defaultSize! * 8.2,
+        //   ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.end,

@@ -29,6 +29,14 @@ class _CircularCheckboxState extends State<CircularCheckbox> {
   }
 
   @override
+  void didUpdateWidget(CircularCheckbox oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.initialValue != _isChecked) {
+      _isChecked = widget.initialValue;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Row(
       children: [
@@ -49,15 +57,14 @@ class _CircularCheckboxState extends State<CircularCheckbox> {
               height: AppSize.defaultSize! * 1.9,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color:
-                    _isChecked! ? AppColors.primaryColor : Colors.transparent,
+                color: _isChecked! ? AppColors.primaryColor : Colors.transparent,
               ),
               child: _isChecked!
                   ? const Icon(
-                      Icons.check,
-                      color: Colors.white,
-                      size: 16,
-                    )
+                Icons.check,
+                color: Colors.white,
+                size: 16,
+              )
                   : null,
             ),
           ),
