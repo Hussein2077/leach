@@ -87,7 +87,7 @@ class PostData {
       this.user, 
       this.picture, 
       this.caption, 
-      this.likes, 
+      this.liked,
       this.comments,});
 
   PostData.fromJson(dynamic json) {
@@ -96,12 +96,7 @@ class PostData {
     user = json['user'] != null ? User.fromJson(json['user']) : null;
     picture = json['picture'];
     caption = json['caption'];
-    if (json['likes'] != null) {
-      likes = [];
-      json['likes'].forEach((v) {
-        likes?.add(Likes.fromJson(v));
-      });
-    }
+    liked = json['liked']??false;
     comments = json['comments'] != null ? Comments.fromJson(json['comments']) : null;
   }
   int? id;
@@ -109,7 +104,7 @@ class PostData {
   User? user;
   String? picture;
   String? caption;
-  List<Likes>? likes;
+  bool? liked;
   Comments? comments;
 
   Map<String, dynamic> toJson() {
@@ -121,9 +116,7 @@ class PostData {
     }
     map['picture'] = picture;
     map['caption'] = caption;
-    if (likes != null) {
-      map['likes'] = likes?.map((v) => v.toJson()).toList();
-    }
+    map['liked'] = liked;
     if (comments != null) {
       map['comments'] = comments?.toJson();
     }
