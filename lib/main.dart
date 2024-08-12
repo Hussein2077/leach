@@ -10,6 +10,9 @@ import 'package:leach/core/utils/methods.dart';
 import 'package:leach/features/auth/presentation/controller/login_bloc/login_with_email_and_password_bloc.dart';
 import 'package:leach/features/auth/presentation/controller/sign_up_bloc/sign_up_with_email_and_password_bloc.dart';
 import 'package:leach/features/main_screen_bloc.dart';
+import 'package:leach/features/posts/presentation/manager/comment_manager/comment_bloc.dart';
+import 'package:leach/features/posts/presentation/manager/get_posts_manager/get_posts_bloc.dart';
+import 'package:leach/features/posts/presentation/manager/like_post_manager/like_post_bloc.dart';
 
 String? token;
 
@@ -45,6 +48,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
+    //token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS5sZWFzaHBldHMuY29tL2FwaS9sZWFzaC9sb2dpbiIsImlhdCI6MTcyMzM4NjgzOCwiZXhwIjoxNzI0NTk2NDM4LCJuYmYiOjE3MjMzODY4MzgsImp0aSI6Imw5SjI0N1F0RFIycXJhUUoiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.Z91Vct-WoqLUmJdo2UFKhqGqJG5zUVC-6TMMP98wMMo";
     super.initState();
   }
 
@@ -59,8 +63,18 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => getIt<SignUpWithEmailAndPasswordBloc>(),
-        ), BlocProvider(
+        ),
+        BlocProvider(
           create: (context) => getIt<MainScreenBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<GetPostsBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<CommentBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<LikePostsBloc>(),
         ),
       ],
       child: MaterialApp(
@@ -70,8 +84,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RouteGenerator.getRoute,
         navigatorKey: getIt<NavigationService>().navigatorKey,
-        initialRoute:
-        token == null || token == 'noToken' ? Routes.welcomePage : Routes.main,
+        initialRoute: token == null || token == 'noToken' ? Routes.welcomePage : Routes.main,
         theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,

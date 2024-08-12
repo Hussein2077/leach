@@ -1,4 +1,3 @@
-import 'package:leach/main.dart';
 
 class ConstantApi {
   static const String baseUrl = 'https://api.leashpets.com/api/leash/';
@@ -8,6 +7,17 @@ class ConstantApi {
   static getPdf(String url) => 'https://api.intrn.app/Intrn/UsersCVs/$url';
   static const String signUp = "${baseUrl}register";
   static const String login = "${baseUrl}login";
+  static getPosts(String page) => '${baseUrl}post/viewPosts?page=$page';
+  static likePost(String id) {
+    return "${baseUrl}post/likePost/$id";
+  }
+  static unLikePost(String id) {
+    return "${baseUrl}post/removeLike/$id";
+  }
+  static addComments(String id) {
+    return "${baseUrl}post/comment/$id";
+  }
+
 
 //////////////////////////////
   static const String deleteAccount = "${baseUrl}New";
