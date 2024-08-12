@@ -8,6 +8,15 @@ class ConstantApi {
   static const String signUp = "${baseUrl}register";
   static const String login = "${baseUrl}login";
   static getPosts(String page) => '${baseUrl}post/viewPosts?page=$page';
+  static likePost(String id) {
+    return "${baseUrl}post/likePost/$id";
+  }
+  static unLikePost(String id) {
+    return "${baseUrl}post/removeLike/$id";
+  }
+  static addComments(String id) {
+    return "${baseUrl}post/comment/$id";
+  }
 
 
 //////////////////////////////

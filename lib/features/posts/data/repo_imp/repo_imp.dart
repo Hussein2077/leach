@@ -19,4 +19,34 @@ class PostsRepositoryImp extends PostsBaseRepository {
       return right(DioHelper.buildFailure(e));
     }
   }
+
+  @override
+  Future<Either<String, Failure>> likePost({required String id}) async {
+    try {
+      final result = await postsBaseRemotelyDataSource.likePost(id: id);
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<String, Failure>> unLikePost({required String id}) async {
+    try {
+      final result = await postsBaseRemotelyDataSource.unLikePost(id: id);
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<String, Failure>> addComment({required String id, required String comment}) async {
+    try {
+      final result = await postsBaseRemotelyDataSource.addComment(id: id, comment: comment);
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
 }

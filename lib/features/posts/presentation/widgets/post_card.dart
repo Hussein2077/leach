@@ -69,7 +69,9 @@ class _PostCardState extends State<PostCard> {
               InkWell(
                   onTap: () {
                     isLiked = !isLiked;
-                    setState(() {});
+                    setState(() {
+
+                    });
                   },
                   borderRadius:
                       BorderRadius.circular(AppSize.defaultSize! * 1.5),

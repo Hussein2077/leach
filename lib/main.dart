@@ -10,7 +10,9 @@ import 'package:leach/core/utils/methods.dart';
 import 'package:leach/features/auth/presentation/controller/login_bloc/login_with_email_and_password_bloc.dart';
 import 'package:leach/features/auth/presentation/controller/sign_up_bloc/sign_up_with_email_and_password_bloc.dart';
 import 'package:leach/features/main_screen_bloc.dart';
+import 'package:leach/features/posts/presentation/manager/comment_manager/comment_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/get_posts_manager/get_posts_bloc.dart';
+import 'package:leach/features/posts/presentation/manager/like_post_manager/like_post_bloc.dart';
 
 String? token;
 
@@ -67,6 +69,12 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => getIt<GetPostsBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<CommentBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<LikePostsBloc>(),
         ),
       ],
       child: MaterialApp(
