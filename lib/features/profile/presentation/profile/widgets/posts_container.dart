@@ -48,7 +48,7 @@ class PostsContainer extends StatelessWidget {
                   log('messagemessage');
 
                   if(pets){
-                    Navigator.pushNamed(context, Routes.addPhotoForPet);
+                    Navigator.pushNamed(context, Routes.addPetScreen);
                   }
                   else{
                     Navigator.pushNamed(context, Routes.addPost);

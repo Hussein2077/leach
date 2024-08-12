@@ -13,7 +13,8 @@ import 'package:leach/core/widgets/leading_icon.dart';
 class TypeOfPetScreen extends StatelessWidget {
   const TypeOfPetScreen({super.key, required this.typeOfPetNavigator});
 
-final TypeOfPetNavigator typeOfPetNavigator;
+  final TypeOfPetNavigator typeOfPetNavigator;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,19 +47,14 @@ final TypeOfPetNavigator typeOfPetNavigator;
                   LargeButton(
                       text: StringManager.dog.tr(),
                       onPressed: () {
-                        switch(typeOfPetNavigator){
-
-
-
+                        switch (typeOfPetNavigator) {
                           case TypeOfPetNavigator.dogBread:
                             Navigator.pushNamed(context, Routes.dogBread);
                           case TypeOfPetNavigator.breadingScreen:
-                          Navigator.pushNamed(context, Routes.breedingScreen);
+                            Navigator.pushNamed(context, Routes.breedingScreen);
                           case TypeOfPetNavigator.groomingScreen:
-
-                            case TypeOfPetNavigator.trainingScreen:
-                          Navigator.pushNamed(context, Routes.trainYourDog);
-
+                          case TypeOfPetNavigator.trainingScreen:
+                            Navigator.pushNamed(context, Routes.trainYourDog);
                         }
                         // if(!isFromBreeding) {
                         //   Navigator.pushNamed(context, Routes.dogBread);
@@ -67,7 +63,6 @@ final TypeOfPetNavigator typeOfPetNavigator;
                         //   Navigator.pushNamed(context, Routes.breedingScreen);
                         // }
                       },
-
                       child: Image.asset(AssetPath.dog)),
                   SizedBox(
                     height: AppSize.defaultSize! * 3,
@@ -75,19 +70,15 @@ final TypeOfPetNavigator typeOfPetNavigator;
                   LargeButton(
                       text: StringManager.cat.tr(),
                       onPressed: () {
-                        switch(typeOfPetNavigator){
-
-
-
+                        switch (typeOfPetNavigator) {
                           case TypeOfPetNavigator.dogBread:
                             Navigator.pushNamed(context, Routes.catBread);
                           case TypeOfPetNavigator.breadingScreen:
-                          Navigator.pushNamed(context, Routes.breedingScreen);
+                            Navigator.pushNamed(context, Routes.breedingScreen);
                           case TypeOfPetNavigator.groomingScreen:
                           // TODO: Handle this case.
                           case TypeOfPetNavigator.trainingScreen:
-                          Navigator.pushNamed(context, Routes.breedingScreen);
-
+                            Navigator.pushNamed(context, Routes.breedingScreen);
                         }
                         // if(!isFromBreeding) {
                         //   Navigator.pushNamed(context, Routes.catBread);

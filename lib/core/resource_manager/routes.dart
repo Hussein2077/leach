@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:leach/core/resource_manager/enums.dart';
@@ -62,7 +61,6 @@ class Routes {
   static const String typeOfPetScreen = "/TypeOfPetScreen";
   static const String catBread = "/CatBread";
   static const String dogBread = "/dogBread";
-  static const String TypeOfPetScreen = "/TypeOfPetScreen";
   static const String doctor = "/Doctors";
   static const String catBreed2 = "/CatBreed2";
   static const String catBreed3 = "/CatBreed3";
@@ -358,7 +356,7 @@ class RouteGenerator {
           );
 
           // Return whether to leave the app or not
-          return leaveApp ?? false;
+          return leaveApp ;
         },
         child: Container(), // Replace with your app's content
       ),
