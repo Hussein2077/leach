@@ -14,8 +14,8 @@ abstract class ProfileBaseRepository {
   Future<Either<String, Failure>> rejectFriendRequests({required String id});
   Future<Either<FriendsModel, Failure>> getFriends({required String page});
   Future<Either<UserModel, Failure>> getMyData();
-  Future<Either<PetProfileModel, Failure>> createPet(
-      PetProfileModel petProfileModel);  Future<Either<PetProfileModel, Failure>> updatePet (
+
+  Future<Either<PetProfileModel, Failure>> updatePet (
       UpdatePetRequest petProfileModel);
 
   Future<Either<List<PetTrait>, Failure>> getTraits();
