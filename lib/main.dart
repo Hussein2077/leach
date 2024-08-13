@@ -15,6 +15,9 @@ import 'package:leach/features/posts/presentation/manager/get_posts_manager/get_
 import 'package:leach/features/posts/presentation/manager/like_post_manager/like_post_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/create_pet_bloc/create_pet_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/dogBreadBloc/bloc.dart';
+import 'package:leach/features/profile/presentation/controller/friends_manager/friends_bloc.dart';
+import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_bloc.dart';
+import 'package:leach/features/profile/presentation/controller/pending_friend_request_manager/pending_friend_request_bloc.dart';
 
 String? token;
 
@@ -49,12 +52,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  @override
-  void initState() {
-    token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS5sZWFzaHBldHMuY29tL2FwaS9sZWFzaC9sb2dpbiIsImlhdCI6MTcyMzM4NjgzOCwiZXhwIjoxNzI0NTk2NDM4LCJuYmYiOjE3MjMzODY4MzgsImp0aSI6Imw5SjI0N1F0RFIycXJhUUoiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.Z91Vct-WoqLUmJdo2UFKhqGqJG5zUVC-6TMMP98wMMo";
-    super.initState();
-  }
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -81,8 +78,18 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => getIt<CreatePetBloc>(),
-        ),   BlocProvider(
+        ),
+        BlocProvider(
           create: (context) => getIt<DogBreadCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<GetFriendRequestBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<GetFriendsBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<GetMyDataBloc>(),
         ),
       ],
       child: MaterialApp(

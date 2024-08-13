@@ -21,8 +21,7 @@ class DioHelper {
   }
 
   Future<Map<String, String>> header() async {
-     //String token = await Methods.instance.returnUserToken();
-    String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS5sZWFzaHBldHMuY29tL2FwaS9sZWFzaC9sb2dpbiIsImlhdCI6MTcyMzM4NjgzOCwiZXhwIjoxNzI0NTk2NDM4LCJuYmYiOjE3MjMzODY4MzgsImp0aSI6Imw5SjI0N1F0RFIycXJhUUoiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.Z91Vct-WoqLUmJdo2UFKhqGqJG5zUVC-6TMMP98wMMo";
+    String token = await Methods.instance.returnUserToken();
     if (kDebugMode) {
       log('husssssssssss $token');
     }

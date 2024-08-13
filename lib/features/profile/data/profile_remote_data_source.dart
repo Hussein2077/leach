@@ -1,15 +1,20 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
+import 'package:leach/core/models/profile_data_model.dart';
 import 'package:leach/core/utils/api_helper.dart';
 import 'package:leach/core/utils/constant_api.dart';
 import 'package:leach/features/profile/domain/model/create_pet.dart';
 import 'package:http_parser/http_parser.dart';
-import 'package:leach/features/profile/domain/model/traits_model.dart';
+import 'package:leach/features/profile/domain/model/friends_model.dart';
+import 'package:leach/features/profile/domain/model/pending_friend_requests_model.dart';
 
 abstract class ProfileBaseRemotelyDataSource {
   Future<PetProfileModel> createPet(PetProfileModel petProfileModel);
-  // Future<PetTrait> getTraits();
+  Future<PendingFriendRequestsModel> getPendingFriendRequests({required String page});
+  Future<String> acceptFriendRequests({required String id});
+  Future<String> rejectFriendRequests({required String id});
+  Future<FriendsModel> getFriends({required String page});
+  Future<UserModel> getMyData();
+
 }
 
 class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
@@ -71,10 +76,99 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
     }
   }
 
-  // @override
-  // Future<PetTrait> getTraits() {
-  //
-  // }
+  @override
+  Future<PendingFriendRequestsModel> getPendingFriendRequests({required String page}) async {
+    Map<String, String> headers = await DioHelper().header();
+
+    try {
+      final response = await Dio().get(
+        ConstantApi.getPendingFriendRequests(page),
+        options: Options(
+          headers: headers,
+        ),
+      );
+
+      return PendingFriendRequestsModel.fromJson(response.data);
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(dioError: e, endpointName: 'getPendingFriendRequests');
+    }
+  }
+
+  @override
+  Future<String> acceptFriendRequests({required String id}) async {
+    Map<String, String> headers = await DioHelper().header();
+
+    try {
+      final response = await Dio().post(
+        ConstantApi.acceptFriendRequests(id),
+        options: Options(
+          headers: headers,
+        ),
+      );
+
+      Map<String, dynamic> data = response.data;
+
+      return data["message"];
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(dioError: e, endpointName: 'acceptFriendRequests');
+    }
+  }
+
+  @override
+  Future<String> rejectFriendRequests({required String id}) async {
+    Map<String, String> headers = await DioHelper().header();
+
+    try {
+      final response = await Dio().delete(
+        ConstantApi.rejectFriendRequests(id),
+        options: Options(
+          headers: headers,
+        ),
+      );
+
+      Map<String, dynamic> data = response.data;
+
+      return data["message"];
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(dioError: e, endpointName: 'rejectFriendRequests');
+    }
+  }
+
+  @override
+  Future<FriendsModel> getFriends({required String page}) async {
+    Map<String, String> headers = await DioHelper().header();
+
+    try {
+      final response = await Dio().get(
+        ConstantApi.getFriends(page),
+        options: Options(
+          headers: headers,
+        ),
+      );
+
+      return FriendsModel.fromJson(response.data);
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(dioError: e, endpointName: 'getFriends');
+    }
+  }
+
+  @override
+  Future<UserModel> getMyData() async {
+    Map<String, String> headers = await DioHelper().header();
+
+    try {
+      final response = await Dio().get(
+        ConstantApi.getMyData,
+        options: Options(
+          headers: headers,
+        ),
+      );
+
+      return UserModel.fromMap(response.data);
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(dioError: e, endpointName: 'getMyData');
+    }
+  }
 
 
 }

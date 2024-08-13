@@ -24,8 +24,16 @@ import 'package:leach/features/profile/data/profile_remote_data_source.dart';
 import 'package:leach/features/profile/data/repo_imp_profile.dart';
 import 'package:leach/features/profile/domain/base_repo/profie_base_repo.dart';
 import 'package:leach/features/profile/domain/use_case/CREATE_PET_USE_CASE.dart';
+import 'package:leach/features/profile/domain/use_case/accept_friend_request_uc.dart';
+import 'package:leach/features/profile/domain/use_case/get_friends_uc.dart';
+import 'package:leach/features/profile/domain/use_case/get_my_data_uc.dart';
+import 'package:leach/features/profile/domain/use_case/get_pending_friend_requests_uc.dart';
+import 'package:leach/features/profile/domain/use_case/reject_friend_request_uc.dart';
 import 'package:leach/features/profile/presentation/controller/create_pet_bloc/create_pet_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/dogBreadBloc/bloc.dart';
+import 'package:leach/features/profile/presentation/controller/friends_manager/friends_bloc.dart';
+import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_bloc.dart';
+import 'package:leach/features/profile/presentation/controller/pending_friend_request_manager/pending_friend_request_bloc.dart';
 
 final getIt = GetIt.instance;
 
@@ -45,6 +53,9 @@ class ServerLocator {
     getIt.registerLazySingleton(() => LikePostsBloc(likePostUc: getIt(), unLikePostUc: getIt()));
     getIt.registerLazySingleton(() => CreatePetBloc(createPetUseCase: getIt()));
     getIt.registerLazySingleton(() => DogBreadCubit());
+    getIt.registerLazySingleton(() => GetFriendRequestBloc(getFriendRequestUseCase: getIt(), acceptFriendRequestsUseCase: getIt(), rejectFriendRequestsUseCase: getIt()));
+    getIt.registerLazySingleton(() => GetFriendsBloc(getFriendsUseCase: getIt()));
+    getIt.registerLazySingleton(() => GetMyDataBloc(getMyDataUseCase: getIt()));
 
 //use_case
 
@@ -57,6 +68,11 @@ class ServerLocator {
     getIt.registerFactory(() => LikePostUc(postsBaseRepository: getIt()));
     getIt.registerFactory(() => UnLikePostUc(postsBaseRepository: getIt()));
     getIt.registerFactory(() => CreatePetUseCase(profileBaseRepository : getIt()));
+    getIt.registerFactory(() => GetPendingFriendRequestsUseCase(profileBaseRepository : getIt()));
+    getIt.registerFactory(() => AcceptFriendRequestsUseCase(profileBaseRepository : getIt()));
+    getIt.registerFactory(() => RejectFriendRequestsUseCase(profileBaseRepository : getIt()));
+    getIt.registerFactory(() => GetFriendsUseCase(profileBaseRepository : getIt()));
+    getIt.registerFactory(() => GetMyDataUseCase(profileBaseRepository : getIt()));
 
     //remote data
     getIt.registerLazySingleton<BaseRemotelyDataSource>(
