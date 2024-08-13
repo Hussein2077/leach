@@ -18,7 +18,9 @@ class ProfileAppBar extends StatelessWidget {
         ),
         const Spacer(),
         IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, Routes.notification);
+            },
             icon: Icon(
               Icons.notifications,
               size: AppSize.defaultSize! * 3.5,
