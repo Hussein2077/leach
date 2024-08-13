@@ -33,6 +33,8 @@ import 'package:leach/features/profile/presentation/friends/friends_view.dart';
 import 'package:leach/features/profile/presentation/friends/report.dart';
 import 'package:leach/features/profile/presentation/friends/specific_messages_report.dart';
 import 'package:leach/features/profile/presentation/friends/submit_report.dart';
+import 'package:leach/features/profile/presentation/notifications/friend_requests_screen.dart';
+import 'package:leach/features/profile/presentation/notifications/notifications_screen.dart';
 import 'package:leach/features/profile/presentation/posts_and_pet_view/posts_view_profile.dart';
 import 'package:leach/features/profile/presentation/profile/componant/account_privacy.dart';
 import 'package:leach/features/profile/presentation/profile/componant/activity_and_history.dart';
@@ -91,6 +93,8 @@ class Routes {
   static const String  reportView      = "/report_view";
   static const String  selectHowTo      = "/select_how_to";
   static const String  trainYourDog      = "/train_your_dog";
+  static const String  notification      = "/notification_screen";
+  static const String  friendRequests     = "/friend_requests";
 }
 
 class RouteGenerator {
@@ -307,6 +311,16 @@ class RouteGenerator {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
             const   TrainYourDog(),
+            transitionsBuilder: customAnimate);
+      case Routes.notification:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const   NotificationsScreen(),
+            transitionsBuilder: customAnimate);
+      case Routes.friendRequests:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const   FriendRequestsScreen(),
             transitionsBuilder: customAnimate);
     }
     return unDefinedRoute(

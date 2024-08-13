@@ -10,6 +10,7 @@ class ConstantApi {
   static const String createPet = "${baseUrl}pet";
   static   String updatePet(String id)  => "${baseUrl}pet/$id";
   static const String getTraits  = "${baseUrl}pet/traits";
+  static const String getMyData = "${baseUrl}user";
   static getPosts(String page) => '${baseUrl}post/viewPosts?page=$page';
   static likePost(String id) {
     return "${baseUrl}post/likePost/$id";
@@ -19,6 +20,18 @@ class ConstantApi {
   }
   static addComments(String id) {
     return "${baseUrl}post/comment/$id";
+  }
+  static getPendingFriendRequests(String page) {
+    return "${baseUrl}user/pending_friend_requests?page=$page";
+  }
+  static acceptFriendRequests(String id) {
+    return "${baseUrl}user/acceptFriendRequest/$id";
+  }
+  static rejectFriendRequests(String id) {
+    return "${baseUrl}user/friendRequest/$id";
+  }
+  static getFriends(String page) {
+    return "${baseUrl}user/listAllFriends?page=$page";
   }
 
 

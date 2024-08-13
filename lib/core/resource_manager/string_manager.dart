@@ -218,6 +218,8 @@ class StringManager {
   static const String editPost = "Edit Post";
   static const String turnOffComments = "Turn off comments";
   static const String deletePost = "Delete Post";
+  static const String notifications = "Notifications";
+  static const String friendRequests = "Friend Requests";
   static const  List<String> citiesInEgypt = [
     "Cairo",
     "Alexandria",

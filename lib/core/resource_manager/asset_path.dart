@@ -107,4 +107,6 @@ class AssetPath {
   static const String             maya1MP4         = '$pathImage/mmaayyy_1.gif';
   static const String             vistaMP4          = '$pathImage/vistaaaa.gif';
   static const String             loading           = '$pathImage/loading.png';
+  static const String             accept           = '$pathImage/accept.png';
+  static const String             reject           = '$pathImage/rej.png';
 }
