@@ -7,9 +7,11 @@ import 'package:leach/features/profile/presentation/controller/create_pet_bloc/c
 
 class CreatePetBloc extends Bloc<BaseCreatePetEvent, CreatePetState> {
   CreatePetUseCase createPetUseCase;
+  UpdatePetUseCase updatePetUseCase;
 
   CreatePetBloc({
     required this.createPetUseCase,
+    required this.updatePetUseCase,
   }) : super(CreatePetInitial()) {
     on<CreatePetEvent>((event, emit) async {
       emit(
@@ -46,6 +48,38 @@ class CreatePetBloc extends Bloc<BaseCreatePetEvent, CreatePetState> {
         ),
         (r) => emit(
           CreatePetErrorMessageState(
+            errorMessage: DioHelper().getTypeOfFailure(r),
+          ),
+        ),
+      );
+    });
+    on<UpdatePetEvent>((event, emit) async {
+      emit(
+        const UpdatePetLoadingState(),
+      );
+      final result = await updatePetUseCase.call(UpdatePetRequest(
+        username: event.username,
+        name: event.name,
+        weight: event.weight,
+        size: event.size,
+        breedingExperience: event.breedingExperience,
+        neuteredSpayed: event.neuteredSpayed,
+        profilePicture: event.profilePicture,
+        medicalPassport: event.medicalPassport,
+        traits: event.traits,
+        subtraits: event.subtraits,
+        uuid: event.uuid,
+        breedingAvailable: event.breedingAvailable,
+
+      ));
+      result.fold(
+        (l) => emit(
+          UpdatePetSuccessMessageState(
+            petProfileModel: l,
+          ),
+        ),
+        (r) => emit(
+          UpdatePetErrorMessageState(
             errorMessage: DioHelper().getTypeOfFailure(r),
           ),
         ),

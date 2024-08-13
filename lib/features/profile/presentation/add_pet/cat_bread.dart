@@ -155,8 +155,8 @@ class CatBread extends StatelessWidget {
             ),
             MainButton(text: StringManager.next . tr(),
 onTap: (){
-              Navigator.pushNamed(context, Routes.catBreed2);
-},
+
+              },
 textColor: Colors.white,
             ),
             SizedBox(

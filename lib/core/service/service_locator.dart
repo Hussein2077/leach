@@ -24,8 +24,10 @@ import 'package:leach/features/profile/data/profile_remote_data_source.dart';
 import 'package:leach/features/profile/data/repo_imp_profile.dart';
 import 'package:leach/features/profile/domain/base_repo/profie_base_repo.dart';
 import 'package:leach/features/profile/domain/use_case/CREATE_PET_USE_CASE.dart';
+import 'package:leach/features/profile/domain/use_case/get_traits_use_case.dart';
 import 'package:leach/features/profile/presentation/controller/create_pet_bloc/create_pet_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/dogBreadBloc/bloc.dart';
+import 'package:leach/features/profile/presentation/controller/get_traits/bloc.dart';
 
 final getIt = GetIt.instance;
 
@@ -43,8 +45,9 @@ class ServerLocator {
     getIt.registerLazySingleton(() => GetPostsBloc(getPostsUseCase: getIt()));
     getIt.registerLazySingleton(() => CommentBloc(addCommentUseCase: getIt()));
     getIt.registerLazySingleton(() => LikePostsBloc(likePostUc: getIt(), unLikePostUc: getIt()));
-    getIt.registerLazySingleton(() => CreatePetBloc(createPetUseCase: getIt()));
+    getIt.registerLazySingleton(() => CreatePetBloc(createPetUseCase: getIt(), updatePetUseCase: getIt()));
     getIt.registerLazySingleton(() => DogBreadCubit());
+    getIt.registerLazySingleton(() => GetTraitsBloc(getTraitUseCase: getIt()));
 
 //use_case
 
@@ -57,6 +60,8 @@ class ServerLocator {
     getIt.registerFactory(() => LikePostUc(postsBaseRepository: getIt()));
     getIt.registerFactory(() => UnLikePostUc(postsBaseRepository: getIt()));
     getIt.registerFactory(() => CreatePetUseCase(profileBaseRepository : getIt()));
+    getIt.registerFactory(() => GetTraitsUseCase(profileBaseRepository : getIt()));
+    getIt.registerFactory(() => UpdatePetUseCase(profileBaseRepository : getIt()));
 
     //remote data
     getIt.registerLazySingleton<BaseRemotelyDataSource>(

@@ -15,6 +15,7 @@ import 'package:leach/features/posts/presentation/manager/get_posts_manager/get_
 import 'package:leach/features/posts/presentation/manager/like_post_manager/like_post_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/create_pet_bloc/create_pet_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/dogBreadBloc/bloc.dart';
+import 'package:leach/features/profile/presentation/controller/get_traits/bloc.dart';
 
 String? token;
 
@@ -80,8 +81,12 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => getIt<CreatePetBloc>(),
-        ),   BlocProvider(
+        ),
+        BlocProvider(
           create: (context) => getIt<DogBreadCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<GetTraitsBloc>(),
         ),
       ],
       child: MaterialApp(
@@ -91,7 +96,9 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RouteGenerator.getRoute,
         navigatorKey: getIt<NavigationService>().navigatorKey,
-        initialRoute: token == null || token == 'noToken' ? Routes.welcomePage : Routes.main,
+        initialRoute: token == null || token == 'noToken'
+            ? Routes.welcomePage
+            : Routes.main,
         theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,

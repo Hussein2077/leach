@@ -12,7 +12,7 @@ class PetProfileModel  extends Equatable{
   final String? secondBreed;
   final String? dateOfBirth;
   final double? weight;
-  final String? weightFromApi;
+  final  dynamic? weightFromApi;
   final bool breedingExperience;
   final bool neuteredSpayed;
   final File? profilePicture;
@@ -90,6 +90,7 @@ class PetProfileModel  extends Equatable{
       profilePictureFromApi: map['profile_picture'],
       medicalPassportFromApi: map['medical_passport'],
       bio: map['bio'],
+      breedSize:  map['size'],
       breedingAvailable: map['breeding_available']==1,
       traitsFromApi: List<Trait>.from(map['traits']?.map((x) => Trait.fromMap(x))),
       subtraitsFromApi: List<SubTrait>.from(

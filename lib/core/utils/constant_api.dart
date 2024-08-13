@@ -8,6 +8,8 @@ class ConstantApi {
   static const String signUp = "${baseUrl}register";
   static const String login = "${baseUrl}login";
   static const String createPet = "${baseUrl}pet";
+  static   String updatePet(String id)  => "${baseUrl}pet/$id";
+  static const String getTraits  = "${baseUrl}pet/traits";
   static getPosts(String page) => '${baseUrl}post/viewPosts?page=$page';
   static likePost(String id) {
     return "${baseUrl}post/likePost/$id";

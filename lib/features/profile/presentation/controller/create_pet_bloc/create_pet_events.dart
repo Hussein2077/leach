@@ -1,8 +1,5 @@
 import 'dart:io';
-
 import 'package:equatable/equatable.dart';
-import 'package:leach/features/profile/domain/model/create_pet.dart';
-
 abstract class BaseCreatePetEvent extends Equatable {
   const BaseCreatePetEvent();
 
@@ -55,5 +52,34 @@ final String breedSize;
     this.bio,
   });
 }
+class  UpdatePetEvent
+    extends BaseCreatePetEvent {
+  final String? username;
+  final String uuid;
+  final String? name;
+  final double? weight;
+  final String? size;
+  final bool? breedingExperience;
+  final bool? neuteredSpayed;
+  final bool? breedingAvailable;
+  final File? profilePicture;
+  final String? medicalPassport;
+  final List<int>? traits;
+  final List<int>? subtraits;
 
-class DeleteAccountEvent extends BaseCreatePetEvent {}
+  const UpdatePetEvent({
+    this.username,
+    this.name,
+    required this.uuid,
+    this.weight,
+    this.size,
+    this.breedingExperience,
+    this.neuteredSpayed,
+    this.breedingAvailable,
+    this.profilePicture,
+    this.medicalPassport,
+    this.traits,
+    this.subtraits,
+  });
+}
+

@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
@@ -65,7 +66,7 @@ class _DogBreadState extends State<DogBread> {
           if (state is CreatePetSuccessMessageState) {
             LoadingOverlay().hide();
 
-            Navigator.pushNamed(context, Routes.dogBreed3);
+            Navigator.pushNamed(context, Routes.dogBreed3,arguments: state.petProfileModel);
           } else if (state is CreatePetErrorMessageState) {
             LoadingOverlay().hide();
             errorSnackBar(context, state.errorMessage);
@@ -346,6 +347,7 @@ class _DogBreadState extends State<DogBread> {
                           neuteredSpayed: state.neuteredSpayed ?? false,
                           breedingAvailable: state.breedingAvailable ?? false,
                           pictures: state.pickedImages,
+
                         );
 
                         if (isValid == null) {
@@ -356,6 +358,7 @@ class _DogBreadState extends State<DogBread> {
                               gender: state.isMale == true ? 'MALE' : 'FEMALE',
                               petType: 'DOG',
                               pureBred: state.isPureBredSelected ?? false,
+
                               breed: state.selectKind ?? '',
                               secondBreed: state.selectSecondKind ?? '',
                               dateOfBirth: state.selectedDate != null
@@ -381,6 +384,7 @@ class _DogBreadState extends State<DogBread> {
                                   .toString(),
                             ),
                           );
+                          log('message${state.sizeSelectedIndex}state.sizeSelectedIndex');
                         } else {
                           errorSnackBar(context, isValid);
                         }
