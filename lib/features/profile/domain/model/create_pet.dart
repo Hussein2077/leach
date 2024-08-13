@@ -11,7 +11,8 @@ class PetProfileModel  extends Equatable{
   final String breed;
   final String? secondBreed;
   final String? dateOfBirth;
-  final double weight;
+  final double? weight;
+  final String? weightFromApi;
   final bool breedingExperience;
   final bool neuteredSpayed;
   final File? profilePicture;
@@ -43,8 +44,9 @@ class PetProfileModel  extends Equatable{
     required this.pureBred,
     required this.breed,
     this.secondBreed,
+    this.weightFromApi,
     required this.dateOfBirth,
-    required this.weight,
+      this.weight,
     required this.breedingExperience,
     required this.neuteredSpayed,
     this.profilePicture,
@@ -77,18 +79,18 @@ class PetProfileModel  extends Equatable{
       name: map['name'],
       gender: map['gender'],
       petType: map['pet_type'],
-      pureBred: map['pure_bred'],
+      pureBred: map['pure_bred']==1,
       breed: map['breed'],
       secondBreed: map['second_breed'],
       dateOfBirth: map['date_of_birth'],
       age: map['age'],
-      weight: map['weight'],
-      breedingExperience: map['breeding_experience'],
-      neuteredSpayed: map['neutered_spayed'],
+      weightFromApi: map['weight'],
+      breedingExperience: map['breeding_experience']==1,
+      neuteredSpayed: map['neutered_spayed']==1,
       profilePictureFromApi: map['profile_picture'],
       medicalPassportFromApi: map['medical_passport'],
       bio: map['bio'],
-      breedingAvailable: map['breeding_available'],
+      breedingAvailable: map['breeding_available']==1,
       traitsFromApi: List<Trait>.from(map['traits']?.map((x) => Trait.fromMap(x))),
       subtraitsFromApi: List<SubTrait>.from(
           map['subtraits']?.map((x) => SubTrait.fromMap(x))),
