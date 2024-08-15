@@ -9,16 +9,19 @@ import 'package:leach/core/widgets/cutom_text.dart';
 class SideBarRow extends StatelessWidget {
 
   final String? image;
-  final String text;
+  final String? text;
   final Color? color;
+  final double? textSize;
+  final bool? isMenu;
 
 final void Function()? onTap;
   const SideBarRow({super.key,
-
+    this.textSize,
      this.image,
-    required this.text,
+     this.text,
     this.color,
-    this.onTap
+    this.onTap,
+    this.isMenu
 });
 
   @override
@@ -42,9 +45,11 @@ final void Function()? onTap;
           if(image==null)
           Padding(
             padding: EdgeInsets.only(  left: AppSize.defaultSize! * 2.2,),
+
             child: CustomText(
-              text: text,
-              fontSize: AppSize.defaultSize! * 2,
+
+              text: text != null? text!: "",
+              fontSize: textSize != null?textSize:  AppSize.defaultSize! * 2,
               color: color,
 
               maxLines: 1,
@@ -53,17 +58,23 @@ final void Function()? onTap;
           ),
           if(image!=null)
           CustomText(
-            text: text,
-            fontSize: AppSize.defaultSize! * 2,
+            text: text != null? text!: "",
+            fontSize: textSize != null?textSize:  AppSize.defaultSize! * 2,
             color: color,
             maxLines: 1,
             textAlign: TextAlign.start,
           ),
           Spacer(),
+          if(isMenu==false || isMenu==null)
           Padding(
             padding:  EdgeInsets.only(right:AppSize.defaultSize! * 2.5),
             child: Image.asset(AssetPath.rightArrow),
           ),
+          if(isMenu==true)
+            Padding(
+              padding:  EdgeInsets.only(right:AppSize.defaultSize! * 2.5),
+              child: Image.asset(AssetPath.menuFriend),
+            ),
 
 
         ],

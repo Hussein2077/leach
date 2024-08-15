@@ -1,3 +1,4 @@
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:leach/core/resource_manager/enums.dart';
@@ -35,6 +36,7 @@ import 'package:leach/features/profile/presentation/friends/specific_messages_re
 import 'package:leach/features/profile/presentation/friends/submit_report.dart';
 import 'package:leach/features/profile/presentation/notifications/friend_requests_screen.dart';
 import 'package:leach/features/profile/presentation/notifications/notifications_screen.dart';
+import 'package:leach/features/profile/presentation/posts_and_pet_view/edit_post.dart';
 import 'package:leach/features/profile/presentation/posts_and_pet_view/posts_view_profile.dart';
 import 'package:leach/features/profile/presentation/profile/componant/account_privacy.dart';
 import 'package:leach/features/profile/presentation/profile/componant/activity_and_history.dart';
@@ -95,6 +97,7 @@ class Routes {
   static const String  trainYourDog      = "/train_your_dog";
   static const String  notification      = "/notification_screen";
   static const String  friendRequests     = "/friend_requests";
+  static const String  editPost      = "/edit_post";
 }
 
 class RouteGenerator {
@@ -321,6 +324,11 @@ class RouteGenerator {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
             const   FriendRequestsScreen(),
+            transitionsBuilder: customAnimate);
+      case Routes.editPost:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const   EditPost(),
             transitionsBuilder: customAnimate);
     }
     return unDefinedRoute(

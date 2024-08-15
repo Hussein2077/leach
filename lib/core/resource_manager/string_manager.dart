@@ -252,6 +252,7 @@ class StringManager {
     "Marsa Matruh",
     "Al-Minya"
   ];
+  static const String editCaption = "Edit Caption";
 
 
 
