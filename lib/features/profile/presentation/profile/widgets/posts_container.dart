@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/routes.dart';
@@ -45,12 +43,9 @@ class PostsContainer extends StatelessWidget {
             if (addIcon)
               GestureDetector(
                 onTap: () {
-                  log('messagemessage');
-
                   if(pets){
                     Navigator.pushNamed(context, Routes.addPetScreen);
-                  }
-                  else{
+                  } else{
                     Navigator.pushNamed(context, Routes.addPost);
                   }
                 },

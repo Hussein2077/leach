@@ -101,12 +101,11 @@ class Pet extends Equatable {
       neuteredSpayed: json['neutered_spayed'] == 1,
       profilePicture: json['profile_picture'],
       medicalPassport: json['medical_passport'],
-      bio: json['bio'],
+      bio: json['bio']??"",
       breedingAvailable: json['breeding_available'] == 1,
       adoptionAvailable: json['adoption_available'] == 1,
-      traits: (json['traits'] as List).map((e) => Trait.fromJson(e)).toList(),
-      subtraits:
-      (json['subtraits'] as List).map((e) => Trait.fromJson(e)).toList(),
+      traits: json['traits'] == null ? [] : (json['traits'] as List).map((e) => Trait.fromJson(e)).toList(),
+      subtraits: json['subtraits'] == null ? [] : (json['subtraits'] as List).map((e) => Trait.fromJson(e)).toList(),
       pictures: (json['pictures'] as List)
           .map((e) => PetPicture.fromJson(e))
           .toList(),
@@ -123,7 +122,7 @@ class Trait extends Equatable {
   List<Object?> get props => [name];
 
   factory Trait.fromJson(Map<String, dynamic> json) {
-    return Trait(name: json['name']);
+    return Trait(name: json['name']??"");
   }
 }
 

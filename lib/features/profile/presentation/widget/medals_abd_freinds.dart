@@ -8,51 +8,53 @@ import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/large_botton.dart';
 
 class MedalsAbdFriends extends StatelessWidget {
-  const MedalsAbdFriends({super.key, this.pet=false});
-final   bool? pet;
+  final bool? pet;
+  final String? number_of_friends;
+  const MedalsAbdFriends({super.key, this.pet = false, this.number_of_friends});
+
   @override
   Widget build(BuildContext context) {
-    return pet!?
-    Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        buildMedal(
-            text: "3 Y", image: AssetPath.years, name: StringManager.age),
-        SizedBox(
-          width: AppSize.defaultSize!,
-        ),
-        buildMedal(
-            text: "6K", image: AssetPath.weight, name: StringManager.weight),
-        SizedBox(
-          width: AppSize.defaultSize!,
-        ),
-        buildMedal(
-            text: "Fem", image: AssetPath.gender, name: StringManager.gender),
-      ],
-    )
-        :Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        // buildMedal(
-        //     text: "10", image: AssetPath.petLeg, name: StringManager.points),
-        // SizedBox(
-        //   width: AppSize.defaultSize!,
-        // ),
-        // buildMedal(
-        //     text: "10", image: AssetPath.medal, name: StringManager.badges),
-        // SizedBox(
-        //   width: AppSize.defaultSize!,
-        // ),
-        buildMedal(
-            text: "10", image: AssetPath.pet2Leg, name: StringManager.friends,onPressed: (){
-              Navigator.pushNamed(context, Routes.friends);
-        }),
-      ],
-    );
+    return pet!
+        ? Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              buildMedal(
+                  text: "3 Y", image: AssetPath.years, name: StringManager.age),
+              SizedBox(
+                width: AppSize.defaultSize!,
+              ),
+              buildMedal(
+                  text: "6K",
+                  image: AssetPath.weight,
+                  name: StringManager.weight),
+              SizedBox(
+                width: AppSize.defaultSize!,
+              ),
+              buildMedal(
+                  text: "Fem",
+                  image: AssetPath.gender,
+                  name: StringManager.gender),
+            ],
+          )
+        : Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              buildMedal(
+                  text: number_of_friends??"",
+                  image: AssetPath.pet2Leg,
+                  name: StringManager.friends,
+                  onPressed: () {
+                    Navigator.pushNamed(context, Routes.friends);
+                  }),
+            ],
+          );
   }
 
   Widget buildMedal(
-      {required String text, required String image, required String name,  Function()? onPressed}) {
+      {required String text,
+      required String image,
+      required String name,
+      Function()? onPressed}) {
     return Column(
       children: [
         LargeButton(

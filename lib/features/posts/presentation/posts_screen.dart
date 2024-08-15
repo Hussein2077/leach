@@ -22,13 +22,6 @@ class _PostsScreenState extends State<PostsScreen> {
 
   List<PostData> data = [];
 
-  @override
-  void initState() {
-    scrollcontroller.addListener(_scrollListener);
-    BlocProvider.of<GetPostsBloc>(context).add(const GetPostsEvent(page: "1"));
-    super.initState();
-  }
-
   void _scrollListener() {
     if (scrollcontroller.position.pixels ==
         scrollcontroller.position.maxScrollExtent) {
