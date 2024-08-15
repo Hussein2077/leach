@@ -104,9 +104,8 @@ class Pet extends Equatable {
       bio: json['bio']??"",
       breedingAvailable: json['breeding_available'] == 1,
       adoptionAvailable: json['adoption_available'] == 1,
-      traits: (json['traits'] as List).map((e) => Trait.fromJson(e)).toList(),
-      subtraits:
-      (json['subtraits'] as List).map((e) => Trait.fromJson(e)).toList(),
+      traits: json['traits'] == null ? [] : (json['traits'] as List).map((e) => Trait.fromJson(e)).toList(),
+      subtraits: json['subtraits'] == null ? [] : (json['subtraits'] as List).map((e) => Trait.fromJson(e)).toList(),
       pictures: (json['pictures'] as List)
           .map((e) => PetPicture.fromJson(e))
           .toList(),

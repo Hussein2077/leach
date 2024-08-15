@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cached_network_image.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
-import 'package:leach/features/profile/presentation/friends/friends_view.dart';
 
 class ProfileUserRow extends StatelessWidget {
   const ProfileUserRow(
@@ -27,16 +25,16 @@ class ProfileUserRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (image == null||image!.isEmpty)
-          CircleAvatar(
-            radius: AppSize.defaultSize! * 4,
-            backgroundColor: Colors.transparent,
-            child: Image.asset(
-             AssetPath.whiteProfileIcon,
-              width: AppSize.defaultSize! * 8.2,
-              height: AppSize.defaultSize! * 8.2,
-            ),
-          ),
+        // if (image == null||image!.isEmpty)
+        //   CircleAvatar(
+        //     radius: AppSize.defaultSize! * 4,
+        //     backgroundColor: Colors.transparent,
+        //     child: Image.asset(
+        //       image ?? AssetPath.whiteProfileIcon,
+        //       width: AppSize.defaultSize! * 8.2,
+        //       height: AppSize.defaultSize! * 8.2,
+        //     ),
+        //   ),
         if (image != null&&image!.isNotEmpty)
           CachedNetworkCustom(
             url: image ?? "",
@@ -44,21 +42,21 @@ class ProfileUserRow extends StatelessWidget {
             height: AppSize.defaultSize! * 8.2,
           ),
         SizedBox(
-          width: AppSize.defaultSize! ,
+          width: AppSize.defaultSize!,
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             CustomText(
-              text: name ?? 'Hussein',
+              text: name!,
               fontSize: AppSize.defaultSize! * 3,
               color: Colors.white,
               fontWeight: FontWeight.w700,
             ),
             if (kind == null)
               CustomText(
-                text: userName ?? '@3amk2077',
+                text: userName!,
                 fontSize: AppSize.defaultSize! * 1.7,
                 color: Colors.white,
               ),
@@ -67,7 +65,7 @@ class ProfileUserRow extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText(
-                    text: userName ?? '@3amk2077',
+                    text: userName!,
                     fontSize: AppSize.defaultSize! * 1.7,
                     color: Colors.white,
                   ),
