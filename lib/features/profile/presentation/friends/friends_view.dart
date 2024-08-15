@@ -383,8 +383,9 @@ class _FriendsViewState extends State<FriendsView>
                   child: TabBarView(controller: tabController, children: const [
                     PostsContainer(
                       addIcon: false,
+                      pictures: [],
                     ),
-                    PostsContainer( addIcon: false,),
+                    PostsContainer( addIcon: false,pictures: [],),
                   ]),
                 ),
               )
