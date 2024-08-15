@@ -74,9 +74,9 @@ class _DogBreadState extends State<DogBread> {
             LoadingOverlay().show(context);
           }
         },
-        child: BlocBuilder<DogBreadCubit, DogBreadState>(
+        child: BlocBuilder<BaseBreadCubit, BaseBreadState>(
           builder: (context, state) {
-            final cubit = context.read<DogBreadCubit>();
+            final cubit = context.read<BaseBreadCubit>();
             var config = CalendarDatePicker2WithActionButtonsConfig(
               dayTextStyle: const TextStyle(color: AppColors.primaryColor),
               selectedDayHighlightColor: AppColors.primaryColor,
@@ -313,7 +313,7 @@ class _DogBreadState extends State<DogBread> {
                       },
                     ),
                     SizedBox(
-                      height: AppSize.defaultSize! * 2.5,
+                      height: AppSize.defaultSize! * 2,
                     ),
                     ImagePickerWidget(
                       initialText:

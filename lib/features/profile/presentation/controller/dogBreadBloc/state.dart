@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:equatable/equatable.dart';
 
-class DogBreadState extends Equatable {
+class BaseBreadState extends Equatable {
   final DateTime? selectedDate;
   final bool? isMale;
   final List<File> pickedImages;
@@ -15,7 +15,7 @@ class DogBreadState extends Equatable {
   final bool? neuteredSpayed;
   final bool? breedingAvailable;
 
-  const DogBreadState({
+  const BaseBreadState({
     this.selectedDate,
     this.isMale,
     this.pickedImages = const [],
@@ -44,7 +44,7 @@ class DogBreadState extends Equatable {
     breedingAvailable
   ];
 
-  DogBreadState copyWith({
+  BaseBreadState copyWith({
     DateTime? selectedDate,
     bool? isMale,
     List<File>? pickedImages,
@@ -58,7 +58,7 @@ class DogBreadState extends Equatable {
       bool? neuteredSpayed,
       bool? breedingAvailable,
   }) {
-    return DogBreadState(
+    return BaseBreadState(
       selectedDate: selectedDate ?? this.selectedDate,
       isMale: isMale ?? this.isMale,
       pickedImages: pickedImages ?? this.pickedImages,

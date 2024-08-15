@@ -32,17 +32,20 @@ class ProfileUserRow extends StatelessWidget {
             radius: AppSize.defaultSize! * 4,
             backgroundColor: Colors.transparent,
             child: Image.asset(
-              image ?? AssetPath.whiteProfileIcon,
+             AssetPath.whiteProfileIcon,
               width: AppSize.defaultSize! * 8.2,
               height: AppSize.defaultSize! * 8.2,
             ),
           ),
-        // if (image != null&&image!.isNotEmpty)
-        //   CachedNetworkCustom(
-        //     url: image ?? "",
-        //     width: AppSize.defaultSize! * 8.2,
-        //     height: AppSize.defaultSize! * 8.2,
-        //   ),
+        if (image != null&&image!.isNotEmpty)
+          CachedNetworkCustom(
+            url: image ?? "",
+            width: AppSize.defaultSize! * 8.2,
+            height: AppSize.defaultSize! * 8.2,
+          ),
+        SizedBox(
+          width: AppSize.defaultSize! ,
+        ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.end,

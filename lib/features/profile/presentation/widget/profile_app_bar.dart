@@ -7,8 +7,8 @@ import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/leading_icon.dart';
 class ProfileAppBar extends StatelessWidget {
-  const ProfileAppBar({super.key});
-
+  const ProfileAppBar({super.key,   this.child});
+final Widget? child;
   @override
   Widget build(BuildContext context) {
     return  Row(
@@ -17,6 +17,7 @@ class ProfileAppBar extends StatelessWidget {
           color: Colors.white,
         ),
         const Spacer(),
+        child??
         IconButton(
             onPressed: () {
               Navigator.pushNamed(context, Routes.notification);

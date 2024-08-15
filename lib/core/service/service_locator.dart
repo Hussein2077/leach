@@ -54,7 +54,7 @@ class ServerLocator {
     getIt.registerLazySingleton(() => CommentBloc(addCommentUseCase: getIt()));
     getIt.registerLazySingleton(() => LikePostsBloc(likePostUc: getIt(), unLikePostUc: getIt()));
     getIt.registerLazySingleton(() => CreatePetBloc(createPetUseCase: getIt(), updatePetUseCase: getIt()));
-    getIt.registerLazySingleton(() => DogBreadCubit());
+    getIt.registerLazySingleton(() => BaseBreadCubit());
     getIt.registerLazySingleton(() => GetFriendRequestBloc(getFriendRequestUseCase: getIt(), acceptFriendRequestsUseCase: getIt(), rejectFriendRequestsUseCase: getIt()));
     getIt.registerLazySingleton(() => GetFriendsBloc(getFriendsUseCase: getIt()));
     getIt.registerLazySingleton(() => GetMyDataBloc(getMyDataUseCase: getIt()));

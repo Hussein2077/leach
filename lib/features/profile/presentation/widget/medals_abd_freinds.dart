@@ -1,33 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:leach/core/models/pet_model.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
+import 'package:leach/core/utils/methods.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/large_botton.dart';
 
 class MedalsAbdFriends extends StatelessWidget {
-  const MedalsAbdFriends({super.key, this.pet=false});
-final   bool? pet;
+  const MedalsAbdFriends({super.key, this.pet});
+  final Pet? pet;
   @override
   Widget build(BuildContext context) {
-    return pet!?
+    return pet!=null?
     Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         buildMedal(
-            text: "3 Y", image: AssetPath.years, name: StringManager.age),
+            text: "${Methods.instance.calculateAge(pet!.dateOfBirth ) }", image: AssetPath.years, name: StringManager.age),
         SizedBox(
           width: AppSize.defaultSize!,
         ),
         buildMedal(
-            text: "6K", image: AssetPath.weight, name: StringManager.weight),
+            text: "${pet?.weight}K", image: AssetPath.weight, name: StringManager.weight),
         SizedBox(
           width: AppSize.defaultSize!,
         ),
         buildMedal(
-            text: "Fem", image: AssetPath.gender, name: StringManager.gender),
+            text: "${pet?.gender}", image: AssetPath.gender, name: StringManager.gender),
       ],
     )
         :Row(

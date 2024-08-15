@@ -30,62 +30,64 @@ void _showEditDialog(BuildContext context) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return DropdownButton2(
-        alignment: Alignment.topCenter,
-
-
-        items: [],
-        // child:
-        //
-        //
-        //
-        //     Divider(
-        //       color: Colors.black,
-        //       height: 5,
-        //       thickness: 0.6,
-        //       indent: AppSize.defaultSize! * 2.2,
-        //       endIndent: AppSize.defaultSize! * 2.8,
-        //     ),
-        //     SizedBox(
-        //       height: AppSize.defaultSize! * 0.7,
-        //     ),
-        //     SideBarRow(
-        //       image: AssetPath.messageX,
-        //       text: StringManager.turnOffCommenting.tr(),
-        //
-        //       onTap: () {
-        //         Navigator.of(context).pop();
-        //         // _showBlockDialog(context);
-        //       },
-        //     ),
-        //     Divider(
-        //       color: Colors.black,
-        //       height: 5,
-        //       thickness: 0.6,
-        //       indent: AppSize.defaultSize! * 2.2,
-        //       endIndent: AppSize.defaultSize! * 2.8,
-        //     ),
-        //     SizedBox(
-        //       height: AppSize.defaultSize! * 0.7,
-        //     ),
-        //     SideBarRow(
-        //       image: AssetPath.x,
-        //       text: StringManager.deletePost.tr(),
-        //
-        //       onTap: () {
-        //         Navigator.of(context).pop();
-        //
-        //       },
-        //     ),
-        //     Divider(
-        //       color: Colors.black,
-        //       height: 5,
-        //       thickness: 0.6,
-        //       indent: AppSize.defaultSize! * 2.2,
-        //       endIndent: AppSize.defaultSize! * 2.8,
-        //     ),
-
-
+      return Scaffold(
+        body: DropdownButton2(
+          alignment: Alignment.topCenter,
+        
+        
+          items: [],
+          // child:
+          //
+          //
+          //
+          //     Divider(
+          //       color: Colors.black,
+          //       height: 5,
+          //       thickness: 0.6,
+          //       indent: AppSize.defaultSize! * 2.2,
+          //       endIndent: AppSize.defaultSize! * 2.8,
+          //     ),
+          //     SizedBox(
+          //       height: AppSize.defaultSize! * 0.7,
+          //     ),
+          //     SideBarRow(
+          //       image: AssetPath.messageX,
+          //       text: StringManager.turnOffCommenting.tr(),
+          //
+          //       onTap: () {
+          //         Navigator.of(context).pop();
+          //         // _showBlockDialog(context);
+          //       },
+          //     ),
+          //     Divider(
+          //       color: Colors.black,
+          //       height: 5,
+          //       thickness: 0.6,
+          //       indent: AppSize.defaultSize! * 2.2,
+          //       endIndent: AppSize.defaultSize! * 2.8,
+          //     ),
+          //     SizedBox(
+          //       height: AppSize.defaultSize! * 0.7,
+          //     ),
+          //     SideBarRow(
+          //       image: AssetPath.x,
+          //       text: StringManager.deletePost.tr(),
+          //
+          //       onTap: () {
+          //         Navigator.of(context).pop();
+          //
+          //       },
+          //     ),
+          //     Divider(
+          //       color: Colors.black,
+          //       height: 5,
+          //       thickness: 0.6,
+          //       indent: AppSize.defaultSize! * 2.2,
+          //       endIndent: AppSize.defaultSize! * 2.8,
+          //     ),
+        
+        
+        ),
       );
     },
   );

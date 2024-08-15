@@ -333,7 +333,7 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
         ),
       );
 
-      return UserModel.fromMap(response.data);
+      return UserModel.fromMap(response.data['data']);
     } on DioException catch (e) {
       throw DioHelper.handleDioError(dioError: e, endpointName: 'getMyData');
     }

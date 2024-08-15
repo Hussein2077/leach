@@ -66,6 +66,23 @@ class Methods {
     right: AppSize.defaultSize??10 * 2,
     top: AppSize.defaultSize??10 * 6,
   );
+  String calculateAge(DateTime birthDate) {
+    DateTime currentDate = DateTime.now();
+
+    int years = currentDate.year - birthDate.year;
+    int months = currentDate.month - birthDate.month;
+
+    if (months < 0) {
+      years--;
+      months = 12 + months;
+    }
+
+    if (years == 0) {
+      return '$months M';
+    } else {
+      return '$years Y';
+    }
+  }
 
 }
 

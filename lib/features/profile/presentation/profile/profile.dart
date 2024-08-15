@@ -37,7 +37,9 @@ class _PersonalProfileState extends State<PersonalProfile> {
           padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 3.4),
           child: Column(
             children: [
-              const ProfileAppBar(),
+              const ProfileAppBar(
+
+              ),
               SizedBox(
                 height: AppSize.defaultSize! * 3,
               ),
@@ -76,7 +78,9 @@ class _PersonalProfileState extends State<PersonalProfile> {
         SizedBox(
           height: AppSize.defaultSize!,
         ),
-        const Expanded(child: PostsContainer())
+        const Expanded(child: PostsContainer(
+          pictures: [],
+        ))
       ],
     );
   }

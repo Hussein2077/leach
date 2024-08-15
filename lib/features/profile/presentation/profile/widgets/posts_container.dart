@@ -1,14 +1,14 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/utils/app_size.dart';
+import 'package:leach/core/widgets/cached_network_image.dart';
 import 'package:leach/core/widgets/icon_with_matrial.dart';
 
 class PostsContainer extends StatelessWidget {
-  const PostsContainer({super.key, this.addIcon = true, this.pets = false});
-
+  const PostsContainer({super.key, this.addIcon = true, this.pets = false, this.pictures});
+ final List <String>? pictures;
   final bool addIcon;
   final bool pets;
 
@@ -24,21 +24,23 @@ class PostsContainer extends StatelessWidget {
         child: Stack(
           children: [
             GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3),
+              itemCount:  pictures!.length,
+                gridDelegate:   SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount:3 ),
                 padding: EdgeInsets.all(AppSize.defaultSize! * 2),
                 itemBuilder: (context, i) {
-                  return InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.postsViewProfile);
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        borderRadius:
-                            BorderRadius.circular(AppSize.defaultSize!),
+                  return Padding(
+                    padding:   EdgeInsets.all(AppSize.defaultSize! ),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, Routes.postsViewProfile);
+                      },
+                      child: CachedNetworkCustom(
+                        url: pictures![i],
+                        width: AppSize.defaultSize! * 11,
+                        height: AppSize.defaultSize! * 11,
+                        shape: BoxShape.rectangle,
                       ),
-                      child: Image.asset(AssetPath.testPosts4),
                     ),
                   );
                 }),
@@ -48,7 +50,7 @@ class PostsContainer extends StatelessWidget {
                   log('messagemessage');
 
                   if(pets){
-                    Navigator.pushNamed(context, Routes.addPetScreen);
+                    Navigator.pushNamed(context, Routes.addPhotoForPet);
                   }
                   else{
                     Navigator.pushNamed(context, Routes.addPost);

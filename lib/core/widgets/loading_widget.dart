@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/utils/app_size.dart';
 
-class LoadingWidget extends StatelessWidget {
+class LoadingWidget extends StatefulWidget {
   const LoadingWidget({super.key, this.height, this.width, this.size});
 
   final double? height;
@@ -12,12 +12,36 @@ class LoadingWidget extends StatelessWidget {
   final double? size;
 
   @override
+  State<LoadingWidget> createState() => _LoadingWidgetState();
+}
+
+class _LoadingWidgetState extends State<LoadingWidget>    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 2),
+      vsync: this,
+    )..repeat(); // Repeat the animation indefinitely
+  }
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
     return Center(
-      child: SizedBox(
-        height: height,
-        width: width,
-      ),
+      child: RotationTransition(
+        turns: _controller,
+        child: Image.asset(
+          AssetPath.loading,
+          height: AppSize.defaultSize! * 7,
+          width: AppSize.defaultSize! * 7,
+        ), // Replace with your asset path
+      )
     );
   }
 }

@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/dogBreadBloc/state.dart';
 
-class DogBreadCubit extends Cubit<DogBreadState> {
-  DogBreadCubit() : super(const DogBreadState());
+class BaseBreadCubit extends Cubit<BaseBreadState> {
+  BaseBreadCubit() : super(const BaseBreadState());
 
   void selectDate(DateTime date) {
     emit(state.copyWith(selectedDate: date, weight: null));

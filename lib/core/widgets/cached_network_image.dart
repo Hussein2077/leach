@@ -4,12 +4,13 @@ import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/utils/constant_api.dart';
 import 'package:shimmer/shimmer.dart';
 class CachedNetworkCustom extends StatelessWidget {
-  const CachedNetworkCustom({super.key, required this.url,   this.height,   this.width, this.fit, this.radius});
+  const CachedNetworkCustom({super.key, required this.url,   this.height,   this.width, this.fit, this.radius, this.shape});
 final String url;
 final double? height;
 final double? width;
 final double? radius;
 final BoxFit? fit;
+final BoxShape? shape;
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
@@ -18,10 +19,11 @@ final BoxFit? fit;
       imageUrl: url,
       imageBuilder: (context, imageProvider) => Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(radius??AppSize.defaultSize!),
+          shape:shape?? BoxShape.circle,
+          borderRadius:shape==BoxShape.rectangle?   BorderRadius.circular(radius??AppSize.defaultSize!*2.5):null,
           image: DecorationImage(
               image: imageProvider,
-              fit: fit?? BoxFit.cover,
+              fit: fit?? BoxFit.fill,
            ),
         ),
       ),
