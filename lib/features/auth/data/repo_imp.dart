@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:leach/core/error/failure.dart';
+import 'package:leach/core/models/profile_data_model.dart';
 import 'package:leach/core/utils/api_helper.dart';
 import 'package:leach/features/auth/data/auth_remote_data_source.dart';
 import 'package:leach/features/auth/domain/repo/base_repo.dart';
@@ -13,7 +14,7 @@ class RepositoryImp extends BaseRepository {
 
 
   @override
-  Future<Either<Map<String, dynamic>, Failure>> loginWithEmailAndPassword(AuthModel authModel) async {
+  Future<Either<UserModel , Failure>> loginWithEmailAndPassword(AuthModel authModel) async {
     try {
       final result =
           await baseRemotelyDataSource.loginWithEmailAndPassword(authModel);
@@ -24,7 +25,7 @@ class RepositoryImp extends BaseRepository {
   }
 
   @override
-  Future<Either<Map<String, dynamic>, Failure>> signUpWithEmailAndPassword(SignUpModel signUpModel) async{
+  Future<Either<  UserModel, Failure>> signUpWithEmailAndPassword(SignUpModel signUpModel) async{
     try {
       final result =
           await baseRemotelyDataSource.signUpWithEmailAndPassword(signUpModel);

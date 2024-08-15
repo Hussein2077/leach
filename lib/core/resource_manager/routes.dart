@@ -12,7 +12,7 @@ import 'package:leach/features/auth/presentation/login_screen.dart';
 import 'package:leach/features/auth/presentation/sign_up/register.dart';
 import 'package:leach/features/auth/presentation/welcome_screen.dart';
 import 'package:leach/features/chat/chat_details.dart';
-import 'package:leach/features/doctors.dart';
+import 'package:leach/features/home/doctors.dart';
 import 'package:leach/features/home/componant/booking.dart';
 import 'package:leach/features/home/componant/breeding.dart';
 import 'package:leach/features/home/componant/cash_or_credit.dart';
@@ -22,12 +22,11 @@ import 'package:leach/features/home/componant/select_how_to.dart';
 import 'package:leach/features/home/componant/trainYourDog.dart';
 import 'package:leach/features/home/widgets/calender.dart';
 import 'package:leach/features/main_screen.dart';
+import 'package:leach/features/profile/domain/model/create_pet.dart';
 import 'package:leach/features/profile/presentation/add_pet/add_pet_screen.dart';
 import 'package:leach/features/profile/presentation/add_pet/cat_bread.dart';
-import 'package:leach/features/profile/presentation/add_pet/cat_breed2.dart';
 import 'package:leach/features/profile/presentation/add_pet/cat_breed3.dart';
 import 'package:leach/features/profile/presentation/add_pet/dog_bread.dart';
-import 'package:leach/features/profile/presentation/add_pet/dog_breed2.dart';
 import 'package:leach/features/profile/presentation/add_pet/dog_breed3.dart';
 import 'package:leach/features/profile/presentation/add_pet/type_of_pet.dart';
 import 'package:leach/features/profile/presentation/friends/friends_screen.dart';
@@ -35,6 +34,8 @@ import 'package:leach/features/profile/presentation/friends/friends_view.dart';
 import 'package:leach/features/profile/presentation/friends/report.dart';
 import 'package:leach/features/profile/presentation/friends/specific_messages_report.dart';
 import 'package:leach/features/profile/presentation/friends/submit_report.dart';
+import 'package:leach/features/profile/presentation/notifications/friend_requests_screen.dart';
+import 'package:leach/features/profile/presentation/notifications/notifications_screen.dart';
 import 'package:leach/features/profile/presentation/posts_and_pet_view/edit_post.dart';
 import 'package:leach/features/profile/presentation/posts_and_pet_view/posts_view_profile.dart';
 import 'package:leach/features/profile/presentation/profile/componant/account_privacy.dart';
@@ -63,11 +64,8 @@ class Routes {
   static const String typeOfPetScreen = "/TypeOfPetScreen";
   static const String catBread = "/CatBread";
   static const String dogBread = "/dogBread";
-  static const String TypeOfPetScreen = "/TypeOfPetScreen";
   static const String doctor = "/Doctors";
-  static const String catBreed2 = "/CatBreed2";
   static const String catBreed3 = "/CatBreed3";
-  static const String dogBreed2 = "/dogBreed2";
   static const String dogBreed3 = "/dogBreed3";
   static const String sidebar = "/side_bar";
   static const String breedingScreen = "/BreedingScreen";
@@ -97,6 +95,8 @@ class Routes {
   static const String  reportView      = "/report_view";
   static const String  selectHowTo      = "/select_how_to";
   static const String  trainYourDog      = "/train_your_dog";
+  static const String  notification      = "/notification_screen";
+  static const String  friendRequests     = "/friend_requests";
   static const String  editPost      = "/edit_post";
 }
 
@@ -168,20 +168,12 @@ class RouteGenerator {
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const DogBread(),
             transitionsBuilder: customAnimate);
-      case Routes.dogBreed2:
-        return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) =>
-                const DogBreed2(),
-            transitionsBuilder: customAnimate);
+
       case Routes.dogBreed3:
+        PetProfileModel petProfileModel = settings.arguments as PetProfileModel;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const DogBreed3(),
-            transitionsBuilder: customAnimate);
-      case Routes.catBreed2:
-        return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) =>
-                const CatBreed2(),
+                  DogBreed3(petProfileModel:petProfileModel ,),
             transitionsBuilder: customAnimate);
       case Routes.catBreed3:
         return PageRouteBuilder(
@@ -323,6 +315,16 @@ class RouteGenerator {
             pageBuilder: (context, animation, secondaryAnimation) =>
             const   TrainYourDog(),
             transitionsBuilder: customAnimate);
+      case Routes.notification:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const   NotificationsScreen(),
+            transitionsBuilder: customAnimate);
+      case Routes.friendRequests:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const   FriendRequestsScreen(),
+            transitionsBuilder: customAnimate);
       case Routes.editPost:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
@@ -365,7 +367,7 @@ class RouteGenerator {
           );
 
           // Return whether to leave the app or not
-          return leaveApp ?? false;
+          return leaveApp ;
         },
         child: Container(), // Replace with your app's content
       ),

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leach/core/models/profile_data_model.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/enums.dart';
 import 'package:leach/core/resource_manager/routes.dart';
@@ -62,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(
                         width: AppSize.screenWidth! * .5,
                         child: CustomText(
-                          text: '${StringManager.welcome}, Hussein',
+                          text: '${StringManager.welcome}, ${UserModel.getInstance().name??""}',
                           fontWeight: FontWeight.w700,
                           maxLines: 2,
                           textAlign: TextAlign.start,

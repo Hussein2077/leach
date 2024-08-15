@@ -16,9 +16,9 @@ final double? height;
 final  double? elevation;
   @override
   Widget build(BuildContext context) {
-    return    Material(
+    return Material(
       color:color?? Colors.white,
-      elevation:elevation?? 10,
+      elevation:elevation ?? 10,
       shape: const CircleBorder(),
       child: Padding(
         padding: EdgeInsets.all(AppSize.defaultSize! * .5),

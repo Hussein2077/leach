@@ -22,6 +22,7 @@ class StringManager {
   static const String enterNewPassword = "Enter new password";
   static const String enterOldPassword = "Enter old password";
   static const String enterConfirmPassword = "Enter confirm password";
+  static const String fileTooBig = "File too big";
 
   static const String forgotPassword = "Forgot Password?";
   static const String enterPersonalInformation =
@@ -74,6 +75,7 @@ class StringManager {
   static List<String> sizeList = [small, medium, large, chunky];
   static List<String> sizeListDog = [small, medium, large, giant];
   static const String breedingExperience = "Breeding experience";
+  static const String neuteredSpayed  = "Neutered/Spayed ";
   static const String yes = "Yes";
   static const String no = "No";
 
@@ -216,6 +218,40 @@ class StringManager {
   static const String editPost = "Edit Post";
   static const String turnOffComments = "Turn off comments";
   static const String deletePost = "Delete Post";
+  static const String notifications = "Notifications";
+  static const String friendRequests = "Friend Requests";
+  static const  List<String> citiesInEgypt = [
+    "Cairo",
+    "Alexandria",
+    "Giza",
+    "Shubra El Kheima",
+    "Port Said",
+    "Suez",
+    "Luxor",
+    "Asyut",
+    "Mansoura",
+    "Tanta",
+    "Zagazig",
+    "Ismailia",
+    "Faiyum",
+    "Minya",
+    "Damietta",
+    "Aswan",
+    "Damanhur",
+    "Beni Suef",
+    "Hurghada",
+    "Qena",
+    "Sohag",
+    "Sharm El Sheikh",
+    "Banha",
+    "Arish",
+    "Mahalla El Kubra",
+    "Beni Mazar",
+    "Kafr El Sheikh",
+    "Helwan",
+    "Marsa Matruh",
+    "Al-Minya"
+  ];
   static const String editCaption = "Edit Caption";
 
 

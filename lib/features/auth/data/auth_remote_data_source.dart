@@ -1,22 +1,20 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:leach/core/resource_manager/string_manager.dart';
-import 'package:leach/core/resource_manager/enums.dart';
+import 'package:leach/core/models/profile_data_model.dart';
 import 'package:leach/core/utils/api_helper.dart';
 import 'package:leach/core/utils/constant_api.dart';
 import 'package:leach/core/utils/methods.dart';
 import 'package:leach/features/auth/domain/use_case/login_with_email_and_password_use_case.dart';
 import 'package:leach/features/auth/domain/use_case/sign_up_use_case.dart';
-import 'package:leach/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http_parser/http_parser.dart';
 
 abstract class BaseRemotelyDataSource {
-  Future<Map<String, dynamic>> loginWithEmailAndPassword(AuthModel authModel);
-Future <String> deleteAccount();
-  Future<Map<String, dynamic>> signUpWithEmailAndPassword(
-      SignUpModel signUpModel);
+  Future<UserModel> loginWithEmailAndPassword(AuthModel authModel);
+
+  Future<String> deleteAccount();
+
+  Future<UserModel> signUpWithEmailAndPassword(SignUpModel signUpModel);
 
   Future<String> sendCode(SignUpModel signUpModel);
 
@@ -24,18 +22,15 @@ Future <String> deleteAccount();
 
   Future<Map<String, dynamic>> resetPassword(SignUpModel signUpModel);
 
-
 }
 
 class AuthRemotelyDateSource extends BaseRemotelyDataSource {
   @override
-  Future<Map<String, dynamic>> loginWithEmailAndPassword(
-      AuthModel authModel) async {
+  Future<UserModel> loginWithEmailAndPassword(AuthModel authModel) async {
     final Options options = await DioHelper().options();
     final body = {
-      'phoneNumber': authModel.phone,
+      'identifier': authModel.phoneOrEmail,
       "password": authModel.password,
-      "userRole": "User",
     };
     try {
       final response = await Dio().post(
@@ -43,27 +38,29 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
         data: body,
         options: options,
       );
-      Map<String, dynamic> jsonData = response.data;
+      UserModel jsonData = UserModel.fromMap(response.data['data']['user']);
       SharedPreferences preferences = await SharedPreferences.getInstance();
 
-      await Methods.instance.saveUserToken(authToken: jsonData['token']);
+      await Methods.instance
+          .saveUserToken(authToken: response.data['data']['token']);
       return jsonData;
     } on DioException catch (e) {
-
       throw DioHelper.handleDioError(
           dioError: e, endpointName: "loginWithEmailAndPassword");
     }
   }
 
   @override
-  Future<Map<String, dynamic>> signUpWithEmailAndPassword(
-      SignUpModel signUpModel) async {
+  Future<UserModel> signUpWithEmailAndPassword(SignUpModel signUpModel) async {
     final Options options = await DioHelper().options();
     final body = {
       'password': signUpModel.password,
-      'phonenumber': signUpModel.phone,
-      'otp': signUpModel.code,
-      'userRole': "User"
+      'phone_number': signUpModel.phone,
+      'area': signUpModel.area,
+      'city': signUpModel.city,
+      'username': signUpModel.userName,
+      'email': signUpModel.email,
+      'name': signUpModel.name
     };
 
     try {
@@ -72,9 +69,13 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
         data: body,
         options: options,
       );
-      Map<String, dynamic> jsonData = response.data;
-      await Methods.instance.saveUserToken(authToken: jsonData['token']);
-      if (jsonData['token'] == null) {
+      log('messagemessagemessage');
+
+      UserModel jsonData = UserModel.fromMap(response.data['data']['user']);
+
+      await Methods.instance
+          .saveUserToken(authToken: response.data['data']['token']);
+      if (response.data['data']['token'] == null) {
         DioException? e;
         throw DioHelper.handleDioError(
             dioError: e, endpointName: "signUpWithEmailAndPassword");
@@ -93,12 +94,11 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
     final body = {
       'newPassword': signUpModel.password,
       'email': signUpModel.phone,
-      'otp': signUpModel.code,
     };
 
     try {
       final response = await Dio().post(
-       ' ConstantApi.resetPassword',
+        ' ConstantApi.resetPassword',
         data: body,
         options: options,
       );
@@ -116,22 +116,13 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
   Future<String> sendCode(SignUpModel signUpModel) async {
     final Options options = await DioHelper().options();
     late final Map<String, dynamic> body;
-    log('${signUpModel.phoneOrEmailType} signUpModel.phoneOrEmailType');
-    if (signUpModel.phoneOrEmailType == PhoneOrEmail.phone) {
-      body = {
-        'phoneNumber': signUpModel.phone,
-      };
-    } else {
-      body = {
-        'email': signUpModel.phone,
-      };
-    }
+    body = {
+      'email': signUpModel.phone,
+    };
 
     try {
       final response = await Dio().post(
-        signUpModel.phoneOrEmailType == PhoneOrEmail.phone
-            ? ConstantApi.sendCode
-            : ConstantApi.sendCodeToEmail,
+        ConstantApi.sendCodeToEmail,
         data: body,
         options: options,
       );
@@ -149,7 +140,6 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
     final Options options = await DioHelper().options();
     final body = {
       'email': signUpModel.phone,
-      'otp': signUpModel.code,
     };
 
     try {
@@ -168,7 +158,7 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
   }
 
   @override
-  Future<String> deleteAccount() async{
+  Future<String> deleteAccount() async {
     final Options options = await DioHelper().options();
 
     try {
@@ -177,12 +167,16 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
         options: options,
       );
 
-     String jsonData = response.data;
+      String jsonData = response.data;
 
       return jsonData;
     } on DioException catch (e) {
-      throw DioHelper.handleDioError(dioError: e, endpointName: "deleteAccount");
+      throw DioHelper.handleDioError(
+          dioError: e, endpointName: "deleteAccount");
     }
   }
 
+
 }
+
+

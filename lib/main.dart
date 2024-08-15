@@ -10,6 +10,15 @@ import 'package:leach/core/utils/methods.dart';
 import 'package:leach/features/auth/presentation/controller/login_bloc/login_with_email_and_password_bloc.dart';
 import 'package:leach/features/auth/presentation/controller/sign_up_bloc/sign_up_with_email_and_password_bloc.dart';
 import 'package:leach/features/main_screen_bloc.dart';
+import 'package:leach/features/posts/presentation/manager/comment_manager/comment_bloc.dart';
+import 'package:leach/features/posts/presentation/manager/get_posts_manager/get_posts_bloc.dart';
+import 'package:leach/features/posts/presentation/manager/like_post_manager/like_post_bloc.dart';
+import 'package:leach/features/profile/presentation/controller/create_pet_bloc/create_pet_bloc.dart';
+import 'package:leach/features/profile/presentation/controller/dogBreadBloc/bloc.dart';
+import 'package:leach/features/profile/presentation/controller/friends_manager/friends_bloc.dart';
+import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_bloc.dart';
+import 'package:leach/features/profile/presentation/controller/pending_friend_request_manager/pending_friend_request_bloc.dart';
+import 'package:leach/features/profile/presentation/controller/get_traits/bloc.dart';
 
 String? token;
 
@@ -43,10 +52,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   // This widget is the root of your application.
   @override
@@ -59,8 +64,36 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => getIt<SignUpWithEmailAndPasswordBloc>(),
-        ), BlocProvider(
+        ),
+        BlocProvider(
           create: (context) => getIt<MainScreenBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<GetPostsBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<CommentBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<LikePostsBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<CreatePetBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<DogBreadCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<GetFriendRequestBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<GetFriendsBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<GetMyDataBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<GetTraitsBloc>(),
         ),
       ],
       child: MaterialApp(
@@ -70,13 +103,13 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RouteGenerator.getRoute,
         navigatorKey: getIt<NavigationService>().navigatorKey,
-        initialRoute: Routes.welcomePage,
-        // token == null || token == 'noToken' ? Routes.login : Routes.main,
+        initialRoute: token == null || token == 'noToken'
+            ? Routes.welcomePage
+            : Routes.main,
         theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
             fontFamily: 'Brodien',
-
             scaffoldBackgroundColor: const Color.fromRGBO(248, 250, 255, 1)),
       ),
     );

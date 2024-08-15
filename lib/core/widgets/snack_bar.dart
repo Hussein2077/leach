@@ -1,26 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:leach/core/utils/app_size.dart';
+import 'package:leach/core/widgets/cutom_text.dart';
 
 void errorSnackBar(BuildContext context, String message) {
+  // Check if the keyboard is visible
+  bool isKeyboardVisible = MediaQuery.of(context).viewInsets.bottom != 0;
+
+  // Adjust the bottom margin based on keyboard visibility
+  double bottomMargin = isKeyboardVisible
+      ? MediaQuery.of(context).viewInsets.bottom + AppSize.defaultSize! * 2 // Just above the keyboard
+      : AppSize.defaultSize! * 10; // Default margin when keyboard is not visible
+
   final snackBar = SnackBar(
-    content: Center(child: Text(message)),
-    duration:   const Duration(seconds: 3),
-    shape:     const StadiumBorder(),
-    margin: EdgeInsets.only(
-        bottom: AppSize.defaultSize!*4 ,
-        left: AppSize.screenWidth! * .1,
-        right: AppSize.screenWidth! * .1),
+    content: Center(
+      child: CustomText(
+        text: message,
+        color: Colors.white,
+        fontSize: AppSize.defaultSize! * 2,
+      ),
+    ),
+    duration: const Duration(seconds: 3),
+    shape: const StadiumBorder(),
+    margin: EdgeInsets.symmetric(
+      horizontal: AppSize.screenWidth! * .1,
+    ).copyWith(
+      bottom: bottomMargin,
+    ),
     backgroundColor: Colors.red.withOpacity(.9),
     behavior: SnackBarBehavior.floating,
-    // action: SnackBarAction(
-    //   label: 'UNDO',
-    //   disabledTextColor: Colors.white,
-    //   textColor: Colors.white,
-    //   onPressed: () {
-    //     // Few lines of code to undo the change.
-    //   },
-    // ),
   );
+
   ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }
 void successSnackBar(BuildContext context, String message) {

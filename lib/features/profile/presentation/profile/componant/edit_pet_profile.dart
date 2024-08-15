@@ -2,19 +2,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
-import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/check_box.dart';
 import 'package:leach/core/widgets/column_with_text_field.dart';
 import 'package:leach/core/widgets/custom_text_field.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
-import 'package:leach/core/widgets/large_botton.dart';
-import 'package:leach/core/widgets/leading_icon.dart';
 import 'package:leach/core/widgets/main_button.dart';
-import 'package:leach/features/auth/presentation/widgets/country_drop_down.dart';
 import 'package:leach/features/auth/presentation/widgets/leading_with_icon.dart';
-import 'package:leach/features/profile/presentation/widget/male_or_female.dart';
 import 'package:leach/features/profile/presentation/widget/size_row.dart';
 
 class EditPetProfile extends StatelessWidget {
@@ -118,7 +113,7 @@ class EditPetProfile extends StatelessWidget {
 
                 MainButton(text: StringManager.save. tr(),
                   onTap: (){
-                    Navigator.pushNamed(context,  Routes.dogBreed2);
+
                   },
                   textColor: Colors.white,
                 ),

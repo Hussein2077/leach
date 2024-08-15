@@ -1,12 +1,13 @@
   import 'package:dartz/dartz.dart';
 import 'package:leach/core/error/failure.dart';
+import 'package:leach/core/models/profile_data_model.dart';
 import 'package:leach/features/auth/domain/use_case/login_with_email_and_password_use_case.dart';
 import 'package:leach/features/auth/domain/use_case/sign_up_use_case.dart';
 
 abstract class BaseRepository {
-  Future<Either<Map<String, dynamic>, Failure>> loginWithEmailAndPassword(
+  Future<Either<UserModel, Failure>> loginWithEmailAndPassword(
       AuthModel authModel);
-  Future<Either<Map<String, dynamic>, Failure>> signUpWithEmailAndPassword(
+  Future<Either<UserModel, Failure>> signUpWithEmailAndPassword(
       SignUpModel signUpModel);
   Future<Either<Map<String, dynamic>, Failure>> resetPassword(
       SignUpModel signUpModel);
