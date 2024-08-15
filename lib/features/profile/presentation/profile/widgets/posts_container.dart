@@ -26,7 +26,7 @@ class PostsContainer extends StatelessWidget {
           children: [
             GridView.builder(
               itemCount: commonType. pictures.length,
-                gridDelegate:   SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate:   const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount:3 ),
                 padding: EdgeInsets.all(AppSize.defaultSize! * 2),
                 itemBuilder: (context, i) {

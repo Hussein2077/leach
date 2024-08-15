@@ -122,7 +122,7 @@ class Trait extends Equatable {
   List<Object?> get props => [name];
 
   factory Trait.fromJson(Map<String, dynamic> json) {
-    return Trait(name: json['name']??"");
+    return Trait(name: json['trait']??"");
   }
 }
 

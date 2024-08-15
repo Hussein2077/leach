@@ -36,16 +36,12 @@ class _PetProfileState extends State<PetProfile> {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocBuilder<GetMyDataBloc, GetMyDataState>(
       builder: (context, state) {
-
-
-        if (state is GetMyDataLoadingState ) {
+        if (state is GetMyDataLoadingState) {
           if (userModel != null) {
             return petProfile(userModel!);
-          }
-          else {
+          } else {
             return const LoadingWidget();
           }
         } else if (state is GetMyDataSuccessState) {
@@ -81,17 +77,23 @@ class _PetProfileState extends State<PetProfile> {
                         builder: (context) => Stack(
                           children: [
                             Positioned(
-                              top: AppSize.defaultSize! * 8,  // Adjust this value as needed to position the dialog from the top
-                              left: AppSize.defaultSize! * 7,  // Adjust for horizontal centering or alignment
-                              right: AppSize.defaultSize! * 7,  // Adjust for horizontal centering or alignment
+                              top: AppSize.defaultSize! * 8,
+                              // Adjust this value as needed to position the dialog from the top
+                              left: AppSize.defaultSize! * 7,
+                              // Adjust for horizontal centering or alignment
+                              right: AppSize.defaultSize! * 7,
+                              // Adjust for horizontal centering or alignment
                               child: Material(
                                 color: Colors.transparent,
                                 child: Container(
-                                  height: AppSize.defaultSize! * 18,  // Fixed height
-                                  width: AppSize.defaultSize! * 10,   // Fixed width
+                                  height: AppSize.defaultSize! * 18,
+                                  // Fixed height
+                                  width: AppSize.defaultSize! * 10,
+                                  // Fixed width
                                   decoration: BoxDecoration(
                                     color: Colors.white,
-                                    borderRadius: BorderRadius.circular(AppSize.defaultSize! * 2),
+                                    borderRadius: BorderRadius.circular(
+                                        AppSize.defaultSize! * 2),
                                   ),
                                   child: Column(
                                     children: [
@@ -100,35 +102,50 @@ class _PetProfileState extends State<PetProfile> {
                                           itemCount: user.pets!.length,
                                           itemBuilder: (context, index) {
                                             return Padding(
-                                              padding: EdgeInsets.all(AppSize.defaultSize!),
+                                              padding: EdgeInsets.all(
+                                                  AppSize.defaultSize!),
                                               child: InkWell(
                                                 onTap: () {
                                                   Navigator.pop(context);
                                                   setState(() {
-                                                    currentPet = user.pets![index];
+                                                    currentPet =
+                                                        user.pets![index];
                                                   });
                                                 },
                                                 child: Row(
                                                   children: [
                                                     CachedNetworkCustom(
-                                                      url: user.pets![index].profilePicture,
-                                                      width: AppSize.defaultSize! * 3,
-                                                      height: AppSize.defaultSize! * 3,
+                                                      url: user.pets![index]
+                                                          .profilePicture,
+                                                      width:
+                                                          AppSize.defaultSize! *
+                                                              3,
+                                                      height:
+                                                          AppSize.defaultSize! *
+                                                              3,
                                                     ),
                                                     SizedBox(
-                                                      width: AppSize.defaultSize,
+                                                      width:
+                                                          AppSize.defaultSize,
                                                     ),
                                                     CustomText(
-                                                      text: user.pets![index].name,
-                                                      fontWeight: FontWeight.w700,
+                                                      text: user
+                                                          .pets![index].name,
+                                                      fontWeight:
+                                                          FontWeight.w700,
                                                     ),
                                                     const Spacer(),
-                                                    if(currentPet?.uuid == user.pets![index].uuid)
-                                                    CircleAvatar(
-                                                      backgroundColor: AppColors.primaryColor,
-                                                      radius: AppSize.defaultSize! *  .5,
-                                                    )
-                                                   ],
+                                                    if (currentPet?.uuid ==
+                                                        user.pets![index].uuid)
+                                                      CircleAvatar(
+                                                        backgroundColor:
+                                                            AppColors
+                                                                .primaryColor,
+                                                        radius: AppSize
+                                                                .defaultSize! *
+                                                            .5,
+                                                      )
+                                                  ],
                                                 ),
                                               ),
                                             );
@@ -138,7 +155,8 @@ class _PetProfileState extends State<PetProfile> {
                                       IconButton(
                                         onPressed: () {
                                           Navigator.pop(context);
-                                          Navigator.pushNamed(context, Routes.addPetScreen);
+                                          Navigator.pushNamed(
+                                              context, Routes.addPetScreen);
                                         },
                                         icon: Row(
                                           children: [
@@ -165,9 +183,6 @@ class _PetProfileState extends State<PetProfile> {
                           ],
                         ),
                       );
-
-
-
                     },
                     icon: CachedNetworkCustom(
                       url: (currentPet!.profilePicture.isEmpty)
@@ -204,7 +219,14 @@ class _PetProfileState extends State<PetProfile> {
               SizedBox(
                 width: AppSize.screenWidth! * .7,
                 child: CustomText(
-                  text: currentPet!.bio,
+                  text: currentPet!.traits
+                      .map((e) => e.name)
+                      .toList()
+                      .toString()
+                      .split('[')
+                      .last
+                      .split(']')
+                      .first,
                   fontSize: AppSize.defaultSize! * 1.5,
                   color: Colors.white,
                   maxLines: 6,
@@ -221,13 +243,12 @@ class _PetProfileState extends State<PetProfile> {
         SizedBox(
           height: AppSize.defaultSize,
         ),
-          Expanded(
+        Expanded(
             child: PostsContainer(
           pets: true,
-              commonType: CommonType(
-                pictures: currentPet!.pictures.map((e) => e.picture).toList(),
-              ),
-
+          commonType: CommonType(
+            pictures: currentPet!.pictures.map((e) => e.picture).toList(),
+          ),
         ))
       ],
     );

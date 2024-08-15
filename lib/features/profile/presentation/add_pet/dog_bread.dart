@@ -24,6 +24,8 @@ import 'package:leach/features/profile/presentation/controller/create_pet_bloc/c
 import 'package:leach/features/profile/presentation/controller/create_pet_bloc/create_pet_states.dart';
 import 'package:leach/features/profile/presentation/controller/dogBreadBloc/bloc.dart';
 import 'package:leach/features/profile/presentation/controller/dogBreadBloc/state.dart';
+import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_bloc.dart';
+import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_event.dart';
 import 'package:leach/features/profile/presentation/widget/image_picker_widget.dart';
 import 'package:leach/features/profile/presentation/widget/male_or_female.dart';
 import 'package:leach/features/profile/presentation/widget/multi_image_picker.dart';
@@ -65,7 +67,8 @@ class _DogBreadState extends State<DogBread> {
         listener: (context, state) {
           if (state is CreatePetSuccessMessageState) {
             LoadingOverlay().hide();
-
+            BlocProvider.of<GetMyDataBloc>(context).add(
+                GetMyDataEvent());
             Navigator.pushNamed(context, Routes.dogBreed3,arguments: state.petProfileModel);
           } else if (state is CreatePetErrorMessageState) {
             LoadingOverlay().hide();
@@ -88,6 +91,8 @@ class _DogBreadState extends State<DogBread> {
               okButtonTextStyle: const TextStyle(color: AppColors.primaryColor),
               cancelButtonTextStyle:
                   const TextStyle(color: AppColors.primaryColor),
+              firstDate: DateTime(1900), // Set this to the earliest date you want to allow
+              lastDate: DateTime.now() , // Current date to restrict to past dates only
             );
 
             return SingleChildScrollView(
@@ -204,6 +209,7 @@ class _DogBreadState extends State<DogBread> {
                               var results = await showCalendarDatePicker2Dialog(
                                 context: context,
                                 config: config,
+
                                 dialogSize: Size(AppSize.screenWidth! * .8,
                                     AppSize.screenHeight! * .5),
                                 borderRadius: BorderRadius.circular(15),
