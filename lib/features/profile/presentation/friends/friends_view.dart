@@ -381,11 +381,8 @@ class _FriendsViewState extends State<FriendsView>
                 child: SizedBox(
                   height: AppSize.screenHeight! * .3,
                   child: TabBarView(controller: tabController, children: const [
-                    PostsContainer(
-                      addIcon: false,
-                      pictures: [],
-                    ),
-                    PostsContainer( addIcon: false,pictures: [],),
+                    PostsContainer( addIcon: false,commonType: CommonType(pictures: []),),
+                    PostsContainer( addIcon: false,commonType: CommonType(pictures: []),),
                   ]),
                 ),
               )

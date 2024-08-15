@@ -75,7 +75,9 @@ class _PersonalProfileState extends State<PersonalProfile> {
             SizedBox(
               height: AppSize.defaultSize!,
             ),
-            const Expanded(child: PostsContainer())
+            const Expanded(child: PostsContainer(
+               commonType: CommonType(pictures: []),
+            ))
           ],
         );
         }else if(state is GetMyDataLoadingState){

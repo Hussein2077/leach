@@ -93,7 +93,6 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => getIt<GetMyDataBloc>()..add(GetMyDataEvent()),
-          create: (context) => getIt<GetMyDataBloc>()..add(GetMyDataEvent()),
         ),
         BlocProvider(
           create: (context) => getIt<GetTraitsBloc>(),

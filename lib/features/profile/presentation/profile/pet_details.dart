@@ -35,7 +35,9 @@ class PetDetails extends StatelessWidget {
 
 
             ),
-            const PostsContainer(),
+            const PostsContainer(
+              commonType: CommonType(pictures: []),
+            ),
           ],
         )
     );

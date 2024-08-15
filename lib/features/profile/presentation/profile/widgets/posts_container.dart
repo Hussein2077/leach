@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/routes.dart';
@@ -7,8 +8,8 @@ import 'package:leach/core/widgets/cached_network_image.dart';
 import 'package:leach/core/widgets/icon_with_matrial.dart';
 
 class PostsContainer extends StatelessWidget {
-  const PostsContainer({super.key, this.addIcon = true, this.pets = false, this.pictures});
- final List <String>? pictures;
+  const PostsContainer({super.key, this.addIcon = true, this.pets = false, required this.commonType});
+ final CommonType commonType;
   final bool addIcon;
   final bool pets;
 
@@ -24,7 +25,7 @@ class PostsContainer extends StatelessWidget {
         child: Stack(
           children: [
             GridView.builder(
-              itemCount:  pictures!.length,
+              itemCount: commonType. pictures.length,
                 gridDelegate:   SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount:3 ),
                 padding: EdgeInsets.all(AppSize.defaultSize! * 2),
@@ -36,7 +37,7 @@ class PostsContainer extends StatelessWidget {
                         Navigator.pushNamed(context, Routes.postsViewProfile);
                       },
                       child: CachedNetworkCustom(
-                        url: pictures![i],
+                        url:commonType. pictures[i],
                         width: AppSize.defaultSize! * 11,
                         height: AppSize.defaultSize! * 11,
                         shape: BoxShape.rectangle,
@@ -73,4 +74,12 @@ class PostsContainer extends StatelessWidget {
           ],
         ));
   }
+}
+class CommonType extends Equatable{
+ final String? id ;
+  final List <String> pictures;
+  const CommonType({  this.id, required this.pictures});
+  @override
+  List<Object?> get props => [id, pictures];
+
 }

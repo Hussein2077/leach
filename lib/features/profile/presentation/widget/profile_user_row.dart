@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cached_network_image.dart';
@@ -25,19 +26,19 @@ class ProfileUserRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // if (image == null||image!.isEmpty)
-        //   CircleAvatar(
-        //     radius: AppSize.defaultSize! * 4,
-        //     backgroundColor: Colors.transparent,
-        //     child: Image.asset(
-        //       image ?? AssetPath.whiteProfileIcon,
-        //       width: AppSize.defaultSize! * 8.2,
-        //       height: AppSize.defaultSize! * 8.2,
-        //     ),
-        //   ),
+        if (image == null||image!.isEmpty)
+          CircleAvatar(
+            radius: AppSize.defaultSize! * 4,
+            backgroundColor: Colors.transparent,
+            child: Image.asset(
+                AssetPath.whiteProfileIcon,
+              width: AppSize.defaultSize! * 8.2,
+              height: AppSize.defaultSize! * 8.2,
+            ),
+          ),
         if (image != null&&image!.isNotEmpty)
           CachedNetworkCustom(
-            url: image ?? "",
+            url: image !,
             width: AppSize.defaultSize! * 8.2,
             height: AppSize.defaultSize! * 8.2,
           ),

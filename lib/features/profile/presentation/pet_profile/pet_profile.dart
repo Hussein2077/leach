@@ -31,27 +31,26 @@ class PetProfile extends StatefulWidget {
 }
 
 class _PetProfileState extends State<PetProfile> {
-  bool first = true;
   UserModel? userModel;
   Pet? currentPet;
 
   @override
   Widget build(BuildContext context) {
-    log('${first}dgddg');
 
     return BlocBuilder<GetMyDataBloc, GetMyDataState>(
       builder: (context, state) {
-        if (userModel != null) {
-          return petProfile(userModel!);
-        }
 
-        if (state is GetMyDataLoadingState && first) {
-          return const LoadingWidget();
+
+        if (state is GetMyDataLoadingState ) {
+          if (userModel != null) {
+            return petProfile(userModel!);
+          }
+          else {
+            return const LoadingWidget();
+          }
         } else if (state is GetMyDataSuccessState) {
           currentPet ??= state.userModel.pets![0];
           userModel = state.userModel;
-          first = false;
-          log('${first}dgddg');
           return petProfile(userModel!);
         } else if (state is GetMyDataErrorState) {
           return ErrorWidget(state.errorMessage);
@@ -225,7 +224,10 @@ class _PetProfileState extends State<PetProfile> {
           Expanded(
             child: PostsContainer(
           pets: true,
-              pictures: currentPet?.pictures.map((e) => e.picture).toList(),
+              commonType: CommonType(
+                pictures: currentPet!.pictures.map((e) => e.picture).toList(),
+              ),
+
         ))
       ],
     );
