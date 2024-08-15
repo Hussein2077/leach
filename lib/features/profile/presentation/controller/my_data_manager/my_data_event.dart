@@ -8,3 +8,4 @@ abstract class GetMyDataEventBase extends Equatable {
 }
 
 class GetMyDataEvent extends GetMyDataEventBase {}
+class ChangePrivacyEvent extends GetMyDataEventBase {}

@@ -21,7 +21,7 @@ abstract class ProfileBaseRemotelyDataSource {
   Future<String> rejectFriendRequests({required String id});
   Future<FriendsModel> getFriends({required String page});
   Future<UserModel> getMyData();
-
+Future<String> changePrivacy();
 }
 
 class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
@@ -325,17 +325,31 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
 
   @override
   Future<UserModel> getMyData() async {
-    Map<String, String> headers = await DioHelper().header();
+    Options options = await DioHelper().options();
 
     try {
       final response = await Dio().get(
         ConstantApi.getMyData,
-        options: Options(
-          headers: headers,
-        ),
+        options:options
       );
 
       return UserModel.fromMap(response.data['data']);
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(dioError: e, endpointName: 'getMyData');
+    }
+  }  @override
+  Future<String> changePrivacy() async {
+    Options options = await DioHelper().options();
+
+    try {
+      final response = await Dio().post(
+        ConstantApi.togglePrivacy,
+        options: options,
+
+
+      );
+
+      return 'Success';
     } on DioException catch (e) {
       throw DioHelper.handleDioError(dioError: e, endpointName: 'getMyData');
     }
