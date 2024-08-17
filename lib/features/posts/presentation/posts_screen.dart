@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leach/core/utils/app_size.dart';
+import 'package:leach/core/widgets/loading_widget.dart';
 import 'package:leach/features/posts/data/models/posts_model.dart';
 import 'package:leach/features/posts/presentation/manager/get_posts_manager/get_posts_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/get_posts_manager/get_posts_event.dart';
@@ -84,7 +85,7 @@ class _PostsScreenState extends State<PostsScreen> {
               );
             } else {
               return const Center(
-                child: CircularProgressIndicator(),
+                child: LoadingWidget(),
               );
             }
           },

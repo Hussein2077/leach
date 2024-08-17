@@ -66,6 +66,7 @@ class _PostCardState extends State<PostCard> {
           url: widget.postData.picture??"",
           width: AppSize.screenWidth!,
           height: AppSize.defaultSize! * 20,
+          shape: BoxShape.rectangle,
         ),
 
         SizedBox(

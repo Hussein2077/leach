@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/loading_widget.dart';
+import 'package:leach/features/posts/presentation/manager/get_posts_manager/get_posts_bloc.dart';
+import 'package:leach/features/posts/presentation/manager/get_posts_manager/get_posts_state.dart';
 import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_state.dart';
 import 'package:leach/features/profile/presentation/profile/widgets/posts_container.dart';
@@ -24,65 +26,81 @@ class _PersonalProfileState extends State<PersonalProfile> {
   Widget build(BuildContext context) {
     return BlocBuilder<GetMyDataBloc, GetMyDataState>(
       builder: (context, state) {
-        if(state is GetMyDataSuccessState) {
+        if (state is GetMyDataSuccessState) {
           return Column(
-          children: [
-            SizedBox(
-              height: AppSize.defaultSize! * 8,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 3.4),
-              child: Column(
-                children: [
-                  const ProfileAppBar(),
-                  SizedBox(
-                    height: AppSize.defaultSize! * 3,
-                  ),
-                  ProfileUserRow(
-                    name: state.userModel.name??"",
-                    userName: state.userModel.username??"",
-                    image: state.userModel.image??"",
-                  ),
-                  SizedBox(
-                    height: AppSize.defaultSize!,
-                  ),
-                  Divider(
-                    color: Colors.white,
-                    thickness: AppSize.defaultSize! * 0.2,
-                    indent: AppSize.defaultSize! * 2,
-                    endIndent: AppSize.defaultSize! * 2,
-                  ),
-                  SizedBox(
-                    height: AppSize.defaultSize! * 2,
-                  ),
-                  SizedBox(
-                    width: AppSize.screenWidth! * .7,
-                    child: CustomText(
-                      text: state.userModel.bio ?? "",
-                      fontSize: AppSize.defaultSize! * 1.5,
-                      color: Colors.white,
-                      maxLines: 6,
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                  MedalsAbdFriends(
-                    number_of_friends: state.userModel.friends?.length.toString()??"",
-                  ),
-                ],
+            children: [
+              SizedBox(
+                height: AppSize.defaultSize! * 8,
               ),
-            ),
-            const PetOrProfile(),
-            SizedBox(
-              height: AppSize.defaultSize!,
-            ),
-            const Expanded(child: PostsContainer(
-               commonType: CommonType(pictures: []),
-            ))
-          ],
-        );
-        }else if(state is GetMyDataLoadingState){
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: AppSize.defaultSize! * 3.4),
+                child: Column(
+                  children: [
+                    const ProfileAppBar(),
+                    SizedBox(
+                      height: AppSize.defaultSize! * 3,
+                    ),
+                    ProfileUserRow(
+                      name: state.userModel.name ?? "",
+                      userName: state.userModel.username ?? "",
+                      image: state.userModel.image ?? "",
+                    ),
+                    SizedBox(
+                      height: AppSize.defaultSize!,
+                    ),
+                    Divider(
+                      color: Colors.white,
+                      thickness: AppSize.defaultSize! * 0.2,
+                      indent: AppSize.defaultSize! * 2,
+                      endIndent: AppSize.defaultSize! * 2,
+                    ),
+                    SizedBox(
+                      height: AppSize.defaultSize! * 2,
+                    ),
+                    SizedBox(
+                      width: AppSize.screenWidth! * .7,
+                      child: CustomText(
+                        text: state.userModel.bio ?? "",
+                        fontSize: AppSize.defaultSize! * 1.5,
+                        color: Colors.white,
+                        maxLines: 6,
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                    MedalsAbdFriends(
+                      number_of_friends: state.userModel.friends?.length
+                          .toString() ?? "",
+                    ),
+                  ],
+                ),
+              ),
+              const PetOrProfile(),
+              SizedBox(
+                height: AppSize.defaultSize!,
+              ),
+              Expanded(
+                child: BlocBuilder<GetPostsBloc, GetPostState>(
+                  builder: (context, state) {
+                    if(state is GetPostsSuccessState) {
+                      return PostsContainer(
+                        pets: false,
+                        commonType: CommonType(
+                          pictures: state.postsModel.posts!.data!.map((e) => e.picture!).toList(),
+                          id: state.postsModel.posts!.data!.map((e) => e.id!.toString()).toList(),
+                        ),
+                      );
+                    }else{
+                      return const SizedBox();
+                    }
+                  },
+                ),
+              ),
+            ],
+          );
+        } else if (state is GetMyDataLoadingState) {
           return const LoadingWidget();
-        }else{
+        } else {
           return const SizedBox();
         }
       },

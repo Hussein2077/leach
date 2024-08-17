@@ -48,8 +48,6 @@ class PostsContainer extends StatelessWidget {
             if (addIcon)
               GestureDetector(
                 onTap: () {
-                  log('messagemessage');
-
                   if(pets){
                     Navigator.pushNamed(context, Routes.addPhotoForPet);
                   }
@@ -76,7 +74,7 @@ class PostsContainer extends StatelessWidget {
   }
 }
 class CommonType extends Equatable{
- final String? id ;
+ final List <String>? id ;
   final List <String> pictures;
   const CommonType({  this.id, required this.pictures});
   @override
