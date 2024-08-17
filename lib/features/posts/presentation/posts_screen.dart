@@ -22,6 +22,12 @@ class _PostsScreenState extends State<PostsScreen> {
 
   List<PostData> data = [];
 
+  @override
+  void initState() {
+    scrollcontroller.addListener(_scrollListener);
+    super.initState();
+  }
+
   void _scrollListener() {
     if (scrollcontroller.position.pixels ==
         scrollcontroller.position.maxScrollExtent) {
