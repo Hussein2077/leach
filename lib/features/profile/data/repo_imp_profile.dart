@@ -96,4 +96,14 @@ class ProfileRepositoryImp extends ProfileBaseRepository {
     }
   }
 
+  @override
+  Future<Either<String, Failure>> changePrivacy() async{
+    try {
+      final result = await profileBaseRemotelyDataSource.changePrivacy();
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
+
 }

@@ -23,3 +23,17 @@ class GetMyDataSuccessState extends GetMyDataState {
 
   const GetMyDataSuccessState({required this.userModel});
 }
+//////////////////////////////////////////////////
+class ChangePrivacyLoadingState extends GetMyDataState {}
+
+class ChangePrivacyErrorState extends GetMyDataState {
+  final String errorMessage;
+
+  const ChangePrivacyErrorState({required this.errorMessage});
+}
+
+class ChangePrivacySuccessState extends GetMyDataState {
+  final String message ;
+
+  const ChangePrivacySuccessState({required this.message});
+}

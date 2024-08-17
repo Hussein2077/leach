@@ -19,4 +19,5 @@ abstract class ProfileBaseRepository {
       UpdatePetRequest petProfileModel);
 
   Future<Either<List<PetTrait>, Failure>> getTraits();
+  Future<Either<String, Failure>>  changePrivacy();
 }

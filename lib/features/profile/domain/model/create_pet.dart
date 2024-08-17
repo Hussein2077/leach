@@ -92,9 +92,6 @@ class PetProfileModel  extends Equatable{
       bio: map['bio'],
       breedSize:  map['size'],
       breedingAvailable: map['breeding_available']==1,
-      traitsFromApi: List<Trait>.from(map['traits']?.map((x) => Trait.fromMap(x))),
-      subtraitsFromApi: List<SubTrait>.from(
-          map['subtraits']?.map((x) => SubTrait.fromMap(x))),
       picturesFromApi:
       List<Picture>.from(map['pictures']?.map((x) => Picture.fromMap(x))),
 

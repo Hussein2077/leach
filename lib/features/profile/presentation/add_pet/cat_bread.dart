@@ -24,6 +24,8 @@ import 'package:leach/features/profile/presentation/controller/create_pet_bloc/c
 import 'package:leach/features/profile/presentation/controller/create_pet_bloc/create_pet_states.dart';
 import 'package:leach/features/profile/presentation/controller/dogBreadBloc/bloc.dart';
 import 'package:leach/features/profile/presentation/controller/dogBreadBloc/state.dart';
+import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_bloc.dart';
+import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_event.dart';
 import 'package:leach/features/profile/presentation/widget/image_picker_widget.dart';
 import 'package:leach/features/profile/presentation/widget/male_or_female.dart';
 import 'package:leach/features/profile/presentation/widget/multi_image_picker.dart';
@@ -65,7 +67,8 @@ class _CatBreadState extends State<CatBread> {
         listener: (context, state) {
           if (state is CreatePetSuccessMessageState) {
             LoadingOverlay().hide();
-
+            BlocProvider.of<GetMyDataBloc>(context).add(
+                GetMyDataEvent());
             Navigator.pushNamed(context, Routes.catBreed3, arguments: state.petProfileModel);
           } else if (state is CreatePetErrorMessageState) {
             LoadingOverlay().hide();

@@ -25,6 +25,7 @@ import 'package:leach/features/profile/data/repo_imp_profile.dart';
 import 'package:leach/features/profile/domain/base_repo/profie_base_repo.dart';
 import 'package:leach/features/profile/domain/use_case/CREATE_PET_USE_CASE.dart';
 import 'package:leach/features/profile/domain/use_case/accept_friend_request_uc.dart';
+import 'package:leach/features/profile/domain/use_case/change_privacy_use_case.dart';
 import 'package:leach/features/profile/domain/use_case/get_friends_uc.dart';
 import 'package:leach/features/profile/domain/use_case/get_my_data_uc.dart';
 import 'package:leach/features/profile/domain/use_case/get_pending_friend_requests_uc.dart';
@@ -57,7 +58,7 @@ class ServerLocator {
     getIt.registerLazySingleton(() => BaseBreadCubit());
     getIt.registerLazySingleton(() => GetFriendRequestBloc(getFriendRequestUseCase: getIt(), acceptFriendRequestsUseCase: getIt(), rejectFriendRequestsUseCase: getIt()));
     getIt.registerLazySingleton(() => GetFriendsBloc(getFriendsUseCase: getIt()));
-    getIt.registerLazySingleton(() => GetMyDataBloc(getMyDataUseCase: getIt()));
+    getIt.registerLazySingleton(() => GetMyDataBloc(getMyDataUseCase: getIt(), changePrivacyUseCase: getIt()));
     getIt.registerLazySingleton(() => GetTraitsBloc(getTraitUseCase: getIt()));
 
 //use_case
@@ -78,6 +79,7 @@ class ServerLocator {
     getIt.registerFactory(() => GetMyDataUseCase(profileBaseRepository : getIt()));
     getIt.registerFactory(() => GetTraitsUseCase(profileBaseRepository : getIt()));
     getIt.registerFactory(() => UpdatePetUseCase(profileBaseRepository : getIt()));
+    getIt.registerFactory(() => ChangePrivacyUseCase(profileBaseRepository : getIt()));
 
     //remote data
     getIt.registerLazySingleton<BaseRemotelyDataSource>(
