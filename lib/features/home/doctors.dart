@@ -37,6 +37,7 @@ class Doctors extends StatelessWidget {
                 textAlign: TextAlign.start,
               ),
               CustomText(
+                fontFamily: 'Gully',
                 text: StringManager.selectPreferredVet.tr(),
                 fontSize: AppSize.defaultSize! * 1.5,
                 color: AppColors.greyColor,

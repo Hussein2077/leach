@@ -22,13 +22,14 @@ class TrainYourDog extends StatelessWidget {
         padding: Methods.instance.paddingCustom,
         child: SingleChildScrollView(
           child: Column(
+
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const LeadingWithIcon(
                 image: AssetPath.handIcon,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Image.asset(
 
@@ -39,7 +40,7 @@ class TrainYourDog extends StatelessWidget {
                   SizedBox(width: AppSize.defaultSize!*2,),
                   CustomText(
                     text: StringManager.trainYourDog.tr(),
-                    fontSize: AppSize.defaultSize! * 6,
+                    fontSize: AppSize.defaultSize! * 4,
                     fontWeight: FontWeight.w700,
                   ),
                 ],

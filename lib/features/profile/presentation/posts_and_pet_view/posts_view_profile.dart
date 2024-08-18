@@ -8,6 +8,7 @@ import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/utils/methods.dart';
 import 'package:leach/core/widgets/background.dart';
+import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/cached_network_image.dart';
 import 'package:leach/core/widgets/icon_with_matrial.dart';
 import 'package:leach/core/widgets/leading_icon.dart';
@@ -48,19 +49,24 @@ class _PostsViewProfileState extends State<PostsViewProfile> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          insetPadding: EdgeInsets.fromLTRB(0, 0, 0, AppSize.defaultSize!*36),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSize.defaultSize! * 4),
           ),
           contentPadding: EdgeInsets.all(AppSize.defaultSize! * 3),
           backgroundColor: Color.fromRGBO(246, 255, 255, 1),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                StringManager.turnOffCommenting.tr(),
-                style: TextStyle(
-                  fontSize: AppSize.defaultSize! * 2.5,
-                  color: AppColors.primaryColor,
+          content: SizedBox(
+            width: double.maxFinite,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SideBarRow(
+
+                  image: AssetPath.messageX,
+                  text: StringManager.turnOffCommenting.tr(),
+
+                  onTap: () {
+                  },
                 ),
               ),
               SizedBox(height: AppSize.defaultSize! * 2),
@@ -112,11 +118,12 @@ class _PostsViewProfileState extends State<PostsViewProfile> {
     );
   }
 
+
   @override
   void initState() {
     items = [
       SideBarRow(
-        textSize: AppSize.defaultSize! * 2.8,
+        textSize: AppSize.defaultSize! * 2,
         image: AssetPath.edit,
         text: StringManager.editPost.tr(),
         onTap: () {
@@ -124,15 +131,16 @@ class _PostsViewProfileState extends State<PostsViewProfile> {
         },
       ),
       SideBarRow(
-        textSize: AppSize.defaultSize! * 2.8,
+        textSize: AppSize.defaultSize! * 2,
         image: AssetPath.messageX,
         text: StringManager.turnOffCommenting.tr(),
         onTap: () {
+          Navigator.of(context).pop();
           _showTurnOffCommentingDialog(context);
         },
       ),
       SideBarRow(
-        textSize: AppSize.defaultSize! * 2.8,
+        textSize: AppSize.defaultSize! * 2,
         image: AssetPath.x,
         text: StringManager.deletePost.tr(),
         onTap: () {
@@ -140,6 +148,7 @@ class _PostsViewProfileState extends State<PostsViewProfile> {
         },
       ),
     ];
+
     super.initState();
   }
 

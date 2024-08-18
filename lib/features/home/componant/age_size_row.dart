@@ -29,6 +29,8 @@ class AgeSizeRow extends StatelessWidget {
             ),
             CustomText(
               text: '2 yrs',
+              fontFamily: 'Brodien-Medium',
+
               fontSize: AppSize.defaultSize! * 1.5,
             ),
           ],
@@ -49,6 +51,8 @@ class AgeSizeRow extends StatelessWidget {
             ),
             CustomText(
               text: '15 kg',
+              fontFamily: 'Brodien-Medium',
+
               fontSize: AppSize.defaultSize! * 1.5,
             ),
           ],
@@ -69,6 +73,8 @@ class AgeSizeRow extends StatelessWidget {
             ),
             CustomText(
               text: 'Male',
+              fontFamily: 'Brodien-Medium',
+
               fontSize: AppSize.defaultSize! * 1.5,
             ),
           ],
@@ -86,6 +92,8 @@ class AgeSizeRow extends StatelessWidget {
             ),
             CustomText(
               text: 'Medium',
+              fontFamily: 'Brodien-Medium',
+
               fontSize: AppSize.defaultSize! * 1.5,
             ),
           ],

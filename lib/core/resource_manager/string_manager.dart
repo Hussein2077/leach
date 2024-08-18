@@ -253,7 +253,7 @@ class StringManager {
     "Al-Minya"
   ];
   static const String editCaption = "Edit Caption";
-
+  static const String turnOff = "Turn Off";
 
 
 }

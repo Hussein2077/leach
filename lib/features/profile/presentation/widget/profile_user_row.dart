@@ -58,7 +58,7 @@ class ProfileUserRow extends StatelessWidget {
             if (kind == null)
               CustomText(
                 text: userName!,
-                fontSize: AppSize.defaultSize! * 1.7,
+                fontSize: AppSize.defaultSize! * 2,
                 color: Colors.white,
               ),
             if (kind != null)
@@ -67,7 +67,7 @@ class ProfileUserRow extends StatelessWidget {
                 children: [
                   CustomText(
                     text: userName!,
-                    fontSize: AppSize.defaultSize! * 1.7,
+                    fontSize: AppSize.defaultSize! * 2,
                     color: Colors.white,
                   ),
                   CustomText(
@@ -78,7 +78,7 @@ class ProfileUserRow extends StatelessWidget {
                     width: AppSize.screenWidth! * .35,
                     child: CustomText(
                       text: kind ?? 'German Shepherd',
-                      fontSize: AppSize.defaultSize! * 1.7,
+                      fontSize: AppSize.defaultSize! * 2,
                       color: Colors.white,
                       textAlign: TextAlign.start,
                       maxLines: 2,

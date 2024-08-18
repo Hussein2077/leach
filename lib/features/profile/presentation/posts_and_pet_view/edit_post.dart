@@ -86,7 +86,7 @@ class _EditPostState extends State<EditPost> {
                         ),
                         SizedBox(height: AppSize.defaultSize! * 3),
                         SideBarRow(
-                          textSize: AppSize.defaultSize! * 2.8,
+
                           image: AssetPath.edit,
                           text: StringManager.editPost.tr(),
                           onTap: () {

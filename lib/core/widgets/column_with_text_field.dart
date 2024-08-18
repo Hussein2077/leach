@@ -62,6 +62,7 @@ class _ColumnWithTextFieldState extends State<ColumnWithTextField> {
 Spacer(),
 if(widget.rightText!=null)
             CustomText(
+              fontFamily: 'Gully-CD',
               text: widget.rightText!,
               fontSize: AppSize.defaultSize! * 1,
               color: AppColors.greyColor,

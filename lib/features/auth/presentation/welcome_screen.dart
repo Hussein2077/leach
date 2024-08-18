@@ -49,6 +49,7 @@ image: AssetPath.maya1MP4,
                     fontWeight: FontWeight.w700,
                     fontSize: AppSize.defaultSize! * 2.5,
                     maxLines: 2,
+                    fontFamily: 'Gully',
                     textAlign: TextAlign.start,
                   ),
                   SizedBox(

@@ -10,6 +10,7 @@ class SideBarRow extends StatelessWidget {
 
   final String? image;
   final String? text;
+  final String? font;
   final Color? color;
   final double? textSize;
   final bool? isMenu;
@@ -21,7 +22,7 @@ final void Function()? onTap;
      this.text,
     this.color,
     this.onTap,
-    this.isMenu
+    this.isMenu, this.font
 });
 
   @override
@@ -49,8 +50,9 @@ final void Function()? onTap;
             child: CustomText(
 
               text: text != null? text!: "",
-              fontSize: textSize != null?textSize:  AppSize.defaultSize! * 2,
+              fontSize: textSize ?? AppSize.defaultSize! * 2,
               color: color,
+              fontWeight: FontWeight.w400,
 
               maxLines: 1,
               textAlign: TextAlign.start,
@@ -59,7 +61,7 @@ final void Function()? onTap;
           if(image!=null)
           CustomText(
             text: text != null? text!: "",
-            fontSize: textSize != null?textSize:  AppSize.defaultSize! * 2,
+            fontSize: textSize ?? AppSize.defaultSize! * 2,
             color: color,
             maxLines: 1,
             textAlign: TextAlign.start,

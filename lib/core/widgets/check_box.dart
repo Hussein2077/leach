@@ -73,6 +73,7 @@ class _CircularCheckboxState extends State<CircularCheckbox> {
         SizedBox(
           width: AppSize.defaultSize! * 14.5,
           child: CustomText(
+            fontFamily: 'Gully-CD',
             text: widget.text,
             textAlign: TextAlign.start,
             fontSize: AppSize.defaultSize! * 1.5,
