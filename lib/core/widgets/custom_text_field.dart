@@ -58,6 +58,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         onTap: widget.onTap,
         style:  widget.textStyle??TextStyle(
           fontSize: AppSize.defaultSize! * 1.5,
+
         ),
         onChanged: widget.onChanged ,
 
@@ -79,7 +80,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           filled: widget.fillColor != null ? true : false,
           hintText: widget.hintText,
           hintStyle: widget.hintStyle??TextStyle(
-            fontSize: AppSize.defaultSize! * 1.3,
+            fontSize: AppSize.defaultSize! * 1.5,
 fontFamily: 'Gully',
             color: AppColors.greyColor,
           ),

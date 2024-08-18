@@ -49,6 +49,7 @@ class EditProfile extends StatelessWidget {
               ),
               SizedBox(height: AppSize.defaultSize! * 2,),
               CustomText(
+                fontFamily: 'Gully-CD',
                 text:
                 StringManager.enterInformation.tr(),
                 fontSize: AppSize.defaultSize!   * 1.5,

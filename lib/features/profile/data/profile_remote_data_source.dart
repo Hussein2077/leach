@@ -22,6 +22,7 @@ abstract class ProfileBaseRemotelyDataSource {
   Future<FriendsModel> getFriends({required String page});
   Future<UserModel> getMyData();
 Future<String> changePrivacy();
+
 }
 
 class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {

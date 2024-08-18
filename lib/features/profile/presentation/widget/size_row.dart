@@ -67,10 +67,11 @@ class _SizeRowState extends State<SizeRow> {
                     ),
                   ),
                   CustomText(
+                    fontFamily: 'Gully-CD',
                     text: !widget.isDog
                         ? StringManager.sizeList[index].toString()
                         : StringManager.sizeListDog[index].toString(),
-                    fontSize: AppSize.defaultSize! * 1.4,
+                    fontSize: AppSize.defaultSize! * 1.5,
                     color: isSelected ? AppColors.primaryColor : AppColors.greyColor,
                   ),
                 ],

@@ -1,12 +1,14 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/utils/methods.dart';
 import 'package:leach/core/widgets/background.dart';
+import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/icon_with_matrial.dart';
 import 'package:leach/core/widgets/leading_icon.dart';
 import 'package:leach/features/profile/presentation/widget/side_bar_row.dart';
@@ -23,7 +25,7 @@ class PostsViewProfile extends StatefulWidget {
 class _PostsViewProfileState extends State<PostsViewProfile> {
   late List<SideBarRow> items;
   SideBarRow? selectedValue;
-
+  bool isSwitched = false;
   List<DropdownMenuItem<SideBarRow>> _addDividersAfterItems(List<SideBarRow> items) {
     final List<DropdownMenuItem<SideBarRow>> menuItems = [];
     for (final SideBarRow item in items) {
@@ -46,62 +48,61 @@ class _PostsViewProfileState extends State<PostsViewProfile> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          insetPadding: EdgeInsets.fromLTRB(0, 0, 0, AppSize.defaultSize!*36),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSize.defaultSize! * 4),
           ),
           contentPadding: EdgeInsets.all(AppSize.defaultSize! * 3),
           backgroundColor: Color.fromRGBO(246, 255, 255, 1),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                StringManager.turnOffCommenting.tr(),
-                style: TextStyle(
-                  fontSize: AppSize.defaultSize! * 2.5,
-                  color: AppColors.primaryColor,
+          content: SizedBox(
+            width: double.maxFinite,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SideBarRow(
+
+                  image: AssetPath.messageX,
+                  text: StringManager.turnOffCommenting.tr(),
+
+                  onTap: () {
+                  },
                 ),
-              ),
-              SizedBox(height: AppSize.defaultSize! * 2),
-              Text(
-                "Are you sure you want to turn off commenting on this post?",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: AppSize.defaultSize! * 2,
-                  color: Colors.black,
-                ),
-              ),
-              SizedBox(height: AppSize.defaultSize! * 3),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pop(); // Dismiss dialog
-                    },
-                    child: Text("Cancel"),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.grey[400],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(AppSize.defaultSize! * 2),
+
+                Divider(),
+
+
+                Row(
+
+                  children: [
+                    Transform.scale(
+                      scale: AppSize.defaultSize! * 0.08,
+                      child: Switch(
+                        // thumb color (round icon)
+
+                        activeColor: Colors.blue,
+                        activeTrackColor: Colors.white,
+                        inactiveThumbColor: Colors.blue,
+                        inactiveTrackColor: Colors.white,
+
+                        // boolean variable value
+                        value: isSwitched,
+                        // changes the state of the switch
+                        onChanged: (value) {
+                          // BlocProvider.of<GetMyDataBloc>(context).add(
+                          //     ChangePrivacyEvent());
+                          // setState(() {
+                          //   isSwitched = value;
+                          // });
+                        },
                       ),
                     ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pop(); // Dismiss dialog
-                      // Add your logic to turn off commenting here
-                    },
-                    child: Text("Turn Off"),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primaryColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(AppSize.defaultSize! * 2),
-                      ),
+                    CustomText(text: StringManager.turnOff.tr(),fontSize: AppSize.defaultSize! * 2,
+
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -119,7 +120,7 @@ class _PostsViewProfileState extends State<PostsViewProfile> {
       //   },
       // ),
       SideBarRow(
-        textSize: AppSize.defaultSize! * 2.8,
+        textSize: AppSize.defaultSize! * 2,
         image: AssetPath.edit,
         text: StringManager.editPost.tr(),
         onTap: () {
@@ -127,15 +128,16 @@ class _PostsViewProfileState extends State<PostsViewProfile> {
         },
       ),
       SideBarRow(
-        textSize: AppSize.defaultSize! * 2.8,
+        textSize: AppSize.defaultSize! * 2,
         image: AssetPath.messageX,
         text: StringManager.turnOffCommenting.tr(),
         onTap: () {
           Navigator.of(context).pop();
+          _showTurnOffCommentingDialog(context);
         },
       ),
       SideBarRow(
-        textSize: AppSize.defaultSize! * 2.8,
+        textSize: AppSize.defaultSize! * 2,
         image: AssetPath.x,
         text: StringManager.deletePost.tr(),
         onTap: () {
@@ -143,6 +145,7 @@ class _PostsViewProfileState extends State<PostsViewProfile> {
         },
       ),
     ];
+
     super.initState();
   }
 
