@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +16,9 @@ import 'package:leach/core/widgets/loading_widget.dart';
 import 'package:leach/core/widgets/main_button.dart';
 import 'package:leach/features/posts/presentation/manager/posts_manager/posts_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/posts_manager/posts_event.dart';
-import 'package:leach/features/posts/presentation/manager/posts_manager/posts_state.dart';
+import 'package:leach/features/posts/presentation/manager/user_posts_manager/user_posts_bloc.dart';
+import 'package:leach/features/posts/presentation/manager/user_posts_manager/user_posts_event.dart';
+import 'package:leach/features/posts/presentation/manager/user_posts_manager/user_posts_state.dart';
 import 'package:leach/features/profile/presentation/profile/widgets/dottet_border_custom.dart';
 import 'package:http_parser/http_parser.dart';
 
@@ -47,16 +48,13 @@ class _AddPostState extends State<AddPost> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<PostsBloc, PostState>(
+    return BlocListener<UserPostsBloc, UserPostState>(
       listener: (context, state) {
         if(state is CreatePostsSuccessState){
           LoadingOverlay().hide();
           BlocProvider.of<PostsBloc>(context).add(const GetPostsEvent(page: "1"));
+          BlocProvider.of<UserPostsBloc>(context).add(const GetUserPostsEvent(page: "1"));
           Navigator.pop(context);
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(state.message),
-            backgroundColor: Colors.green,
-          ));
         }else if(state is CreatePostsErrorState){
           LoadingOverlay().hide();
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -111,7 +109,6 @@ class _AddPostState extends State<AddPost> {
                 ),
                 CustomTextField(
                   hintText: StringManager.writeCaption.tr(),
-                  maxLines: 1,
                   controller: postController,
                   suffixIcon: Image.asset(
                     AssetPath.chat,
@@ -138,7 +135,7 @@ class _AddPostState extends State<AddPost> {
                         "caption": postController.text,
                       });
                     }
-                    BlocProvider.of<PostsBloc>(context)
+                    BlocProvider.of<UserPostsBloc>(context)
                         .add(CreatePostEvent(data: formData));
                   },
                   textColor: Colors.white,

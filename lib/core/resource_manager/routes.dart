@@ -20,6 +20,7 @@ import 'package:leach/features/home/componant/select_how_to.dart';
 import 'package:leach/features/home/componant/trainYourDog.dart';
 import 'package:leach/features/home/widgets/calender.dart';
 import 'package:leach/features/main_screen.dart';
+import 'package:leach/features/posts/data/models/posts_model.dart';
 import 'package:leach/features/profile/domain/model/create_pet.dart';
 import 'package:leach/features/profile/presentation/add_pet/add_pet_screen.dart';
 import 'package:leach/features/profile/presentation/add_pet/cat_bread.dart';
@@ -323,9 +324,9 @@ class RouteGenerator {
             const   FriendRequestsScreen(),
             transitionsBuilder: customAnimate);
       case Routes.editPost:
+        PostData postData = settings.arguments as PostData;
         return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) =>
-            const   EditPost(),
+            pageBuilder: (context, animation, secondaryAnimation) => EditPost(data: postData),
             transitionsBuilder: customAnimate);
     }
     return unDefinedRoute(

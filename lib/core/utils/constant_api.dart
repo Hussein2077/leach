@@ -13,6 +13,7 @@ class ConstantApi {
   static const String getMyData = "${baseUrl}user";
   static const String togglePrivacy  = "${baseUrl}user/togglePrivacy";
   static getPosts(String page) => '${baseUrl}post/viewPosts?page=$page';
+  static getUserPosts(String page) => '${baseUrl}post?page=$page';
   static likePost(String id) {
     return "${baseUrl}post/likePost/$id";
   }
