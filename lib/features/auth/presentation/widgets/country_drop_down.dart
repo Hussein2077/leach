@@ -9,10 +9,11 @@ import 'package:leach/core/widgets/cutom_text.dart';
 
 class CountryDropDown extends StatefulWidget {
   const CountryDropDown(
-      {super.key, this.countryOrCity, this.onChanged, this.hint});
+      {super.key, this.countryOrCity, this.onChanged, this.hint, this.initialValue});
 
   final List<String>? countryOrCity;
   final String? hint;
+  final String? initialValue;
   final Function(String?)? onChanged;
 
   @override
@@ -21,6 +22,12 @@ class CountryDropDown extends StatefulWidget {
 
 class _CountryDropDownState extends State<CountryDropDown> {
   String? value;
+
+  @override
+  void initState() {
+    value = widget.initialValue;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
@@ -36,7 +35,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   late TextEditingController usernameController;
 
   late TextEditingController phoneController;
-  String? country;
+  String? area;
   String? city;
 
   @override
@@ -169,28 +168,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   );
                 }),
-                ColumnWithTextField(
-                  text: StringManager.country.tr(),
-                  child: CountryDropDown(
-                    countryOrCity: const ['Egypt'],
-                    onChanged: (String? value) {
-                      setState(() {
-                        country = value;
-                      });
-                    },
-                  ),
-                ),
-                ColumnWithTextField(
-                  text: StringManager.city.tr(),
-                  child: CountryDropDown(
-                    countryOrCity: StringManager.citiesInEgypt,
-                    onChanged: (String? value) {
-                      setState(() {
-                        city = value;
-                      });
-                    },
-                    hint: StringManager.selectYourCity.tr(),
-                  ),
+
+                StatefulBuilder(
+                  builder: (context, setState) {
+                    return ColumnWithTextField(
+                      text: StringManager.city.tr(),
+                      child: CountryDropDown(
+                        countryOrCity: StringManager.citiesInEgypt,
+                        onChanged: (String? value) {
+                          setState(() {
+                            city = value;
+                          });
+                        },
+                        hint: StringManager.selectYourCity.tr(),
+                      ),
+                    );
+                  }
+                ), StatefulBuilder(
+                    builder: (context, setState) {
+                      return ColumnWithTextField(
+                        text: StringManager.area.tr(),
+                        child: CountryDropDown(
+                          countryOrCity: const ['6 Of October'],
+                          onChanged: (String? value) {
+                            setState(() {
+                              area = value;
+                            });
+                          },
+                        ),
+                      );
+                    }
                 ),
                 SizedBox(height: AppSize.defaultSize! * 3),
                 Center(
@@ -204,7 +211,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         phone: phoneController.text,
                         password: passwordController.text,
                         confirmPassword: confirmPasswordController.text,
-                        country: country ?? "",
+                        country: area ?? "",
                         city: city ?? "",
                       );
 
@@ -219,7 +226,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             email: emailController.text,
                             phone: phoneController.text,
                             password: passwordController.text,
-                            country: country ?? "",
+                            country: area ?? "",
                             city: city ?? "",
                           ),
                         );

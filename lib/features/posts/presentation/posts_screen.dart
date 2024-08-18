@@ -84,9 +84,7 @@ class _PostsScreenState extends State<PostsScreen> {
                 itemCount: data.length,
               );
             } else {
-              return const Center(
-                child: LoadingWidget(),
-              );
+              return const LoadingWidget();
             }
           },
         ),

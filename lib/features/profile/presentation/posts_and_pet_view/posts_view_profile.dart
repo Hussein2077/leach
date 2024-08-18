@@ -68,7 +68,7 @@ class _PostsViewProfileState extends State<PostsViewProfile> {
                   onTap: () {
                   },
                 ),
-              ),
+
               SizedBox(height: AppSize.defaultSize! * 2),
               Text(
                 "Are you sure you want to turn off commenting on this post?",
@@ -113,10 +113,11 @@ class _PostsViewProfileState extends State<PostsViewProfile> {
               ),
             ],
           ),
-        );
+        ));
       },
     );
   }
+
 
 
   @override

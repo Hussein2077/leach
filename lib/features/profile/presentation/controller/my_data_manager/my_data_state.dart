@@ -37,3 +37,19 @@ class ChangePrivacySuccessState extends GetMyDataState {
 
   const ChangePrivacySuccessState({required this.message});
 }
+///////////////////////////////////////
+
+class UpdateMyDataLoadingState extends GetMyDataState {}
+
+class UpdateMyDataErrorState extends GetMyDataState {
+  final String errorMessage;
+
+  const UpdateMyDataErrorState({required this.errorMessage});
+}
+
+class UpdateMyDataSuccessState extends GetMyDataState {
+  final UserModel userModel;
+
+  const UpdateMyDataSuccessState({required this.userModel});
+
+}

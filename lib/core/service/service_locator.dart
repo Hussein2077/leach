@@ -36,6 +36,7 @@ import 'package:leach/features/profile/domain/use_case/get_my_data_uc.dart';
 import 'package:leach/features/profile/domain/use_case/get_pending_friend_requests_uc.dart';
 import 'package:leach/features/profile/domain/use_case/reject_friend_request_uc.dart';
 import 'package:leach/features/profile/domain/use_case/get_traits_use_case.dart';
+import 'package:leach/features/profile/domain/use_case/update_my_data_use_case.dart';
 import 'package:leach/features/profile/presentation/controller/create_pet_bloc/create_pet_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/dogBreadBloc/bloc.dart';
 import 'package:leach/features/profile/presentation/controller/get_traits/bloc.dart';
@@ -59,7 +60,7 @@ class ServerLocator {
     getIt.registerLazySingleton(() => BaseBreadCubit());
     getIt.registerLazySingleton(() => GetFriendRequestBloc(getFriendRequestUseCase: getIt(), acceptFriendRequestsUseCase: getIt(), rejectFriendRequestsUseCase: getIt()));
     getIt.registerLazySingleton(() => GetFriendsBloc(getFriendsUseCase: getIt()));
-    getIt.registerLazySingleton(() => GetMyDataBloc(getMyDataUseCase: getIt(), changePrivacyUseCase: getIt()));
+    getIt.registerLazySingleton(() => GetMyDataBloc(getMyDataUseCase: getIt(), changePrivacyUseCase: getIt(), updateMyDataUseCase: getIt()));
     getIt.registerLazySingleton(() => GetTraitsBloc(getTraitUseCase: getIt()));
     getIt.registerLazySingleton(() => DeleteCommentBloc(deleteCommentUseCase: getIt()));
 
@@ -83,6 +84,7 @@ class ServerLocator {
     getIt.registerFactory(() => RejectFriendRequestsUseCase(profileBaseRepository : getIt()));
     getIt.registerFactory(() => GetFriendsUseCase(profileBaseRepository : getIt()));
     getIt.registerFactory(() => GetMyDataUseCase(profileBaseRepository : getIt()));
+    getIt.registerFactory(() => UpdateMyDataUseCase(profileBaseRepository : getIt()));
     getIt.registerFactory(() => GetTraitsUseCase(profileBaseRepository : getIt()));
     getIt.registerFactory(() => UpdatePetUseCase(profileBaseRepository : getIt()));
     getIt.registerFactory(() => ChangePrivacyUseCase(profileBaseRepository : getIt()));

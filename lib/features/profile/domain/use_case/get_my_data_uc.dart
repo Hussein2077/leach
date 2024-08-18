@@ -14,3 +14,4 @@ class GetMyDataUseCase extends BaseUseCase<UserModel, NoParameter> {
     return result;
   }
 }
+

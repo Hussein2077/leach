@@ -33,6 +33,7 @@ class StringManager {
   static const String confirmPassword = "Confirm password";
   static const String country = "Country";
   static const String city = "City";
+  static const String area  = "Area";
   static const String selectYourCountry = "Select your country";
   static const String selectYourCity = "Select your city";
   static const String resetPassword = "Reset Password";
@@ -224,6 +225,7 @@ class StringManager {
     "Cairo",
     "Alexandria",
     "Giza",
+    'gizaaa',
     "Shubra El Kheima",
     "Port Said",
     "Suez",

@@ -11,6 +11,7 @@ import 'package:leach/features/profile/domain/model/friends_model.dart';
 import 'package:leach/features/profile/domain/model/pending_friend_requests_model.dart';
 import 'package:leach/features/profile/domain/model/traits_model.dart';
 import 'package:leach/features/profile/domain/use_case/CREATE_PET_USE_CASE.dart';
+import 'package:leach/features/profile/domain/use_case/update_my_data_use_case.dart';
 
 abstract class ProfileBaseRemotelyDataSource {
   Future<PetProfileModel> createPet(PetProfileModel petProfileModel);
@@ -21,6 +22,7 @@ abstract class ProfileBaseRemotelyDataSource {
   Future<String> rejectFriendRequests({required String id});
   Future<FriendsModel> getFriends({required String page});
   Future<UserModel> getMyData();
+  Future<UserModel> updateMyData(UpdateDataParams parameter);
 Future<String> changePrivacy();
 
 }
@@ -217,6 +219,7 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
       throw DioHelper.handleDioError(dioError: e, endpointName: 'getMyData');
     }
   }
+
     try {
       final response = await Dio().post(
         ConstantApi.updatePet(updatePetRequest.uuid ),
@@ -338,7 +341,33 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
     } on DioException catch (e) {
       throw DioHelper.handleDioError(dioError: e, endpointName: 'getMyData');
     }
-  }  @override
+  }   @override
+  Future<UserModel> updateMyData(UpdateDataParams parameter) async {
+    Options options = await DioHelper().options();
+  final FormData formData = FormData.fromMap({
+    "name": parameter.name,
+    "username": parameter.username,
+    "bio": parameter.bio,
+    "city": parameter.city,
+    "area": parameter.area,
+    "profile_picture": parameter.profilePicture != null
+        ? await MultipartFile.fromFile(parameter.profilePicture!.path)
+        : null,
+
+  });
+    try {
+      final response = await Dio().post(
+        ConstantApi.updateMyData,
+        options:options,
+        data: formData
+      );
+
+      return UserModel.fromMap(response.data['data']);
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(dioError: e, endpointName: 'updateMyData');
+    }
+  }
+  @override
   Future<String> changePrivacy() async {
     Options options = await DioHelper().options();
 
@@ -355,4 +384,6 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
       throw DioHelper.handleDioError(dioError: e, endpointName: 'getMyData');
     }
   }
+
+
 }

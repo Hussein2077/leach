@@ -11,6 +11,7 @@ class ConstantApi {
   static   String updatePet(String id)  => "${baseUrl}pet/$id";
   static const String getTraits  = "${baseUrl}pet/traits";
   static const String getMyData = "${baseUrl}user";
+  static const String updateMyData  = "${baseUrl}user/update";
   static const String togglePrivacy  = "${baseUrl}user/togglePrivacy";
   static getPosts(String page) => '${baseUrl}post/viewPosts?page=$page';
   static likePost(String id) {

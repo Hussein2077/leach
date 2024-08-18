@@ -9,6 +9,7 @@ import 'package:leach/features/profile/domain/model/traits_model.dart';
 import 'package:leach/features/profile/domain/use_case/CREATE_PET_USE_CASE.dart';
 import 'package:leach/features/profile/domain/model/friends_model.dart';
 import 'package:leach/features/profile/domain/model/pending_friend_requests_model.dart';
+import 'package:leach/features/profile/domain/use_case/update_my_data_use_case.dart';
 
 class ProfileRepositoryImp extends ProfileBaseRepository {
   final ProfileBaseRemotelyDataSource profileBaseRemotelyDataSource;
@@ -90,6 +91,16 @@ class ProfileRepositoryImp extends ProfileBaseRepository {
   Future<Either<UserModel, Failure>> getMyData() async {
     try {
       final result = await profileBaseRemotelyDataSource.getMyData();
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<UserModel, Failure>> updateMyData(UpdateDataParams parameter) async {
+    try {
+      final result = await profileBaseRemotelyDataSource.updateMyData(parameter);
       return Left(result);
     } on Exception catch (e) {
       return right(DioHelper.buildFailure(e));

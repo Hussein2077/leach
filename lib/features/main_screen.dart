@@ -8,6 +8,8 @@ import 'package:leach/features/chat/chat_list.dart';
 import 'package:leach/features/home/home_screen.dart';
 import 'package:leach/features/main_screen_bloc.dart';
 import 'package:leach/features/posts/presentation/posts_screen.dart';
+import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_bloc.dart';
+import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_event.dart';
 import 'package:leach/features/profile/presentation/pet_profile/pet_profile.dart';
 import 'package:leach/features/profile/presentation/profile/profile.dart';
 import 'package:leach/features/profile/presentation/widget/pet_or_profile.dart';
@@ -27,6 +29,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     context.read<MainScreenBloc>().add(const ChangeTabEvent(4));
+    BlocProvider.of<GetMyDataBloc>(context).add(GetMyDataEvent());
     super.initState();
   }
 
