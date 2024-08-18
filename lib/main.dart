@@ -11,9 +11,10 @@ import 'package:leach/features/auth/presentation/controller/login_bloc/login_wit
 import 'package:leach/features/auth/presentation/controller/sign_up_bloc/sign_up_with_email_and_password_bloc.dart';
 import 'package:leach/features/main_screen_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/comment_manager/comment_bloc.dart';
-import 'package:leach/features/posts/presentation/manager/get_posts_manager/get_posts_bloc.dart';
-import 'package:leach/features/posts/presentation/manager/get_posts_manager/get_posts_event.dart';
+import 'package:leach/features/posts/presentation/manager/delete_comment_manager/delete_comment_bloc.dart';
+import 'package:leach/features/posts/presentation/manager/posts_manager/posts_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/like_post_manager/like_post_bloc.dart';
+import 'package:leach/features/posts/presentation/manager/posts_manager/posts_event.dart';
 import 'package:leach/features/profile/presentation/controller/create_pet_bloc/create_pet_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/dogBreadBloc/bloc.dart';
 import 'package:leach/features/profile/presentation/controller/friends_manager/friends_bloc.dart';
@@ -71,7 +72,7 @@ class _MyAppState extends State<MyApp> {
           create: (context) => getIt<MainScreenBloc>(),
         ),
         BlocProvider(
-          create: (context) => getIt<GetPostsBloc>()..add(const GetPostsEvent(page: '1')),
+          create: (context) => getIt<PostsBloc>()..add(const GetPostsEvent(page: '1')),
         ),
         BlocProvider(
           create: (context) => getIt<CommentBloc>(),
@@ -96,6 +97,9 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => getIt<GetTraitsBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<DeleteCommentBloc>(),
         ),
       ],
       child: MaterialApp(

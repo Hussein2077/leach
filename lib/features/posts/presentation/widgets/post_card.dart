@@ -78,10 +78,10 @@ class _PostCardState extends State<PostCard> {
             children: [
               InkWell(
                   onTap: () {
-                    if(isLiked){
-                      BlocProvider.of<LikePostsBloc>(context).add(LikeEvent(id: widget.postData.id.toString()));
+                    if(!isLiked){
+                      BlocProvider.of<LikePostsBloc>(context).add(LikeEvent(id: widget.postData.uuid.toString()));
                     }else{
-                      BlocProvider.of<LikePostsBloc>(context).add(UnLikeEvent(id: widget.postData.id.toString()));
+                      BlocProvider.of<LikePostsBloc>(context).add(UnLikeEvent(id: widget.postData.uuid.toString()));
                     }
                     setState(() {
                       isLiked = !isLiked;

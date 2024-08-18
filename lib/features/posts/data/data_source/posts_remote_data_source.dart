@@ -8,6 +8,10 @@ abstract class PostsBaseRemotelyDataSource {
   Future<String> likePost({required String id});
   Future<String> unLikePost({required String id});
   Future<String> addComment({required String id, required String comment});
+  Future<String> deletePost({required String id});
+  Future<String> deleteComment({required String id});
+  Future<String> editePost({var postData, required String id});
+  Future<String> createPost({var postData});
 
 }
 
@@ -44,7 +48,7 @@ class PostsRemotelyDateSource extends PostsBaseRemotelyDataSource {
       );
 
       Map<String, dynamic> data = response.data;
-      return data["message"];
+      return data["message"] ?? "success";
     } on DioException catch (e) {
       throw DioHelper.handleDioError(
           dioError: e, endpointName: 'likePost');
@@ -56,7 +60,7 @@ class PostsRemotelyDateSource extends PostsBaseRemotelyDataSource {
     Map<String, String> headers = await DioHelper().header();
 
     try {
-      final response = await Dio().post(
+      final response = await Dio().delete(
         ConstantApi.unLikePost(id),
         options: Options(
           headers: headers,
@@ -64,7 +68,7 @@ class PostsRemotelyDateSource extends PostsBaseRemotelyDataSource {
       );
 
       Map<String, dynamic> data = response.data;
-      return data["message"];
+      return data["message"] ?? "success";
     } on DioException catch (e) {
       throw DioHelper.handleDioError(
           dioError: e, endpointName: 'unLikePost');
@@ -87,9 +91,87 @@ class PostsRemotelyDateSource extends PostsBaseRemotelyDataSource {
       );
 
       Map<String, dynamic> data = response.data;
-      return data["message"];
+      return data["message"] ?? "success";
     } on DioException catch (e) {
       throw DioHelper.handleDioError(dioError: e, endpointName: 'addComment');
+    }
+  }
+
+  @override
+  Future<String> deletePost({required String id}) async {
+    Map<String, String> headers = await DioHelper().header();
+
+    try {
+      final response = await Dio().delete(
+        ConstantApi.deletePost(id),
+        options: Options(
+          headers: headers,
+        ),
+      );
+
+      Map<String, dynamic> responseData = response.data;
+      return responseData["message"] ?? "success";
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(dioError: e, endpointName: 'deletePost');
+    }
+  }
+
+  @override
+  Future<String> deleteComment({required String id}) async {
+    Map<String, String> headers = await DioHelper().header();
+
+    try {
+      final response = await Dio().delete(
+        ConstantApi.deleteComment(id),
+        options: Options(
+          headers: headers,
+        ),
+      );
+
+      Map<String, dynamic> responseData = response.data;
+      return responseData["message"] ?? "success";
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(dioError: e, endpointName: 'deleteComment');
+    }
+  }
+
+  @override
+  Future<String> editePost({var postData, required String id}) async {
+    Map<String, String> headers = await DioHelper().header();
+
+    try {
+      final response = await Dio().post(
+        ConstantApi.editePost(id),
+        data: postData,
+        options: Options(
+          headers: headers,
+        ),
+      );
+
+      Map<String, dynamic> data = response.data;
+      return data["message"] ?? "success";
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(dioError: e, endpointName: 'editePost');
+    }
+  }
+
+  @override
+  Future<String> createPost({var postData}) async {
+    Map<String, String> headers = await DioHelper().header();
+
+    try {
+      final response = await Dio().post(
+        ConstantApi.createPost,
+        data: postData,
+        options: Options(
+          headers: headers,
+        ),
+      );
+
+      Map<String, dynamic> data = response.data;
+      return data["message"] ?? "success";
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(dioError: e, endpointName: 'createPost');
     }
   }
 

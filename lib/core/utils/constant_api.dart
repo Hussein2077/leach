@@ -34,6 +34,16 @@ class ConstantApi {
   static getFriends(String page) {
     return "${baseUrl}user/listAllFriends?page=$page";
   }
+  static deletePost(String id) {
+    return "${baseUrl}post/$id";
+  }
+  static deleteComment(String id) {
+    return "${baseUrl}post/comment/$id";
+  }
+  static editePost(String id) {
+    return "${baseUrl}post/$id";
+  }
+  static const String createPost = "${baseUrl}post";
 
 
 //////////////////////////////

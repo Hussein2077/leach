@@ -49,4 +49,44 @@ class PostsRepositoryImp extends PostsBaseRepository {
       return right(DioHelper.buildFailure(e));
     }
   }
+
+  @override
+  Future<Either<String, Failure>> deletePost({required String id}) async {
+    try {
+      final result = await postsBaseRemotelyDataSource.deletePost(id: id);
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<String, Failure>> deleteComment({required String id}) async {
+    try {
+      final result = await postsBaseRemotelyDataSource.deleteComment(id: id);
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<String, Failure>> editePost({var postData, required String id}) async {
+    try {
+      final result = await postsBaseRemotelyDataSource.editePost(postData: postData, id: id);
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<String, Failure>> createPost({var postData}) async {
+    try {
+      final result = await postsBaseRemotelyDataSource.createPost(postData: postData);
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
 }

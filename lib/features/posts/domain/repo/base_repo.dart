@@ -7,4 +7,8 @@ abstract class PostsBaseRepository {
   Future<Either<String, Failure>> likePost({required String id});
   Future<Either<String, Failure>> unLikePost({required String id});
   Future<Either<String, Failure>> addComment({required String id, required String comment});
+  Future<Either<String, Failure>> deletePost({required String id});
+  Future<Either<String, Failure>> deleteComment({required String id});
+  Future<Either<String, Failure>> editePost({var postData, required String id});
+  Future<Either<String, Failure>> createPost({var postData});
 }

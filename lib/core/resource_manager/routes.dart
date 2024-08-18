@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:leach/core/resource_manager/enums.dart';
 import 'package:leach/core/service/navigator_services.dart';
@@ -272,8 +270,7 @@ class RouteGenerator {
             transitionsBuilder: customAnimate);
       case Routes.addPost:
         return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) =>
-            const   AddPost(),
+            pageBuilder: (context, animation, secondaryAnimation) => AddPost(),
             transitionsBuilder: customAnimate);
       case Routes.addPhotoForPet:
         return PageRouteBuilder(
@@ -347,7 +344,6 @@ class RouteGenerator {
               actions: [
                 TextButton(
                   onPressed: () {
-                    // Stay in the app
                     Navigator.of(context).pushNamedAndRemoveUntil(
                       Routes.main,
                       (route) => false,
@@ -357,7 +353,6 @@ class RouteGenerator {
                 ),
                 TextButton(
                   onPressed: () {
-                    // Leave the app
                     Navigator.of(context).pop(true);
                   },
                   child: const Text('Exit'),
@@ -365,11 +360,9 @@ class RouteGenerator {
               ],
             ),
           );
-
-          // Return whether to leave the app or not
           return leaveApp ;
         },
-        child: Container(), // Replace with your app's content
+        child: Container(),
       ),
     );
   }

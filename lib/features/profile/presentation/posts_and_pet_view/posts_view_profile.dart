@@ -11,10 +11,10 @@ import 'package:leach/core/widgets/background.dart';
 import 'package:leach/core/widgets/cached_network_image.dart';
 import 'package:leach/core/widgets/icon_with_matrial.dart';
 import 'package:leach/core/widgets/leading_icon.dart';
-import 'package:leach/features/posts/presentation/manager/get_posts_manager/get_posts_state.dart';
+import 'package:leach/features/posts/presentation/manager/posts_manager/posts_state.dart';
 import 'package:leach/features/profile/presentation/widget/side_bar_row.dart';
 import '../../../../core/resource_manager/routes.dart';
-import '../../../posts/presentation/manager/get_posts_manager/get_posts_bloc.dart';
+import '../../../posts/presentation/manager/posts_manager/posts_bloc.dart';
 
 class PostsViewProfile extends StatefulWidget {
   const PostsViewProfile({super.key});
@@ -128,7 +128,7 @@ class _PostsViewProfileState extends State<PostsViewProfile> {
         image: AssetPath.messageX,
         text: StringManager.turnOffCommenting.tr(),
         onTap: () {
-          Navigator.of(context).pop();
+          _showTurnOffCommentingDialog(context);
         },
       ),
       SideBarRow(
@@ -182,14 +182,15 @@ class _PostsViewProfileState extends State<PostsViewProfile> {
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                       horizontal: AppSize.defaultSize! * 3),
-                  child: BlocBuilder<GetPostsBloc, GetPostState>(
+                  child: BlocBuilder<PostsBloc, PostState>(
                     builder: (context, state) {
                       if(state is GetPostsSuccessState) {
                         return ListView.builder(
                           padding: EdgeInsets.zero,
                           itemCount: state.postsModel.posts!.data!.length,
                           itemBuilder: (context, index) {
-                          return Column(
+                            bool isLiked = state.postsModel.posts!.data![index].liked ?? false;
+                            return Column(
                             children: [
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,

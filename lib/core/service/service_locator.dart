@@ -14,11 +14,16 @@ import 'package:leach/features/posts/data/data_source/posts_remote_data_source.d
 import 'package:leach/features/posts/data/repo_imp/repo_imp.dart';
 import 'package:leach/features/posts/domain/repo/base_repo.dart';
 import 'package:leach/features/posts/domain/use_case/add_comment_uc.dart';
+import 'package:leach/features/posts/domain/use_case/create_post_uc.dart';
+import 'package:leach/features/posts/domain/use_case/delete_comment_uc.dart';
+import 'package:leach/features/posts/domain/use_case/delete_post_uc.dart';
+import 'package:leach/features/posts/domain/use_case/edit_post_uc.dart';
 import 'package:leach/features/posts/domain/use_case/get_posts_uc.dart';
 import 'package:leach/features/posts/domain/use_case/like_post_uc.dart';
 import 'package:leach/features/posts/domain/use_case/un_like_post_uc.dart';
 import 'package:leach/features/posts/presentation/manager/comment_manager/comment_bloc.dart';
-import 'package:leach/features/posts/presentation/manager/get_posts_manager/get_posts_bloc.dart';
+import 'package:leach/features/posts/presentation/manager/delete_comment_manager/delete_comment_bloc.dart';
+import 'package:leach/features/posts/presentation/manager/posts_manager/posts_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/like_post_manager/like_post_bloc.dart';
 import 'package:leach/features/profile/data/profile_remote_data_source.dart';
 import 'package:leach/features/profile/data/repo_imp_profile.dart';
@@ -42,16 +47,12 @@ final getIt = GetIt.instance;
 
 class ServerLocator {
   Future<void> init() async {
-    //bloc
-    getIt.registerLazySingleton(() => LoginWithEmailAndPasswordBloc(
-        loginWithEmailAndPasswordUseCase: getIt(),
-        deleteAccountUseCase: getIt()));
 
-    getIt.registerLazySingleton(() => SignUpWithEmailAndPasswordBloc(
-          signUpWithEmailAndPasswordUseCase: getIt(),
-        ));
+    //bloc
+    getIt.registerLazySingleton(() => LoginWithEmailAndPasswordBloc(loginWithEmailAndPasswordUseCase: getIt(), deleteAccountUseCase: getIt()));
+    getIt.registerLazySingleton(() => SignUpWithEmailAndPasswordBloc(signUpWithEmailAndPasswordUseCase: getIt(),));
     getIt.registerLazySingleton(() => MainScreenBloc());
-    getIt.registerLazySingleton(() => GetPostsBloc(getPostsUseCase: getIt()));
+    getIt.registerLazySingleton(() => PostsBloc(getPostsUseCase: getIt(), deletePostUseCase: getIt(), editePostUc: getIt(), createPostUseCase: getIt()));
     getIt.registerLazySingleton(() => CommentBloc(addCommentUseCase: getIt()));
     getIt.registerLazySingleton(() => LikePostsBloc(likePostUc: getIt(), unLikePostUc: getIt()));
     getIt.registerLazySingleton(() => CreatePetBloc(createPetUseCase: getIt(), updatePetUseCase: getIt()));
@@ -60,10 +61,15 @@ class ServerLocator {
     getIt.registerLazySingleton(() => GetFriendsBloc(getFriendsUseCase: getIt()));
     getIt.registerLazySingleton(() => GetMyDataBloc(getMyDataUseCase: getIt(), changePrivacyUseCase: getIt()));
     getIt.registerLazySingleton(() => GetTraitsBloc(getTraitUseCase: getIt()));
+    getIt.registerLazySingleton(() => DeleteCommentBloc(deleteCommentUseCase: getIt()));
 
-//use_case
 
+    //use_case
     getIt.registerFactory(() => ResetPasswordUseCase(baseRepository: getIt()));
+    getIt.registerFactory(() => DeleteCommentUseCase(postsBaseRepository: getIt()));
+    getIt.registerFactory(() => EditePostUc(postsBaseRepository: getIt()));
+    getIt.registerFactory(() => CreatePostUseCase(postsBaseRepository: getIt()));
+    getIt.registerFactory(() => DeletePostUseCase(postsBaseRepository: getIt()));
     getIt.registerFactory(() => SignUpWithEmailAndPasswordUseCase(baseRepository: getIt()));
     getIt.registerFactory(() => LoginWithEmailAndPasswordUseCase(baseRepository: getIt()));
     getIt.registerFactory(() => DeleteAccountUseCase(baseRepository: getIt()));
@@ -81,21 +87,17 @@ class ServerLocator {
     getIt.registerFactory(() => UpdatePetUseCase(profileBaseRepository : getIt()));
     getIt.registerFactory(() => ChangePrivacyUseCase(profileBaseRepository : getIt()));
 
-    //remote data
-    getIt.registerLazySingleton<BaseRemotelyDataSource>(
-        () => AuthRemotelyDateSource());
-    getIt.registerLazySingleton<PostsBaseRemotelyDataSource>(
-            () => PostsRemotelyDateSource());
-    getIt.registerLazySingleton<ProfileBaseRemotelyDataSource>(
-            () => ProfileRemotelyDateSource());
 
-//repo
-    getIt.registerLazySingleton<BaseRepository>(
-        () => RepositoryImp(baseRemotelyDataSource: getIt()));
-    getIt.registerLazySingleton<ProfileBaseRepository>(
-        () => ProfileRepositoryImp(profileBaseRemotelyDataSource: getIt()));
-    getIt.registerLazySingleton<PostsBaseRepository>(
-            () => PostsRepositoryImp(postsBaseRemotelyDataSource: getIt()));
+    //remote data
+    getIt.registerLazySingleton<BaseRemotelyDataSource>(() => AuthRemotelyDateSource());
+    getIt.registerLazySingleton<PostsBaseRemotelyDataSource>(() => PostsRemotelyDateSource());
+    getIt.registerLazySingleton<ProfileBaseRemotelyDataSource>(() => ProfileRemotelyDateSource());
+
+
+    //repo
+    getIt.registerLazySingleton<BaseRepository>(() => RepositoryImp(baseRemotelyDataSource: getIt()));
+    getIt.registerLazySingleton<ProfileBaseRepository>(() => ProfileRepositoryImp(profileBaseRemotelyDataSource: getIt()));
+    getIt.registerLazySingleton<PostsBaseRepository>(() => PostsRepositoryImp(postsBaseRemotelyDataSource: getIt()));
     getIt.registerLazySingleton(() => NavigationService());
   }
 }

@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/loading_widget.dart';
-import 'package:leach/features/posts/presentation/manager/get_posts_manager/get_posts_bloc.dart';
-import 'package:leach/features/posts/presentation/manager/get_posts_manager/get_posts_state.dart';
+import 'package:leach/features/posts/presentation/manager/posts_manager/posts_bloc.dart';
+import 'package:leach/features/posts/presentation/manager/posts_manager/posts_state.dart';
 import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_state.dart';
 import 'package:leach/features/profile/presentation/profile/widgets/posts_container.dart';
@@ -80,7 +80,7 @@ class _PersonalProfileState extends State<PersonalProfile> {
                 height: AppSize.defaultSize!,
               ),
               Expanded(
-                child: BlocBuilder<GetPostsBloc, GetPostState>(
+                child: BlocBuilder<PostsBloc, PostState>(
                   builder: (context, state) {
                     if(state is GetPostsSuccessState) {
                       return PostsContainer(
@@ -91,7 +91,16 @@ class _PersonalProfileState extends State<PersonalProfile> {
                         ),
                       );
                     }else{
-                      return const SizedBox();
+                      return Container(
+                        width: AppSize.screenWidth!,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(AppSize.defaultSize! * 4),
+                            topRight: Radius.circular(AppSize.defaultSize! * 4),
+                          ),
+                        ),
+                      );
                     }
                   },
                 ),
