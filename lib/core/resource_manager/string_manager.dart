@@ -256,6 +256,13 @@ class StringManager {
   ];
   static const String editCaption = "Edit Caption";
   static const String turnOff = "Turn Off";
+  static const String caption = "Caption";
+  static const String deleteComment = "Delete Comment";
+  static const String bookingHistory = "Booking History";
+
+  
+
+
 
 
 }

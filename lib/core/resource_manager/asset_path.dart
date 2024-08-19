@@ -109,4 +109,8 @@ class AssetPath {
   static const String             loading           = '$pathImage/loading.png';
   static const String             accept           = '$pathImage/accept.png';
   static const String             reject           = '$pathImage/rej.png';
+  static const String             dots           = '$pathImage/dots.png';
+  static const String             smallCalendar           = '$pathImage/small_calendar.png';
+  static const String             smallWhiteCalendar           = '$pathImage/small_white_calendar.png';
+
 }

@@ -12,6 +12,8 @@ import 'package:leach/features/posts/data/models/posts_model.dart';
 import 'package:leach/features/posts/presentation/manager/like_post_manager/like_post_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/like_post_manager/like_post_event.dart';
 
+import 'comment_view.dart';
+
 class PostCard extends StatefulWidget {
   final PostData postData;
   const PostCard({super.key, required this.postData});
@@ -99,7 +101,10 @@ class _PostCardState extends State<PostCard> {
                 width: AppSize.defaultSize!,
               ),
               InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    showHalfPageBottomSheet(context);
+
+                  },
                   borderRadius:
                       BorderRadius.circular(AppSize.defaultSize! * 1.5),
                   child: const IconWithMaterial(
