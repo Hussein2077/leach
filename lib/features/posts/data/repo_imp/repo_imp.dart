@@ -21,6 +21,16 @@ class PostsRepositoryImp extends PostsBaseRepository {
   }
 
   @override
+  Future<Either<PostsModel, Failure>> getUserPosts({required String page}) async {
+    try {
+      final result = await postsBaseRemotelyDataSource.getUserPosts(page: page);
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
+
+  @override
   Future<Either<String, Failure>> likePost({required String id}) async {
     try {
       final result = await postsBaseRemotelyDataSource.likePost(id: id);

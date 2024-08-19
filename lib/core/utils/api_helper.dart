@@ -11,7 +11,6 @@ import 'package:leach/core/utils/methods.dart';
 class DioHelper {
   Future<Options> options() async {
     Map<String, String> headers = await DioHelper().header();
-    log('headers $headers');
     return Options(
       receiveDataWhenStatusError: true,
       sendTimeout: const Duration(milliseconds: 5000),
@@ -25,7 +24,6 @@ class DioHelper {
     if (kDebugMode) {
       log('husssssssssss $token');
     }
-
     Map<String, String> headers = {
       "Authorization": 'Bearer $token',
       'accept': 'application/json',

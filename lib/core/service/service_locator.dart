@@ -9,6 +9,11 @@ import 'package:leach/features/auth/domain/use_case/login_with_email_and_passwor
 import 'package:leach/features/auth/domain/use_case/sign_up_use_case.dart';
 import 'package:leach/features/auth/presentation/controller/login_bloc/login_with_email_and_password_bloc.dart';
 import 'package:leach/features/auth/presentation/controller/sign_up_bloc/sign_up_with_email_and_password_bloc.dart';
+import 'package:leach/features/home/data/data_source/home_remote_data_source.dart';
+import 'package:leach/features/home/data/repo_imp/repo_imp.dart';
+import 'package:leach/features/home/domain/repo/base_repo.dart';
+import 'package:leach/features/home/domain/use_case/get_breeding_uc.dart';
+import 'package:leach/features/home/presentation/manager/get_breeding_manager/get_breeding_bloc.dart';
 import 'package:leach/features/main_screen_bloc.dart';
 import 'package:leach/features/posts/data/data_source/posts_remote_data_source.dart';
 import 'package:leach/features/posts/data/repo_imp/repo_imp.dart';
@@ -19,12 +24,14 @@ import 'package:leach/features/posts/domain/use_case/delete_comment_uc.dart';
 import 'package:leach/features/posts/domain/use_case/delete_post_uc.dart';
 import 'package:leach/features/posts/domain/use_case/edit_post_uc.dart';
 import 'package:leach/features/posts/domain/use_case/get_posts_uc.dart';
+import 'package:leach/features/posts/domain/use_case/get_user_posts_uc.dart';
 import 'package:leach/features/posts/domain/use_case/like_post_uc.dart';
 import 'package:leach/features/posts/domain/use_case/un_like_post_uc.dart';
 import 'package:leach/features/posts/presentation/manager/comment_manager/comment_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/delete_comment_manager/delete_comment_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/posts_manager/posts_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/like_post_manager/like_post_bloc.dart';
+import 'package:leach/features/posts/presentation/manager/user_posts_manager/user_posts_bloc.dart';
 import 'package:leach/features/profile/data/profile_remote_data_source.dart';
 import 'package:leach/features/profile/data/repo_imp_profile.dart';
 import 'package:leach/features/profile/domain/base_repo/profie_base_repo.dart';
@@ -53,7 +60,8 @@ class ServerLocator {
     getIt.registerLazySingleton(() => LoginWithEmailAndPasswordBloc(loginWithEmailAndPasswordUseCase: getIt(), deleteAccountUseCase: getIt()));
     getIt.registerLazySingleton(() => SignUpWithEmailAndPasswordBloc(signUpWithEmailAndPasswordUseCase: getIt(),));
     getIt.registerLazySingleton(() => MainScreenBloc());
-    getIt.registerLazySingleton(() => PostsBloc(getPostsUseCase: getIt(), deletePostUseCase: getIt(), editePostUc: getIt(), createPostUseCase: getIt()));
+    getIt.registerLazySingleton(() => PostsBloc(getPostsUseCase: getIt()));
+    getIt.registerLazySingleton(() => UserPostsBloc(getUserPostsUseCase: getIt(), deleteUserPostUseCase: getIt(), editeUserPostUc: getIt(), createUserPostUseCase: getIt()));
     getIt.registerLazySingleton(() => CommentBloc(addCommentUseCase: getIt()));
     getIt.registerLazySingleton(() => LikePostsBloc(likePostUc: getIt(), unLikePostUc: getIt()));
     getIt.registerLazySingleton(() => CreatePetBloc(createPetUseCase: getIt(), updatePetUseCase: getIt()));
@@ -63,12 +71,14 @@ class ServerLocator {
     getIt.registerLazySingleton(() => GetMyDataBloc(getMyDataUseCase: getIt(), changePrivacyUseCase: getIt(), updateMyDataUseCase: getIt()));
     getIt.registerLazySingleton(() => GetTraitsBloc(getTraitUseCase: getIt()));
     getIt.registerLazySingleton(() => DeleteCommentBloc(deleteCommentUseCase: getIt()));
+    getIt.registerLazySingleton(() => BreedingBloc(getBreedingUseCase: getIt()));
 
 
     //use_case
     getIt.registerFactory(() => ResetPasswordUseCase(baseRepository: getIt()));
     getIt.registerFactory(() => DeleteCommentUseCase(postsBaseRepository: getIt()));
     getIt.registerFactory(() => EditePostUc(postsBaseRepository: getIt()));
+    getIt.registerFactory(() => GetUserPostsUseCase(postsBaseRepository: getIt()));
     getIt.registerFactory(() => CreatePostUseCase(postsBaseRepository: getIt()));
     getIt.registerFactory(() => DeletePostUseCase(postsBaseRepository: getIt()));
     getIt.registerFactory(() => SignUpWithEmailAndPasswordUseCase(baseRepository: getIt()));
@@ -88,18 +98,21 @@ class ServerLocator {
     getIt.registerFactory(() => GetTraitsUseCase(profileBaseRepository : getIt()));
     getIt.registerFactory(() => UpdatePetUseCase(profileBaseRepository : getIt()));
     getIt.registerFactory(() => ChangePrivacyUseCase(profileBaseRepository : getIt()));
+    getIt.registerFactory(() => GetBreedingUseCase(homeBaseRepository : getIt()));
 
 
     //remote data
     getIt.registerLazySingleton<BaseRemotelyDataSource>(() => AuthRemotelyDateSource());
     getIt.registerLazySingleton<PostsBaseRemotelyDataSource>(() => PostsRemotelyDateSource());
     getIt.registerLazySingleton<ProfileBaseRemotelyDataSource>(() => ProfileRemotelyDateSource());
+    getIt.registerLazySingleton<HomeBaseRemotelyDataSource>(() => HomeRemotelyDateSource());
 
 
     //repo
     getIt.registerLazySingleton<BaseRepository>(() => RepositoryImp(baseRemotelyDataSource: getIt()));
     getIt.registerLazySingleton<ProfileBaseRepository>(() => ProfileRepositoryImp(profileBaseRemotelyDataSource: getIt()));
     getIt.registerLazySingleton<PostsBaseRepository>(() => PostsRepositoryImp(postsBaseRemotelyDataSource: getIt()));
+    getIt.registerLazySingleton<HomeBaseRepository>(() => HomeRepositoryImp(homeBaseRemotelyDataSource: getIt()));
     getIt.registerLazySingleton(() => NavigationService());
   }
 }

@@ -9,9 +9,9 @@ import 'package:leach/core/utils/methods.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/leading_icon.dart';
 import 'package:leach/core/widgets/main_button.dart';
-import 'package:leach/features/home/widgets/calender_widget.dart';
-import 'package:leach/features/home/widgets/times.dart';
-import 'package:table_calendar/table_calendar.dart';
+import 'package:leach/features/home/presentation/widgets/calender_widget.dart';
+import 'package:leach/features/home/presentation/widgets/times.dart';
+
 
 class CalenderScreen extends StatefulWidget {
   const CalenderScreen({super.key});

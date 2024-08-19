@@ -117,6 +117,7 @@ class StringManager {
   static const String messages = "Messages";
   static const String message = "Message";
   static const String turnOffCommenting = "Turn off commenting";
+  static const String turnOnCommenting = "Turn on commenting";
   static const String comment = "Comment";
   static const String enterUsername = "Enter your name";
   static const String availableSpecialists = "Available Training Specialist";

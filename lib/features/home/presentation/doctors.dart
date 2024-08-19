@@ -5,9 +5,8 @@ import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
-import 'package:leach/core/widgets/main_button.dart';
 import 'package:leach/features/auth/presentation/widgets/leading_with_icon.dart';
-import 'package:leach/features/home/widgets/doctor_card.dart';
+import 'package:leach/features/home/presentation/widgets/doctor_card.dart';
 
 class Doctors extends StatelessWidget {
   const Doctors({super.key});

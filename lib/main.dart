@@ -9,12 +9,15 @@ import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/utils/methods.dart';
 import 'package:leach/features/auth/presentation/controller/login_bloc/login_with_email_and_password_bloc.dart';
 import 'package:leach/features/auth/presentation/controller/sign_up_bloc/sign_up_with_email_and_password_bloc.dart';
+import 'package:leach/features/home/presentation/manager/get_breeding_manager/get_breeding_bloc.dart';
 import 'package:leach/features/main_screen_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/comment_manager/comment_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/delete_comment_manager/delete_comment_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/posts_manager/posts_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/like_post_manager/like_post_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/posts_manager/posts_event.dart';
+import 'package:leach/features/posts/presentation/manager/user_posts_manager/user_posts_bloc.dart';
+import 'package:leach/features/posts/presentation/manager/user_posts_manager/user_posts_event.dart';
 import 'package:leach/features/profile/presentation/controller/create_pet_bloc/create_pet_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/dogBreadBloc/bloc.dart';
 import 'package:leach/features/profile/presentation/controller/friends_manager/friends_bloc.dart';
@@ -34,17 +37,20 @@ void main() async {
   token = await Methods.instance.returnUserToken();
 
   runApp(EasyLocalization(
-      fallbackLocale: const Locale('en'),
-      supportedLocales: const [
-        Locale('en'),
-        Locale('ar'),
-      ],
-      assetLoader: CodegenLoader(),
-      path: 'lib/core/translations/',
-      saveLocale: true,
-      child: Builder(builder: (context) {
-        return const MyApp();
-      })));
+    fallbackLocale: const Locale('en'),
+    supportedLocales: const [
+      Locale('en'),
+      Locale('ar'),
+    ],
+    assetLoader: CodegenLoader(),
+    path: 'lib/core/translations/',
+    saveLocale: true,
+    child: Builder(builder: (context) {
+      return const MyApp();
+      },
+    ),
+  ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -75,6 +81,9 @@ class _MyAppState extends State<MyApp> {
           create: (context) => getIt<PostsBloc>()..add(const GetPostsEvent(page: '1')),
         ),
         BlocProvider(
+          create: (context) => getIt<UserPostsBloc>()..add(const GetUserPostsEvent(page: '1')),
+        ),
+        BlocProvider(
           create: (context) => getIt<CommentBloc>(),
         ),
         BlocProvider(
@@ -100,6 +109,9 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => getIt<DeleteCommentBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<BreedingBloc>(),
         ),
       ],
       child: MaterialApp(

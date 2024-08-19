@@ -14,6 +14,7 @@ class ConstantApi {
   static const String updateMyData  = "${baseUrl}user/update";
   static const String togglePrivacy  = "${baseUrl}user/togglePrivacy";
   static getPosts(String page) => '${baseUrl}post/viewPosts?page=$page';
+  static getUserPosts(String page) => '${baseUrl}post?page=$page';
   static likePost(String id) {
     return "${baseUrl}post/likePost/$id";
   }
@@ -46,6 +47,9 @@ class ConstantApi {
   }
   static const String createPost = "${baseUrl}post";
 
+  static getBreeding({required String type, required String page}) {
+    return "${baseUrl}breeding?pet_type=$type&page=$page";
+  }
 
 //////////////////////////////
   static const String deleteAccount = "${baseUrl}New";

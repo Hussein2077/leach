@@ -5,7 +5,7 @@ import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/background.dart';
 import 'package:leach/features/chat/chat_list.dart';
-import 'package:leach/features/home/home_screen.dart';
+import 'package:leach/features/home/presentation/home_screen.dart';
 import 'package:leach/features/main_screen_bloc.dart';
 import 'package:leach/features/posts/presentation/posts_screen.dart';
 import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_bloc.dart';

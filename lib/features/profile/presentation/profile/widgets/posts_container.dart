@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
@@ -24,9 +23,9 @@ class PostsContainer extends StatelessWidget {
                 topRight: Radius.circular(AppSize.defaultSize! * 4))),
         child: Stack(
           children: [
-            GridView.builder(
-              itemCount: commonType. pictures.length,
-                gridDelegate:   const SliverGridDelegateWithFixedCrossAxisCount(
+            commonType.pictures.isNotEmpty ? GridView.builder(
+              itemCount: commonType.pictures.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount:3 ),
                 padding: EdgeInsets.all(AppSize.defaultSize! * 2),
                 itemBuilder: (context, i) {
@@ -44,7 +43,8 @@ class PostsContainer extends StatelessWidget {
                       ),
                     ),
                   );
-                }),
+                  },
+            ) : Center(child: Text("No Data Found", style: TextStyle(fontSize: AppSize.defaultSize! * 2.5),)),
             if (addIcon)
               GestureDetector(
                 onTap: () {
