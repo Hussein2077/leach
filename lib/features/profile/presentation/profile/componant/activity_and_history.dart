@@ -128,6 +128,22 @@ class ActivityAndHistory extends StatelessWidget {
               indent: AppSize.defaultSize! * 2.2, //spacing at the start of divider
               endIndent: AppSize.defaultSize! * 2.8, //spacing at the end of divider
             ),
+            SizedBox(
+              height: AppSize.defaultSize! * 3,
+            ),
+            SideBarRow(image:AssetPath.smallCalendar,text: StringManager.bookingHistory.tr(),onTap: () {
+              Navigator.pushNamed(context, Routes.bookingHistory);
+            },),
+            SizedBox(
+              height: AppSize.defaultSize! * 0.7,
+            ),
+            Divider(
+              color: Colors.black, //color of divider
+              height: 5, //height spacing of divider
+              thickness: 0.6, //thickness of divier line
+              indent: AppSize.defaultSize! * 2.2, //spacing at the start of divider
+              endIndent: AppSize.defaultSize! * 2.8, //spacing at the end of divider
+            ),
 
             SizedBox(
               height: AppSize.defaultSize! * 3,

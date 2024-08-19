@@ -42,6 +42,7 @@ import 'package:leach/features/profile/presentation/profile/componant/account_pr
 import 'package:leach/features/profile/presentation/profile/componant/activity_and_history.dart';
 import 'package:leach/features/profile/presentation/profile/componant/add_photo_for_pet.dart';
 import 'package:leach/features/profile/presentation/profile/componant/add_post.dart';
+import 'package:leach/features/profile/presentation/profile/componant/booking_history.dart';
 import 'package:leach/features/profile/presentation/profile/componant/delete_account.dart';
 import 'package:leach/features/profile/presentation/profile/componant/edit_pet_profile.dart';
 import 'package:leach/features/profile/presentation/profile/my_pet_profile.dart';
@@ -98,6 +99,8 @@ class Routes {
   static const String notification = "/notification_screen";
   static const String friendRequests = "/friend_requests";
   static const String editPost = "/edit_post";
+  static const String bookingHistory = "/booking_history";
+
 }
 
 class RouteGenerator {
@@ -334,6 +337,11 @@ class RouteGenerator {
         PostData postData = settings.arguments as PostData;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) => EditPost(data: postData),
+            transitionsBuilder: customAnimate);
+      case Routes.bookingHistory:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const BookingHistory(),
             transitionsBuilder: customAnimate);
     }
     return unDefinedRoute(
