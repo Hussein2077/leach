@@ -114,9 +114,10 @@ class RouteGenerator {
                 const LoginScreen(),
             transitionsBuilder: customAnimate);
       case Routes.main:
+        int ?selectedIndex = settings.arguments as int?;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const MainScreen(),
+                  MainScreen(selectedIndex: selectedIndex??4,),
             transitionsBuilder: customAnimate);
       case Routes.welcomePage:
         return PageRouteBuilder(
@@ -221,12 +222,12 @@ class RouteGenerator {
             pageBuilder: (context, animation, secondaryAnimation) => BreedingScreen(type: type),
             transitionsBuilder: customAnimate);
       case Routes.editPetProfile:
-        Pet currentPet = settings.arguments as Pet;
+        List<Pet> currentPet = settings.arguments as List<Pet> ;
 
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 EditPetProfile(
-                  currentPet: currentPet,
+                  pets: currentPet,
                 ),
             transitionsBuilder: customAnimate);
       case Routes.deleteAccount:

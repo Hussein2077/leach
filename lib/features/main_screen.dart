@@ -16,10 +16,9 @@ import 'package:leach/features/profile/presentation/widget/pet_or_profile.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({
-    super.key,
+    super.key,   this.selectedIndex=4,
   });
-
-  static int mainIndex = 0;
+final int selectedIndex;
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -28,7 +27,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
-    context.read<MainScreenBloc>().add(const ChangeTabEvent(4));
+    context.read<MainScreenBloc>().add(  ChangeTabEvent(widget.selectedIndex));
     BlocProvider.of<GetMyDataBloc>(context).add(GetMyDataEvent());
     super.initState();
   }

@@ -63,7 +63,7 @@ class MyPetProfile extends StatelessWidget {
                 onTap: () {
                   // lesa
                   Navigator.pushNamed(context, Routes.editPetProfile,
-                      arguments: UserModel.getInstance().pets![0]);
+                      arguments: UserModel.getInstance().pets);
                 },
                 child: Padding(
                   padding: EdgeInsets.only(left: AppSize.defaultSize! * 2),

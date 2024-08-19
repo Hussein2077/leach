@@ -89,7 +89,8 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
   Future<PetProfileModel> updatePet (UpdatePetRequest updatePetRequest) async {
     FormData? formData;
     final Options options = await DioHelper().options();
-  log(' updatePetRequest.traits ${updatePetRequest.subtraits}');
+  log(' updatePetRequest.traits ${updatePetRequest.uuid}');
+
   if(updatePetRequest.profilePicture!=null){
     formData=FormData.fromMap({
       'username': updatePetRequest.username,
