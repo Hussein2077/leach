@@ -10,15 +10,15 @@ import 'package:leach/features/auth/presentation/login_screen.dart';
 import 'package:leach/features/auth/presentation/sign_up/register.dart';
 import 'package:leach/features/auth/presentation/welcome_screen.dart';
 import 'package:leach/features/chat/chat_details.dart';
-import 'package:leach/features/home/doctors.dart';
-import 'package:leach/features/home/componant/booking.dart';
-import 'package:leach/features/home/componant/breeding.dart';
-import 'package:leach/features/home/componant/cash_or_credit.dart';
-import 'package:leach/features/home/componant/how_to.dart';
-import 'package:leach/features/home/componant/review.dart';
-import 'package:leach/features/home/componant/select_how_to.dart';
-import 'package:leach/features/home/componant/trainYourDog.dart';
-import 'package:leach/features/home/widgets/calender.dart';
+import 'package:leach/features/home/presentation/componant/booking.dart';
+import 'package:leach/features/home/presentation/componant/breeding/breeding.dart';
+import 'package:leach/features/home/presentation/componant/cash_or_credit.dart';
+import 'package:leach/features/home/presentation/componant/how_to.dart';
+import 'package:leach/features/home/presentation/componant/review.dart';
+import 'package:leach/features/home/presentation/componant/select_how_to.dart';
+import 'package:leach/features/home/presentation/componant/trainYourDog.dart';
+import 'package:leach/features/home/presentation/doctors.dart';
+import 'package:leach/features/home/presentation/widgets/calender.dart';
 import 'package:leach/features/main_screen.dart';
 import 'package:leach/features/posts/data/models/posts_model.dart';
 import 'package:leach/features/profile/domain/model/create_pet.dart';
@@ -210,9 +210,9 @@ class RouteGenerator {
                 const EditProfile(),
             transitionsBuilder: customAnimate);
       case Routes.breedingScreen:
+        String type = settings.arguments as String;
         return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) =>
-                const BreedingScreen(),
+            pageBuilder: (context, animation, secondaryAnimation) => BreedingScreen(type: type),
             transitionsBuilder: customAnimate);
         case Routes.editPetProfile:
         return PageRouteBuilder(

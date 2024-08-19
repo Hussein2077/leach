@@ -9,6 +9,11 @@ import 'package:leach/features/auth/domain/use_case/login_with_email_and_passwor
 import 'package:leach/features/auth/domain/use_case/sign_up_use_case.dart';
 import 'package:leach/features/auth/presentation/controller/login_bloc/login_with_email_and_password_bloc.dart';
 import 'package:leach/features/auth/presentation/controller/sign_up_bloc/sign_up_with_email_and_password_bloc.dart';
+import 'package:leach/features/home/data/data_source/home_remote_data_source.dart';
+import 'package:leach/features/home/data/repo_imp/repo_imp.dart';
+import 'package:leach/features/home/domain/repo/base_repo.dart';
+import 'package:leach/features/home/domain/use_case/get_breeding_uc.dart';
+import 'package:leach/features/home/presentation/manager/get_breeding_manager/get_breeding_bloc.dart';
 import 'package:leach/features/main_screen_bloc.dart';
 import 'package:leach/features/posts/data/data_source/posts_remote_data_source.dart';
 import 'package:leach/features/posts/data/repo_imp/repo_imp.dart';
@@ -65,6 +70,7 @@ class ServerLocator {
     getIt.registerLazySingleton(() => GetMyDataBloc(getMyDataUseCase: getIt(), changePrivacyUseCase: getIt()));
     getIt.registerLazySingleton(() => GetTraitsBloc(getTraitUseCase: getIt()));
     getIt.registerLazySingleton(() => DeleteCommentBloc(deleteCommentUseCase: getIt()));
+    getIt.registerLazySingleton(() => BreedingBloc(getBreedingUseCase: getIt()));
 
 
     //use_case
@@ -90,18 +96,21 @@ class ServerLocator {
     getIt.registerFactory(() => GetTraitsUseCase(profileBaseRepository : getIt()));
     getIt.registerFactory(() => UpdatePetUseCase(profileBaseRepository : getIt()));
     getIt.registerFactory(() => ChangePrivacyUseCase(profileBaseRepository : getIt()));
+    getIt.registerFactory(() => GetBreedingUseCase(homeBaseRepository : getIt()));
 
 
     //remote data
     getIt.registerLazySingleton<BaseRemotelyDataSource>(() => AuthRemotelyDateSource());
     getIt.registerLazySingleton<PostsBaseRemotelyDataSource>(() => PostsRemotelyDateSource());
     getIt.registerLazySingleton<ProfileBaseRemotelyDataSource>(() => ProfileRemotelyDateSource());
+    getIt.registerLazySingleton<HomeBaseRemotelyDataSource>(() => HomeRemotelyDateSource());
 
 
     //repo
     getIt.registerLazySingleton<BaseRepository>(() => RepositoryImp(baseRemotelyDataSource: getIt()));
     getIt.registerLazySingleton<ProfileBaseRepository>(() => ProfileRepositoryImp(profileBaseRemotelyDataSource: getIt()));
     getIt.registerLazySingleton<PostsBaseRepository>(() => PostsRepositoryImp(postsBaseRemotelyDataSource: getIt()));
+    getIt.registerLazySingleton<HomeBaseRepository>(() => HomeRepositoryImp(homeBaseRemotelyDataSource: getIt()));
     getIt.registerLazySingleton(() => NavigationService());
   }
 }

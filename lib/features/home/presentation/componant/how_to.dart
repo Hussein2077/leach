@@ -1,14 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
-import 'package:leach/core/widgets/icon_with_matrial.dart';
-import 'package:leach/core/widgets/leading_icon.dart';
-import 'package:leach/features/home/widgets/upper_stack.dart';
+import 'package:leach/features/home/presentation/widgets/upper_stack.dart';
 
 class HowTo extends StatelessWidget {
   const HowTo({super.key});

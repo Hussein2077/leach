@@ -9,6 +9,7 @@ import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/utils/methods.dart';
 import 'package:leach/features/auth/presentation/controller/login_bloc/login_with_email_and_password_bloc.dart';
 import 'package:leach/features/auth/presentation/controller/sign_up_bloc/sign_up_with_email_and_password_bloc.dart';
+import 'package:leach/features/home/presentation/manager/get_breeding_manager/get_breeding_bloc.dart';
 import 'package:leach/features/main_screen_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/comment_manager/comment_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/delete_comment_manager/delete_comment_bloc.dart';
@@ -36,17 +37,20 @@ void main() async {
   token = await Methods.instance.returnUserToken();
 
   runApp(EasyLocalization(
-      fallbackLocale: const Locale('en'),
-      supportedLocales: const [
-        Locale('en'),
-        Locale('ar'),
-      ],
-      assetLoader: CodegenLoader(),
-      path: 'lib/core/translations/',
-      saveLocale: true,
-      child: Builder(builder: (context) {
-        return const MyApp();
-      })));
+    fallbackLocale: const Locale('en'),
+    supportedLocales: const [
+      Locale('en'),
+      Locale('ar'),
+    ],
+    assetLoader: CodegenLoader(),
+    path: 'lib/core/translations/',
+    saveLocale: true,
+    child: Builder(builder: (context) {
+      return const MyApp();
+      },
+    ),
+  ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -105,6 +109,9 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => getIt<DeleteCommentBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<BreedingBloc>(),
         ),
       ],
       child: MaterialApp(

@@ -6,11 +6,15 @@ import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 class AgeSizeRow extends StatelessWidget {
-  const AgeSizeRow({super.key});
+  final String age;
+  final String weight;
+  final String gender;
+  final String size;
+  const AgeSizeRow({super.key, required this.age, required this.weight, required this.gender, required this.size});
 
   @override
   Widget build(BuildContext context) {
-    return    Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Column(
@@ -28,7 +32,7 @@ class AgeSizeRow extends StatelessWidget {
               height: AppSize.defaultSize! * 0.5,
             ),
             CustomText(
-              text: '2 yrs',
+              text: '$age yrs',
               fontSize: AppSize.defaultSize! * 1.5,
             ),
           ],
@@ -48,7 +52,7 @@ class AgeSizeRow extends StatelessWidget {
               height: AppSize.defaultSize! * 0.5,
             ),
             CustomText(
-              text: '15 kg',
+              text: '$weight kg',
               fontSize: AppSize.defaultSize! * 1.5,
             ),
           ],
@@ -68,7 +72,7 @@ class AgeSizeRow extends StatelessWidget {
               height: AppSize.defaultSize! * 0.5,
             ),
             CustomText(
-              text: 'Male',
+              text: gender,
               fontSize: AppSize.defaultSize! * 1.5,
             ),
           ],
@@ -85,7 +89,7 @@ class AgeSizeRow extends StatelessWidget {
               height: AppSize.defaultSize! * 0.5,
             ),
             CustomText(
-              text: 'Medium',
+              text: size,
               fontSize: AppSize.defaultSize! * 1.5,
             ),
           ],

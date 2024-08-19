@@ -1,9 +1,7 @@
-import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
@@ -19,7 +17,6 @@ import 'package:leach/features/posts/presentation/manager/user_posts_manager/use
 import 'package:leach/features/posts/presentation/manager/user_posts_manager/user_posts_event.dart';
 import 'package:leach/features/posts/presentation/manager/user_posts_manager/user_posts_state.dart';
 import 'package:leach/features/profile/presentation/widget/side_bar_row.dart';
-import 'package:http_parser/http_parser.dart';
 
 class EditPost extends StatefulWidget {
   final PostData data;
@@ -33,24 +30,14 @@ class EditPost extends StatefulWidget {
 class _EditPostState extends State<EditPost> {
   TextEditingController postController = TextEditingController();
 
-  final ImagePicker picker = ImagePicker();
-  XFile? image;
-
-  Future<void> _getImage() async {
-    image = await picker.pickImage(source: ImageSource.gallery);
-    setState(() {});
-  }
-
   @override
   void initState() {
-    image = null;
     postController.text = widget.data.caption ?? "";
     super.initState();
   }
 
   @override
   void dispose() {
-    image = null;
     postController.dispose();
     super.dispose();
   }
@@ -131,24 +118,14 @@ class _EditPostState extends State<EditPost> {
                               ),
                             ],
                           ),
-                          InkWell(
-                            onTap: () {
-                              _getImage();
-                            },
-                            child: Container(
-                              width: AppSize.screenWidth!,
-                              height: AppSize.defaultSize! * 35,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(
-                                    AppSize.defaultSize! * 4),
-                                image: image == null
-                                    ? DecorationImage(
-                                        image: NetworkImage(
-                                            widget.data.picture ?? ""),
-                                        fit: BoxFit.cover)
-                                    : DecorationImage(
-                                        image: FileImage(File(image!.path)),
-                                        fit: BoxFit.cover),
+                          Container(
+                            width: AppSize.screenWidth!,
+                            height: AppSize.defaultSize! * 35,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(AppSize.defaultSize! * 4),
+                              image: DecorationImage(
+                                image: NetworkImage(widget.data.picture ?? ""),
+                                fit: BoxFit.cover,
                               ),
                             ),
                           ),
@@ -169,22 +146,9 @@ class _EditPostState extends State<EditPost> {
                             text: StringManager.save.tr(),
                             onTap: () async {
                               FormData? formData;
-                              if (image != null) {
-                                formData = FormData.fromMap({
-                                  "caption": postController.text,
-                                  "picture": await MultipartFile.fromFile(
-                                      image!.path,
-                                      filename: image?.path
-                                          .split('/')
-                                          .last
-                                          .toString(),
-                                      contentType: MediaType("image", "jpeg")),
-                                });
-                              } else {
-                                formData = FormData.fromMap({
-                                  "caption": postController.text,
-                                });
-                              }
+                              formData = FormData.fromMap({
+                                "caption": postController.text,
+                              });
                               BlocProvider.of<UserPostsBloc>(context).add(
                                   EditeUserPostEvent(
                                       data: formData, id: widget.data.uuid!));

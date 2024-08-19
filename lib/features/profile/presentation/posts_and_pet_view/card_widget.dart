@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -93,9 +94,9 @@ class _CardWidgetState extends State<CardWidget> {
                       BlocProvider.of<UserPostsBloc>(context).add(
                         EditeUserPostEvent(
                           id: widget.data.uuid!,
-                          data: const {
-                            "comments_allowed": 0
-                          },
+                          data: FormData.fromMap({
+                            "comments_allowed": 0,
+                          }),
                         ),
                       );
                       Navigator.of(context).pop(); // Dismiss dialog
@@ -169,9 +170,9 @@ class _CardWidgetState extends State<CardWidget> {
                       BlocProvider.of<UserPostsBloc>(context).add(
                         EditeUserPostEvent(
                           id: widget.data.uuid!,
-                          data: const {
-                            "comments_allowed": 1
-                          },
+                          data: FormData.fromMap({
+                            "comments_allowed": 1,
+                          }),
                         ),
                       );
                       Navigator.of(context).pop(); // Dismiss dialog

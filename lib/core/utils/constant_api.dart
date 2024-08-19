@@ -46,6 +46,9 @@ class ConstantApi {
   }
   static const String createPost = "${baseUrl}post";
 
+  static getBreeding({required String type, required String page}) {
+    return "${baseUrl}breeding?pet_type=$type&page=$page";
+  }
 
 //////////////////////////////
   static const String deleteAccount = "${baseUrl}New";
