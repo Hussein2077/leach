@@ -70,7 +70,7 @@ class _CatBreed3State extends State<CatBreed3> {
               ],
             ),
             SizedBox(height: AppSize.defaultSize! * 3),
-            Spacer(),
+            const Spacer(),
             Center(
               child: MainButton(
                 text: StringManager.save.tr(),

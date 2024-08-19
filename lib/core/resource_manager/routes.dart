@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leach/core/models/pet_model.dart';
 import 'package:leach/core/resource_manager/enums.dart';
 import 'package:leach/core/service/navigator_services.dart';
 import 'package:leach/core/service/service_locator.dart';
@@ -216,9 +217,13 @@ class RouteGenerator {
                 const BreedingScreen(),
             transitionsBuilder: customAnimate);
       case Routes.editPetProfile:
+        Pet currentPet = settings.arguments as Pet;
+
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const EditPetProfile(),
+                EditPetProfile(
+                  currentPet: currentPet,
+                ),
             transitionsBuilder: customAnimate);
       case Routes.deleteAccount:
         return PageRouteBuilder(

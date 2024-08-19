@@ -1,129 +1,349 @@
+import 'dart:io';
+
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leach/core/models/pet_model.dart';
+import 'package:leach/core/models/profile_data_model.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
+import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
+import 'package:leach/core/utils/methods.dart';
 import 'package:leach/core/widgets/check_box.dart';
 import 'package:leach/core/widgets/column_with_text_field.dart';
 import 'package:leach/core/widgets/custom_text_field.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
+import 'package:leach/core/widgets/leading_icon.dart';
+import 'package:leach/core/widgets/loading_widget.dart';
 import 'package:leach/core/widgets/main_button.dart';
+import 'package:leach/core/widgets/snack_bar.dart';
 import 'package:leach/features/auth/presentation/widgets/leading_with_icon.dart';
+import 'package:leach/features/profile/presentation/controller/create_pet_bloc/create_pet_bloc.dart';
+import 'package:leach/features/profile/presentation/controller/create_pet_bloc/create_pet_events.dart';
+import 'package:leach/features/profile/presentation/controller/create_pet_bloc/create_pet_states.dart';
+import 'package:leach/features/profile/presentation/profile/widgets/profile_pic.dart';
+import 'package:leach/features/profile/presentation/widget/image_picker_widget.dart';
 import 'package:leach/features/profile/presentation/widget/size_row.dart';
 
-class EditPetProfile extends StatelessWidget {
-  const EditPetProfile({super.key});
+class EditPetProfile extends StatefulWidget {
+  const EditPetProfile({super.key, required this.currentPet});
+
+  final Pet currentPet;
+
+  @override
+  State<EditPetProfile> createState() => _EditPetProfileState();
+}
+
+class _EditPetProfileState extends State<EditPetProfile> {
+  late TextEditingController nameController;
+  late TextEditingController usernameController;
+  late TextEditingController weightController;
+  File? imageFile;
+  File? passportImageFile;
+  DateTime? selectedDate;
+  int? size;
+  bool? breedingExperience;
+  bool? neuteredSpayed;
+  bool? breedingAvailable;
+
+  @override
+  void initState() {
+    nameController = TextEditingController(text: widget.currentPet.name);
+    usernameController =
+        TextEditingController(text: widget.currentPet.username);
+    weightController =
+        TextEditingController(text: widget.currentPet.weight.toString());
+    selectedDate = widget.currentPet.dateOfBirth;
+    size = widget.currentPet.size == 'SMALL'
+        ? 0
+        : widget.currentPet.size == 'MEDIUM'
+            ? 1
+            : widget.currentPet.size == 'LARGE'
+                ? 2
+                : 3;
+    neuteredSpayed = widget.currentPet.neuteredSpayed;
+    breedingExperience = widget.currentPet.breedingExperience;
+    breedingAvailable = widget.currentPet.breedingAvailable;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocListener<CreatePetBloc, CreatePetState >(
+      listener: (context, state) {
+        if (state is UpdatePetSuccessMessageState) {
+          LoadingOverlay().hide();
+          Navigator.pushNamed(context, Routes.main);
+        } else if (state is UpdatePetErrorMessageState) {
+          LoadingOverlay().hide();
+          errorSnackBar(context, state.errorMessage);
+        } else if (state is UpdatePetLoadingState) {
+          LoadingOverlay().show(context);
+        }
+      },
+  child: Scaffold(
         body: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.only(
-              left: AppSize.defaultSize! * 2,
-              right: AppSize.defaultSize! * 2,
-              top: AppSize.defaultSize! * 6,
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: AppSize.defaultSize! * 2,
+          right: AppSize.defaultSize! * 2,
+          top: AppSize.defaultSize! * 6,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: AppSize.defaultSize! * 2,
+              width: AppSize.defaultSize! * 2,
             ),
-            child: Column(
+            Row(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-
-                SizedBox(height: AppSize.defaultSize! * 2,width: AppSize.defaultSize! * 2,),
-
-                LeadingWithIcon(image: AssetPath.petPawIcon,)
-                ,
-                Padding(
-                  padding:  EdgeInsets.only(right: AppSize.defaultSize! * 2.5,),
-                  child: Center(
-                    child: InkWell(
-                      child: CustomText(
-                        text: StringManager.changePicture.tr(),
-                        fontSize: AppSize.defaultSize! * 2,
+                const LeadingIcon(
+                  color: AppColors.primaryColor,
+                ),
+                const Spacer(
+                  flex: 10,
+                ),
+                if (widget.currentPet.profilePicture != null ||
+                    widget.currentPet.profilePicture != '')
+                  StatefulBuilder(builder: (context, setState) {
+                    return Padding(
+                      padding: EdgeInsets.only(top: AppSize.defaultSize! * 2),
+                      child: ProfileImagePicker(
+                        initialImageUrl:
+                            UserModel.getInstance().pets?[0].profilePicture,
+                        // Your initial image URL
+                        initialText: 'Pick an image',
+                        onImagePicked: (File image) {
+                          setState(() {
+                            imageFile = image;
+                          });
+                        },
                       ),
+                    );
+                  }),
+                if (widget.currentPet.profilePicture == '')
+                  Padding(
+                    padding: EdgeInsets.only(top: AppSize.defaultSize! * 2),
+                    child: Image.asset(
+                      AssetPath.whiteProfileIcon,
+                      width: AppSize.defaultSize! * 15,
+                      height: AppSize.defaultSize! * 15,
                     ),
                   ),
-                ),
-                SizedBox(height: AppSize.defaultSize! * 2,),
-                CustomText(
-                  fontFamily: 'Gully-CD',
-                  text:
-                  StringManager.enterInformation.tr(),
-                  fontSize: AppSize.defaultSize!   * 1.5,
-                  color: Color.fromRGBO(112, 112, 112, 1),
-
-                ),
-                ColumnWithTextField(
-                  text: StringManager.typeAgeAndWeightOfDog.tr(),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomTextField(
-                        width: AppSize.screenWidth! * 0.42,
-                        hintText: StringManager.age.tr(),
-                      ),
-
-                      CustomTextField(
-                        width: AppSize.screenWidth! * 0.42,
-                        hintText: StringManager.weightKg.tr(),
-                      ),
-                    ],
-                  ),
-                ),
-                ColumnWithTextField(
-                  text: StringManager.size.tr(),
-                  child:   const SizeRow(isDog: true,),
-                ),
-
-
-
-
-
-
-                ColumnWithTextField(
-                  text: StringManager.breedingExperience.tr(),
-                  child: Row(
-                    children: [
-                      CircularCheckbox(
-                        text: StringManager.yes.tr(),
-                      ),
-                      CircularCheckbox(
-                        text: StringManager.no.tr(),
-                      ),
-                    ],
-                  ),
-                ),SizedBox(
-                  height: AppSize.defaultSize! * 2,
-                ),
-
-                InkWell(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomText(
-                        text: StringManager.addPictureOfMedicalPassport.tr(),
-                        fontSize: AppSize.defaultSize! * 2,
-                        color: AppColors.primaryColor,
-                      ),
-                      IconButton(
-                          onPressed: () {},
-                          icon: Image.asset(AssetPath.cameraIcon.toString()))
-                    ],
-                  ),
-                ),
-
-                MainButton(text: StringManager.save. tr(),
-                  onTap: (){
-
-                  },
-                  textColor: Colors.white,
-                ),
-                SizedBox(
-                  height: AppSize.defaultSize! * 2.5,
+                const Spacer(
+                  flex: 12,
                 ),
               ],
             ),
-          ),
-        ));
+            Padding(
+              padding: EdgeInsets.only(
+                right: AppSize.defaultSize! * 2.5,
+              ),
+              child: Center(
+                child: InkWell(
+                  child: CustomText(
+                    text: StringManager.changePicture.tr(),
+                    fontSize: AppSize.defaultSize! * 2,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: AppSize.defaultSize! * 2,
+            ),
+            CustomText(
+              fontFamily: 'Gully-CD',
+              text: StringManager.enterInformation.tr(),
+              fontSize: AppSize.defaultSize! * 1.5,
+              color: Color.fromRGBO(112, 112, 112, 1),
+            ),
+            ColumnWithTextField(
+              text: StringManager.name.tr(),
+              hintText: StringManager.enterYourName.tr(),
+              rightText: StringManager.optional.tr(),
+              controller: nameController,
+            ),
+            ColumnWithTextField(
+              text: StringManager.userName.tr(),
+              hintText: StringManager.enterUserName.tr(),
+              controller: usernameController,
+              rightText: StringManager.optional.tr(),
+            ),
+            ColumnWithTextField(
+              text: StringManager.typeAgeAndWeightOfDog.tr(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  StatefulBuilder(builder: (context, setState) {
+                    return CustomTextField(
+                      width: AppSize.screenWidth! * 0.42,
+                      hintText: selectedDate != null
+                          ? DateFormat('yyyy-MM-dd').format(selectedDate!)
+                          : StringManager.age.tr(),
+                      readOnly: true,
+                      onTap: () async {
+                        var results = await showCalendarDatePicker2Dialog(
+                          context: context,
+                          config: Methods.instance.config,
+                          dialogSize: Size(AppSize.screenWidth! * .8,
+                              AppSize.screenHeight! * .5),
+                          borderRadius: BorderRadius.circular(15),
+                        );
+                        if (results != null && results.isNotEmpty) {
+                          DateTime selectedDate = results.first!;
+                          setState(() {
+                            this.selectedDate = selectedDate;
+                          });
+                        }
+                      },
+                    );
+                  }),
+                  CustomTextField(
+                    width: AppSize.screenWidth! * 0.42,
+                    hintText: StringManager.weightKg.tr(),
+                  ),
+                ],
+              ),
+            ),
+            ColumnWithTextField(
+              text: StringManager.size.tr(),
+              child: SizeRow(
+                isDog: false,
+                initialValue: size,
+                onValueChange: (value) {
+                  setState(() {
+                    size = value;
+                  });
+                },
+              ),
+            ),
+            ColumnWithTextField(
+              text: StringManager.breedingExperience.tr(),
+              child: Row(
+                children: [
+                  CircularCheckbox(
+                    text: StringManager.yes.tr(),
+                    initialValue: breedingExperience == true,
+                    onChanged: (value) {
+                      setState(() {
+                        breedingExperience = true;
+                      });
+                    },
+                  ),
+                  CircularCheckbox(
+                    text: StringManager.no.tr(),
+                    initialValue: breedingExperience == false,
+                    onChanged: (value) {
+                      setState(() {
+                        breedingExperience = false;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+            ColumnWithTextField(
+              text: StringManager.availableForBreeding.tr(),
+              child: Row(
+                children: [
+                  CircularCheckbox(
+                    text: StringManager.yes.tr(),
+                    initialValue: breedingAvailable == true,
+                    onChanged: (value) {
+                      setState(() {
+                        breedingAvailable = true;
+                      });
+                    },
+                  ),
+                  CircularCheckbox(
+                    text: StringManager.no.tr(),
+                    initialValue: breedingAvailable == false,
+                    onChanged: (value) {
+                      setState(() {
+                        breedingAvailable = false;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+            ColumnWithTextField(
+              text: StringManager.neuteredSpayed.tr(),
+              child: Row(
+                children: [
+                  CircularCheckbox(
+                    text: StringManager.yes.tr(),
+                    initialValue: neuteredSpayed == true,
+                    onChanged: (value) {
+                      setState(() {
+                        neuteredSpayed = true;
+                      });
+                    },
+                  ),
+                  CircularCheckbox(
+                    text: StringManager.no.tr(),
+                    initialValue: neuteredSpayed == false,
+                    onChanged: (value) {
+                      setState(() {
+                        neuteredSpayed = false;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: AppSize.defaultSize! * 2,
+            ),
+            ImagePickerWidget(
+              initialText: StringManager.editPictureOfMedicalPassport.tr(),
+              onImagePicked: (File file) {
+                setState(() {
+                  passportImageFile = file;
+                });
+              },
+            ),
+            MainButton(
+              text: StringManager.save.tr(),
+              onTap: () {
+                BlocProvider.of<CreatePetBloc>(context).add(UpdatePetEvent(
+                  uuid: widget.currentPet.uuid ?? "",
+                  profilePicture: imageFile,
+                  name: nameController.text,
+                  username: usernameController.text,
+                  weight: double.parse(weightController.text.isEmpty
+                      ? "0"
+                      : weightController.text),
+                  breedingAvailable: breedingAvailable,
+                  neuteredSpayed: neuteredSpayed,
+                  breedingExperience: breedingExperience,
+                  medicalPassport:  passportImageFile,
+                  size: size == 0
+                      ? "SMALL"
+                      : size == 1
+                          ? "MEDIUM"
+                          : size == 2
+                              ? "LARGE"
+                              : (widget.currentPet.petType == "DOG"
+                                  ? "GIANT"
+                                  : "CHUNKY"),
+                ));
+              },
+              textColor: Colors.white,
+            ),
+            SizedBox(
+              height: AppSize.defaultSize! * 2.5,
+            ),
+          ],
+        ),
+      ),
+    )),
+);
   }
 }

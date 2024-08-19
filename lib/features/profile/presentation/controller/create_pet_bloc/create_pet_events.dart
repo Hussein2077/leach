@@ -63,7 +63,7 @@ class  UpdatePetEvent
   final bool? neuteredSpayed;
   final bool? breedingAvailable;
   final File? profilePicture;
-  final String? medicalPassport;
+  final File? medicalPassport;
   final List<int>? traits;
   final List<int>? subtraits;
 

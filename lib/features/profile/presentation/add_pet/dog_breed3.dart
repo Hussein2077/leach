@@ -13,6 +13,7 @@ import 'package:leach/core/widgets/main_button.dart';
 import 'package:leach/core/widgets/snack_bar.dart';
 import 'package:leach/features/auth/presentation/widgets/leading_with_icon.dart';
 import 'package:leach/features/profile/domain/model/create_pet.dart';
+import 'package:leach/features/profile/domain/model/traits_model.dart';
 import 'package:leach/features/profile/presentation/controller/create_pet_bloc/create_pet_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/create_pet_bloc/create_pet_events.dart';
 import 'package:leach/features/profile/presentation/controller/create_pet_bloc/create_pet_states.dart';
@@ -35,6 +36,7 @@ class _DogBreed3State extends State<DogBreed3> {
   final Set<int> selectedPetTraitIds = {};
 
   final Set<int> selectedSubtraitIds = {};
+  List<int>?  petTraits;
 
   @override
   void initState() {
@@ -95,6 +97,7 @@ class _DogBreed3State extends State<DogBreed3> {
                   if (state is GetTraitLoadingState) {
                     return const LoadingWidget();
                   } else if (state is GetTraitSuccessMessageState) {
+                    petTraits= state.petTraits.map((trait) => trait.id).toList();
                     if (state.petTraits.isEmpty) {
                       return const EmptyWidget();
                     }
@@ -144,7 +147,10 @@ class _DogBreed3State extends State<DogBreed3> {
                 child: MainButton(
                   text: StringManager.save.tr(),
                   onTap: () {
-                    BlocProvider.of<CreatePetBloc>(context).add(UpdatePetEvent(
+                    bool areTraitsValid = selectedPetTraitIds.every((id) => petTraits!.contains(id));
+                    bool areSubtraitsValid = selectedSubtraitIds.every((id) => petTraits!.contains(id));
+                    if (areTraitsValid && areSubtraitsValid) {
+                      BlocProvider.of<CreatePetBloc>(context).add(UpdatePetEvent(
                       uuid: widget.petProfileModel.uuid??"",
                       traits: selectedPetTraitIds.toList(),
                       subtraits: selectedSubtraitIds.toList(),
@@ -153,6 +159,9 @@ class _DogBreed3State extends State<DogBreed3> {
                       breedingExperience: widget.petProfileModel.breedingExperience,
                       size: widget.petProfileModel.breedSize,
                     ));
+                    }else{
+                      errorSnackBar(context, StringManager.unexpectedError);
+                    }
                     // Handle saving logic here
                     print('Selected Pet Trait IDs: ${widget.petProfileModel}');
                     print('Selected Subtrait IDs: $selectedSubtraitIds');

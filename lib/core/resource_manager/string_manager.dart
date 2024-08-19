@@ -82,7 +82,8 @@ class StringManager {
 
   static const String addAPicture = "Add a picture";
   static const String addPictureOfMedicalPassport =
-      "Add a picture of medical passport";
+      "Add a picture of medical passport";  static const String editPictureOfMedicalPassport  =
+      "Edit picture of medical passport";
   static const String next = "Next";
   static const String dogBreed = "Dog Breed";
   static const String enterYourDogsInformation = "Enter your dog’s information";

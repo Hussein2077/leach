@@ -1,9 +1,11 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:leach/core/models/profile_data_model.dart';
+import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/service/navigator_services.dart';
@@ -83,6 +85,20 @@ class Methods {
       return '$years Y';
     }
   }
+  var config = CalendarDatePicker2WithActionButtonsConfig(
+    dayTextStyle: const TextStyle(color: AppColors.primaryColor),
+    selectedDayHighlightColor: AppColors.primaryColor,
+    calendarType: CalendarDatePicker2Type.single,
+    controlsTextStyle: const TextStyle(color: AppColors.primaryColor),
+    weekdayLabelTextStyle:
+    const TextStyle(color: AppColors.primaryColor),
+    selectedDayTextStyle: const TextStyle(color: Colors.white),
+    okButtonTextStyle: const TextStyle(color: AppColors.primaryColor),
+    cancelButtonTextStyle:
+    const TextStyle(color: AppColors.primaryColor),
+    firstDate: DateTime(1900), // Set this to the earliest date you want to allow
+    lastDate: DateTime.now() ,
+  );
 
 }
 
