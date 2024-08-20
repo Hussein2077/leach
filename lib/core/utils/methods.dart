@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leach/core/models/profile_data_model.dart';
 import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/resource_manager/routes.dart';
@@ -11,9 +12,13 @@ import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/service/navigator_services.dart';
 import 'package:leach/core/service/service_locator.dart';
 import 'package:leach/core/utils/app_size.dart';
+import 'package:leach/features/home/presentation/manager/get_vendor/bloc.dart';
+import 'package:leach/features/home/presentation/manager/get_vendor/event.dart';
 
 import 'package:leach/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'enums.dart';
 
 class Methods {
 //singleton class
@@ -99,6 +104,25 @@ class Methods {
     firstDate: DateTime(1900), // Set this to the earliest date you want to allow
     lastDate: DateTime.now() ,
   );
+  Future<void> chooseVendorType( BuildContext context,{required TypeOfVendor type}) async {
+    switch (type){
+      case TypeOfVendor.vet:
+        BlocProvider.of<VendorsBloc>(context)
+            .add(GetVendorsEvent(type: TypeOfVendor.vet));
 
+        break;
+      case TypeOfVendor.grooming:
+        BlocProvider.of<VendorsBloc>(context)
+            .add(GetVendorsEvent(type: TypeOfVendor.grooming));
+
+        break;
+      case TypeOfVendor.training:
+        BlocProvider.of<VendorsBloc>(context)
+            .add(GetVendorsEvent(type: TypeOfVendor.training));
+
+        break;
+
+    }
+  }
 }
 

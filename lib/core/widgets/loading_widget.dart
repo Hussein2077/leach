@@ -5,11 +5,12 @@ import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/utils/app_size.dart';
 
 class LoadingWidget extends StatefulWidget {
-  const LoadingWidget({super.key, this.height, this.width, this.size});
+  const LoadingWidget({super.key, this.height, this.width, this.size, this.color});
 
   final double? height;
   final double? width;
   final double? size;
+  final Color? color;
 
   @override
   State<LoadingWidget> createState() => _LoadingWidgetState();
@@ -38,6 +39,7 @@ class _LoadingWidgetState extends State<LoadingWidget>    with SingleTickerProvi
         turns: _controller,
         child: Image.asset(
           AssetPath.loading,
+          color:widget. color,
           height: AppSize.defaultSize! * 7,
           width: AppSize.defaultSize! * 7,
         ), // Replace with your asset path

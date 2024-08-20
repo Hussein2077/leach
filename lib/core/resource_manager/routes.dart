@@ -3,6 +3,7 @@ import 'package:leach/core/models/pet_model.dart';
 import 'package:leach/core/resource_manager/enums.dart';
 import 'package:leach/core/service/navigator_services.dart';
 import 'package:leach/core/service/service_locator.dart';
+import 'package:leach/core/utils/enums.dart';
 import 'package:leach/features/auth/presentation/forgot_password/code_page.dart';
 import 'package:leach/features/auth/presentation/forgot_password/forgot_password.dart';
 import 'package:leach/features/auth/presentation/forgot_password/reset_password_from_profile.dart';
@@ -25,7 +26,6 @@ import 'package:leach/features/posts/data/models/posts_model.dart';
 import 'package:leach/features/profile/domain/model/create_pet.dart';
 import 'package:leach/features/profile/presentation/add_pet/add_pet_screen.dart';
 import 'package:leach/features/profile/presentation/add_pet/cat_bread.dart';
-import 'package:leach/features/profile/presentation/add_pet/cat_breed3.dart';
 import 'package:leach/features/profile/presentation/add_pet/dog_bread.dart';
 import 'package:leach/features/profile/presentation/add_pet/dog_breed3.dart';
 import 'package:leach/features/profile/presentation/add_pet/type_of_pet.dart';
@@ -66,7 +66,6 @@ class Routes {
   static const String catBread = "/CatBread";
   static const String dogBread = "/dogBread";
   static const String doctor = "/Doctors";
-  static const String catBreed3 = "/CatBreed3";
   static const String dogBreed3 = "/dogBreed3";
   static const String sidebar = "/side_bar";
   static const String breedingScreen = "/BreedingScreen";
@@ -159,9 +158,10 @@ class RouteGenerator {
                 ),
             transitionsBuilder: customAnimate);
       case Routes.doctor:
+        TypeOfVendor typeOfVendor = settings.arguments as TypeOfVendor;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const Doctors(),
+                  Doctors(typeOfVendor: typeOfVendor ,),
             transitionsBuilder: customAnimate);
       case Routes.catBread:
         return PageRouteBuilder(
@@ -175,17 +175,13 @@ class RouteGenerator {
             transitionsBuilder: customAnimate);
 
       case Routes.dogBreed3:
-        PetProfileModel petProfileModel = settings.arguments as PetProfileModel;
+        SelectionPetTypeParamRoute  selectionPetTypeParamRoute = settings.arguments as SelectionPetTypeParamRoute;
         return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) => DogBreed3(
-                  petProfileModel: petProfileModel,
+            pageBuilder: (context, animation, secondaryAnimation) => PetBreedSelection(
+            selectionPetTypeParamRoute: selectionPetTypeParamRoute,
                 ),
             transitionsBuilder: customAnimate);
-      case Routes.catBreed3:
-        return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) =>
-                const CatBreed3(),
-            transitionsBuilder: customAnimate);
+
       case Routes.sidebar:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
@@ -236,9 +232,10 @@ class RouteGenerator {
                 const DeleteAccount(),
             transitionsBuilder: customAnimate);
       case Routes.calenderScreen:
+        int vendorId = settings.arguments as int;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const CalenderScreen(),
+                  CalenderScreen(vendorId:  vendorId,),
             transitionsBuilder: customAnimate);
       case Routes.reviewScreen:
         return PageRouteBuilder(
@@ -396,4 +393,9 @@ Widget customAnimate(BuildContext context, Animation<double> animation,
     opacity: animation,
     child: child,
   );
+}
+class SelectionPetTypeParamRoute {
+  final PetProfileModel petProfileModel ;
+  final String petType;
+  SelectionPetTypeParamRoute({ required this.petProfileModel, required this.petType});
 }

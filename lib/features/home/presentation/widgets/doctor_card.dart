@@ -6,18 +6,19 @@ import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/available_training_specialist_row.dart';
+import 'package:leach/core/widgets/cached_network_image.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
+import 'package:leach/features/home/data/models/vendor.dart';
 
 
 class DoctorCard extends StatelessWidget {
-  const DoctorCard({super.key, this.onTap});
+  const DoctorCard({super.key, this.onTap, required this.vendor});
   final Function()? onTap;
+  final Vendor vendor;
   @override
   Widget build(BuildContext context) {
     return  InkWell(
-      onTap: onTap??(){
-        Navigator.pushNamed(context, Routes.calenderScreen);
-      },
+      onTap: onTap,
       child: Padding(
         padding: EdgeInsets.symmetric(
             vertical: AppSize.defaultSize!),
@@ -37,9 +38,14 @@ class DoctorCard extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Image.asset(
-                        AssetPath.doctor,
-                        scale: 1.3,
+                      CircleAvatar(
+                        radius: AppSize.defaultSize! * 3.5,
+                        backgroundColor: Colors.transparent,
+                        child: CachedNetworkCustom(
+                          url:  vendor.image,
+
+
+                        ),
                       ),
                       Column(
                           crossAxisAlignment:
@@ -49,18 +55,18 @@ class DoctorCard extends StatelessWidget {
                               height: AppSize.defaultSize! * 2,
                             ),
                             CustomText(
-                              text: "Dr. Ali Korkor",
+                              text: vendor.name,
                               fontSize: AppSize.defaultSize! * 3,
                               fontWeight: FontWeight.w700,
                               maxLines: 1,
                               textAlign: TextAlign.start,
                             ),
-                            CustomText(
-                              text: StringManager.microchip.tr(),
-                              fontSize: AppSize.defaultSize! * 2,
-                              maxLines: 2,
-                              textAlign: TextAlign.start,
-                            ),
+                            // CustomText(
+                            //   text: StringManager.microchip.tr(),
+                            //   fontSize: AppSize.defaultSize! * 2,
+                            //   maxLines: 2,
+                            //   textAlign: TextAlign.start,
+                            // ),
                             Material(
                               elevation: 10,
                               borderRadius:
@@ -93,32 +99,32 @@ class DoctorCard extends StatelessWidget {
                       SizedBox(
                         height: AppSize.defaultSize! * 3,
                       ),
-                      const TextImageRow(
+                        TextImageRow(
                         text:
-                        '${StringManager.veterinarian} in Microchip Implantation',
+                        // '${StringManager.veterinarian} in Microchip Implantation',
+                        vendor.description,
                         image: AssetPath.doctor2,
-
                       ),
                       SizedBox(
                           height: AppSize.defaultSize! * 3
                       ),
-                      const TextImageRow(
+                        TextImageRow(
                         text:
-                        '${StringManager.address}:El Sheikh Zayed,  Waslet Dahshour',
+                        '${StringManager.address} : ${vendor.address}',
                         image: AssetPath.address,
                       ),
                       SizedBox(
                           height: AppSize.defaultSize! * 3
                       ),
-                      const TextImageRow(
-                        text: '${StringManager.fees}:600 EGP',
+                        TextImageRow(
+                        text: '${StringManager.fees}: ${vendor.baseFee}',
                         image: AssetPath.fees,
                       ),
                       SizedBox(
                           height: AppSize.defaultSize! * 3
                       ),
-                      const TextImageRow(
-                        text: '${StringManager.phone}:2234567',
+                        TextImageRow(
+                        text: '${StringManager.phone}:  ${vendor.phoneNumber}',
                         image: AssetPath.phone,
                       ),
                       SizedBox(

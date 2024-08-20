@@ -10,6 +10,7 @@ import 'package:leach/core/utils/methods.dart';
 import 'package:leach/features/auth/presentation/controller/login_bloc/login_with_email_and_password_bloc.dart';
 import 'package:leach/features/auth/presentation/controller/sign_up_bloc/sign_up_with_email_and_password_bloc.dart';
 import 'package:leach/features/home/presentation/manager/get_breeding_manager/get_breeding_bloc.dart';
+import 'package:leach/features/home/presentation/manager/get_vendor/bloc.dart';
 import 'package:leach/features/main_screen_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/comment_manager/comment_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/delete_comment_manager/delete_comment_bloc.dart';
@@ -36,20 +37,22 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   token = await Methods.instance.returnUserToken();
 
-  runApp(EasyLocalization(
-    fallbackLocale: const Locale('en'),
-    supportedLocales: const [
-      Locale('en'),
-      Locale('ar'),
-    ],
-    assetLoader: CodegenLoader(),
-    path: 'lib/core/translations/',
-    saveLocale: true,
-    child: Builder(builder: (context) {
-      return const MyApp();
-      },
+  runApp(
+    EasyLocalization(
+      fallbackLocale: const Locale('en'),
+      supportedLocales: const [
+        Locale('en'),
+        Locale('ar'),
+      ],
+      assetLoader: CodegenLoader(),
+      path: 'lib/core/translations/',
+      saveLocale: true,
+      child: Builder(
+        builder: (context) {
+          return const MyApp();
+        },
+      ),
     ),
-  ),
   );
 }
 
@@ -61,7 +64,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -78,10 +80,12 @@ class _MyAppState extends State<MyApp> {
           create: (context) => getIt<MainScreenBloc>(),
         ),
         BlocProvider(
-          create: (context) => getIt<PostsBloc>()..add(const GetPostsEvent(page: '1')),
+          create: (context) =>
+              getIt<PostsBloc>()..add(const GetPostsEvent(page: '1')),
         ),
         BlocProvider(
-          create: (context) => getIt<UserPostsBloc>()..add(const GetUserPostsEvent(page: '1')),
+          create: (context) =>
+              getIt<UserPostsBloc>()..add(const GetUserPostsEvent(page: '1')),
         ),
         BlocProvider(
           create: (context) => getIt<CommentBloc>(),
@@ -112,6 +116,9 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => getIt<BreedingBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<VendorsBloc>(),
         ),
       ],
       child: MaterialApp(

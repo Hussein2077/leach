@@ -70,7 +70,10 @@ class _CatBreadState extends State<CatBread> {
             LoadingOverlay().hide();
             BlocProvider.of<GetMyDataBloc>(context).add(
                 GetMyDataEvent());
-            Navigator.pushNamed(context, Routes.catBreed3, arguments: state.petProfileModel);
+            Navigator.pushNamed(context, Routes.dogBreed3, arguments:SelectionPetTypeParamRoute(
+              petProfileModel: state.petProfileModel,
+              petType: 'cat'
+            ) );
           } else if (state is CreatePetErrorMessageState) {
             LoadingOverlay().hide();
             errorSnackBar(context, state.errorMessage);

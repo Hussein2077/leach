@@ -9,13 +9,14 @@ import 'package:leach/core/utils/methods.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/leading_icon.dart';
 import 'package:leach/core/widgets/main_button.dart';
+import 'package:leach/features/home/data/models/vendor.dart';
 import 'package:leach/features/home/presentation/widgets/calender_widget.dart';
 import 'package:leach/features/home/presentation/widgets/times.dart';
 
 
 class CalenderScreen extends StatefulWidget {
-  const CalenderScreen({super.key});
-
+  const CalenderScreen({super.key, required this.vendorId});
+final int vendorId;
   @override
   State<CalenderScreen> createState() => _CalenderScreenState();
 }

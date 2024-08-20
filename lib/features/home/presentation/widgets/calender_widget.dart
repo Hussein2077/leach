@@ -22,6 +22,7 @@ class _CalenderWidgetState extends State<CalenderWidget> {
   }  @override
   Widget build(BuildContext context) {
     return    TableCalendar(
+
       headerStyle: HeaderStyle(
         formatButtonVisible: false,
         titleCentered: true,
@@ -47,7 +48,7 @@ class _CalenderWidgetState extends State<CalenderWidget> {
       availableGestures: AvailableGestures.all,
       selectedDayPredicate: (day) => isSameDay(day, today),
       focusedDay: today,
-      firstDay: DateTime.utc(2010, 10, 16),
+      firstDay: DateTime.now(),
       lastDay: DateTime.utc(2050, 10, 16),
       onDaySelected: _onDaySelected,
     );

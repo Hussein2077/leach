@@ -13,6 +13,8 @@ class ConstantApi {
   static const String getMyData = "${baseUrl}user";
   static const String updateMyData  = "${baseUrl}user/update";
   static const String togglePrivacy  = "${baseUrl}user/togglePrivacy";
+  static const String requestBooking   = "${baseUrl}user/requestBooking";
+  static   String cancelBooking (String id)   => "${baseUrl}user/cancelBooking/$id";
   static getPosts(String page) => '${baseUrl}post/viewPosts?page=$page';
   static getUserPosts(String page) => '${baseUrl}post?page=$page';
   static likePost(String id) {
@@ -49,6 +51,9 @@ class ConstantApi {
 
   static getBreeding({required String type, required String page}) {
     return "${baseUrl}breeding?pet_type=$type&page=$page";
+  }
+  static getVendors({required String type, }) {
+    return "${baseUrl}user/vendors/$type";
   }
 
 //////////////////////////////
