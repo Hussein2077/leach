@@ -16,17 +16,7 @@ class RequestBookingUseCase extends BaseUseCase<void, RequestBookingParam> {
   }
 }
 
-class CancelBookingUseCase extends BaseUseCase<void, int> {
-  final HomeBaseRepository homeBaseRepository;
 
-  CancelBookingUseCase({required this.homeBaseRepository});
-
-  @override
-  Future<Either<void, Failure>> call(int parameter) async {
-    final result = await homeBaseRepository.cancelBooking(parameter);
-    return result;
-  }
-}
 
 class RequestBookingParam {
   final int vendorId;

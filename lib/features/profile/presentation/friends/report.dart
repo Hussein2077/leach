@@ -6,13 +6,6 @@ import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/background.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
-import 'package:leach/core/widgets/icon_with_matrial.dart';
-import 'package:leach/core/widgets/leading_icon.dart';
-import 'package:leach/features/profile/presentation/profile/widgets/posts_container.dart';
-import 'package:leach/features/profile/presentation/widget/medals_abd_freinds.dart';
-import 'package:leach/features/profile/presentation/widget/pet_or_profile.dart';
-import 'package:leach/features/profile/presentation/widget/profile_user_row.dart';
-import 'package:leach/features/profile/presentation/widget/side_bar_row.dart';
 
 class ReportView extends StatefulWidget {
   const ReportView({super.key});

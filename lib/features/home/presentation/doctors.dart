@@ -83,7 +83,7 @@ class _DoctorsState extends State<Doctors> {
                                 Navigator.pushNamed(
                                   context,
                                   Routes.calenderScreen ,
-                                  arguments: state.vendors[index].id,
+                                  arguments: state.vendors[index],
                                 );
                               },
                             ),

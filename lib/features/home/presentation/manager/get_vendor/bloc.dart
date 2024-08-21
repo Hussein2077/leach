@@ -9,9 +9,9 @@ import 'package:leach/features/home/presentation/manager/get_vendor/state.dart';
 class VendorsBloc extends Bloc<BaseGetVendorEvent, BaseVendorsState> {
   final GetVendorsUseCase getVendorsUseCase;
   final RequestBookingUseCase requestBookingUseCase;
-  final CancelBookingUseCase cancelBookingUseCase;
 
-  VendorsBloc({required this.getVendorsUseCase, required this.requestBookingUseCase, required this.cancelBookingUseCase})
+
+  VendorsBloc({required this.getVendorsUseCase, required this.requestBookingUseCase,  })
       : super(VendorsInitialState()) {
     on<GetVendorsEvent>((event, emit) async {
       emit(GetVendorsLoadingState());
@@ -31,14 +31,6 @@ class VendorsBloc extends Bloc<BaseGetVendorEvent, BaseVendorsState> {
           (r) => emit(RequestBookingErrorState(
               errorMessage: DioHelper().getTypeOfFailure(r))));
     });
-    //cancel booking
-    on<CancelBookingEvent>((event, emit) async {
-      emit(CancelBookingLoadingState());
-      final result = await cancelBookingUseCase.call(event.bookingId);
-      result.fold(
-          (l) => emit(const CancelBookingSuccessState( )),
-          (r) => emit(CancelBookingErrorState(
-              errorMessage: DioHelper().getTypeOfFailure(r))));
-    });
+
   }
 }

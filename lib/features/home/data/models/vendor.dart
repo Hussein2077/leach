@@ -35,7 +35,7 @@ class Vendor extends Equatable{
       address: json['address'],
       baseFee: json['base_fee'],
       rating: json['rating'].toDouble(),
-      image: json['image']??"",
+      image: json['profile_picture']??"",
       description: json['description'],
     );
   }
@@ -64,6 +64,7 @@ class Vendor extends Equatable{
     address,
     baseFee,
     rating,
+    image,
     description,
   ];
 }

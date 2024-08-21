@@ -16,7 +16,7 @@ import 'package:leach/features/posts/data/models/posts_model.dart';
 import 'package:leach/features/posts/presentation/manager/user_posts_manager/user_posts_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/user_posts_manager/user_posts_event.dart';
 import 'package:leach/features/posts/presentation/manager/user_posts_manager/user_posts_state.dart';
-import 'package:leach/features/profile/presentation/widget/side_bar_row.dart';
+import 'package:leach/features/profile/presentation/side%20bar/side_bar_row.dart';
 
 class EditPost extends StatefulWidget {
   final PostData data;

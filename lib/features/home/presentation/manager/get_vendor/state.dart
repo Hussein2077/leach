@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:leach/features/home/data/models/vendor.dart';
+import 'package:leach/features/profile/domain/model/all_booking_model.dart';
 
 abstract class BaseVendorsState extends Equatable {
   const BaseVendorsState();
@@ -35,17 +36,5 @@ class RequestBookingErrorState extends BaseVendorsState {
 
 class RequestBookingSuccessState extends BaseVendorsState {
   const RequestBookingSuccessState();
-}
-//cancel booking
-class CancelBookingLoadingState extends BaseVendorsState {}
-
-class CancelBookingErrorState extends BaseVendorsState {
-  final String errorMessage;
-
-  const CancelBookingErrorState({required this.errorMessage});
-}
-
-class CancelBookingSuccessState extends BaseVendorsState {
-  const CancelBookingSuccessState();
 }
 

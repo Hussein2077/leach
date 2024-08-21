@@ -1,22 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/background.dart';
+import 'package:leach/core/widgets/cached_network_image.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/leading_icon.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:leach/core/widgets/available_training_specialist_row.dart';
+import 'package:leach/core/widgets/loading_widget.dart';
 import 'package:leach/core/widgets/main_button.dart';
+import 'package:leach/core/widgets/snack_bar.dart';
+import 'package:leach/features/home/data/models/vendor.dart';
+import 'package:leach/features/home/domain/use_case/request_booking_uc.dart';
+import 'package:leach/features/home/presentation/manager/get_vendor/bloc.dart';
+import 'package:leach/features/home/presentation/manager/get_vendor/event.dart';
+import 'package:leach/features/home/presentation/manager/get_vendor/state.dart';
 
 class ReviewScreen extends StatelessWidget {
-  const ReviewScreen({super.key});
+  const ReviewScreen({
+    super.key,
+    required this.reviewParams,
+  });
+
+  final ReviewParams reviewParams;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocListener<VendorsBloc,  BaseVendorsState>(
+  listener: (context, state) {
+      if(state is RequestBookingLoadingState)
+        {
+          LoadingOverlay().show(context);
+        }
+      else if(state is RequestBookingErrorState)
+        {
+          LoadingOverlay().hide();
+          errorSnackBar(context,  state.errorMessage);
+        }
+      else if(state is RequestBookingSuccessState)
+        {
+          LoadingOverlay().hide();
+          successSnackBar(context, 'Request Sent Successfully');
+          Navigator.pushNamedAndRemoveUntil(context, Routes.main, (route) => false);
+        }
+  },
+  child: Scaffold(
       body: BackgroundScreen(
         image: AssetPath.homeBackground2,
         child: Stack(
@@ -68,12 +100,15 @@ class ReviewScreen extends StatelessWidget {
                             ),
                             Row(
                               children: [
-                                Image.asset(
-                                  AssetPath.doctor,
-                                  scale: 1.3,
+                                CircleAvatar(
+                                  radius: AppSize.defaultSize! * 3.5,
+                                  backgroundColor: Colors.transparent,
+                                  child: CachedNetworkCustom(
+                                    url: reviewParams.vendor.image,
+                                  ),
                                 ),
                                 CustomText(
-                                  text: "Dr. Ali Korkor",
+                                  text: reviewParams.vendor.name,
                                   fontSize: AppSize.defaultSize! * 3,
                                   fontWeight: FontWeight.w700,
                                   maxLines: 1,
@@ -87,34 +122,34 @@ class ReviewScreen extends StatelessWidget {
                                 SizedBox(
                                   height: AppSize.defaultSize!,
                                 ),
-                                const TextImageRow(
-                                  text: 'Microchip',
-                                  image: AssetPath.doctor2,
-                                ),
-                                SizedBox(height: AppSize.defaultSize! * 3),
-                                const TextImageRow(
+                                // const TextImageRow(
+                                //   text: 'Microchip',
+                                //   image: AssetPath.doctor2,
+                                // ),
+                                // SizedBox(height: AppSize.defaultSize! * 3),
+                                TextImageRow(
                                   text:
-                                      '${StringManager.address}:El Sheikh Zayed',
+                                      '${StringManager.address} : ${reviewParams.vendor.address}',
                                   image: AssetPath.address,
                                 ),
                                 SizedBox(height: AppSize.defaultSize! * 3),
-                                const TextImageRow(
-                                  text: '${StringManager.fees}:600 EGP',
+                                  TextImageRow(
+                                  text: '${StringManager.fees}: ${reviewParams.vendor.baseFee}',
                                   image: AssetPath.fees,
                                 ),
                                 SizedBox(height: AppSize.defaultSize! * 3),
-                                const TextImageRow(
-                                  text: '${StringManager.date}:600 EGP',
+                                  TextImageRow(
+                                  text: '${StringManager.date} ${reviewParams.date}',
                                   image: AssetPath.calender,
                                 ),
                                 SizedBox(height: AppSize.defaultSize! * 3),
-                                const TextImageRow(
-                                  text: '${StringManager.time}:600 EGP',
+                                  TextImageRow(
+                                  text: '${StringManager.time} ${reviewParams.time}',
                                   image: AssetPath.clock,
                                 ),
                                 SizedBox(height: AppSize.defaultSize! * 3),
-                                const TextImageRow(
-                                  text: '${StringManager.phone}:2234567',
+                                  TextImageRow(
+                                  text: '${StringManager.phone}:  ${reviewParams.vendor.phoneNumber}',
                                   image: AssetPath.phone,
                                 ),
                                 SizedBox(height: AppSize.defaultSize! * 3),
@@ -122,7 +157,13 @@ class ReviewScreen extends StatelessWidget {
                                   child: MainButton(
                                     text: StringManager.confirmAppointment.tr(),
                                     onTap: () {
-                                      Navigator.pushNamed(context, Routes.cashOrCredit);
+                                      //RequestBookingEvent
+                                      BlocProvider.of<VendorsBloc>(context) .add(RequestBookingEvent(requestBooking: RequestBookingParam(
+                                        date: reviewParams.date.substring(  0, 10),
+                                        time: reviewParams.time,
+                                        vendorId: reviewParams.vendor.id,
+                                      )));
+                                      
                                     },
                                     textColor: Colors.white,
                                   ),
@@ -141,6 +182,15 @@ class ReviewScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ),
+);
   }
+}
+
+class ReviewParams {
+  final String date;
+  final String time;
+  final Vendor vendor;
+
+  ReviewParams({required this.date, required this.time, required this.vendor});
 }

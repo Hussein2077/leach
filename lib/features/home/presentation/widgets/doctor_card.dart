@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
@@ -10,22 +12,22 @@ import 'package:leach/core/widgets/cached_network_image.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/features/home/data/models/vendor.dart';
 
-
 class DoctorCard extends StatelessWidget {
   const DoctorCard({super.key, this.onTap, required this.vendor});
+
   final Function()? onTap;
   final Vendor vendor;
+
   @override
   Widget build(BuildContext context) {
-    return  InkWell(
+    log('${vendor.image}vendor.image');
+    return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: EdgeInsets.symmetric(
-            vertical: AppSize.defaultSize!),
+        padding: EdgeInsets.symmetric(vertical: AppSize.defaultSize!),
         child: Card(
           shape: RoundedRectangleBorder(
-            borderRadius:
-            BorderRadius.circular(AppSize.defaultSize! * 4),
+            borderRadius: BorderRadius.circular(AppSize.defaultSize! * 4),
           ),
           elevation: 10,
           color: const Color.fromRGBO(246, 255, 255, 1),
@@ -42,14 +44,11 @@ class DoctorCard extends StatelessWidget {
                         radius: AppSize.defaultSize! * 3.5,
                         backgroundColor: Colors.transparent,
                         child: CachedNetworkCustom(
-                          url:  vendor.image,
-
-
+                          url: vendor.image,
                         ),
                       ),
                       Column(
-                          crossAxisAlignment:
-                          CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
                               height: AppSize.defaultSize! * 2,
@@ -69,24 +68,21 @@ class DoctorCard extends StatelessWidget {
                             // ),
                             Material(
                               elevation: 10,
-                              borderRadius:
-                              BorderRadius.circular(20.0),
-                              color: const Color.fromRGBO(
-                                  246, 255, 255, 1),
+                              borderRadius: BorderRadius.circular(20.0),
+                              color: const Color.fromRGBO(246, 255, 255, 1),
                               child: SizedBox(
                                 width: AppSize.screenWidth! * .2,
                                 height: AppSize.defaultSize! * 2,
                                 child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
                                     physics:
-                                    const NeverScrollableScrollPhysics(),
+                                        const NeverScrollableScrollPhysics(),
                                     itemCount: 5,
                                     itemBuilder: (context, i) {
                                       return Icon(
                                         Icons.star,
                                         color: AppColors.primaryColor,
-                                        size: AppSize.defaultSize! *
-                                            1.6,
+                                        size: AppSize.defaultSize! * 1.6,
                                       );
                                     }),
                               ),
@@ -99,37 +95,28 @@ class DoctorCard extends StatelessWidget {
                       SizedBox(
                         height: AppSize.defaultSize! * 3,
                       ),
-                        TextImageRow(
+                      TextImageRow(
                         text:
-                        // '${StringManager.veterinarian} in Microchip Implantation',
-                        vendor.description,
+                            // '${StringManager.veterinarian} in Microchip Implantation',
+                            vendor.description,
                         image: AssetPath.doctor2,
                       ),
-                      SizedBox(
-                          height: AppSize.defaultSize! * 3
-                      ),
-                        TextImageRow(
-                        text:
-                        '${StringManager.address} : ${vendor.address}',
+                      SizedBox(height: AppSize.defaultSize! * 3),
+                      TextImageRow(
+                        text: '${StringManager.address} : ${vendor.address}',
                         image: AssetPath.address,
                       ),
-                      SizedBox(
-                          height: AppSize.defaultSize! * 3
-                      ),
-                        TextImageRow(
+                      SizedBox(height: AppSize.defaultSize! * 3),
+                      TextImageRow(
                         text: '${StringManager.fees}: ${vendor.baseFee}',
                         image: AssetPath.fees,
                       ),
-                      SizedBox(
-                          height: AppSize.defaultSize! * 3
-                      ),
-                        TextImageRow(
+                      SizedBox(height: AppSize.defaultSize! * 3),
+                      TextImageRow(
                         text: '${StringManager.phone}:  ${vendor.phoneNumber}',
                         image: AssetPath.phone,
                       ),
-                      SizedBox(
-                          height: AppSize.defaultSize! * 3
-                      ),
+                      SizedBox(height: AppSize.defaultSize! * 3),
                       // Center(
                       //   child: MainButton(
                       //     text: StringManager.book.tr(),

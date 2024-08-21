@@ -16,8 +16,5 @@ class RequestBookingEvent extends BaseGetVendorEvent {
   final RequestBookingParam requestBooking;
 
   RequestBookingEvent({required this.requestBooking});
-}class CancelBookingEvent extends BaseGetVendorEvent {
-  final int bookingId;
-
-  CancelBookingEvent({required this.bookingId});
 }
+

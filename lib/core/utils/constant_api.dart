@@ -14,6 +14,8 @@ class ConstantApi {
   static const String updateMyData  = "${baseUrl}user/update";
   static const String togglePrivacy  = "${baseUrl}user/togglePrivacy";
   static const String requestBooking   = "${baseUrl}user/requestBooking";
+  static const String getAllBooking    = "${baseUrl}user/listAllBookings";
+  static const String getHowToPosts     = "${baseUrl}user/howToPosts";
   static   String cancelBooking (String id)   => "${baseUrl}user/cancelBooking/$id";
   static getPosts(String page) => '${baseUrl}post/viewPosts?page=$page';
   static getUserPosts(String page) => '${baseUrl}post?page=$page';

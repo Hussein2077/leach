@@ -7,8 +7,12 @@ import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/icon_with_matrial.dart';
 import 'package:leach/core/widgets/leading_icon.dart';
+import 'package:leach/features/home/data/models/how_toModel.dart';
+
 class UpperStack extends StatelessWidget {
-  const UpperStack({super.key});
+  const UpperStack({super.key, required this.howToModel});
+
+  final HowToModel howToModel;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +46,7 @@ class UpperStack extends StatelessWidget {
                   width: AppSize.defaultSize! * 2,
                 ),
                 CustomText(
-                  text: StringManager.clickerTraining.tr(),
+                  text: howToModel.title,
                   color: Colors.white,
                   fontSize: AppSize.defaultSize! * 4,
                 )
@@ -71,58 +75,39 @@ class UpperStack extends StatelessWidget {
                         CustomText(
                             text: StringManager.difficultyLevel.tr(),
                             fontSize: AppSize.defaultSize! * 2),
-                        const Row(
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            IconWithMaterial(
-                              imagePath: AssetPath.rate,
-                              color: AppColors.primaryColor,
-                              color2: Colors.white,
-                            ),
-                            SizedBox(
-                              width: 2,
-                            ),
-                            IconWithMaterial(
-                              imagePath: AssetPath.rate,
-                              color: AppColors.primaryColor,
-                              color2: Colors.white,
-                            ),
-                            SizedBox(
-                              width: 2,
-                            ),
-                            IconWithMaterial(
-                              imagePath: AssetPath.rate,
-                              color2: AppColors.greyColor,
-                            ),
-                            SizedBox(
-                              width: 2,
-                            ),
-                            IconWithMaterial(
-                              imagePath: AssetPath.rate,
-                              color2: AppColors.greyColor,
-                            ),
-                            SizedBox(
-                              width: 2,
-                            ),
-                            IconWithMaterial(
-                              imagePath: AssetPath.rate,
-                              color2: AppColors.greyColor,
-                            ),
-                          ],
-                        ),
-
+                          children: List.generate(5, (index) {
+                            return Row(
+                              children: [
+                                IconWithMaterial(
+                                  imagePath: AssetPath.rate,
+                                  color: index < howToModel.difficultyLevel
+                                      ? AppColors.primaryColor
+                                      : Colors.white,
+                                  color2: index < howToModel.difficultyLevel
+                                      ? Colors.white
+                                      : AppColors.greyColor,
+                                ),
+                                if (index < 4)
+                                  const SizedBox(
+                                    width: 2,
+                                  ),
+                              ],
+                            );
+                          }),
+                        )
                       ],
                     ),
                   ),
                 ),
                 SizedBox(
-                  height: AppSize.defaultSize! ,
+                  height: AppSize.defaultSize!,
                 ),
                 SizedBox(
                   width: AppSize.screenWidth! * .8,
                   child: CustomText(
-                    text:
-                    '''Clicker training uses a clicker to mark desired behaviors, making learning quick and enjoyable for animals. It’s an effective positive reinforcement method.''',
+                    text: howToModel.description,
                     fontSize: AppSize.defaultSize! * 1.5,
                     fontFamily: 'Gully',
                     color: Colors.white,

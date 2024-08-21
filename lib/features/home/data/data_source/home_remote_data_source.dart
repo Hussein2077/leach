@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:leach/core/utils/api_helper.dart';
 import 'package:leach/core/utils/constant_api.dart';
 import 'package:leach/core/utils/enums.dart';
 import 'package:leach/features/home/data/models/breeding_model.dart';
+import 'package:leach/features/home/data/models/how_toModel.dart';
 import 'package:leach/features/home/data/models/vendor.dart';
 import 'package:leach/features/home/domain/use_case/request_booking_uc.dart';
 import 'package:leach/features/home/presentation/widgets/times.dart';
@@ -12,9 +15,9 @@ abstract class HomeBaseRemotelyDataSource {
       {required String type, required String page});
 
   Future<List<Vendor>> getVendors(TypeOfVendor type);
+  Future<List<HowToModel>> getHowTo (TypeOfVendor type);
 
   Future<void> requestBooking(RequestBookingParam requestBooking);
-  Future<void>  cancelBooking( int bookingId );
 }
 
 class HomeRemotelyDateSource extends HomeBaseRemotelyDataSource {
@@ -62,10 +65,30 @@ class HomeRemotelyDateSource extends HomeBaseRemotelyDataSource {
       throw DioHelper.handleDioError(dioError: e, endpointName: 'getVendors');
     }
   }
+  @override
+  Future<List<HowToModel>> getHowTo (TypeOfVendor type) async {
+    Map<String, String> headers = await DioHelper().header();
+
+    try {
+      final response = await Dio().get(
+        ConstantApi.getHowToPosts,
+        options: Options(
+          headers: headers,
+        ),
+      );
+      List<HowToModel>  jsonData = (response.data['posts']['data'] as List)
+          .map((e) => HowToModel.fromJson(e))
+          .toList();
+      return jsonData;
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(dioError: e, endpointName: 'getHowTo');
+    }
+  }
 
   @override
   Future<void> requestBooking(RequestBookingParam requestBooking) async {
     Map<String, String> headers = await DioHelper().header();
+    log('${ requestBooking.vendorId.toString()} agagewrgq ${requestBooking.date} ${requestBooking.time}');
     final body = {
       "vendor_id": requestBooking.vendorId.toString(),
       "date": requestBooking.date,
@@ -80,25 +103,10 @@ class HomeRemotelyDateSource extends HomeBaseRemotelyDataSource {
         ),
       );
     } on DioException catch (e) {
-      throw DioHelper.handleDioError(dioError: e, endpointName: 'getVendors');
+      throw DioHelper.handleDioError(dioError: e, endpointName: 'requestBooking');
     }
   }
 
-  @override
-  Future<void>  cancelBooking( int bookingId ) async {
-    Map<String, String> headers = await DioHelper().header();
 
-    try {
-      final response = await Dio().get(
-        ConstantApi.cancelBooking(bookingId.toString()),
-
-        options: Options(
-          headers: headers,
-        ),
-      );
-    } on DioException catch (e) {
-      throw DioHelper.handleDioError(dioError: e, endpointName: 'cancelBooking');
-    }
-  }
 }
 

@@ -12,6 +12,8 @@ import 'package:leach/features/auth/presentation/login_screen.dart';
 import 'package:leach/features/auth/presentation/sign_up/register.dart';
 import 'package:leach/features/auth/presentation/welcome_screen.dart';
 import 'package:leach/features/chat/chat_details.dart';
+import 'package:leach/features/home/data/models/how_toModel.dart';
+import 'package:leach/features/home/data/models/vendor.dart';
 import 'package:leach/features/home/presentation/componant/booking.dart';
 import 'package:leach/features/home/presentation/componant/breeding/breeding.dart';
 import 'package:leach/features/home/presentation/componant/cash_or_credit.dart';
@@ -38,19 +40,18 @@ import 'package:leach/features/profile/presentation/notifications/friend_request
 import 'package:leach/features/profile/presentation/notifications/notifications_screen.dart';
 import 'package:leach/features/profile/presentation/posts_and_pet_view/edit_post.dart';
 import 'package:leach/features/profile/presentation/posts_and_pet_view/posts_view_profile.dart';
-import 'package:leach/features/profile/presentation/profile/componant/account_privacy.dart';
-import 'package:leach/features/profile/presentation/profile/componant/activity_and_history.dart';
 import 'package:leach/features/profile/presentation/profile/componant/add_photo_for_pet.dart';
 import 'package:leach/features/profile/presentation/profile/componant/add_post.dart';
-import 'package:leach/features/profile/presentation/profile/componant/booking_history.dart';
-import 'package:leach/features/profile/presentation/profile/componant/delete_account.dart';
-import 'package:leach/features/profile/presentation/profile/componant/edit_pet_profile.dart';
 import 'package:leach/features/profile/presentation/profile/my_pet_profile.dart';
 import 'package:leach/features/profile/presentation/profile/pet_details.dart';
-import 'package:leach/features/profile/presentation/profile/side_bar.dart';
-import 'package:leach/features/profile/presentation/profile/componant/edit_profile.dart';
-
-import 'package:leach/features/profile/presentation/profile/componant/delete_account_2.dart';
+import 'package:leach/features/profile/presentation/side%20bar/componant/account_privacy.dart';
+import 'package:leach/features/profile/presentation/side%20bar/componant/activity_and_history.dart';
+import 'package:leach/features/profile/presentation/side%20bar/componant/booking_history.dart';
+import 'package:leach/features/profile/presentation/side%20bar/componant/delete_account.dart';
+import 'package:leach/features/profile/presentation/side%20bar/componant/delete_account_2.dart';
+import 'package:leach/features/profile/presentation/side%20bar/componant/edit_pet_profile.dart';
+import 'package:leach/features/profile/presentation/side%20bar/componant/edit_profile.dart';
+import 'package:leach/features/profile/presentation/side%20bar/side_bar.dart';
 
 class Routes {
   static const String login = "/login";
@@ -232,15 +233,16 @@ class RouteGenerator {
                 const DeleteAccount(),
             transitionsBuilder: customAnimate);
       case Routes.calenderScreen:
-        int vendorId = settings.arguments as int;
+        Vendor vendor = settings.arguments as Vendor ;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                  CalenderScreen(vendorId:  vendorId,),
+                  CalenderScreen(vendor:  vendor,),
             transitionsBuilder: customAnimate);
       case Routes.reviewScreen:
+        ReviewParams reviewParams = settings.arguments as ReviewParams;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const ReviewScreen(),
+                  ReviewScreen(reviewParams:reviewParams ,),
             transitionsBuilder: customAnimate);
       case Routes.cashOrCredit:
         return PageRouteBuilder(
@@ -287,9 +289,10 @@ class RouteGenerator {
                 const AddPhotoForPet(),
             transitionsBuilder: customAnimate);
       case Routes.howTo:
+          HowToModel howToModel = settings.arguments as HowToModel;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const HowTo(),
+                  HowTo(howToModel: howToModel ,),
             transitionsBuilder: customAnimate);
       case Routes.resetPasswordFromProfile:
         return PageRouteBuilder(
