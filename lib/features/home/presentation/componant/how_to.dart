@@ -100,6 +100,7 @@ class _HowToState extends State<HowTo> {
                               url: widget.howToModel.steps[index].picture,
                               height: AppSize.defaultSize! * 20,
                               width: AppSize.screenWidth!,
+                              shape: BoxShape.rectangle,
                               fit: BoxFit.fitWidth,
                             ),
                           ],

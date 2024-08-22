@@ -93,7 +93,9 @@ class _BookingHistoryState extends State<BookingHistory> {
                 builder: (context, state) {
                   if (state is GetAllBookingLoadingState) {
                     return (first == 0 && allBookingModel == null)
-                        ? const LoadingWidget()
+                        ?   LoadingWidget(
+                      padding:  AppSize.screenHeight! * .3,
+                    )
                         :     allBookingListView(allBookingModel);
                     ;
                   } else if (state is GetAllBookingSuccessState) {

@@ -37,7 +37,7 @@ class _PersonalProfileState extends State<PersonalProfile> {
                     horizontal: AppSize.defaultSize! * 3.4),
                 child: Column(
                   children: [
-                    const ProfileAppBar(),
+                    const ProfileAppBar(leading: false,),
                     SizedBox(
                       height: AppSize.defaultSize! * 3,
                     ),

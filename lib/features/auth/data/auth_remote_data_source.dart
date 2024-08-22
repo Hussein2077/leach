@@ -20,7 +20,7 @@ abstract class BaseRemotelyDataSource {
 
   Future<Map<String, dynamic>> verifyCode(SignUpModel signUpModel);
 
-  Future<Map<String, dynamic>> resetPassword(SignUpModel signUpModel);
+  Future<Map<String, dynamic>> changePassword(SignUpModel signUpModel);
 
 }
 
@@ -89,16 +89,16 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
   }
 
   @override
-  Future<Map<String, dynamic>> resetPassword(SignUpModel signUpModel) async {
+  Future<Map<String, dynamic>> changePassword(SignUpModel signUpModel) async {
     final Options options = await DioHelper().options();
     final body = {
-      'newPassword': signUpModel.password,
-      'email': signUpModel.phone,
+      'password': signUpModel.password,
+      'old_password': signUpModel.oldPassword,
     };
 
     try {
       final response = await Dio().post(
-        ' ConstantApi.resetPassword',
+         ConstantApi.changePassword,
         data: body,
         options: options,
       );

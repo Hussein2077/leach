@@ -9,7 +9,7 @@ abstract class BaseRepository {
       AuthModel authModel);
   Future<Either<UserModel, Failure>> signUpWithEmailAndPassword(
       SignUpModel signUpModel);
-  Future<Either<Map<String, dynamic>, Failure>> resetPassword(
+  Future<Either<Map<String, dynamic>, Failure>> changePassword(
       SignUpModel signUpModel);
   Future<Either<String, Failure>> sendCode(
       SignUpModel signUpModel);

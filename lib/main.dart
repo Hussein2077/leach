@@ -7,6 +7,7 @@ import 'package:leach/core/service/service_locator.dart';
 import 'package:leach/core/translations/translations.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/utils/methods.dart';
+import 'package:leach/features/auth/presentation/controller/change_password_bloc/change_password_bloc.dart';
 import 'package:leach/features/auth/presentation/controller/login_bloc/login_with_email_and_password_bloc.dart';
 import 'package:leach/features/auth/presentation/controller/sign_up_bloc/sign_up_with_email_and_password_bloc.dart';
 import 'package:leach/features/home/presentation/manager/get_breeding_manager/get_breeding_bloc.dart';
@@ -121,10 +122,15 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => getIt<VendorsBloc>(),
-        ),  BlocProvider(
+        ),
+        BlocProvider(
           create: (context) => getIt<BookingBloc>(),
-        ),BlocProvider(
+        ),
+        BlocProvider(
           create: (context) => getIt<HowToBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<ChangePasswordFlowBloc>(),
         ),
       ],
       child: MaterialApp(

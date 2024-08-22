@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/loading_widget.dart';
 import 'package:leach/features/posts/data/models/posts_model.dart';
@@ -84,7 +85,9 @@ class _PostsScreenState extends State<PostsScreen> {
                 itemCount: data.length,
               );
             } else {
-              return const LoadingWidget();
+              return const LoadingWidget(
+                color: AppColors.primaryColor,
+              );
             }
           },
         ),

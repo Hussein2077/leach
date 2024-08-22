@@ -2,7 +2,9 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leach/core/models/profile_data_model.dart';
@@ -12,6 +14,7 @@ import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/service/navigator_services.dart';
 import 'package:leach/core/service/service_locator.dart';
 import 'package:leach/core/utils/app_size.dart';
+import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/features/home/presentation/manager/get_vendor/bloc.dart';
 import 'package:leach/features/home/presentation/manager/get_vendor/event.dart';
 
@@ -123,6 +126,56 @@ class Methods {
         break;
 
     }
+  }
+  showAlertDialog(
+      BuildContext context,
+      {
+
+        required String title,
+
+        required VoidCallback? onPressed
+}
+      ){
+    showDialog(
+        context: context,
+        builder: (context) {
+          return CupertinoAlertDialog(
+            title: CustomText(
+              text:
+              title,
+              fontWeight: FontWeight.w700,
+              fontFamily: 'Gully',
+              fontSize: 1.7 * AppSize.defaultSize!,
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: CustomText(
+                  text: StringManager.no.tr(),
+
+                  fontWeight: FontWeight.w700,
+                  fontFamily: 'Gully',
+                  fontSize: 2 * AppSize.defaultSize!,
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  onPressed?.call();
+                },
+                child: CustomText(
+                  text: StringManager.yes.tr(),
+                  fontWeight: FontWeight.w700,
+                  color: Colors.red,
+                  fontFamily: 'Gully',
+                  fontSize: 2 * AppSize.defaultSize!,
+                ),
+              ),
+            ],
+          );
+        });
   }
 }
 

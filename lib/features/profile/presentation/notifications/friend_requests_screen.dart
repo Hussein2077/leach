@@ -7,6 +7,7 @@ import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/background.dart';
 import 'package:leach/core/widgets/cached_network_image.dart';
+import 'package:leach/core/widgets/empty_widget.dart';
 import 'package:leach/core/widgets/leading_icon.dart';
 import 'package:leach/core/widgets/loading_widget.dart';
 import 'package:leach/core/widgets/snack_bar.dart';
@@ -34,17 +35,17 @@ class _FriendRequestsScreenState extends State<FriendRequestsScreen> {
   Widget build(BuildContext context) {
     return BlocListener<GetFriendRequestBloc, GetFriendRequestState>(
       listener: (context, state) {
-        if(state is AcceptFriendRequestsSuccessState){
+        if (state is AcceptFriendRequestsSuccessState) {
           BlocProvider.of<GetFriendRequestBloc>(context)
               .add(const GetFriendRequestEvent(page: "1"));
-        }else if(state is RejectFriendRequestsSuccessState){
+        } else if (state is RejectFriendRequestsSuccessState) {
           BlocProvider.of<GetFriendRequestBloc>(context)
               .add(const GetFriendRequestEvent(page: "1"));
-        }else if(state is AcceptFriendRequestsErrorState){
+        } else if (state is AcceptFriendRequestsErrorState) {
           errorSnackBar(context, state.errorMessage);
           BlocProvider.of<GetFriendRequestBloc>(context)
               .add(const GetFriendRequestEvent(page: "1"));
-        }else if(state is RejectFriendRequestsErrorState){
+        } else if (state is RejectFriendRequestsErrorState) {
           errorSnackBar(context, state.errorMessage);
           BlocProvider.of<GetFriendRequestBloc>(context)
               .add(const GetFriendRequestEvent(page: "1"));
@@ -112,6 +113,13 @@ class _FriendRequestsScreenState extends State<FriendRequestsScreen> {
                       BlocBuilder<GetFriendRequestBloc, GetFriendRequestState>(
                     builder: (context, state) {
                       if (state is GetFriendRequestsSuccessState) {
+                        if (state.pendingFriendRequestsModel.data!.friends!
+                            .data!.isEmpty) {
+                          return const EmptyWidget(
+                            text: 'No Friend Requests',
+                            textColor: Colors.white,
+                          );
+                        }
                         return ListView.separated(
                           shrinkWrap: true,
                           itemBuilder: (context, index) => Column(

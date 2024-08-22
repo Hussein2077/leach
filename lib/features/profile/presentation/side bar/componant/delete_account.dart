@@ -15,96 +15,105 @@ class DeleteAccount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSize.defaultSize! * 2,
+          vertical: AppSize.defaultSize! * 6,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const LeadingIcon(),
+            SizedBox(height: AppSize.defaultSize! * 3),
+            _buildHeader(),
+            SizedBox(height: AppSize.defaultSize! * 0.4),
+            _buildDivider(),
+            SizedBox(height: AppSize.defaultSize! * 3),
+            _buildImageStack(),
+            const Spacer(),
+            _buildDeleteButton(context),
+            SizedBox(height: AppSize.defaultSize! * 3),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHeader() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(left: AppSize.defaultSize! * 2.2),
+          child: Image.asset(AssetPath.x),
+        ),
+        SizedBox(width: AppSize.defaultSize! * 1.2),
+        CustomText(
+          text: StringManager.deleteAccount.tr(),
+          fontSize: AppSize.defaultSize! * 2,
+          maxLines: 1,
+          textAlign: TextAlign.start,
+        ),
+        const Spacer(),
+      ],
+    );
+  }
+
+  Widget _buildDivider() {
+    return Divider(
+      color: Colors.black,
+      height: 5,
+      thickness: 0.6,
+      indent: AppSize.defaultSize! * 2.2,
+      endIndent: AppSize.defaultSize! * 2.8,
+    );
+  }
+
+  Widget _buildImageStack() {
+    return SizedBox(
+      width: AppSize.screenWidth! * 0.8,
+      height: AppSize.defaultSize! * 30,
+      child: Stack(
         children: [
-          Padding(
-            padding: EdgeInsets.only(
-              left: AppSize.defaultSize! * 2,
-              right: AppSize.defaultSize! * 2,
-              top: AppSize.defaultSize! * 6,
-            ),
-            child: const LeadingIcon(),
-          ),
-          SizedBox(
-            height: AppSize.defaultSize! * 3,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(
-                  left: AppSize.defaultSize! * 2.2,
-                ),
-                child: Image.asset(
-                  AssetPath.x,
-                ),
-              ),
-              SizedBox(
-                width: AppSize.defaultSize! * 1.2,
-              ),
-              CustomText(
-                text: StringManager.deleteAccount.tr(),
-                fontSize: AppSize.defaultSize! * 2,
-                maxLines: 1,
-                textAlign: TextAlign.start,
-              ),
-              const Spacer(),
-            ],
-          ),
-          SizedBox(
-            height: AppSize.defaultSize! * 0.4,
-          ),
-          Divider(
-            color: Colors.black,
-            //color of divider
-            height: 5,
-            //height spacing of divider
-            thickness: 0.6,
-            //thickness of divier line
-            indent: AppSize.defaultSize! * 2.2,
-            //spacing at the start of divider
-            endIndent:
-                AppSize.defaultSize! * 2.8, //spacing at the end of divider
-          ),
-          SizedBox(
-            height: AppSize.defaultSize! * 3,
-          ),
-          Stack(
-            children: [
-              Center(
-                child: SizedBox(
-                    height: AppSize.defaultSize! * 45,
-                    width: AppSize.screenWidth! * 0.75,
-                    child: SvgPicture.asset(
-                      AssetPath.blueContainer,
-                      width: AppSize.defaultSize! * 20,
-                      height: AppSize.defaultSize! * 20,
-                    )),
-              ),
-              Positioned(
-                right: AppSize.defaultSize! * -15,
-                bottom: AppSize.defaultSize! * 12,
-                child: SvgPicture.asset(
-                  AssetPath.mayaExpression,
-                ),
-              ),
-            ],
-          ),
-          const Spacer(),
           Center(
-              child: MainButton(
-                  text: StringManager.deleteAccount.tr(),
-                  color: const Color.fromRGBO(68, 82, 255, 1),
-                  textColor: Colors.white,
-                  onTap: () {
-                    Navigator.pushNamed(context, Routes.deleteAccount2);
-                  })),
-          SizedBox(
-            height: AppSize.defaultSize! * 3,
-          )
+            child: SizedBox(
+              height: AppSize.defaultSize! * 45,
+              width: AppSize.screenWidth! * 0.65,
+              child: SvgPicture.asset(
+                AssetPath.blueContainer,
+                width: AppSize.defaultSize! * 20,
+                height: AppSize.defaultSize! * 20,
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.topRight,
+            child: Padding(
+              //make it  top
+              padding: EdgeInsets.only(top: 0, right: 0),
+
+              child: SvgPicture.asset(
+                AssetPath.mayaExpression,
+                width:  AppSize.defaultSize! * 20,
+                height:  AppSize.defaultSize! * 20,
+              ),
+            ),
+          ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildDeleteButton(BuildContext context) {
+    return Center(
+      child: MainButton(
+        text: StringManager.deleteAccount.tr(),
+        color: const Color.fromRGBO(68, 82, 255, 1),
+        textColor: Colors.white,
+        onTap: () {
+          Navigator.pushNamed(context, Routes.deleteAccount2);
+        },
       ),
     );
   }

@@ -8,6 +8,7 @@ import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
+import 'package:leach/core/utils/methods.dart';
 import 'package:leach/core/widgets/available_training_specialist_row.dart';
 import 'package:leach/core/widgets/cached_network_image.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
@@ -78,11 +79,13 @@ class _DoctorCard2State extends State<DoctorCard2> {
                             fontWeight: FontWeight.w500,
                             maxLines: 1,
                             textAlign: TextAlign.start,
-                          ),    CustomText(
-                            text: '    (${widget.data.bookingStatus.toLowerCase()})',
+                          ),
+                          CustomText(
+                            text:
+                                '    (${widget.data.bookingStatus.toLowerCase()})',
                             fontSize: AppSize.defaultSize! * 1.5,
                             color: Colors.orange,
-                         fontFamily: 'Gully',
+                            fontFamily: 'Gully',
                             maxLines: 1,
                             textAlign: TextAlign.start,
                           ),
@@ -134,47 +137,12 @@ class _DoctorCard2State extends State<DoctorCard2> {
                         onTap: () {
                           //show alert dialog
 
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  title: CustomText(
-                                    text:
-                                        'Are you sure to cancel this booking ? ',
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: 'Gully',
-                                    fontSize: 1.7 * AppSize.defaultSize!,
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: CustomText(
-                                        text: StringManager.no.tr(),
-                                        color: Colors.red,
-                                        fontWeight: FontWeight.w700,
-                                        fontFamily: 'Gully',
-                                        fontSize: 2 * AppSize.defaultSize!,
-                                      ),
-                                    ),
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                        BlocProvider.of<BookingBloc>(context)
-                                            .add(CancelBookingEvent(
-                                                bookingId: widget.data.id));
-                                      },
-                                      child: CustomText(
-                                        text: StringManager.yes.tr(),
-                                        fontWeight: FontWeight.w700,
-                                        fontFamily: 'Gully',
-                                        fontSize: 2 * AppSize.defaultSize!,
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              });
+                          Methods.instance.showAlertDialog(context,
+                              title: 'Are you sure to cancel this booking ? ',
+                              onPressed: () {
+                            BlocProvider.of<BookingBloc>(context).add(
+                                CancelBookingEvent(bookingId: widget.data.id));
+                          });
                         },
                         color: Colors.white,
                         textColor: Colors.red.withOpacity(.9),

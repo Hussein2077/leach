@@ -6,7 +6,10 @@ import 'package:leach/features/auth/domain/repo/base_repo.dart';
 import 'package:leach/features/auth/domain/use_case/change_password.dart';
 import 'package:leach/features/auth/domain/use_case/delete_account_uc.dart';
 import 'package:leach/features/auth/domain/use_case/login_with_email_and_password_use_case.dart';
+import 'package:leach/features/auth/domain/use_case/send_code.dart';
 import 'package:leach/features/auth/domain/use_case/sign_up_use_case.dart';
+import 'package:leach/features/auth/domain/use_case/verify_code.dart';
+import 'package:leach/features/auth/presentation/controller/change_password_bloc/change_password_bloc.dart';
 import 'package:leach/features/auth/presentation/controller/login_bloc/login_with_email_and_password_bloc.dart';
 import 'package:leach/features/auth/presentation/controller/sign_up_bloc/sign_up_with_email_and_password_bloc.dart';
 import 'package:leach/features/home/data/data_source/home_remote_data_source.dart';
@@ -104,9 +107,15 @@ class ServerLocator {
     getIt.registerLazySingleton(() => BookingBloc(
         cancelBookingUseCase: getIt(), getAllBookingUseCase: getIt()));
     getIt.registerLazySingleton(() => HowToBloc(getHowToUseCase: getIt()));
+    getIt.registerLazySingleton(() => ChangePasswordFlowBloc(
+        changePasswordUseCase: getIt(),
+        verifyCodeUseCase: getIt(),
+        sendCodeUseCase: getIt()));
 
     //use_case
-    getIt.registerFactory(() => ResetPasswordUseCase(baseRepository: getIt()));
+    getIt.registerFactory(() => ChangePasswordUseCase(baseRepository: getIt()));
+    getIt.registerFactory(() => VerifyCodeUseCase(baseRepository: getIt()));
+    getIt.registerFactory(() => SendCodeUseCase(baseRepository: getIt()));
     getIt.registerFactory(
         () => DeleteCommentUseCase(postsBaseRepository: getIt()));
     getIt.registerFactory(() => EditePostUc(postsBaseRepository: getIt()));
