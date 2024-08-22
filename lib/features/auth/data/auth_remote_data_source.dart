@@ -167,9 +167,9 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
         options: options,
       );
 
-      String jsonData = response.data;
+      Map<String, dynamic>  jsonData = response.data;
 
-      return jsonData;
+      return jsonData['message'];
     } on DioException catch (e) {
       throw DioHelper.handleDioError(
           dioError: e, endpointName: "deleteAccount");

@@ -17,6 +17,7 @@ class ConstantApi {
   static const String getAllBooking    = "${baseUrl}user/listAllBookings";
   static const String getHowToPosts     = "${baseUrl}user/howToPosts";
   static const String changePassword      = "${baseUrl}user/changePassword";
+  static const String deleteAccount = "${baseUrl}user";
 
   static   String cancelBooking (String id)   => "${baseUrl}user/cancelBooking/$id";
   static getPosts(String page) => '${baseUrl}post/viewPosts?page=$page';
@@ -61,7 +62,6 @@ class ConstantApi {
   }
 
 //////////////////////////////
-  static const String deleteAccount = "${baseUrl}New";
   static const String sendCode = "${baseUrl}NewAu";
   static const String sendCodeToEmail =
       "$baseUrl s";

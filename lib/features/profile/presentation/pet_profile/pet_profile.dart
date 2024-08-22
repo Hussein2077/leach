@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:leach/core/models/pet_model.dart';
 import 'package:leach/core/models/profile_data_model.dart';
+import 'package:leach/core/resource_manager/asset_path.dart';
+import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
+import 'package:leach/core/widgets/icon_with_matrial.dart';
 import 'package:leach/features/profile/presentation/pet_profile/pet_drop_down.dart';
 import 'package:leach/features/profile/presentation/profile/widgets/posts_container.dart';
 import 'package:leach/features/profile/presentation/widget/medals_abd_freinds.dart';
@@ -56,7 +59,21 @@ class _PetProfileState extends State<PetProfile> {
                         });
                       },
                     )),
-              if (user.pets!.length <= 1) const ProfileAppBar(),
+              if (user.pets!.length <= 1)
+                ProfileAppBar(
+                  leading: false,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.addPetScreen);
+                    },
+                    child: Image.asset(
+                       AssetPath.add,
+                      width: AppSize.defaultSize! * 2.5,
+                      height: AppSize.defaultSize! * 2.5,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
               SizedBox(
                 height: AppSize.defaultSize! * 3,
               ),

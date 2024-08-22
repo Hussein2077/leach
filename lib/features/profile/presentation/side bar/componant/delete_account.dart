@@ -30,7 +30,8 @@ class DeleteAccount extends StatelessWidget {
             _buildDivider(),
             SizedBox(height: AppSize.defaultSize! * 3),
             _buildImageStack(),
-            const Spacer(),
+            // const Spacer(),
+            SizedBox(height: AppSize.defaultSize! * 10),
             _buildDeleteButton(context),
             SizedBox(height: AppSize.defaultSize! * 3),
           ],
@@ -71,37 +72,20 @@ class DeleteAccount extends StatelessWidget {
   }
 
   Widget _buildImageStack() {
-    return SizedBox(
-      width: AppSize.screenWidth! * 0.8,
-      height: AppSize.defaultSize! * 30,
-      child: Stack(
-        children: [
-          Center(
-            child: SizedBox(
-              height: AppSize.defaultSize! * 45,
-              width: AppSize.screenWidth! * 0.65,
-              child: SvgPicture.asset(
-                AssetPath.blueContainer,
-                width: AppSize.defaultSize! * 20,
-                height: AppSize.defaultSize! * 20,
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.topRight,
-            child: Padding(
-              //make it  top
-              padding: EdgeInsets.only(top: 0, right: 0),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        SizedBox(width: AppSize.defaultSize!*8 ),
 
-              child: SvgPicture.asset(
-                AssetPath.mayaExpression,
-                width:  AppSize.defaultSize! * 20,
-                height:  AppSize.defaultSize! * 20,
-              ),
-            ),
+        Expanded(
+          child: SvgPicture.asset(
+            AssetPath.myaFull,
+            width: AppSize.screenWidth! * .8
+            // height: AppSize.screenHeight! * .35,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

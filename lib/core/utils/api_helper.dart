@@ -2,10 +2,14 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:leach/core/error/exception.dart';
 import 'package:leach/core/error/failure.dart';
 import 'package:leach/core/error/failures_strings.dart';
+import 'package:leach/core/resource_manager/routes.dart';
+import 'package:leach/core/service/navigator_services.dart';
+import 'package:leach/core/service/service_locator.dart';
 import 'package:leach/core/utils/methods.dart';
 
 class DioHelper {
@@ -55,7 +59,6 @@ class DioHelper {
       case ServerException:
         return ServerFailure();
       case UnauthorizedException:
-
         return UnauthorizedFailure();
       case SiginGoogleException:
         return SiginGoogleFailure();
@@ -104,6 +107,10 @@ class DioHelper {
       case 500:
         throw ServerException();
       case 401:
+        Navigator.pushNamedAndRemoveUntil(
+            getIt<NavigationService>().navigatorKey.currentContext!,
+            Routes.welcomePage,
+            (route) => false);
         if (response?.data.runtimeType == String) {
           throw ErrorModelException(errorMessage: response!.data);
         } else {
