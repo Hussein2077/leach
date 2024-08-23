@@ -45,65 +45,65 @@ class _PostsViewProfileState extends State<PostsViewProfile> {
       child: Scaffold(
         body: BackgroundScreen(
           image: AssetPath.homeBackground,
-          child: Column(
-            children: [
-              SizedBox(
-                height: AppSize.defaultSize! * 2,
-              ),
-              Padding(
-                padding: Methods.instance.paddingCustom,
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    LeadingIcon(
-                      color: Colors.white,
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: AppSize.defaultSize! * 3,
-              ),
-              Expanded(
-                child: Container(
-                  width: AppSize.screenWidth!,
-                  decoration: BoxDecoration(
-                    color: const Color.fromRGBO(246, 255, 255, 1),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(AppSize.defaultSize! * 4),
-                      topRight: Radius.circular(AppSize.defaultSize! * 4),
-                    ),
+          child: SafeArea(
+            bottom: false,
+            child: Column(
+              children: [
+                Padding(
+                  padding: Methods.instance.paddingCustom,
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      LeadingIcon(
+                        color: Colors.white,
+                      ),
+                    ],
                   ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: AppSize.defaultSize! * 3),
-                    child: BlocBuilder<UserPostsBloc, UserPostState>(
-                      builder: (context, state) {
-                        if (state is GetUserPostsSuccessState) {
-                          if(state.postsModel.posts!.data!.isNotEmpty) {
-                            return ListView.builder(
-                            padding: EdgeInsets.zero,
-                            itemCount: state.postsModel.posts!.data!.length,
-                            itemBuilder: (context, index) {
-                              return CardWidget(
-                                data: state.postsModel.posts!.data![index],
-                              );
-                            },
-                          );
-                          }else{
-                            return Center(
-                              child: Text("No Posts", style: TextStyle(fontSize: AppSize.defaultSize! * 3,),),
+                ),
+                SizedBox(
+                  height: AppSize.defaultSize! * 3,
+                ),
+                Expanded(
+                  child: Container(
+                    width: AppSize.screenWidth!,
+                    decoration: BoxDecoration(
+                      color: const Color.fromRGBO(246, 255, 255, 1),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(AppSize.defaultSize! * 4),
+                        topRight: Radius.circular(AppSize.defaultSize! * 4),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: AppSize.defaultSize! * 3),
+                      child: BlocBuilder<UserPostsBloc, UserPostState>(
+                        builder: (context, state) {
+                          if (state is GetUserPostsSuccessState) {
+                            if(state.postsModel.posts!.data!.isNotEmpty) {
+                              return ListView.builder(
+                              padding: EdgeInsets.zero,
+                              itemCount: state.postsModel.posts!.data!.length,
+                              itemBuilder: (context, index) {
+                                return CardWidget(
+                                  data: state.postsModel.posts!.data![index],
+                                );
+                              },
                             );
+                            }else{
+                              return Center(
+                                child: Text("No Posts", style: TextStyle(fontSize: AppSize.defaultSize! * 3,),),
+                              );
+                            }
+                          } else {
+                            return const SizedBox();
                           }
-                        } else {
-                          return const SizedBox();
-                        }
-                      },
+                        },
+                      ),
                     ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),

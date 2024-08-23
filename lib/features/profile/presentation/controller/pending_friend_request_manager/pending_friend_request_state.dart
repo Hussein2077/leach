@@ -61,3 +61,27 @@ class RejectFriendRequestsSuccessState extends GetFriendRequestState {
   final String message;
   const RejectFriendRequestsSuccessState({required this.message});
 }
+
+class RemoveFriendLoadingState extends GetFriendRequestState {}
+
+class RemoveFriendErrorState extends GetFriendRequestState {
+  final String errorMessage;
+  const RemoveFriendErrorState({required this.errorMessage});
+}
+
+class RemoveFriendSuccessState extends GetFriendRequestState {
+  final String message;
+  const RemoveFriendSuccessState({required this.message});
+}
+
+class SendFriendRequestsLoadingState extends GetFriendRequestState {}
+
+class SendFriendRequestsErrorState extends GetFriendRequestState {
+  final String errorMessage;
+  const SendFriendRequestsErrorState({required this.errorMessage});
+}
+
+class SendFriendRequestsSuccessState extends GetFriendRequestState {
+  final String message;
+  const SendFriendRequestsSuccessState({required this.message});
+}

@@ -28,21 +28,19 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
   @override
   Future<UserModel> loginWithEmailAndPassword(AuthModel authModel) async {
     final Options options = await DioHelper().options();
-    final body = {
-      'identifier': authModel.phoneOrEmail,
-      "password": authModel.password,
-    };
+
     try {
       final response = await Dio().post(
         ConstantApi.login,
-        data: body,
+        data: {
+          'identifier': authModel.phoneOrEmail,
+          'password': authModel.password,
+        },
         options: options,
       );
       UserModel jsonData = UserModel.fromMap(response.data['data']['user']);
-      SharedPreferences preferences = await SharedPreferences.getInstance();
 
-      await Methods.instance
-          .saveUserToken(authToken: response.data['data']['token']);
+      await Methods.instance.saveUserToken(authToken: response.data['data']['token']);
       return jsonData;
     } on DioException catch (e) {
       throw DioHelper.handleDioError(

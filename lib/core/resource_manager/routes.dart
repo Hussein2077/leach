@@ -270,9 +270,9 @@ class RouteGenerator {
                 const FriendsScreen(),
             transitionsBuilder: customAnimate);
       case Routes.friendsView:
+        String uuid = settings.arguments as String;
         return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) =>
-                const FriendsView(),
+            pageBuilder: (context, animation, secondaryAnimation) => FriendsView(uuid: uuid),
             transitionsBuilder: customAnimate);
       case Routes.postsViewProfile:
         return PageRouteBuilder(

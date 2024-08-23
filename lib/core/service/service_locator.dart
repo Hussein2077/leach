@@ -50,14 +50,18 @@ import 'package:leach/features/profile/domain/use_case/get_all_booking_uc.dart';
 import 'package:leach/features/profile/domain/use_case/get_friends_uc.dart';
 import 'package:leach/features/profile/domain/use_case/get_my_data_uc.dart';
 import 'package:leach/features/profile/domain/use_case/get_pending_friend_requests_uc.dart';
+import 'package:leach/features/profile/domain/use_case/get_user_uc.dart';
 import 'package:leach/features/profile/domain/use_case/reject_friend_request_uc.dart';
 import 'package:leach/features/profile/domain/use_case/get_traits_use_case.dart';
+import 'package:leach/features/profile/domain/use_case/remove_friend_uc.dart';
+import 'package:leach/features/profile/domain/use_case/sned_friend_request_uc.dart';
 import 'package:leach/features/profile/domain/use_case/update_my_data_use_case.dart';
 import 'package:leach/features/profile/presentation/controller/booking/bloc.dart';
 import 'package:leach/features/profile/presentation/controller/create_pet_bloc/create_pet_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/dogBreadBloc/bloc.dart';
 import 'package:leach/features/profile/presentation/controller/get_traits/bloc.dart';
 import 'package:leach/features/profile/presentation/controller/friends_manager/friends_bloc.dart';
+import 'package:leach/features/profile/presentation/controller/get_user_manager/get_user_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/pending_friend_request_manager/pending_friend_request_bloc.dart';
 
@@ -88,7 +92,7 @@ class ServerLocator {
     getIt.registerLazySingleton(() => GetFriendRequestBloc(
         getFriendRequestUseCase: getIt(),
         acceptFriendRequestsUseCase: getIt(),
-        rejectFriendRequestsUseCase: getIt()));
+        rejectFriendRequestsUseCase: getIt(), removeFriendUseCase: getIt(), sendFriendRequestsUseCase: getIt(),));
     getIt.registerLazySingleton(
         () => GetFriendsBloc(getFriendsUseCase: getIt()));
     getIt.registerLazySingleton(() => GetMyDataBloc(
@@ -111,8 +115,10 @@ class ServerLocator {
         changePasswordUseCase: getIt(),
         verifyCodeUseCase: getIt(),
         sendCodeUseCase: getIt()));
+    getIt.registerLazySingleton(() => GetUserBloc(getUserUseCase: getIt()));
 
     //use_case
+    getIt.registerFactory(() => GetUserUseCase(profileBaseRepository: getIt()));
     getIt.registerFactory(() => ChangePasswordUseCase(baseRepository: getIt()));
     getIt.registerFactory(() => VerifyCodeUseCase(baseRepository: getIt()));
     getIt.registerFactory(() => SendCodeUseCase(baseRepository: getIt()));
@@ -143,6 +149,10 @@ class ServerLocator {
         () => AcceptFriendRequestsUseCase(profileBaseRepository: getIt()));
     getIt.registerFactory(
         () => RejectFriendRequestsUseCase(profileBaseRepository: getIt()));
+    getIt.registerFactory(
+        () => SendFriendRequestsUseCase(profileBaseRepository: getIt()));
+    getIt.registerFactory(
+        () => RemoveFriendUseCase(profileBaseRepository: getIt()));
     getIt.registerFactory(
         () => GetFriendsUseCase(profileBaseRepository: getIt()));
     getIt.registerFactory(

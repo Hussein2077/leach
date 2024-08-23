@@ -12,7 +12,8 @@ import 'package:leach/core/widgets/large_botton.dart';
 class MedalsAbdFriends extends StatelessWidget {
   final Pet? pet;
   final String? number_of_friends;
-  const MedalsAbdFriends({super.key, this.pet, this.number_of_friends});
+  final bool? isFriendView;
+  const MedalsAbdFriends({super.key, this.pet, this.number_of_friends, this.isFriendView = false});
 
   @override
   Widget build(BuildContext context) {
@@ -37,20 +38,16 @@ class MedalsAbdFriends extends StatelessWidget {
         :Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // buildMedal(
-        //     text: "10", image: AssetPath.petLeg, name: StringManager.points),
-        // SizedBox(
-        //   width: AppSize.defaultSize!,
-        // ),
-        // buildMedal(
-        //     text: "10", image: AssetPath.medal, name: StringManager.badges),
-        // SizedBox(
-        //   width: AppSize.defaultSize!,
-        // ),
         buildMedal(
-            text: "10", image: AssetPath.pet2Leg, name: StringManager.friends,onPressed: (){
-              Navigator.pushNamed(context, Routes.friends);
-        }),
+            text: number_of_friends??"0",
+            image: AssetPath.pet2Leg,
+            name: StringManager.friends,
+            onPressed: (){
+              if(!isFriendView!) {
+                Navigator.pushNamed(context, Routes.friends);
+              }
+            }
+        ),
       ],
     );
   }

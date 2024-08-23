@@ -34,6 +34,9 @@ class ConstantApi {
   static getPendingFriendRequests(String page) {
     return "${baseUrl}user/pending_friend_requests?page=$page";
   }
+  static sendFriendRequests(String id) {
+    return "${baseUrl}user/friendRequest/$id";
+  }
   static acceptFriendRequests(String id) {
     return "${baseUrl}user/acceptFriendRequest/$id";
   }
@@ -59,6 +62,12 @@ class ConstantApi {
   }
   static getVendors({required String type, }) {
     return "${baseUrl}user/vendors/$type";
+  }
+  static getUser({required String id}) {
+    return "${baseUrl}user/viewUser/$id";
+  }
+  static removeFriend({required String id}) {
+    return "${baseUrl}user/removeFriend/$id";
   }
 
 //////////////////////////////

@@ -134,9 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Center(
                   child: MainButton(
                     text: StringManager.login.tr(),
-
                     onTap: () {
-                      log('passwordController.text ${passwordController.text}');
                       if  (passwordController.text.isEmpty || phoneOrEmailController.text.isEmpty) {
                         errorSnackBar(context, StringManager.enterEmailOrPhoneNumber.tr());
                       }
@@ -144,13 +142,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         errorSnackBar(context, 'Password must be at least 6 characters long');
                       }
                       else {
-                        BlocProvider.of<LoginWithEmailAndPasswordBloc>(context)
-                          .add(LoginWithEmailAndPasswordEvent(
+                        BlocProvider.of<LoginWithEmailAndPasswordBloc>(context).add(LoginWithEmailAndPasswordEvent(
                         phoneOrEmail: phoneOrEmailController.text,
                         password: passwordController.text,
                       ));
                       }
-
                     },
                     textColor: Colors.white,
                   ),

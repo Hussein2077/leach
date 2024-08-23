@@ -7,6 +7,7 @@ import 'package:leach/features/profile/domain/base_repo/profie_base_repo.dart';
 import 'package:leach/features/profile/domain/model/all_booking_model.dart';
 import 'package:leach/features/profile/domain/model/create_pet.dart';
 import 'package:leach/features/profile/domain/model/traits_model.dart';
+import 'package:leach/features/profile/domain/model/user_data_model.dart';
 import 'package:leach/features/profile/domain/use_case/CREATE_PET_USE_CASE.dart';
 import 'package:leach/features/profile/domain/model/friends_model.dart';
 import 'package:leach/features/profile/domain/model/pending_friend_requests_model.dart';
@@ -62,6 +63,16 @@ class ProfileRepositoryImp extends ProfileBaseRepository {
   Future<Either<String, Failure>> acceptFriendRequests({required String id}) async {
     try {
       final result = await profileBaseRemotelyDataSource.acceptFriendRequests(id: id);
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<String, Failure>> sendFriendRequests({required String id}) async {
+    try {
+      final result = await profileBaseRemotelyDataSource.sendFriendRequests(id: id);
       return Left(result);
     } on Exception catch (e) {
       return right(DioHelper.buildFailure(e));
@@ -135,4 +146,23 @@ class ProfileRepositoryImp extends ProfileBaseRepository {
     }
   }
 
+  @override
+  Future<Either<UserDataModel, Failure>> getUser({required String id}) async {
+    try {
+      final result = await profileBaseRemotelyDataSource.getUser(id: id);
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<String, Failure>> removeFriend({required String id}) async {
+    try {
+      final result = await profileBaseRemotelyDataSource.removeFriend(id: id);
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
 }

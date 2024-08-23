@@ -3,6 +3,8 @@ import 'package:leach/core/utils/api_helper.dart';
 import 'package:leach/features/profile/domain/use_case/accept_friend_request_uc.dart';
 import 'package:leach/features/profile/domain/use_case/get_pending_friend_requests_uc.dart';
 import 'package:leach/features/profile/domain/use_case/reject_friend_request_uc.dart';
+import 'package:leach/features/profile/domain/use_case/remove_friend_uc.dart';
+import 'package:leach/features/profile/domain/use_case/sned_friend_request_uc.dart';
 import 'package:leach/features/profile/presentation/controller/pending_friend_request_manager/pending_friend_request_event.dart';
 import 'package:leach/features/profile/presentation/controller/pending_friend_request_manager/pending_friend_request_state.dart';
 
@@ -10,8 +12,10 @@ class GetFriendRequestBloc extends Bloc<GetFriendRequestEventBase, GetFriendRequ
   final GetPendingFriendRequestsUseCase getFriendRequestUseCase;
   final AcceptFriendRequestsUseCase acceptFriendRequestsUseCase;
   final RejectFriendRequestsUseCase rejectFriendRequestsUseCase;
+  final SendFriendRequestsUseCase sendFriendRequestsUseCase;
+  final RemoveFriendUseCase removeFriendUseCase;
 
-  GetFriendRequestBloc({required this.getFriendRequestUseCase, required this.acceptFriendRequestsUseCase, required this.rejectFriendRequestsUseCase}) : super(FriendRequestInitialState()) {
+  GetFriendRequestBloc({required this.getFriendRequestUseCase, required this.acceptFriendRequestsUseCase, required this.rejectFriendRequestsUseCase, required this.removeFriendUseCase, required this.sendFriendRequestsUseCase}) : super(FriendRequestInitialState()) {
 
     on<GetFriendRequestEvent>((event, emit) async {
       emit(GetFriendRequestsLoadingState());
@@ -45,6 +49,22 @@ class GetFriendRequestBloc extends Bloc<GetFriendRequestEventBase, GetFriendRequ
       result.fold(
               (l) => emit(RejectFriendRequestsSuccessState(message: l)),
               (r) => emit(RejectFriendRequestsErrorState(errorMessage: DioHelper().getTypeOfFailure(r))));
+    });
+
+    on<RemoveFriendEvent>((event, emit) async {
+      emit(RemoveFriendLoadingState());
+      final result = await removeFriendUseCase.call(event.id);
+      result.fold(
+              (l) => emit(RemoveFriendSuccessState(message: l)),
+              (r) => emit(RemoveFriendErrorState(errorMessage: DioHelper().getTypeOfFailure(r))));
+    });
+
+    on<SendFriendRequestEvent>((event, emit) async {
+      emit(SendFriendRequestsLoadingState());
+      final result = await sendFriendRequestsUseCase.call(event.id);
+      result.fold(
+              (l) => emit(SendFriendRequestsSuccessState(message: l)),
+              (r) => emit(SendFriendRequestsErrorState(errorMessage: DioHelper().getTypeOfFailure(r))));
     });
 
   }
