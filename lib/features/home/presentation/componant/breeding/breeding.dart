@@ -35,12 +35,11 @@ class _BreedingScreenState extends State<BreedingScreen> {
   }
 
   void _scrollListener() {
-    if (scrollcontroller.position.pixels ==
-        scrollcontroller.position.maxScrollExtent) {
+    if (scrollcontroller.position.pixels == scrollcontroller.position.maxScrollExtent) {
       if (page < totalPages) {
         page = page + 1;
         BlocProvider.of<BreedingBloc>(context).add(
-            GetBreedingEvent(page: page.toString(), type: widget.type));
+            GetMoreBreedingEvent(page: page.toString(), type: widget.type));
       }
     }
   }
