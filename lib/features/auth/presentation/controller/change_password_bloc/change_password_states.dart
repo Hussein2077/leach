@@ -1,57 +1,57 @@
 import 'package:equatable/equatable.dart';
 
-abstract class ResetPasswordState extends Equatable {
-  const ResetPasswordState();
+abstract class ChangePasswordState extends Equatable {
+  const ChangePasswordState();
 
   @override
   List<Object> get props => [];
 }
 
-class ResetPasswordInitial extends ResetPasswordState {}
+class ChangePasswordInitial extends ChangePasswordState {}
 
-class ResetPasswordLoadingState extends ResetPasswordState {
-  const ResetPasswordLoadingState();
+class ChangePasswordLoadingState extends ChangePasswordState {
+  const ChangePasswordLoadingState();
 }
 
-class ResetPasswordErrorMessageState extends ResetPasswordState {
+class ChangePasswordErrorState extends ChangePasswordState {
   final String errorMessage;
 
-  const ResetPasswordErrorMessageState({required this.errorMessage});
+  const ChangePasswordErrorState({required this.errorMessage});
 }
 
-class ResetPasswordSuccessMessageState extends ResetPasswordState {
+class ChangePasswordSuccessState extends ChangePasswordState {
   final String successMessage;
 
-  const ResetPasswordSuccessMessageState({required this.successMessage});
+  const ChangePasswordSuccessState({required this.successMessage});
 }
 
-class SendCodeLoadingState extends ResetPasswordState {
+class SendCodeLoadingState extends ChangePasswordState {
   const SendCodeLoadingState();
 }
 
-class SendCodeErrorMessageState extends ResetPasswordState {
+class SendCodeErrorMessageState extends ChangePasswordState {
   final String errorMessage;
 
   const SendCodeErrorMessageState({required this.errorMessage});
 }
 
-class SendCodeSuccessMessageState extends ResetPasswordState {
+class SendCodeSuccessMessageState extends ChangePasswordState {
   final String successMessage;
 
   const SendCodeSuccessMessageState({required this.successMessage});
 }
 
-class VerifyCodeLoadingState extends ResetPasswordState {
+class VerifyCodeLoadingState extends ChangePasswordState {
   const VerifyCodeLoadingState();
 }
 
-class VerifyCodeErrorMessageState extends ResetPasswordState {
+class VerifyCodeErrorMessageState extends ChangePasswordState {
   final String errorMessage;
 
   const VerifyCodeErrorMessageState({required this.errorMessage});
 }
 
-class VerifyCodeSuccessMessageState extends ResetPasswordState {
+class VerifyCodeSuccessMessageState extends ChangePasswordState {
   final String successMessage;
 
   const VerifyCodeSuccessMessageState({required this.successMessage});

@@ -7,12 +7,15 @@ import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/leading_icon.dart';
 class ProfileAppBar extends StatelessWidget {
-  const ProfileAppBar({super.key,   this.child});
+  const ProfileAppBar({super.key,   this.child,   this.leading=true});
 final Widget? child;
+final bool leading;
+
   @override
   Widget build(BuildContext context) {
     return  Row(
       children: [
+        if(leading)
         const LeadingIcon(
           color: Colors.white,
         ),

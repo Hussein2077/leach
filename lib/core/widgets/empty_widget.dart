@@ -6,10 +6,11 @@ import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 
 class EmptyWidget extends StatelessWidget {
-  const EmptyWidget({super.key, this.height, this.width, this.text, });
+  const EmptyWidget({super.key, this.height, this.width, this.text, this.textColor, });
   final double? height;
   final double? width;
   final String? text;
+  final Color? textColor ;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -21,7 +22,7 @@ class EmptyWidget extends StatelessWidget {
             text:text??'empty' ,
             fontSize: AppSize.defaultSize!*2,
             fontWeight: FontWeight.w700,
-            color: AppColors.primaryColor,
+            color:textColor?? AppColors.primaryColor,
           ) ,
         ),
       ),

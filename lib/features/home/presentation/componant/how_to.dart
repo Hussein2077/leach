@@ -1,22 +1,41 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
+import 'package:leach/core/utils/enums.dart';
+import 'package:leach/core/widgets/cached_network_image.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
+import 'package:leach/core/widgets/loading_widget.dart';
+import 'package:leach/features/home/data/models/how_toModel.dart';
+import 'package:leach/features/home/presentation/manager/how_to/bloc.dart';
+import 'package:leach/features/home/presentation/manager/how_to/event.dart';
+import 'package:leach/features/home/presentation/manager/how_to/state.dart';
 import 'package:leach/features/home/presentation/widgets/upper_stack.dart';
 
-class HowTo extends StatelessWidget {
-  const HowTo({super.key});
+class HowTo extends StatefulWidget {
+  const HowTo({super.key, required this.howToModel});
 
+  final HowToModel howToModel;
+
+  @override
+  State<HowTo> createState() => _HowToState();
+}
+
+class _HowToState extends State<HowTo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const UpperStack(),
+            UpperStack(
+              howToModel: widget.howToModel,
+            ),
             Column(
               children: [
                 CustomText(
@@ -26,7 +45,7 @@ class HowTo extends StatelessWidget {
                 ),
                 ListView.builder(
                     shrinkWrap: true,
-                    itemCount: 5,
+                    itemCount: widget.howToModel.steps.length,
                     padding: EdgeInsets.zero,
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
@@ -36,7 +55,7 @@ class HowTo extends StatelessWidget {
                         child: Column(
                           children: [
                             Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   SizedBox(
@@ -61,12 +80,15 @@ class HowTo extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(
+                                    width: AppSize.defaultSize!,
+                                  ),
+                                  SizedBox(
                                     width: AppSize.screenWidth! * .8,
                                     child: CustomText(
-                                      text:
-                                          '''Clicker training uses a clicker to mark desired behaviors, making learning quick and enjoyable for animals. It’s an effective positive reinforcement method.''',
+                                      text: widget.howToModel.steps[index].text,
                                       fontSize: AppSize.defaultSize! * 1.5,
                                       fontFamily: 'Gully',
+                                      textAlign: TextAlign.start,
                                       maxLines: 5,
                                     ),
                                   ),
@@ -74,12 +96,13 @@ class HowTo extends StatelessWidget {
                             SizedBox(
                               height: AppSize.defaultSize! * 2,
                             ),
-                            Image.asset(
-                              AssetPath.testPosts2,
+                            CachedNetworkCustom(
+                              url: widget.howToModel.steps[index].picture,
                               height: AppSize.defaultSize! * 20,
                               width: AppSize.screenWidth!,
+                              shape: BoxShape.rectangle,
                               fit: BoxFit.fitWidth,
-                            )
+                            ),
                           ],
                         ),
                       );
@@ -111,14 +134,13 @@ class HowTo extends StatelessWidget {
                   Expanded(
                     child: ListView.builder(
                         padding: EdgeInsets.zero,
-                        itemCount: 5,
-
+                        itemCount: widget.howToModel.tips.length,
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: EdgeInsets.symmetric(
                                 vertical: AppSize.defaultSize! * 1),
                             child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   SizedBox(
@@ -131,12 +153,15 @@ class HowTo extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(
+                                    width: AppSize.defaultSize!,
+                                  ),
+                                  SizedBox(
                                     width: AppSize.screenWidth! * .8,
                                     child: CustomText(
-                                      text:
-                                          '''Clicker training uses a clicker to mark desired behaviors, making learning quick and enjoyable for animals. It’s an effective positive reinforcement method.''',
+                                      text: widget.howToModel.tips[index].text,
                                       fontSize: AppSize.defaultSize! * 1.5,
                                       fontFamily: 'Gully',
+                                      textAlign: TextAlign.start,
                                       maxLines: 5,
                                       color: Colors.white,
                                     ),

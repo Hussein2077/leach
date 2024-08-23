@@ -51,7 +51,8 @@ class TypeOfPetScreen extends StatelessWidget {
                           case TypeOfPetNavigator.dogBread:
                             Navigator.pushNamed(context, Routes.dogBread);
                           case TypeOfPetNavigator.breadingScreen:
-                            Navigator.pushNamed(context, Routes.breedingScreen, arguments: "DOG");
+                            Navigator.pushNamed(context, Routes.breedingScreen,
+                                arguments: "DOG");
                           case TypeOfPetNavigator.groomingScreen:
                           // TODO: Handle this case.
                           case TypeOfPetNavigator.trainingScreen:
@@ -69,11 +70,12 @@ class TypeOfPetScreen extends StatelessWidget {
                           case TypeOfPetNavigator.dogBread:
                             Navigator.pushNamed(context, Routes.catBread);
                           case TypeOfPetNavigator.breadingScreen:
-                            Navigator.pushNamed(context, Routes.breedingScreen, arguments: "CAT");
+                            Navigator.pushNamed(context, Routes.breedingScreen,
+                                arguments: "CAT");
                           case TypeOfPetNavigator.groomingScreen:
                           // TODO: Handle this case.
                           case TypeOfPetNavigator.trainingScreen:
-                            Navigator.pushNamed(context, Routes.breedingScreen);
+                            Navigator.pushNamed(context, Routes.trainYourDog);
                         }
                       },
                       child: Image.asset(AssetPath.cat)),

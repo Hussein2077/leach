@@ -70,7 +70,9 @@ class _DogBreadState extends State<DogBread> {
             LoadingOverlay().hide();
             BlocProvider.of<GetMyDataBloc>(context).add(
                 GetMyDataEvent());
-            Navigator.pushNamed(context, Routes.dogBreed3,arguments: state.petProfileModel);
+            Navigator.pushNamed(context, Routes.dogBreed3,arguments:SelectionPetTypeParamRoute(
+                petProfileModel: state.petProfileModel,
+                petType: 'dog',));
           } else if (state is CreatePetErrorMessageState) {
             LoadingOverlay().hide();
             errorSnackBar(context, state.errorMessage);
@@ -81,8 +83,6 @@ class _DogBreadState extends State<DogBread> {
         child: BlocBuilder<BaseBreadCubit, BaseBreadState>(
           builder: (context, state) {
             final cubit = context.read<BaseBreadCubit>();
-
-
             return SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.only(

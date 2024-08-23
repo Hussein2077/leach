@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:leach/core/error/failure.dart';
 import 'package:leach/core/models/profile_data_model.dart';
+import 'package:leach/features/profile/domain/model/all_booking_model.dart';
 import 'package:leach/features/profile/domain/model/create_pet.dart';
 import 'package:leach/features/profile/domain/model/friends_model.dart';
 import 'package:leach/features/profile/domain/model/pending_friend_requests_model.dart';
@@ -22,5 +23,7 @@ abstract class ProfileBaseRepository {
 
   Future<Either<List<PetTrait>, Failure>> getTraits();
   Future<Either<String, Failure>>  changePrivacy();
+  Future<Either<List<AllBookingModel>, Failure>>    getAllBooking();
+  Future<Either<void, Failure>> cancelBooking   (  int bookingId );
 
 }

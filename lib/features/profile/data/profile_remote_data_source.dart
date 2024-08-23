@@ -5,6 +5,8 @@ import 'package:dio/dio.dart';
 import 'package:leach/core/models/profile_data_model.dart';
 import 'package:leach/core/utils/api_helper.dart';
 import 'package:leach/core/utils/constant_api.dart';
+import 'package:leach/features/home/data/models/vendor.dart';
+import 'package:leach/features/profile/domain/model/all_booking_model.dart';
 import 'package:leach/features/profile/domain/model/create_pet.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:leach/features/profile/domain/model/friends_model.dart';
@@ -24,6 +26,9 @@ abstract class ProfileBaseRemotelyDataSource {
   Future<UserModel> getMyData();
   Future<UserModel> updateMyData(UpdateDataParams parameter);
 Future<String> changePrivacy();
+Future<List<AllBookingModel>>  getAllBooking();
+  Future<void>  cancelBooking( int bookingId );
+
 
 }
 
@@ -285,7 +290,44 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
 
       return 'Success';
     } on DioException catch (e) {
-      throw DioHelper.handleDioError(dioError: e, endpointName: 'getMyData');
+      throw DioHelper.handleDioError(dioError: e, endpointName: ' changePrivacy');
+    }
+  }
+  @override
+  Future<List<AllBookingModel>> getAllBooking() async {
+    Options options = await DioHelper().options();
+
+    try {
+      final response = await Dio().get(
+        ConstantApi.getAllBooking,
+        options: options,
+
+
+      );
+
+      List<AllBookingModel> jsonData =   List<AllBookingModel>.from(
+          (response.data['bookings']['data'] as List)
+              .map((e) => AllBookingModel.fromJson(e))
+      );
+      return jsonData;
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(dioError: e, endpointName: ' getAllBooking');
+    }
+  }
+  @override
+  Future<void>  cancelBooking( int bookingId ) async {
+    Map<String, String> headers = await DioHelper().header();
+
+    try {
+      final response = await Dio().delete(
+        ConstantApi.cancelBooking(bookingId.toString()),
+
+        options: Options(
+          headers: headers,
+        ),
+      );
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(dioError: e, endpointName: 'cancelBooking');
     }
   }
 

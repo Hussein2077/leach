@@ -9,10 +9,10 @@ import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/icon_with_matrial.dart';
 import 'package:leach/core/widgets/leading_icon.dart';
 import 'package:leach/features/profile/presentation/profile/widgets/posts_container.dart';
+import 'package:leach/features/profile/presentation/side%20bar/side_bar_row.dart';
 import 'package:leach/features/profile/presentation/widget/medals_abd_freinds.dart';
 import 'package:leach/features/profile/presentation/widget/pet_or_profile.dart';
 import 'package:leach/features/profile/presentation/widget/profile_user_row.dart';
-import 'package:leach/features/profile/presentation/widget/side_bar_row.dart';
 
 class FriendsView extends StatefulWidget {
   const FriendsView({super.key});

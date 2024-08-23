@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
@@ -6,25 +8,26 @@ import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/available_training_specialist_row.dart';
+import 'package:leach/core/widgets/cached_network_image.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
-
+import 'package:leach/features/home/data/models/vendor.dart';
 
 class DoctorCard extends StatelessWidget {
-  const DoctorCard({super.key, this.onTap});
+  const DoctorCard({super.key, this.onTap, required this.vendor});
+
   final Function()? onTap;
+  final Vendor vendor;
+
   @override
   Widget build(BuildContext context) {
-    return  InkWell(
-      onTap: onTap??(){
-        Navigator.pushNamed(context, Routes.calenderScreen);
-      },
+    log('${vendor.image}vendor.image');
+    return InkWell(
+      onTap: onTap,
       child: Padding(
-        padding: EdgeInsets.symmetric(
-            vertical: AppSize.defaultSize!),
+        padding: EdgeInsets.symmetric(vertical: AppSize.defaultSize!),
         child: Card(
           shape: RoundedRectangleBorder(
-            borderRadius:
-            BorderRadius.circular(AppSize.defaultSize! * 4),
+            borderRadius: BorderRadius.circular(AppSize.defaultSize! * 4),
           ),
           elevation: 10,
           color: const Color.fromRGBO(246, 255, 255, 1),
@@ -37,50 +40,49 @@ class DoctorCard extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Image.asset(
-                        AssetPath.doctor,
-                        scale: 1.3,
+                      CircleAvatar(
+                        radius: AppSize.defaultSize! * 3.5,
+                        backgroundColor: Colors.transparent,
+                        child: CachedNetworkCustom(
+                          url: vendor.image,
+                        ),
                       ),
                       Column(
-                          crossAxisAlignment:
-                          CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
                               height: AppSize.defaultSize! * 2,
                             ),
                             CustomText(
-                              text: "Dr. Ali Korkor",
+                              text: vendor.name,
                               fontSize: AppSize.defaultSize! * 3,
                               fontWeight: FontWeight.w700,
                               maxLines: 1,
                               textAlign: TextAlign.start,
                             ),
-                            CustomText(
-                              text: StringManager.microchip.tr(),
-                              fontSize: AppSize.defaultSize! * 2,
-                              maxLines: 2,
-                              textAlign: TextAlign.start,
-                            ),
+                            // CustomText(
+                            //   text: StringManager.microchip.tr(),
+                            //   fontSize: AppSize.defaultSize! * 2,
+                            //   maxLines: 2,
+                            //   textAlign: TextAlign.start,
+                            // ),
                             Material(
                               elevation: 10,
-                              borderRadius:
-                              BorderRadius.circular(20.0),
-                              color: const Color.fromRGBO(
-                                  246, 255, 255, 1),
+                              borderRadius: BorderRadius.circular(20.0),
+                              color: const Color.fromRGBO(246, 255, 255, 1),
                               child: SizedBox(
                                 width: AppSize.screenWidth! * .2,
                                 height: AppSize.defaultSize! * 2,
                                 child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
                                     physics:
-                                    const NeverScrollableScrollPhysics(),
+                                        const NeverScrollableScrollPhysics(),
                                     itemCount: 5,
                                     itemBuilder: (context, i) {
                                       return Icon(
                                         Icons.star,
                                         color: AppColors.primaryColor,
-                                        size: AppSize.defaultSize! *
-                                            1.6,
+                                        size: AppSize.defaultSize! * 1.6,
                                       );
                                     }),
                               ),
@@ -93,37 +95,28 @@ class DoctorCard extends StatelessWidget {
                       SizedBox(
                         height: AppSize.defaultSize! * 3,
                       ),
-                      const TextImageRow(
+                      TextImageRow(
                         text:
-                        '${StringManager.veterinarian} in Microchip Implantation',
+                            // '${StringManager.veterinarian} in Microchip Implantation',
+                            vendor.description,
                         image: AssetPath.doctor2,
-
                       ),
-                      SizedBox(
-                          height: AppSize.defaultSize! * 3
-                      ),
-                      const TextImageRow(
-                        text:
-                        '${StringManager.address}:El Sheikh Zayed,  Waslet Dahshour',
+                      SizedBox(height: AppSize.defaultSize! * 3),
+                      TextImageRow(
+                        text: '${StringManager.address} : ${vendor.address}',
                         image: AssetPath.address,
                       ),
-                      SizedBox(
-                          height: AppSize.defaultSize! * 3
-                      ),
-                      const TextImageRow(
-                        text: '${StringManager.fees}:600 EGP',
+                      SizedBox(height: AppSize.defaultSize! * 3),
+                      TextImageRow(
+                        text: '${StringManager.fees}: ${vendor.baseFee}',
                         image: AssetPath.fees,
                       ),
-                      SizedBox(
-                          height: AppSize.defaultSize! * 3
-                      ),
-                      const TextImageRow(
-                        text: '${StringManager.phone}:2234567',
+                      SizedBox(height: AppSize.defaultSize! * 3),
+                      TextImageRow(
+                        text: '${StringManager.phone}:  ${vendor.phoneNumber}',
                         image: AssetPath.phone,
                       ),
-                      SizedBox(
-                          height: AppSize.defaultSize! * 3
-                      ),
+                      SizedBox(height: AppSize.defaultSize! * 3),
                       // Center(
                       //   child: MainButton(
                       //     text: StringManager.book.tr(),

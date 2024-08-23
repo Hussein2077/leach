@@ -5,6 +5,7 @@ import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
+import 'package:leach/core/utils/enums.dart';
 import 'package:leach/core/utils/methods.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/large_botton.dart';
@@ -37,7 +38,7 @@ class BookingScreen extends StatelessWidget {
                     LargeButton(
                       text: StringManager.veternarians,
                       onPressed: (){
-                        Navigator.pushNamed(context, Routes.doctor);
+                        Navigator.pushNamed(context, Routes.doctor,arguments: TypeOfVendor.vet);
                       },
                       child: Image.asset(
                         AssetPath.petProfile,
@@ -54,12 +55,18 @@ class BookingScreen extends StatelessWidget {
                         AssetPath.petProfile,
                         color: AppColors.primaryColor,
                       ),
+                      onPressed: (){
+                        Navigator.pushNamed(context, Routes.doctor,arguments: TypeOfVendor.grooming);
+                      },
                     ),
                     SizedBox(
                       height: AppSize.defaultSize! * 2,
                     ),
                     LargeButton(
                       text: StringManager.trainingCenters,
+                      onPressed:  (){
+                        Navigator.pushNamed(context, Routes.doctor,arguments: TypeOfVendor.training);
+                      },
                       child: Image.asset(
                         AssetPath.petProfile,
                         color: AppColors.primaryColor,

@@ -73,7 +73,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       const Spacer(),
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, Routes.notification);
+                          },
                           icon: Icon(
                             Icons.notifications,
                             size: AppSize.defaultSize! * 3.5,
@@ -104,12 +106,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Radius.circular(AppSize.defaultSize! * 4))),
                     child: ListView.builder(
                         itemCount: StringManager.listOfPosts.length,
+                        padding: EdgeInsets.zero,
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: EdgeInsets.only(
                               top: AppSize.defaultSize! * 3,
                               left: AppSize.defaultSize! * 7,
                               right: AppSize.defaultSize! * 7,
+                              bottom: index==StringManager.listOfPosts.length-1? AppSize.defaultSize! * 5:0
                             ),
                             child: LargeButton(
                               text: StringManager.listOfPosts[index].tr(),
@@ -119,7 +123,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                         }),
                   ),
-                )
+                ),
+
               ],
             ),
 

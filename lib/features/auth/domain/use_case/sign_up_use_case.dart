@@ -25,6 +25,7 @@ class SignUpModel {
   final String? email;
   final String? phone;
   final String? password;
+  final String? oldPassword;
   final String? area;
   final String? city;
   final String? name;
@@ -37,6 +38,7 @@ class SignUpModel {
      this.area,
      this.city,
      this.name,
+     this.oldPassword
 
   }) ;
 

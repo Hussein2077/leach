@@ -4,6 +4,7 @@ import 'package:leach/core/models/profile_data_model.dart';
 import 'package:leach/core/utils/api_helper.dart';
 import 'package:leach/features/profile/data/profile_remote_data_source.dart';
 import 'package:leach/features/profile/domain/base_repo/profie_base_repo.dart';
+import 'package:leach/features/profile/domain/model/all_booking_model.dart';
 import 'package:leach/features/profile/domain/model/create_pet.dart';
 import 'package:leach/features/profile/domain/model/traits_model.dart';
 import 'package:leach/features/profile/domain/use_case/CREATE_PET_USE_CASE.dart';
@@ -111,6 +112,23 @@ class ProfileRepositoryImp extends ProfileBaseRepository {
   Future<Either<String, Failure>> changePrivacy() async{
     try {
       final result = await profileBaseRemotelyDataSource.changePrivacy();
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }  @override
+  Future<Either<List<AllBookingModel>, Failure>>  getAllBooking() async{
+    try {
+      final result = await profileBaseRemotelyDataSource.getAllBooking();
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
+  @override
+  Future<Either< void, Failure>> cancelBooking  ( int bookingId  ) async {
+    try {
+      final result = await profileBaseRemotelyDataSource.cancelBooking(  bookingId  );
       return Left(result);
     } on Exception catch (e) {
       return right(DioHelper.buildFailure(e));
