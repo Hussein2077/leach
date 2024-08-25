@@ -3,6 +3,8 @@ import 'package:leach/core/error/failure.dart';
 import 'package:leach/core/models/profile_data_model.dart';
 import 'package:leach/core/utils/api_helper.dart';
 import 'package:leach/features/auth/data/auth_remote_data_source.dart';
+import 'package:leach/features/auth/data/models/auth_with_apple_model.dart';
+import 'package:leach/features/auth/data/models/auth_with_google_model.dart';
 import 'package:leach/features/auth/domain/repo/base_repo.dart';
 import 'package:leach/features/auth/domain/use_case/login_with_email_and_password_use_case.dart';
 import 'package:leach/features/auth/domain/use_case/sign_up_use_case.dart';
@@ -76,6 +78,26 @@ class RepositoryImp extends BaseRepository {
       return Left(result);
     } on Exception catch (e) {
       return right(DioHelper.buildFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<AuthWithAppleModel, Failure>> siginWithApple() async {
+    try {
+      final result = await baseRemotelyDataSource.sigInWithApple();
+      return Left(result);
+    } on Exception catch (e) {
+      return Right(DioHelper.buildFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<AuthWithGoogleModel, Failure>> siginWithGoogle() async {
+    try {
+      final result = await baseRemotelyDataSource.sigInWithGoogle();
+      return Left(result);
+    } on Exception catch (e) {
+      return Right(DioHelper.buildFailure(e));
     }
   }
 }

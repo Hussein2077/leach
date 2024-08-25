@@ -5,12 +5,15 @@ import 'package:leach/features/auth/data/repo_imp.dart';
 import 'package:leach/features/auth/domain/repo/base_repo.dart';
 import 'package:leach/features/auth/domain/use_case/change_password.dart';
 import 'package:leach/features/auth/domain/use_case/delete_account_uc.dart';
+import 'package:leach/features/auth/domain/use_case/google_sign_in_usecase.dart';
 import 'package:leach/features/auth/domain/use_case/login_with_email_and_password_use_case.dart';
 import 'package:leach/features/auth/domain/use_case/send_code.dart';
 import 'package:leach/features/auth/domain/use_case/sign_up_use_case.dart';
+import 'package:leach/features/auth/domain/use_case/sign_with_apple_us.dart';
 import 'package:leach/features/auth/domain/use_case/verify_code.dart';
 import 'package:leach/features/auth/presentation/controller/change_password_bloc/change_password_bloc.dart';
 import 'package:leach/features/auth/presentation/controller/login_bloc/login_with_email_and_password_bloc.dart';
+import 'package:leach/features/auth/presentation/controller/sign_in_with_paltform_manager/sign_in_with_platform_bloc.dart';
 import 'package:leach/features/auth/presentation/controller/sign_up_bloc/sign_up_with_email_and_password_bloc.dart';
 import 'package:leach/features/home/data/data_source/home_remote_data_source.dart';
 import 'package:leach/features/home/data/repo_imp/repo_imp.dart';
@@ -116,8 +119,11 @@ class ServerLocator {
         verifyCodeUseCase: getIt(),
         sendCodeUseCase: getIt()));
     getIt.registerLazySingleton(() => GetUserBloc(getUserUseCase: getIt()));
+    getIt.registerLazySingleton(() => SignInWithPlatformBloc(signInWithAppleUC: getIt(), signInWithGoogleUC: getIt()));
 
     //use_case
+    getIt.registerFactory(() => SignInWithAppleUC(baseRepository: getIt()));
+    getIt.registerFactory(() => SignInWithGoogleUC(baseRepository: getIt()));
     getIt.registerFactory(() => GetUserUseCase(profileBaseRepository: getIt()));
     getIt.registerFactory(() => ChangePasswordUseCase(baseRepository: getIt()));
     getIt.registerFactory(() => VerifyCodeUseCase(baseRepository: getIt()));
