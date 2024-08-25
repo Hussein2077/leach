@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:leach/core/models/pet_model.dart';
 import 'package:leach/core/models/users_model.dart';
 
+import '../../features/profile/domain/model/user_data_model.dart';
+
 class UserModel {
   String? id;
   String? email;
@@ -16,7 +18,7 @@ class UserModel {
   String? accountStatus ;
   bool? privateAccount ;
   List<Pet>? pets;
-  List<User>? friends;
+  Friends? friends;
 
   static UserModel? _instance;
 
@@ -55,7 +57,7 @@ class UserModel {
     String? accountStatus ,
     bool? privateAccount ,
     List<Pet>? pets ,
-    List<User>? friends ,
+    Friends? friends ,
 
   }) {
     this.id = id ?? this.id;
@@ -90,7 +92,7 @@ class UserModel {
         accountStatus: map['account_status']?? '',
         privateAccount: map['private_account']  ==0 ? false: true,
         pets: map['pets'] == null ? [] :  (map['pets'] as List).map((e) => Pet.fromJson(e)).toList(),
-        friends: map['friends'] == null ? [] : (map['friends'] as List).map((e) => User.fromJson(e)).toList(),
+        friends:  Friends.fromJson(map['friends']),
       );
     } else {
       _instance?.setNewUserData(
@@ -107,7 +109,7 @@ class UserModel {
         accountStatus: map['account_status']?? '',
         privateAccount: map['private_account']==0 ? false: true,
         pets: map['pets'] == null ? [] :  (map['pets'] as List).map((e) => Pet.fromJson(e)).toList(),
-        friends: map['friends'] == null ? [] : (map['friends'] as List).map((e) => User.fromJson(e)).toList(),
+        friends:  Friends.fromJson(map['friends']),
       );
     }
     return _instance!;

@@ -24,8 +24,8 @@ class DioHelper {
   }
 
   Future<Map<String, String>> header() async {
-    String token = await Methods.instance.returnUserToken();
-    //String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS5sZWFzaHBldHMuY29tL2FwaS9sZWFzaC9sb2dpbiIsImlhdCI6MTcyNDQyMDAxNCwiZXhwIjoxNzI1NjI5NjE0LCJuYmYiOjE3MjQ0MjAwMTQsImp0aSI6IjdQdkp6bzVGaTFLM3ZwYUMiLCJzdWIiOiIxNCIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.d9oYHx8x6PS-GTslw32bjpOAqhAUsxWOio2bLPC5rN8";
+    //String token = await Methods.instance.returnUserToken();
+    String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS5sZWFzaHBldHMuY29tL2FwaS9sZWFzaC9sb2dpbiIsImlhdCI6MTcyNDQyMDAxNCwiZXhwIjoxNzI1NjI5NjE0LCJuYmYiOjE3MjQ0MjAwMTQsImp0aSI6IjdQdkp6bzVGaTFLM3ZwYUMiLCJzdWIiOiIxNCIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.d9oYHx8x6PS-GTslw32bjpOAqhAUsxWOio2bLPC5rN8";
     if (kDebugMode) {
       log('husssssssssss $token');
     }

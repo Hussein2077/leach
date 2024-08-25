@@ -50,12 +50,7 @@ class UserData {
         pets?.add(Pets.fromJson(v));
       });
     }
-    if (json['friends'] != null) {
-      friends = [];
-      json['friends'].forEach((v) {
-        friends?.add(Friends.fromJson(v));
-      });
-    }
+    friends = json['friends'] != null ? Friends.fromJson(json['friends']) : null;
     posts = json['posts'] != null ? Posts.fromJson(json['posts']) : null;
   }
   String? username;
@@ -67,7 +62,7 @@ class UserData {
   int? privateAccount;
   String? accountStatus;
   List<Pets>? pets;
-  List<Friends>? friends;
+  Friends? friends;
   Posts? posts;
 
   Map<String, dynamic> toJson() {
@@ -84,10 +79,39 @@ class UserData {
       map['pets'] = pets?.map((v) => v.toJson()).toList();
     }
     if (friends != null) {
-      map['friends'] = friends?.map((v) => v.toJson()).toList();
+      map['friends'] = friends?.toJson();
     }
     if (posts != null) {
       map['posts'] = posts?.toJson();
+    }
+    return map;
+  }
+}
+
+class Friends {
+  Friends({
+    this.data,
+    this.pagination,});
+
+  Friends.fromJson(dynamic json) {
+    if (json['data'] != null) {
+      data = [];
+      json['data'].forEach((v) {
+        data?.add(FriendsData.fromJson(v));
+      });
+    }
+    pagination = json['pagination'] != null ? Pagination.fromJson(json['pagination']) : null;
+  }
+  List<FriendsData>? data;
+  Pagination? pagination;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    if (data != null) {
+      map['data'] = data?.map((v) => v.toJson()).toList();
+    }
+    if (pagination != null) {
+      map['pagination'] = pagination?.toJson();
     }
     return map;
   }
@@ -190,13 +214,13 @@ class Data {
 
 }
 
-class Friends {
-  Friends({
+class FriendsData {
+  FriendsData({
       this.uuid, 
       this.username, 
       this.profilePicture,});
 
-  Friends.fromJson(dynamic json) {
+  FriendsData.fromJson(dynamic json) {
     uuid = json['uuid'];
     username = json['username'];
     profilePicture = json['profile_picture'];
