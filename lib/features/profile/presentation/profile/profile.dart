@@ -69,7 +69,7 @@ class _PersonalProfileState extends State<PersonalProfile> {
                       ),
                     ),
                     MedalsAbdFriends(
-                      number_of_friends: state.userModel.friends?.length.toString() ?? "0",
+                      number_of_friends: state.userModel.friends?.data?.length.toString() ?? "0",
                     ),
                   ],
                 ),

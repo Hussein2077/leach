@@ -389,7 +389,7 @@ class _FriendsViewState extends State<FriendsView>
                               MedalsAbdFriends(
                                 isFriendView: true,
                                 number_of_friends: state
-                                        .userDataModel.data?.friends?.length
+                                        .userDataModel.data?.friends?.data?.length
                                         .toString() ??
                                     "0",
                               ),
