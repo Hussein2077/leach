@@ -57,6 +57,8 @@ dependencies:
   table_calendar: ^3.1.2
   dotted_border: ^2.1.0
   calendar_date_picker2: ^1.1.5
+  google_sign_in:
+  sign_in_with_apple:
 dev_dependencies:
   flutter_test:
     sdk: flutter

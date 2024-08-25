@@ -38,6 +38,7 @@ import 'package:leach/features/profile/presentation/friends/specific_messages_re
 import 'package:leach/features/profile/presentation/friends/submit_report.dart';
 import 'package:leach/features/profile/presentation/notifications/friend_requests_screen.dart';
 import 'package:leach/features/profile/presentation/notifications/notifications_screen.dart';
+import 'package:leach/features/profile/presentation/pet_profile/pet_photo_view.dart';
 import 'package:leach/features/profile/presentation/posts_and_pet_view/edit_post.dart';
 import 'package:leach/features/profile/presentation/posts_and_pet_view/posts_view_profile.dart';
 import 'package:leach/features/profile/presentation/profile/componant/add_photo_for_pet.dart';
@@ -100,6 +101,8 @@ class Routes {
   static const String friendRequests = "/friend_requests";
   static const String editPost = "/edit_post";
   static const String bookingHistory = "/booking_history";
+  static const String petPhotoView = "/pet_photo_view";
+
 
 }
 
@@ -343,6 +346,11 @@ class RouteGenerator {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
             const BookingHistory(),
+            transitionsBuilder: customAnimate);
+      case Routes.petPhotoView:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const PetPhotoView(),
             transitionsBuilder: customAnimate);
     }
     return unDefinedRoute(

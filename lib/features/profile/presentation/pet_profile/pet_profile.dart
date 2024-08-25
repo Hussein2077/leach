@@ -126,6 +126,9 @@ class _PetProfileState extends State<PetProfile> {
         Expanded(
             child: PostsContainer(
           pets: true,
+          onImageTap: (){
+            Navigator.pushNamed(context, Routes.petPhotoView);
+          },
           commonType: CommonType(
             pictures:
                 PetProfile.currentPet!.pictures.map((e) => e.picture).toList(),

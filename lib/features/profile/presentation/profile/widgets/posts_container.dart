@@ -7,11 +7,11 @@ import 'package:leach/core/widgets/cached_network_image.dart';
 import 'package:leach/core/widgets/icon_with_matrial.dart';
 
 class PostsContainer extends StatelessWidget {
-  const PostsContainer({super.key, this.addIcon = true, this.pets = false, required this.commonType});
+  const PostsContainer({super.key, this.addIcon = true, this.pets = false, required this.commonType, this.onImageTap});
  final CommonType commonType;
   final bool addIcon;
   final bool pets;
-
+final Function()? onImageTap;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,7 +32,7 @@ class PostsContainer extends StatelessWidget {
                   return Padding(
                     padding:   EdgeInsets.all(AppSize.defaultSize! ),
                     child: InkWell(
-                      onTap: () {
+                      onTap:onImageTap ?? () {
                         Navigator.pushNamed(context, Routes.postsViewProfile);
                       },
                       child: CachedNetworkCustom(
