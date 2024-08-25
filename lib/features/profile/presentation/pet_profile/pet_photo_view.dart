@@ -34,11 +34,14 @@ class _PetPhotoViewState extends State<PetPhotoView> {
               children: [
                 Padding(
                   padding: Methods.instance.paddingCustom,
-                  child: const Row(
+                  child:  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      LeadingIcon(
-                        color: Colors.white,
+                      Padding(
+                        padding: EdgeInsets.only(top:AppSize.defaultSize! * 5.5,left:AppSize.defaultSize! * 2.5,),
+                        child: LeadingIcon(
+                          color: Colors.white,
+                        ),
                       ),
                     ],
                   ),

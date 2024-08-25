@@ -25,7 +25,6 @@ class PlainCard extends StatefulWidget {
 
 class _PlainCardState extends State<PlainCard> {
 
-  late List<SideBarRow> items;
 
   @override
   void initState() {
@@ -46,7 +45,10 @@ class _PlainCardState extends State<PlainCard> {
           ],
         ),
 
-        Image.asset(AssetPath.cat),
+        ClipRRect(
+            borderRadius: BorderRadius.circular(AppSize.defaultSize! * 4), // Image border
+
+            child: Image.asset(AssetPath.testPosts2, width: AppSize.screenWidth!, height: AppSize.defaultSize! * 35, fit: BoxFit.fill,)),
         // CachedNetworkCustom(
         //   url: widget.data.picture??"",
         //   width: AppSize.screenWidth!,
