@@ -39,7 +39,7 @@ void successSnackBar(BuildContext context, String message) {
   // Adjust the bottom margin based on keyboard visibility
   double bottomMargin = isKeyboardVisible
       ? MediaQuery.of(context).viewInsets.bottom + AppSize.defaultSize! * 2 // Just above the keyboard
-      : AppSize.defaultSize! * 10; // Default margin when keyboard is not visible
+      : AppSize.defaultSize! * 2; // Default margin when keyboard is not visible
 
   final snackBar = SnackBar(
     content: Center(

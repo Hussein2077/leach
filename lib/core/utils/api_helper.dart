@@ -2,16 +2,19 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:leach/core/error/exception.dart';
 import 'package:leach/core/error/failure.dart';
 import 'package:leach/core/error/failures_strings.dart';
+import 'package:leach/core/resource_manager/routes.dart';
+import 'package:leach/core/service/navigator_services.dart';
+import 'package:leach/core/service/service_locator.dart';
 import 'package:leach/core/utils/methods.dart';
 
 class DioHelper {
   Future<Options> options() async {
     Map<String, String> headers = await DioHelper().header();
-    log('headers $headers');
     return Options(
       receiveDataWhenStatusError: true,
       sendTimeout: const Duration(milliseconds: 5000),
@@ -22,10 +25,10 @@ class DioHelper {
 
   Future<Map<String, String>> header() async {
     String token = await Methods.instance.returnUserToken();
+    //String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS5sZWFzaHBldHMuY29tL2FwaS9sZWFzaC9sb2dpbiIsImlhdCI6MTcyNDQyMDAxNCwiZXhwIjoxNzI1NjI5NjE0LCJuYmYiOjE3MjQ0MjAwMTQsImp0aSI6IjdQdkp6bzVGaTFLM3ZwYUMiLCJzdWIiOiIxNCIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.d9oYHx8x6PS-GTslw32bjpOAqhAUsxWOio2bLPC5rN8";
     if (kDebugMode) {
       log('husssssssssss $token');
     }
-
     Map<String, String> headers = {
       "Authorization": 'Bearer $token',
       'accept': 'application/json',
@@ -57,7 +60,6 @@ class DioHelper {
       case ServerException:
         return ServerFailure();
       case UnauthorizedException:
-
         return UnauthorizedFailure();
       case SiginGoogleException:
         return SiginGoogleFailure();
@@ -106,6 +108,10 @@ class DioHelper {
       case 500:
         throw ServerException();
       case 401:
+        Navigator.pushNamedAndRemoveUntil(
+            getIt<NavigationService>().navigatorKey.currentContext!,
+            Routes.welcomePage,
+            (route) => false);
         if (response?.data.runtimeType == String) {
           throw ErrorModelException(errorMessage: response!.data);
         } else {

@@ -8,11 +8,10 @@ abstract class BaseChangePasswordEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
-class ResetPasswordEvent extends BaseChangePasswordEvent{
+class ChangePasswordEvent extends BaseChangePasswordEvent{
   final String password ;
-  final String code ;
-  final String email ;
-  const ResetPasswordEvent({ required this.code, required this.email,  required this.password});
+ final String oldPassword ;
+  const ChangePasswordEvent({ required this.oldPassword,    required this.password});
 }
 class VerifyCodeEvent extends BaseChangePasswordEvent{
   final String email ;

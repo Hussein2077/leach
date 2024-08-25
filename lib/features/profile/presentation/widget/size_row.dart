@@ -6,8 +6,8 @@ import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 
 class SizeRow extends StatefulWidget {
-  const SizeRow({super.key, this.isDog = false, this.onValueChange});
-
+  const SizeRow({super.key, this.isDog = false, this.onValueChange, this.initialValue});
+final int? initialValue;
   final bool isDog;
   final Function(int?)? onValueChange;
   @override
@@ -16,7 +16,11 @@ class SizeRow extends StatefulWidget {
 
 class _SizeRowState extends State<SizeRow> {
   int? selectedIndex; // Variable to track the selected index
-
+@override
+  void initState() {
+    selectedIndex = widget.initialValue;
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return SizedBox(

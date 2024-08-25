@@ -4,8 +4,10 @@ import 'package:leach/core/models/profile_data_model.dart';
 import 'package:leach/core/utils/api_helper.dart';
 import 'package:leach/features/profile/data/profile_remote_data_source.dart';
 import 'package:leach/features/profile/domain/base_repo/profie_base_repo.dart';
+import 'package:leach/features/profile/domain/model/all_booking_model.dart';
 import 'package:leach/features/profile/domain/model/create_pet.dart';
 import 'package:leach/features/profile/domain/model/traits_model.dart';
+import 'package:leach/features/profile/domain/model/user_data_model.dart';
 import 'package:leach/features/profile/domain/use_case/CREATE_PET_USE_CASE.dart';
 import 'package:leach/features/profile/domain/model/friends_model.dart';
 import 'package:leach/features/profile/domain/model/pending_friend_requests_model.dart';
@@ -68,6 +70,16 @@ class ProfileRepositoryImp extends ProfileBaseRepository {
   }
 
   @override
+  Future<Either<String, Failure>> sendFriendRequests({required String id}) async {
+    try {
+      final result = await profileBaseRemotelyDataSource.sendFriendRequests(id: id);
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
+
+  @override
   Future<Either<String, Failure>> rejectFriendRequests({required String id}) async {
     try {
       final result = await profileBaseRemotelyDataSource.rejectFriendRequests(id: id);
@@ -115,6 +127,42 @@ class ProfileRepositoryImp extends ProfileBaseRepository {
     } on Exception catch (e) {
       return right(DioHelper.buildFailure(e));
     }
+  }  @override
+  Future<Either<List<AllBookingModel>, Failure>>  getAllBooking() async{
+    try {
+      final result = await profileBaseRemotelyDataSource.getAllBooking();
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
+  @override
+  Future<Either< void, Failure>> cancelBooking  ( int bookingId  ) async {
+    try {
+      final result = await profileBaseRemotelyDataSource.cancelBooking(  bookingId  );
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
   }
 
+  @override
+  Future<Either<UserDataModel, Failure>> getUser({required String id}) async {
+    try {
+      final result = await profileBaseRemotelyDataSource.getUser(id: id);
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<String, Failure>> removeFriend({required String id}) async {
+    try {
+      final result = await profileBaseRemotelyDataSource.removeFriend(id: id);
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
 }

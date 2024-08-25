@@ -82,7 +82,8 @@ class StringManager {
 
   static const String addAPicture = "Add a picture";
   static const String addPictureOfMedicalPassport =
-      "Add a picture of medical passport";
+      "Add a picture of medical passport";  static const String editPictureOfMedicalPassport  =
+      "Edit picture of medical passport";
   static const String next = "Next";
   static const String dogBreed = "Dog Breed";
   static const String enterYourDogsInformation = "Enter your dog’s information";
@@ -116,6 +117,7 @@ class StringManager {
   static const String messages = "Messages";
   static const String message = "Message";
   static const String turnOffCommenting = "Turn off commenting";
+  static const String turnOnCommenting = "Turn on commenting";
   static const String comment = "Comment";
   static const String enterUsername = "Enter your name";
   static const String availableSpecialists = "Available Training Specialist";

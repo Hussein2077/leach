@@ -5,6 +5,7 @@ import 'package:leach/features/posts/data/models/posts_model.dart';
 
 abstract class PostsBaseRemotelyDataSource {
   Future<PostsModel> getPosts({required String page});
+  Future<PostsModel> getUserPosts({required String page});
   Future<String> likePost({required String id});
   Future<String> unLikePost({required String id});
   Future<String> addComment({required String id, required String comment});
@@ -32,6 +33,24 @@ class PostsRemotelyDateSource extends PostsBaseRemotelyDataSource {
       return PostsModel.fromJson(response.data);
     } on DioException catch (e) {
       throw DioHelper.handleDioError(dioError: e, endpointName: 'getPosts');
+    }
+  }
+
+  @override
+  Future<PostsModel> getUserPosts({required String page}) async {
+    Map<String, String> headers = await DioHelper().header();
+
+    try {
+      final response = await Dio().get(
+        ConstantApi.getUserPosts(page),
+        options: Options(
+          headers: headers,
+        ),
+      );
+
+      return PostsModel.fromJson(response.data);
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(dioError: e, endpointName: 'getUserPosts');
     }
   }
 

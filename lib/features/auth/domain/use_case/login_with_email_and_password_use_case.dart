@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dartz/dartz.dart';
 import 'package:leach/core/base_use_case/base_use_case.dart';
 import 'package:leach/core/error/failure.dart';
@@ -23,12 +21,12 @@ class LoginWithEmailAndPasswordUseCase
 
 class AuthModel {
   final String phoneOrEmail;
-  final String? password;
+  final String password;
   final String? socialID;
 
   AuthModel({
     required this.phoneOrEmail ,
-    this.password,
+    required this.password,
     this.socialID,
   });
 }

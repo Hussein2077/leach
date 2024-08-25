@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/loading_widget.dart';
-import 'package:leach/features/posts/presentation/manager/posts_manager/posts_bloc.dart';
-import 'package:leach/features/posts/presentation/manager/posts_manager/posts_state.dart';
+import 'package:leach/features/posts/presentation/manager/user_posts_manager/user_posts_bloc.dart';
+import 'package:leach/features/posts/presentation/manager/user_posts_manager/user_posts_state.dart';
 import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_state.dart';
 import 'package:leach/features/profile/presentation/profile/widgets/posts_container.dart';
@@ -37,7 +37,7 @@ class _PersonalProfileState extends State<PersonalProfile> {
                     horizontal: AppSize.defaultSize! * 3.4),
                 child: Column(
                   children: [
-                    const ProfileAppBar(),
+                    const ProfileAppBar(leading: false,),
                     SizedBox(
                       height: AppSize.defaultSize! * 3,
                     ),
@@ -69,8 +69,7 @@ class _PersonalProfileState extends State<PersonalProfile> {
                       ),
                     ),
                     MedalsAbdFriends(
-                      number_of_friends: state.userModel.friends?.length
-                          .toString() ?? "",
+                      number_of_friends: state.userModel.friends?.length.toString() ?? "0",
                     ),
                   ],
                 ),
@@ -80,9 +79,9 @@ class _PersonalProfileState extends State<PersonalProfile> {
                 height: AppSize.defaultSize!,
               ),
               Expanded(
-                child: BlocBuilder<PostsBloc, PostState>(
+                child: BlocBuilder<UserPostsBloc, UserPostState>(
                   builder: (context, state) {
-                    if(state is GetPostsSuccessState) {
+                    if(state is GetUserPostsSuccessState) {
                       return PostsContainer(
                         pets: false,
                         commonType: CommonType(

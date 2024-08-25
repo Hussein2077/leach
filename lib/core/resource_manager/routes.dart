@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:leach/core/models/pet_model.dart';
 import 'package:leach/core/resource_manager/enums.dart';
 import 'package:leach/core/service/navigator_services.dart';
 import 'package:leach/core/service/service_locator.dart';
+import 'package:leach/core/utils/enums.dart';
 import 'package:leach/features/auth/presentation/forgot_password/code_page.dart';
 import 'package:leach/features/auth/presentation/forgot_password/forgot_password.dart';
 import 'package:leach/features/auth/presentation/forgot_password/reset_password_from_profile.dart';
@@ -10,20 +12,22 @@ import 'package:leach/features/auth/presentation/login_screen.dart';
 import 'package:leach/features/auth/presentation/sign_up/register.dart';
 import 'package:leach/features/auth/presentation/welcome_screen.dart';
 import 'package:leach/features/chat/chat_details.dart';
-import 'package:leach/features/home/doctors.dart';
-import 'package:leach/features/home/componant/booking.dart';
-import 'package:leach/features/home/componant/breeding.dart';
-import 'package:leach/features/home/componant/cash_or_credit.dart';
-import 'package:leach/features/home/componant/how_to.dart';
-import 'package:leach/features/home/componant/review.dart';
-import 'package:leach/features/home/componant/select_how_to.dart';
-import 'package:leach/features/home/componant/trainYourDog.dart';
-import 'package:leach/features/home/widgets/calender.dart';
+import 'package:leach/features/home/data/models/how_toModel.dart';
+import 'package:leach/features/home/data/models/vendor.dart';
+import 'package:leach/features/home/presentation/componant/booking.dart';
+import 'package:leach/features/home/presentation/componant/breeding/breeding.dart';
+import 'package:leach/features/home/presentation/componant/cash_or_credit.dart';
+import 'package:leach/features/home/presentation/componant/how_to.dart';
+import 'package:leach/features/home/presentation/componant/review.dart';
+import 'package:leach/features/home/presentation/componant/select_how_to.dart';
+import 'package:leach/features/home/presentation/componant/trainYourDog.dart';
+import 'package:leach/features/home/presentation/doctors.dart';
+import 'package:leach/features/home/presentation/widgets/calender.dart';
 import 'package:leach/features/main_screen.dart';
+import 'package:leach/features/posts/data/models/posts_model.dart';
 import 'package:leach/features/profile/domain/model/create_pet.dart';
 import 'package:leach/features/profile/presentation/add_pet/add_pet_screen.dart';
 import 'package:leach/features/profile/presentation/add_pet/cat_bread.dart';
-import 'package:leach/features/profile/presentation/add_pet/cat_breed3.dart';
 import 'package:leach/features/profile/presentation/add_pet/dog_bread.dart';
 import 'package:leach/features/profile/presentation/add_pet/dog_breed3.dart';
 import 'package:leach/features/profile/presentation/add_pet/type_of_pet.dart';
@@ -36,19 +40,18 @@ import 'package:leach/features/profile/presentation/notifications/friend_request
 import 'package:leach/features/profile/presentation/notifications/notifications_screen.dart';
 import 'package:leach/features/profile/presentation/posts_and_pet_view/edit_post.dart';
 import 'package:leach/features/profile/presentation/posts_and_pet_view/posts_view_profile.dart';
-import 'package:leach/features/profile/presentation/profile/componant/account_privacy.dart';
-import 'package:leach/features/profile/presentation/profile/componant/activity_and_history.dart';
 import 'package:leach/features/profile/presentation/profile/componant/add_photo_for_pet.dart';
 import 'package:leach/features/profile/presentation/profile/componant/add_post.dart';
-import 'package:leach/features/profile/presentation/profile/componant/booking_history.dart';
-import 'package:leach/features/profile/presentation/profile/componant/delete_account.dart';
-import 'package:leach/features/profile/presentation/profile/componant/edit_pet_profile.dart';
 import 'package:leach/features/profile/presentation/profile/my_pet_profile.dart';
 import 'package:leach/features/profile/presentation/profile/pet_details.dart';
-import 'package:leach/features/profile/presentation/profile/side_bar.dart';
-import 'package:leach/features/profile/presentation/profile/componant/edit_profile.dart';
-
-import 'package:leach/features/profile/presentation/profile/componant/delete_account_2.dart';
+import 'package:leach/features/profile/presentation/side%20bar/componant/account_privacy.dart';
+import 'package:leach/features/profile/presentation/side%20bar/componant/activity_and_history.dart';
+import 'package:leach/features/profile/presentation/side%20bar/componant/booking_history.dart';
+import 'package:leach/features/profile/presentation/side%20bar/componant/delete_account.dart';
+import 'package:leach/features/profile/presentation/side%20bar/componant/delete_account_2.dart';
+import 'package:leach/features/profile/presentation/side%20bar/componant/edit_pet_profile.dart';
+import 'package:leach/features/profile/presentation/side%20bar/componant/edit_profile.dart';
+import 'package:leach/features/profile/presentation/side%20bar/side_bar.dart';
 
 class Routes {
   static const String login = "/login";
@@ -64,7 +67,6 @@ class Routes {
   static const String catBread = "/CatBread";
   static const String dogBread = "/dogBread";
   static const String doctor = "/Doctors";
-  static const String catBreed3 = "/CatBreed3";
   static const String dogBreed3 = "/dogBreed3";
   static const String sidebar = "/side_bar";
   static const String breedingScreen = "/BreedingScreen";
@@ -112,9 +114,10 @@ class RouteGenerator {
                 const LoginScreen(),
             transitionsBuilder: customAnimate);
       case Routes.main:
+        int ?selectedIndex = settings.arguments as int?;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const MainScreen(),
+                  MainScreen(selectedIndex: selectedIndex??4,),
             transitionsBuilder: customAnimate);
       case Routes.welcomePage:
         return PageRouteBuilder(
@@ -156,9 +159,10 @@ class RouteGenerator {
                 ),
             transitionsBuilder: customAnimate);
       case Routes.doctor:
+        TypeOfVendor typeOfVendor = settings.arguments as TypeOfVendor;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const Doctors(),
+                  Doctors(typeOfVendor: typeOfVendor ,),
             transitionsBuilder: customAnimate);
       case Routes.catBread:
         return PageRouteBuilder(
@@ -172,17 +176,13 @@ class RouteGenerator {
             transitionsBuilder: customAnimate);
 
       case Routes.dogBreed3:
-        PetProfileModel petProfileModel = settings.arguments as PetProfileModel;
+        SelectionPetTypeParamRoute  selectionPetTypeParamRoute = settings.arguments as SelectionPetTypeParamRoute;
         return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) => DogBreed3(
-                  petProfileModel: petProfileModel,
+            pageBuilder: (context, animation, secondaryAnimation) => PetBreedSelection(
+            selectionPetTypeParamRoute: selectionPetTypeParamRoute,
                 ),
             transitionsBuilder: customAnimate);
-      case Routes.catBreed3:
-        return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) =>
-                const CatBreed3(),
-            transitionsBuilder: customAnimate);
+
       case Routes.sidebar:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
@@ -214,14 +214,18 @@ class RouteGenerator {
                 const EditProfile(),
             transitionsBuilder: customAnimate);
       case Routes.breedingScreen:
+        String type = settings.arguments as String;
         return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) =>
-                const BreedingScreen(),
+            pageBuilder: (context, animation, secondaryAnimation) => BreedingScreen(type: type),
             transitionsBuilder: customAnimate);
       case Routes.editPetProfile:
+        List<Pet> currentPet = settings.arguments as List<Pet> ;
+
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const EditPetProfile(),
+                EditPetProfile(
+                  pets: currentPet,
+                ),
             transitionsBuilder: customAnimate);
       case Routes.deleteAccount:
         return PageRouteBuilder(
@@ -229,14 +233,16 @@ class RouteGenerator {
                 const DeleteAccount(),
             transitionsBuilder: customAnimate);
       case Routes.calenderScreen:
+        Vendor vendor = settings.arguments as Vendor ;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const CalenderScreen(),
+                  CalenderScreen(vendor:  vendor,),
             transitionsBuilder: customAnimate);
       case Routes.reviewScreen:
+        ReviewParams reviewParams = settings.arguments as ReviewParams;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const ReviewScreen(),
+                  ReviewScreen(reviewParams:reviewParams ,),
             transitionsBuilder: customAnimate);
       case Routes.cashOrCredit:
         return PageRouteBuilder(
@@ -264,9 +270,9 @@ class RouteGenerator {
                 const FriendsScreen(),
             transitionsBuilder: customAnimate);
       case Routes.friendsView:
+        String uuid = settings.arguments as String;
         return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) =>
-                const FriendsView(),
+            pageBuilder: (context, animation, secondaryAnimation) => FriendsView(uuid: uuid),
             transitionsBuilder: customAnimate);
       case Routes.postsViewProfile:
         return PageRouteBuilder(
@@ -283,9 +289,10 @@ class RouteGenerator {
                 const AddPhotoForPet(),
             transitionsBuilder: customAnimate);
       case Routes.howTo:
+          HowToModel howToModel = settings.arguments as HowToModel;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const HowTo(),
+                  HowTo(howToModel: howToModel ,),
             transitionsBuilder: customAnimate);
       case Routes.resetPasswordFromProfile:
         return PageRouteBuilder(
@@ -328,9 +335,9 @@ class RouteGenerator {
                 const FriendRequestsScreen(),
             transitionsBuilder: customAnimate);
       case Routes.editPost:
+        PostData postData = settings.arguments as PostData;
         return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) =>
-                const EditPost(),
+            pageBuilder: (context, animation, secondaryAnimation) => EditPost(data: postData),
             transitionsBuilder: customAnimate);
       case Routes.bookingHistory:
         return PageRouteBuilder(
@@ -389,4 +396,9 @@ Widget customAnimate(BuildContext context, Animation<double> animation,
     opacity: animation,
     child: child,
   );
+}
+class SelectionPetTypeParamRoute {
+  final PetProfileModel petProfileModel ;
+  final String petType;
+  SelectionPetTypeParamRoute({ required this.petProfileModel, required this.petType});
 }

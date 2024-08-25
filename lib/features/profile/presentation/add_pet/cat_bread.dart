@@ -10,6 +10,7 @@ import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
+import 'package:leach/core/utils/methods.dart';
 import 'package:leach/core/widgets/check_box.dart';
 import 'package:leach/core/widgets/column_with_text_field.dart';
 import 'package:leach/core/widgets/custom_text_field.dart';
@@ -69,7 +70,10 @@ class _CatBreadState extends State<CatBread> {
             LoadingOverlay().hide();
             BlocProvider.of<GetMyDataBloc>(context).add(
                 GetMyDataEvent());
-            Navigator.pushNamed(context, Routes.catBreed3, arguments: state.petProfileModel);
+            Navigator.pushNamed(context, Routes.dogBreed3, arguments:SelectionPetTypeParamRoute(
+              petProfileModel: state.petProfileModel,
+              petType: 'cat'
+            ) );
           } else if (state is CreatePetErrorMessageState) {
             LoadingOverlay().hide();
             errorSnackBar(context, state.errorMessage);
@@ -80,18 +84,7 @@ class _CatBreadState extends State<CatBread> {
         child: BlocBuilder<BaseBreadCubit, BaseBreadState>(
           builder: (context, state) {
             final cubit = context.read<BaseBreadCubit>();
-            var config = CalendarDatePicker2WithActionButtonsConfig(
-              dayTextStyle: const TextStyle(color: AppColors.primaryColor),
-              selectedDayHighlightColor: AppColors.primaryColor,
-              calendarType: CalendarDatePicker2Type.single,
-              controlsTextStyle: const TextStyle(color: AppColors.primaryColor),
-              weekdayLabelTextStyle:
-              const TextStyle(color: AppColors.primaryColor),
-              selectedDayTextStyle: const TextStyle(color: Colors.white),
-              okButtonTextStyle: const TextStyle(color: AppColors.primaryColor),
-              cancelButtonTextStyle:
-              const TextStyle(color: AppColors.primaryColor),
-            );
+
 
             return SingleChildScrollView(
               child: Padding(
@@ -206,7 +199,7 @@ class _CatBreadState extends State<CatBread> {
                             onTap: () async {
                               var results = await showCalendarDatePicker2Dialog(
                                 context: context,
-                                config: config,
+                                config: Methods.instance.config,
                                 dialogSize: Size(AppSize.screenWidth! * .8,
                                     AppSize.screenHeight! * .5),
                                 borderRadius: BorderRadius.circular(15),
@@ -291,7 +284,7 @@ class _CatBreadState extends State<CatBread> {
                         children: [
                           CircularCheckbox(
                             text: StringManager.yes.tr(),
-                            initialValue: state.breedingAvailable == true,
+                            initialValue: state.neuteredSpayed == true,
                             onChanged: (value) {
                               cubit.setNeuteredSpayed(true);
                             },

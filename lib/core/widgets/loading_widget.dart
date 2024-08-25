@@ -5,11 +5,13 @@ import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/utils/app_size.dart';
 
 class LoadingWidget extends StatefulWidget {
-  const LoadingWidget({super.key, this.height, this.width, this.size});
+  const LoadingWidget({super.key, this.height, this.width, this.size, this.color, this.padding});
 
   final double? height;
   final double? width;
   final double? size;
+  final double? padding;
+  final Color? color;
 
   @override
   State<LoadingWidget> createState() => _LoadingWidgetState();
@@ -33,15 +35,19 @@ class _LoadingWidgetState extends State<LoadingWidget>    with SingleTickerProvi
   }
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: RotationTransition(
-        turns: _controller,
-        child: Image.asset(
-          AssetPath.loading,
-          height: AppSize.defaultSize! * 7,
-          width: AppSize.defaultSize! * 7,
-        ), // Replace with your asset path
-      )
+    return Padding(
+      padding:   EdgeInsets.only(top: widget.padding??0 ),
+      child: Center(
+        child: RotationTransition(
+          turns: _controller,
+          child: Image.asset(
+            AssetPath.loading,
+            color:widget. color,
+            height: AppSize.defaultSize! * 7,
+            width: AppSize.defaultSize! * 7,
+          ), // Replace with your asset path
+        )
+      ),
     );
   }
 }

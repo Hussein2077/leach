@@ -6,7 +6,6 @@ import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
-import 'package:leach/core/utils/methods.dart';
 import 'package:leach/core/widgets/cached_network_image.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/loading_widget.dart';
@@ -37,7 +36,7 @@ class _FriendsScreenState extends State<FriendsScreen> {
       if (page < totalPages) {
         page = page + 1;
         BlocProvider.of<GetFriendsBloc>(context).add(
-            GetFriendsEvent(page: page.toString()));
+            GetMoreFriendsEvent(page: page.toString()));
       }
     }
   }
@@ -53,130 +52,137 @@ class _FriendsScreenState extends State<FriendsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: Methods.instance.paddingCustom,
-        child: Column(
-          children: [
-            ChatAppBar(
-              text: StringManager.friends.tr(),
-              leadingIcon: true,
-              image: AssetPath.posts,
-            ),
-            SizedBox(
-              height: AppSize.defaultSize!,
-            ),
-            Expanded(
-              child: BlocBuilder<GetFriendsBloc, GetFriendState>(
-                builder: (context, state) {
-                  if(state is GetFriendsSuccessState) {
-                    totalPages = state.friendsModel.data?.friends?.pagination?.total ?? 1;
-                    page = 1;
-                    data = [];
-                    for (final e in state.friendsModel.data!.friends!.data!) {
-                      data.add(e);
-                    }
-                    return ListView.builder(
-                      controller: scrollcontroller,
-                      cacheExtent: 1000,
-                      itemBuilder: (context, index) => InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, Routes.friendsView);
-                        },
-                        child: Row(
-                          children: [
-                            CachedNetworkCustom(
-                              url: data[index].friendProfilePicture??"",
-                              width: AppSize.defaultSize! * 3.8,
-                              height: AppSize.defaultSize! * 3.8,
-                              radius: AppSize.defaultSize! * 10,
-                            ),
-                            SizedBox(
-                              width: AppSize.defaultSize!,
-                            ),
-                            CustomText(
-                                text: data[index].friendUsername??"",
-                                color: AppColors.primaryColor,
-                                fontWeight: FontWeight.w600,
-                                textAlign: TextAlign.start,
-                                fontSize: AppSize.defaultSize! * 1.8),
-                          ],
-                        ),
-                      ),
-                      itemCount: data.length,
-                    );
-                  }else if(state is GetMoreFriendsLoadingState){
-                    return ListView.builder(
-                    padding: EdgeInsets.zero,
-                      itemCount: data.length,
-                      controller: scrollcontroller,
-                      cacheExtent: 1000,
-                      itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, Routes.friendsView);
-                        },
-                        child: Row(
-                          children: [
-                            CachedNetworkCustom(
-                              url: data[index].friendProfilePicture??"",
-                              width: AppSize.defaultSize! * 3.8,
-                              height: AppSize.defaultSize! * 3.8,
-                              radius: AppSize.defaultSize! * 10,
-                            ),
-                            SizedBox(
-                              width: AppSize.defaultSize!,
-                            ),
-                            CustomText(
-                                text: data[index].friendUsername??"",
-                                color: AppColors.primaryColor,
-                                fontWeight: FontWeight.w600,
-                                textAlign: TextAlign.start,
-                                fontSize: AppSize.defaultSize! * 1.8),
-                          ],
-                        ),
-                      );
-                    },
-                  );
-                  }else if(state is GetMoreFriendsSuccessState){
-                    for (final e in state.friendsModel.data!.friends!.data!) {
-                      data.add(e);
-                    }
-                    return ListView.builder(
-                      controller: scrollcontroller,
-                      cacheExtent: 1000,
-                      itemBuilder: (context, index) => InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, Routes.friendsView);
-                        },
-                        child: Row(
-                          children: [
-                            CachedNetworkCustom(
-                              url: data[index].friendProfilePicture??"",
-                              width: AppSize.defaultSize! * 3.8,
-                              height: AppSize.defaultSize! * 3.8,
-                              radius: AppSize.defaultSize! * 10,
-                            ),
-                            SizedBox(
-                              width: AppSize.defaultSize!,
-                            ),
-                            CustomText(
-                                text: data[index].friendUsername??"",
-                                color: AppColors.primaryColor,
-                                fontWeight: FontWeight.w600,
-                                textAlign: TextAlign.start,
-                                fontSize: AppSize.defaultSize! * 1.8),
-                          ],
-                        ),
-                      ),
-                      itemCount: data.length,
-                    );
-                  }else{
-                    return const LoadingWidget();
-                  }
-                },
+      body: SafeArea(
+        bottom: false,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 2),
+          child: Column(
+            children: [
+              ChatAppBar(
+                text: StringManager.friends.tr(),
+                leadingIcon: true,
+                image: AssetPath.posts,
               ),
-            ),
-          ],
+              SizedBox(
+                height: AppSize.defaultSize!,
+              ),
+              Expanded(
+                child: BlocBuilder<GetFriendsBloc, GetFriendState>(
+                  builder: (context, state) {
+                    if(state is GetFriendsSuccessState) {
+                      totalPages = state.friendsModel.data?.friends?.pagination?.total ?? 1;
+                      page = 1;
+                      data = [];
+                      for (final e in state.friendsModel.data!.friends!.data!) {
+                        data.add(e);
+                      }
+                      if(data.isNotEmpty) {
+                        return ListView.builder(
+                        controller: scrollcontroller,
+                        cacheExtent: 1000,
+                        itemBuilder: (context, index) => InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context, Routes.friendsView, arguments: data[index].friendUuid);
+                          },
+                          child: Row(
+                            children: [
+                              CachedNetworkCustom(
+                                url: data[index].friendProfilePicture??"",
+                                width: AppSize.defaultSize! * 3.8,
+                                height: AppSize.defaultSize! * 3.8,
+                                radius: AppSize.defaultSize! * 10,
+                              ),
+                              SizedBox(
+                                width: AppSize.defaultSize!,
+                              ),
+                              CustomText(
+                                  text: data[index].friendUsername??"",
+                                  color: AppColors.primaryColor,
+                                  fontWeight: FontWeight.w600,
+                                  textAlign: TextAlign.start,
+                                  fontSize: AppSize.defaultSize! * 1.8),
+                            ],
+                          ),
+                        ),
+                        itemCount: data.length,
+                      );
+                      }else{
+                        return Center(child: CustomText(text: "No Friends", fontSize: AppSize.defaultSize! * 3,),);
+                      }
+                    }else if(state is GetMoreFriendsLoadingState){
+                      return ListView.builder(
+                      padding: EdgeInsets.zero,
+                        itemCount: data.length,
+                        controller: scrollcontroller,
+                        cacheExtent: 1000,
+                        itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context, Routes.friendsView);
+                          },
+                          child: Row(
+                            children: [
+                              CachedNetworkCustom(
+                                url: data[index].friendProfilePicture??"",
+                                width: AppSize.defaultSize! * 3.8,
+                                height: AppSize.defaultSize! * 3.8,
+                                radius: AppSize.defaultSize! * 10,
+                              ),
+                              SizedBox(
+                                width: AppSize.defaultSize!,
+                              ),
+                              CustomText(
+                                  text: data[index].friendUsername??"",
+                                  color: AppColors.primaryColor,
+                                  fontWeight: FontWeight.w600,
+                                  textAlign: TextAlign.start,
+                                  fontSize: AppSize.defaultSize! * 1.8),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                    }else if(state is GetMoreFriendsSuccessState){
+                      for (final e in state.friendsModel.data!.friends!.data!) {
+                        data.add(e);
+                      }
+                      return ListView.builder(
+                        controller: scrollcontroller,
+                        cacheExtent: 1000,
+                        itemBuilder: (context, index) => InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context, Routes.friendsView);
+                          },
+                          child: Row(
+                            children: [
+                              CachedNetworkCustom(
+                                url: data[index].friendProfilePicture??"",
+                                width: AppSize.defaultSize! * 3.8,
+                                height: AppSize.defaultSize! * 3.8,
+                                radius: AppSize.defaultSize! * 10,
+                              ),
+                              SizedBox(
+                                width: AppSize.defaultSize!,
+                              ),
+                              CustomText(
+                                  text: data[index].friendUsername??"",
+                                  color: AppColors.primaryColor,
+                                  fontWeight: FontWeight.w600,
+                                  textAlign: TextAlign.start,
+                                  fontSize: AppSize.defaultSize! * 1.8),
+                            ],
+                          ),
+                        ),
+                        itemCount: data.length,
+                      );
+                    }else{
+                      return const LoadingWidget();
+                    }
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

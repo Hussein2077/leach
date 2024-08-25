@@ -7,31 +7,31 @@ import 'package:leach/features/auth/domain/use_case/verify_code.dart';
 import 'package:leach/features/auth/presentation/controller/change_password_bloc/change_password_events.dart';
 import 'package:leach/features/auth/presentation/controller/change_password_bloc/change_password_states.dart';
 
-class ResetPasswordFlowBloc
-    extends Bloc<BaseChangePasswordEvent, ResetPasswordState> {
-  ResetPasswordUseCase resetPasswordUseCase;
+class ChangePasswordFlowBloc
+    extends Bloc<BaseChangePasswordEvent, ChangePasswordState> {
+  ChangePasswordUseCase changePasswordUseCase;
   VerifyCodeUseCase verifyCodeUseCase;
   SendCodeUseCase sendCodeUseCase;
 
-  ResetPasswordFlowBloc(
-      {required this.resetPasswordUseCase,
+  ChangePasswordFlowBloc(
+      {required this.changePasswordUseCase,
       required this.sendCodeUseCase,
       required this.verifyCodeUseCase})
-      : super(ResetPasswordInitial()) {
-    on<ResetPasswordEvent>((event, emit) async {
-      emit(const ResetPasswordLoadingState());
-      final result = await resetPasswordUseCase.call(SignUpModel(
-          password: event.password, phone: event.email, area: '', ));
+      : super(ChangePasswordInitial()) {
+    on<ChangePasswordEvent>((event, emit) async {
+      emit(const ChangePasswordLoadingState());
+      final result = await changePasswordUseCase.call(SignUpModel(
+          password: event.password, oldPassword: event.oldPassword));
       result.fold(
           (l) => emit(
-              ResetPasswordSuccessMessageState(successMessage: l['message'])),
-          (r) => emit(ResetPasswordErrorMessageState(
+              const ChangePasswordSuccessState(successMessage: 'Password Changed')),
+          (r) => emit(ChangePasswordErrorState(
               errorMessage: DioHelper().getTypeOfFailure(r))));
     });
     on<SendCodeEvent>((event, emit) async {
       emit(const SendCodeLoadingState());
-      final result =
-          await sendCodeUseCase.call(SignUpModel(phone: event.phoneOrEmail, area: '' ));
+      final result = await sendCodeUseCase
+          .call(SignUpModel(phone: event.phoneOrEmail, area: ''));
       result.fold(
           (l) => emit(SendCodeSuccessMessageState(successMessage: l)),
           (r) => emit(SendCodeErrorMessageState(
@@ -39,10 +39,8 @@ class ResetPasswordFlowBloc
     });
     on<VerifyCodeEvent>((event, emit) async {
       emit(const VerifyCodeLoadingState());
-      final result = await verifyCodeUseCase
-          .call(SignUpModel( phone: event.email,
-
-
+      final result = await verifyCodeUseCase.call(SignUpModel(
+        phone: event.email,
       ));
       result.fold(
           (l) =>

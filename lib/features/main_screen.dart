@@ -5,7 +5,7 @@ import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/background.dart';
 import 'package:leach/features/chat/chat_list.dart';
-import 'package:leach/features/home/home_screen.dart';
+import 'package:leach/features/home/presentation/home_screen.dart';
 import 'package:leach/features/main_screen_bloc.dart';
 import 'package:leach/features/posts/presentation/posts_screen.dart';
 import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_bloc.dart';
@@ -16,10 +16,9 @@ import 'package:leach/features/profile/presentation/widget/pet_or_profile.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({
-    super.key,
+    super.key,   this.selectedIndex=4,
   });
-
-  static int mainIndex = 0;
+final int selectedIndex;
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -28,7 +27,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
-    context.read<MainScreenBloc>().add(const ChangeTabEvent(4));
+    context.read<MainScreenBloc>().add(  ChangeTabEvent(widget.selectedIndex));
     BlocProvider.of<GetMyDataBloc>(context).add(GetMyDataEvent());
     super.initState();
   }

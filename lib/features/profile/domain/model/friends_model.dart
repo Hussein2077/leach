@@ -106,6 +106,7 @@ class FriendData {
       this.friendName, 
       this.friendUsername, 
       this.friendProfilePicture, 
+      this.friendUuid,
       this.status,});
 
   FriendData.fromJson(dynamic json) {
@@ -114,13 +115,15 @@ class FriendData {
     friendName = json['friend_name'];
     friendUsername = json['friend_username'];
     friendProfilePicture = json['friend_profile_picture'];
+    friendUuid = json['friend_uuid'];
     status = json['status'];
   }
   int? id;
   int? friendId;
   String? friendName;
   String? friendUsername;
-  dynamic friendProfilePicture;
+  String? friendProfilePicture;
+  String? friendUuid;
   String? status;
 
   Map<String, dynamic> toJson() {
@@ -130,6 +133,7 @@ class FriendData {
     map['friend_name'] = friendName;
     map['friend_username'] = friendUsername;
     map['friend_profile_picture'] = friendProfilePicture;
+    map['friend_uuid'] = friendUuid;
     map['status'] = status;
     return map;
   }
