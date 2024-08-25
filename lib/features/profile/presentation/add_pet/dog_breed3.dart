@@ -98,7 +98,9 @@ class _PetBreedSelectionState extends State<PetBreedSelection> {
               BlocBuilder<GetTraitsBloc, GetTraitsState>(
                 builder: (context, state) {
                   if (state is GetTraitLoadingState) {
-                    return const LoadingWidget();
+                    return const LoadingWidget(
+                      color: AppColors.primaryColor,
+                    );
                   } else if (state is GetTraitSuccessMessageState) {
                     petTraits = state.petTraits.map((trait) => trait.id).toList();
                     if (state.petTraits.isEmpty) {
