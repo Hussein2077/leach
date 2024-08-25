@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:equatable/equatable.dart';
+
 abstract class BaseCreatePetEvent extends Equatable {
   const BaseCreatePetEvent();
 
@@ -7,8 +8,7 @@ abstract class BaseCreatePetEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class CreatePetEvent
-    extends BaseCreatePetEvent {
+class CreatePetEvent extends BaseCreatePetEvent {
   final String username;
   final String name;
   final String gender;
@@ -24,11 +24,12 @@ class CreatePetEvent
   final File? medicalPassport;
   final bool breedingAvailable;
   final List<int>? traits;
-  final List<int> ? subtraits;
+  final List<int>? subtraits;
   final List<File> pictures;
 
   final String? bio;
-final String breedSize;
+  final String breedSize;
+
   const CreatePetEvent({
     required this.username,
     required this.name,
@@ -46,14 +47,13 @@ final String breedSize;
     required this.breedingAvailable,
     required this.pictures,
     required this.breedSize,
-      this.traits,
-      this.subtraits,
-
+    this.traits,
+    this.subtraits,
     this.bio,
   });
 }
-class  UpdatePetEvent
-    extends BaseCreatePetEvent {
+
+class UpdatePetEvent extends BaseCreatePetEvent {
   final String? username;
   final String uuid;
   final String? name;
@@ -83,3 +83,12 @@ class  UpdatePetEvent
   });
 }
 
+class AddPhotoForPetEvent extends BaseCreatePetEvent {
+  final String petId;
+  final File image;
+
+  const AddPhotoForPetEvent({
+    required this.petId,
+    required this.image,
+  });
+}

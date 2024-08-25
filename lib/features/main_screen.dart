@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
@@ -27,6 +29,7 @@ final int selectedIndex;
 class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
+    log('${widget.selectedIndex}nskjdgbowrgniowrgbipwo');
     context.read<MainScreenBloc>().add(  ChangeTabEvent(widget.selectedIndex));
     BlocProvider.of<GetMyDataBloc>(context).add(GetMyDataEvent());
     super.initState();

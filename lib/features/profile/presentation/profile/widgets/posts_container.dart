@@ -49,7 +49,7 @@ final Function()? onImageTap;
               GestureDetector(
                 onTap: () {
                   if(pets){
-                    Navigator.pushNamed(context, Routes.addPhotoForPet);
+                    Navigator.pushNamed(context, Routes.addPhotoForPet,arguments: commonType.petId);
                   }
                   else{
                     Navigator.pushNamed(context, Routes.addPost);
@@ -76,8 +76,9 @@ final Function()? onImageTap;
 class CommonType extends Equatable{
  final List <String>? id ;
   final List <String> pictures;
-  const CommonType({  this.id, required this.pictures});
+  final int? petId;
+  const CommonType( {  this.id, required this.pictures,this.petId,});
   @override
-  List<Object?> get props => [id, pictures];
+  List<Object?> get props => [id, pictures,petId];
 
 }

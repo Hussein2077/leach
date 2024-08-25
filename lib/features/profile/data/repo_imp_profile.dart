@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:leach/core/error/failure.dart';
 import 'package:leach/core/models/profile_data_model.dart';
@@ -160,6 +162,15 @@ class ProfileRepositoryImp extends ProfileBaseRepository {
   Future<Either<String, Failure>> removeFriend({required String id}) async {
     try {
       final result = await profileBaseRemotelyDataSource.removeFriend(id: id);
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
+  @override
+  Future<Either<String, Failure>> addPhotoForPet ({required String petId , required File image}) async {
+    try {
+      final result = await profileBaseRemotelyDataSource.addPhotoForPet(petId: petId, image: image);
       return Left(result);
     } on Exception catch (e) {
       return right(DioHelper.buildFailure(e));

@@ -48,6 +48,7 @@ import 'package:leach/features/profile/data/repo_imp_profile.dart';
 import 'package:leach/features/profile/domain/base_repo/profie_base_repo.dart';
 import 'package:leach/features/profile/domain/use_case/CREATE_PET_USE_CASE.dart';
 import 'package:leach/features/profile/domain/use_case/accept_friend_request_uc.dart';
+import 'package:leach/features/profile/domain/use_case/add_photo_for_pet.dart';
 import 'package:leach/features/profile/domain/use_case/change_privacy_use_case.dart';
 import 'package:leach/features/profile/domain/use_case/get_all_booking_uc.dart';
 import 'package:leach/features/profile/domain/use_case/get_friends_uc.dart';
@@ -90,7 +91,7 @@ class ServerLocator {
     getIt.registerLazySingleton(
         () => LikePostsBloc(likePostUc: getIt(), unLikePostUc: getIt()));
     getIt.registerLazySingleton(() =>
-        CreatePetBloc(createPetUseCase: getIt(), updatePetUseCase: getIt()));
+        CreatePetBloc(createPetUseCase: getIt(), updatePetUseCase: getIt(),addPhotoForPetUseCase: getIt(),));
     getIt.registerLazySingleton(() => BaseBreadCubit());
     getIt.registerLazySingleton(() => GetFriendRequestBloc(
         getFriendRequestUseCase: getIt(),
@@ -181,6 +182,7 @@ class ServerLocator {
     getIt.registerFactory(
         () => GetAllBookingUseCase(profileBaseRepository: getIt()));
     getIt.registerFactory(() => GetHowToUseCase(homeBaseRepository: getIt()));
+    getIt.registerFactory(() => AddPhotoForPetUseCase(profileBaseRepository: getIt()));
 
     //remote data
     getIt.registerLazySingleton<BaseRemotelyDataSource>(

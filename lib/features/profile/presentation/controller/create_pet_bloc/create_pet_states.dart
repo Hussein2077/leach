@@ -26,7 +26,10 @@ class CreatePetSuccessMessageState extends CreatePetState {
   const CreatePetSuccessMessageState({
     required this.petProfileModel,
   });
-}class UpdatePetLoadingState extends CreatePetState {
+}
+
+//UpdatePet
+class UpdatePetLoadingState extends CreatePetState {
   const UpdatePetLoadingState();
 }
 
@@ -42,4 +45,21 @@ class UpdatePetSuccessMessageState extends CreatePetState {
   const UpdatePetSuccessMessageState({
     required this.petProfileModel,
   });
+}
+// add photo for pet
+class AddPhotoForPetLoadingState extends CreatePetState {
+  const AddPhotoForPetLoadingState();
+}
+
+class AddPhotoForPetErrorMessageState extends CreatePetState {
+  final String errorMessage;
+
+  const AddPhotoForPetErrorMessageState({required this.errorMessage});
+
+}
+
+class AddPhotoForPetSuccessMessageState extends CreatePetState {
+    final String message;
+
+  const AddPhotoForPetSuccessMessageState({required this.message});
 }

@@ -70,6 +70,7 @@ class _PetProfileState extends State<PetProfile> {
             children: [
               if (user.pets!.length > 1)
                 ProfileAppBar(
+                  leading: false,
                   child: IconButton(
                     onPressed: () {
                       showDialog(
@@ -193,7 +194,21 @@ class _PetProfileState extends State<PetProfile> {
                     ),
                   ),
                 ),
-              if (user.pets!.length <= 1) const ProfileAppBar(),
+              if (user.pets!.length <= 1)
+                ProfileAppBar(
+                  leading: false,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.addPetScreen);
+                    },
+                    child: Image.asset(
+                      AssetPath.add,
+                      width: AppSize.defaultSize! * 2.5,
+                      height: AppSize.defaultSize! * 2.5,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
               SizedBox(
                 height: AppSize.defaultSize! * 3,
               ),
@@ -246,11 +261,12 @@ class _PetProfileState extends State<PetProfile> {
         Expanded(
             child: PostsContainer(
           pets: true,
-          onImageTap: (){
+          onImageTap: () {
             Navigator.pushNamed(context, Routes.petPhotoView);
           },
           commonType: CommonType(
             pictures: currentPet!.pictures.map((e) => e.picture).toList(),
+            petId: currentPet!.id,
           ),
         ))
       ],

@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:leach/core/models/profile_data_model.dart';
 import 'package:leach/core/utils/api_helper.dart';
@@ -12,24 +13,41 @@ import 'package:leach/features/profile/domain/model/traits_model.dart';
 import 'package:leach/features/profile/domain/model/user_data_model.dart';
 import 'package:leach/features/profile/domain/use_case/CREATE_PET_USE_CASE.dart';
 import 'package:leach/features/profile/domain/use_case/update_my_data_use_case.dart';
+import 'package:leach/features/profile/presentation/profile/componant/add_photo_for_pet.dart';
 
 abstract class ProfileBaseRemotelyDataSource {
   Future<PetProfileModel> createPet(PetProfileModel petProfileModel);
-  Future<PetProfileModel> updatePet (UpdatePetRequest updatePetRequest);
+
+  Future<PetProfileModel> updatePet(UpdatePetRequest updatePetRequest);
+
   Future<List<PetTrait>> getTraits();
-  Future<PendingFriendRequestsModel> getPendingFriendRequests({required String page});
+
+  Future<PendingFriendRequestsModel> getPendingFriendRequests(
+      {required String page});
+
   Future<String> sendFriendRequests({required String id});
+
   Future<String> acceptFriendRequests({required String id});
+
   Future<String> rejectFriendRequests({required String id});
+
   Future<FriendsModel> getFriends({required String page});
+
   Future<UserModel> getMyData();
+
   Future<UserModel> updateMyData(UpdateDataParams parameter);
+
   Future<String> changePrivacy();
-  Future<List<AllBookingModel>>  getAllBooking();
+
+  Future<List<AllBookingModel>> getAllBooking();
+
   Future<void> cancelBooking(int bookingId);
+
   Future<UserDataModel> getUser({required String id});
+
   Future<String> removeFriend({required String id});
 
+  Future<String> addPhotoForPet({required String petId, required File image});
 }
 
 class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
@@ -90,48 +108,50 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
       throw DioHelper.handleDioError(dioError: e, endpointName: " createPet");
     }
   }
+
   @override
-  Future<PetProfileModel> updatePet (UpdatePetRequest updatePetRequest) async {
+  Future<PetProfileModel> updatePet(UpdatePetRequest updatePetRequest) async {
     FormData? formData;
     final Options options = await DioHelper().options();
-  log(' updatePetRequest.traits ${updatePetRequest.uuid}');
+    log(' updatePetRequest.traits ${updatePetRequest.uuid}');
 
-  if(updatePetRequest.profilePicture!=null){
-    formData=FormData.fromMap({
-      'username': updatePetRequest.username,
-      'name': updatePetRequest.name,
-      'weight': updatePetRequest.weight,
-      'size': updatePetRequest.size,
-      'breeding_experience': updatePetRequest.breedingExperience! ? 1 : 0,
-      'neutered_spayed': updatePetRequest.neuteredSpayed! ? 1 : 0,
-      'breeding_available': updatePetRequest.breedingAvailable! ? 1 : 0,
-      'profile_picture': await MultipartFile.fromFile(
-          updatePetRequest.profilePicture!.path,
-          filename:
-          updatePetRequest.profilePicture!.path.split('/').last.toString(),
-          contentType: MediaType("image", "jpeg")),
-      'medical_passport': updatePetRequest.medicalPassport,
-      'traits[]': updatePetRequest.traits,
-      'subtraits[]': updatePetRequest.subtraits,
-    }) ;
-  }
-  else{
-    formData=FormData.fromMap({
-      'username': updatePetRequest.username,
-      'name': updatePetRequest.name,
-      'weight': updatePetRequest.weight,
-      'size': updatePetRequest.size,
-      'breeding_experience': updatePetRequest.breedingExperience! ? 1 : 0,
-      'neutered_spayed': updatePetRequest.neuteredSpayed! ? 1 : 0,
-      'breeding_available': updatePetRequest.breedingAvailable! ? 1 : 0,
-      'medical_passport': updatePetRequest.medicalPassport,
-      'traits[]': updatePetRequest.traits,
-      'subtraits[]': updatePetRequest.subtraits,
-    }) ;
-  }
+    if (updatePetRequest.profilePicture != null) {
+      formData = FormData.fromMap({
+        'username': updatePetRequest.username,
+        'name': updatePetRequest.name,
+        'weight': updatePetRequest.weight,
+        'size': updatePetRequest.size,
+        'breeding_experience': updatePetRequest.breedingExperience! ? 1 : 0,
+        'neutered_spayed': updatePetRequest.neuteredSpayed! ? 1 : 0,
+        'breeding_available': updatePetRequest.breedingAvailable! ? 1 : 0,
+        'profile_picture': await MultipartFile.fromFile(
+            updatePetRequest.profilePicture!.path,
+            filename: updatePetRequest.profilePicture!.path
+                .split('/')
+                .last
+                .toString(),
+            contentType: MediaType("image", "jpeg")),
+        'medical_passport': updatePetRequest.medicalPassport,
+        'traits[]': updatePetRequest.traits,
+        'subtraits[]': updatePetRequest.subtraits,
+      });
+    } else {
+      formData = FormData.fromMap({
+        'username': updatePetRequest.username,
+        'name': updatePetRequest.name,
+        'weight': updatePetRequest.weight,
+        'size': updatePetRequest.size,
+        'breeding_experience': updatePetRequest.breedingExperience! ? 1 : 0,
+        'neutered_spayed': updatePetRequest.neuteredSpayed! ? 1 : 0,
+        'breeding_available': updatePetRequest.breedingAvailable! ? 1 : 0,
+        'medical_passport': updatePetRequest.medicalPassport,
+        'traits[]': updatePetRequest.traits,
+        'subtraits[]': updatePetRequest.subtraits,
+      });
+    }
     try {
       final response = await Dio().post(
-        ConstantApi.updatePet(updatePetRequest.uuid ),
+        ConstantApi.updatePet(updatePetRequest.uuid),
         data: formData,
         options: options,
       );
@@ -145,15 +165,15 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
   }
 
   @override
-  Future<List<PetTrait> > getTraits() async{
+  Future<List<PetTrait>> getTraits() async {
     final Options options = await DioHelper().options();
     try {
-      final response =await Dio().get(ConstantApi.getTraits,
+      final response = await Dio().get(
+        ConstantApi.getTraits,
         options: options,
       );
       List<PetTrait> jsonData = List<PetTrait>.from(
-          (response.data['data'] as List)
-              .map((e) => PetTrait.fromJson(e)));
+          (response.data['data'] as List).map((e) => PetTrait.fromJson(e)));
       return jsonData;
     } on DioException catch (e) {
       throw DioHelper.handleDioError(dioError: e, endpointName: " getTraits");
@@ -161,7 +181,8 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
   }
 
   @override
-  Future<PendingFriendRequestsModel> getPendingFriendRequests({required String page}) async {
+  Future<PendingFriendRequestsModel> getPendingFriendRequests(
+      {required String page}) async {
     Map<String, String> headers = await DioHelper().header();
 
     try {
@@ -174,7 +195,8 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
 
       return PendingFriendRequestsModel.fromJson(response.data);
     } on DioException catch (e) {
-      throw DioHelper.handleDioError(dioError: e, endpointName: 'getPendingFriendRequests');
+      throw DioHelper.handleDioError(
+          dioError: e, endpointName: 'getPendingFriendRequests');
     }
   }
 
@@ -192,9 +214,10 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
 
       Map<String, dynamic> data = response.data;
 
-      return data["message"]?? "Success";
+      return data["message"] ?? "Success";
     } on DioException catch (e) {
-      throw DioHelper.handleDioError(dioError: e, endpointName: 'sendFriendRequests');
+      throw DioHelper.handleDioError(
+          dioError: e, endpointName: 'sendFriendRequests');
     }
   }
 
@@ -212,9 +235,10 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
 
       Map<String, dynamic> data = response.data;
 
-      return data["message"]?? "Success";
+      return data["message"] ?? "Success";
     } on DioException catch (e) {
-      throw DioHelper.handleDioError(dioError: e, endpointName: 'acceptFriendRequests');
+      throw DioHelper.handleDioError(
+          dioError: e, endpointName: 'acceptFriendRequests');
     }
   }
 
@@ -232,9 +256,10 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
 
       Map<String, dynamic> data = response.data;
 
-      return data["message"]?? "Success";
+      return data["message"] ?? "Success";
     } on DioException catch (e) {
-      throw DioHelper.handleDioError(dioError: e, endpointName: 'rejectFriendRequests');
+      throw DioHelper.handleDioError(
+          dioError: e, endpointName: 'rejectFriendRequests');
     }
   }
 
@@ -261,10 +286,7 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
     Options options = await DioHelper().options();
 
     try {
-      final response = await Dio().get(
-        ConstantApi.getMyData,
-        options:options
-      );
+      final response = await Dio().get(ConstantApi.getMyData, options: options);
 
       return UserModel.fromMap(response.data['data']);
     } on DioException catch (e) {
@@ -275,23 +297,19 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
   @override
   Future<UserModel> updateMyData(UpdateDataParams parameter) async {
     Options options = await DioHelper().options();
-  final FormData formData = FormData.fromMap({
-    "name": parameter.name,
-    "username": parameter.username,
-    "bio": parameter.bio,
-    "city": parameter.city,
-    "area": parameter.area,
-    "profile_picture": parameter.profilePicture != null
-        ? await MultipartFile.fromFile(parameter.profilePicture!.path)
-        : null,
-
-  });
+    final FormData formData = FormData.fromMap({
+      "name": parameter.name,
+      "username": parameter.username,
+      "bio": parameter.bio,
+      "city": parameter.city,
+      "area": parameter.area,
+      "profile_picture": parameter.profilePicture != null
+          ? await MultipartFile.fromFile(parameter.profilePicture!.path)
+          : null,
+    });
     try {
-      final response = await Dio().post(
-        ConstantApi.updateMyData,
-        options:options,
-        data: formData
-      );
+      final response = await Dio()
+          .post(ConstantApi.updateMyData, options: options, data: formData);
 
       return UserModel.fromMap(response.data['data']);
     } on DioException catch (e) {
@@ -307,13 +325,12 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
       final response = await Dio().post(
         ConstantApi.togglePrivacy,
         options: options,
-
-
       );
 
       return 'Success';
     } on DioException catch (e) {
-      throw DioHelper.handleDioError(dioError: e, endpointName: ' changePrivacy');
+      throw DioHelper.handleDioError(
+          dioError: e, endpointName: ' changePrivacy');
     }
   }
 
@@ -325,34 +342,32 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
       final response = await Dio().get(
         ConstantApi.getAllBooking,
         options: options,
-
-
       );
 
-      List<AllBookingModel> jsonData =   List<AllBookingModel>.from(
+      List<AllBookingModel> jsonData = List<AllBookingModel>.from(
           (response.data['bookings']['data'] as List)
-              .map((e) => AllBookingModel.fromJson(e))
-      );
+              .map((e) => AllBookingModel.fromJson(e)));
       return jsonData;
     } on DioException catch (e) {
-      throw DioHelper.handleDioError(dioError: e, endpointName: ' getAllBooking');
+      throw DioHelper.handleDioError(
+          dioError: e, endpointName: ' getAllBooking');
     }
   }
 
   @override
-  Future<void>  cancelBooking( int bookingId ) async {
+  Future<void> cancelBooking(int bookingId) async {
     Map<String, String> headers = await DioHelper().header();
 
     try {
       final response = await Dio().delete(
         ConstantApi.cancelBooking(bookingId.toString()),
-
         options: Options(
           headers: headers,
         ),
       );
     } on DioException catch (e) {
-      throw DioHelper.handleDioError(dioError: e, endpointName: 'cancelBooking');
+      throw DioHelper.handleDioError(
+          dioError: e, endpointName: 'cancelBooking');
     }
   }
 
@@ -361,10 +376,8 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
     Options options = await DioHelper().options();
 
     try {
-      final response = await Dio().get(
-          ConstantApi.getUser(id: id),
-          options:options
-      );
+      final response =
+          await Dio().get(ConstantApi.getUser(id: id), options: options);
 
       return UserDataModel.fromJson(response.data);
     } on DioException catch (e) {
@@ -377,17 +390,35 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
     Options options = await DioHelper().options();
 
     try {
-      final response = await Dio().get(
-          ConstantApi.removeFriend(id: id),
-          options:options
-      );
+      final response =
+          await Dio().get(ConstantApi.removeFriend(id: id), options: options);
       Map<String, dynamic> data = response.data;
 
-      return data["message"]?? "Success";
+      return data["message"] ?? "Success";
     } on DioException catch (e) {
       throw DioHelper.handleDioError(dioError: e, endpointName: 'removeFriend');
     }
   }
 
+  @override
+  Future<String> addPhotoForPet(
+      {required String petId, required File image}) async {
+    Options options = await DioHelper().options();
+    final FormData formData = FormData.fromMap({
+      'pet_id': petId,
+      'picture': await MultipartFile.fromFile(image.path,
+          filename: image.path.split('/').last.toString(),
+          contentType: MediaType("image", "jpeg")),
+    });
+    try {
+      final response = await Dio()
+          .post(ConstantApi.addPhotoForPet, options: options, data: formData);
+      Map<String, dynamic> data = response.data;
 
+      return data["message"] ?? "Success";
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(
+          dioError: e, endpointName: 'addPhotoForPet');
+    }
+  }
 }

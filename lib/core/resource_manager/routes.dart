@@ -287,9 +287,10 @@ class RouteGenerator {
             pageBuilder: (context, animation, secondaryAnimation) => AddPost(),
             transitionsBuilder: customAnimate);
       case Routes.addPhotoForPet:
+        int petId = settings.arguments as int;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const AddPhotoForPet(),
+                  AddPhotoForPet(petId: petId ,),
             transitionsBuilder: customAnimate);
       case Routes.howTo:
           HowToModel howToModel = settings.arguments as HowToModel;

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:leach/core/error/failure.dart';
 import 'package:leach/core/models/profile_data_model.dart';
@@ -29,5 +31,6 @@ abstract class ProfileBaseRepository {
   Future<Either<void, Failure>> cancelBooking   (  int bookingId );
   Future<Either<UserDataModel, Failure>> getUser({required String id});
   Future<Either<String, Failure>> removeFriend({required String id});
+  Future<Either<String, Failure>> addPhotoForPet({required String petId , required File image});
 }
 
