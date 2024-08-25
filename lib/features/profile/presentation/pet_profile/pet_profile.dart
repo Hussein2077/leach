@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:leach/core/models/pet_model.dart';
 import 'package:leach/core/models/profile_data_model.dart';
@@ -27,7 +29,7 @@ class _PetProfileState extends State<PetProfile> {
 
   @override
   initState() {
-    PetProfile.currentPet ??= UserModel.getInstance().pets?[0];
+    PetProfile.currentPet ??= UserModel.getInstance().pets![0];
     super.initState();
   }
 
