@@ -1,31 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
+import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/utils/methods.dart';
 import 'package:leach/core/widgets/background.dart';
 import 'package:leach/core/widgets/leading_icon.dart';
 import 'package:leach/core/widgets/loading_widget.dart';
-import 'package:leach/features/posts/presentation/manager/posts_manager/posts_bloc.dart';
-import 'package:leach/features/posts/presentation/manager/posts_manager/posts_event.dart';
+import 'package:leach/core/widgets/snack_bar.dart';
 import 'package:leach/features/posts/presentation/manager/user_posts_manager/user_posts_bloc.dart';
-import 'package:leach/features/posts/presentation/manager/user_posts_manager/user_posts_event.dart';
 import 'package:leach/features/posts/presentation/manager/user_posts_manager/user_posts_state.dart';
-import 'package:leach/features/profile/presentation/posts_and_pet_view/card_widget.dart';
+import 'package:leach/features/profile/presentation/controller/create_pet_bloc/create_pet_bloc.dart';
+import 'package:leach/features/profile/presentation/controller/create_pet_bloc/create_pet_events.dart';
+import 'package:leach/features/profile/presentation/controller/create_pet_bloc/create_pet_states.dart';
+import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_bloc.dart';
+import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_event.dart';
 import 'package:leach/features/profile/presentation/posts_and_pet_view/plain_card.dart';
+import 'package:leach/features/profile/presentation/profile/widgets/posts_container.dart';
 
 class PetPhotoView extends StatefulWidget {
-  const PetPhotoView({super.key});
+  const PetPhotoView({super.key, required this.commonType});
+
+  final CommonType commonType;
 
   @override
   State<PetPhotoView> createState() => _PetPhotoViewState();
 }
 
 class _PetPhotoViewState extends State<PetPhotoView> {
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocListener<CreatePetBloc, CreatePetState >(
+      listener: (context, state) {
+        if (state is AddPhotoForPetLoadingState) {
+          LoadingOverlay().show(context);
+        }
+        if (state is AddPhotoForPetSuccessMessageState) {
+          LoadingOverlay().hide();
+          BlocProvider.of<GetMyDataBloc>(context).add(GetMyDataEvent());
+
+          Navigator.pushNamed(context, Routes.main, arguments: 2);
+        }
+        if (state is AddPhotoForPetErrorMessageState) {
+          LoadingOverlay().hide();
+          errorSnackBar(context, state.errorMessage);
+        }
+      },
+      child: Scaffold(
         body: BackgroundScreen(
           image: AssetPath.homeBackground,
           child: SafeArea(
@@ -34,12 +55,15 @@ class _PetPhotoViewState extends State<PetPhotoView> {
               children: [
                 Padding(
                   padding: Methods.instance.paddingCustom,
-                  child:  Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(top:AppSize.defaultSize! * 5.5,left:AppSize.defaultSize! * 2.5,),
-                        child: LeadingIcon(
+                        padding: EdgeInsets.only(
+                          top: AppSize.defaultSize! * 5.5,
+                          left: AppSize.defaultSize! * 2.5,
+                        ),
+                        child: const LeadingIcon(
                           color: Colors.white,
                         ),
                       ),
@@ -62,22 +86,21 @@ class _PetPhotoViewState extends State<PetPhotoView> {
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: AppSize.defaultSize! * 3),
-                      child: BlocBuilder<UserPostsBloc, UserPostState>(
-                        builder: (context, state) {
+                      child: ListView.builder(
+                        padding: EdgeInsets.zero,
+                        itemCount: widget.commonType.pictures.length,
+                        itemBuilder: (context, index) {
+                          return PlainCard(
+                            uuid: widget.commonType.ids![index],
+                            path: widget.commonType.pictures[index],
+                            onDeleteTap: () {
+                              BlocProvider.of<CreatePetBloc>(context)
+                                  .add(AddPhotoForPetEvent(
+                                petId: widget.commonType.ids![index],));
 
-
-                              return ListView.builder(
-                                padding: EdgeInsets.zero,
-                                itemCount: 4,
-                                itemBuilder: (context, index) {
-                                  return const PlainCard(
-
-                                  );
-                                },
-                              );
-
-
-
+                              Navigator.of(context).pop();
+                            },
+                          );
                         },
                       ),
                     ),
@@ -87,7 +110,7 @@ class _PetPhotoViewState extends State<PetPhotoView> {
             ),
           ),
         ),
-      );
-
+      ),
+    );
   }
 }

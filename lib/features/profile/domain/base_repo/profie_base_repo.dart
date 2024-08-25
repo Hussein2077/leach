@@ -31,6 +31,6 @@ abstract class ProfileBaseRepository {
   Future<Either<void, Failure>> cancelBooking   (  int bookingId );
   Future<Either<UserDataModel, Failure>> getUser({required String id});
   Future<Either<String, Failure>> removeFriend({required String id});
-  Future<Either<String, Failure>> addPhotoForPet({required String petId , required File image});
+  Future<Either<String, Failure>> addPhotoForPet({required String petId ,   File? image});
 }
 

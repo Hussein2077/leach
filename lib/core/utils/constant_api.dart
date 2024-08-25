@@ -69,6 +69,8 @@ class ConstantApi {
   }
   static removeFriend({required String id}) {
     return "${baseUrl}user/removeFriend/$id";
+  }  static removePhotoForPet({required String id}) {
+    return "${baseUrl}pet/picture/$id";
   }
 
 //////////////////////////////

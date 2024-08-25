@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:leach/core/models/pet_model.dart';
 import 'package:leach/core/resource_manager/enums.dart';
@@ -45,6 +46,7 @@ import 'package:leach/features/profile/presentation/profile/componant/add_photo_
 import 'package:leach/features/profile/presentation/profile/componant/add_post.dart';
 import 'package:leach/features/profile/presentation/profile/my_pet_profile.dart';
 import 'package:leach/features/profile/presentation/profile/pet_details.dart';
+import 'package:leach/features/profile/presentation/profile/widgets/posts_container.dart';
 import 'package:leach/features/profile/presentation/side%20bar/componant/account_privacy.dart';
 import 'package:leach/features/profile/presentation/side%20bar/componant/activity_and_history.dart';
 import 'package:leach/features/profile/presentation/side%20bar/componant/booking_history.dart';
@@ -349,9 +351,10 @@ class RouteGenerator {
             const BookingHistory(),
             transitionsBuilder: customAnimate);
       case Routes.petPhotoView:
+        CommonType commonType = settings.arguments as   CommonType ;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-            const PetPhotoView(),
+              PetPhotoView(commonType: commonType ,),
             transitionsBuilder: customAnimate);
     }
     return unDefinedRoute(
@@ -396,11 +399,6 @@ class RouteGenerator {
 
 Widget customAnimate(BuildContext context, Animation<double> animation,
     Animation<double> secondaryAnimation, Widget child) {
-  // var begin = Offset(1.0, 0.0);
-  // var end = Offset.zero;
-  // var curve = Curves.decelerate;
-  //
-  // var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
   return FadeTransition(
     opacity: animation,
     child: child,
@@ -410,4 +408,13 @@ class SelectionPetTypeParamRoute {
   final PetProfileModel petProfileModel ;
   final String petType;
   SelectionPetTypeParamRoute({ required this.petProfileModel, required this.petType});
+}
+class CommonType extends Equatable{
+  final List <String>? ids ;
+  final List <String> pictures;
+  final int? petId;
+  const CommonType( {  this.ids, required this.pictures,this.petId,});
+  @override
+  List<Object?> get props => [ids, pictures,petId];
+
 }

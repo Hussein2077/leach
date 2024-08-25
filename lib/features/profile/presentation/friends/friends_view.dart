@@ -433,7 +433,7 @@ class _FriendsViewState extends State<FriendsView>
                                           .userDataModel.data!.posts!.data!
                                           .map((e) => e.picture!)
                                           .toList(),
-                                      id: state.userDataModel.data!.posts!.data!
+                                      ids: state.userDataModel.data!.posts!.data!
                                           .map((e) => e.id!.toString())
                                           .toList(),
                                     ),
@@ -444,7 +444,7 @@ class _FriendsViewState extends State<FriendsView>
                                       pictures: state.userDataModel.data!.pets!
                                           .map((e) => e.profilePicture!)
                                           .toList(),
-                                      id: state.userDataModel.data!.pets!
+                                      ids: state.userDataModel.data!.pets!
                                           .map((e) => e.id!.toString())
                                           .toList(),
                                     ),

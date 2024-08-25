@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -35,11 +36,13 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
   void initState() {
     super.initState();
     _displayText = widget.initialText;
+    log('${widget.initialImageUrl}widget.initialImageUrl ${_imageFile}');
   }
 
   Future<void> _openImagePicker() async {
     var maxFileSizeInBytes = 5 * 1048576; // 5 MB limit
-    final pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+    final pickedImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
 
     if (pickedImage != null) {
       var imageBytes = await pickedImage.readAsBytes();
@@ -50,7 +53,8 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
           _imageFile = File(pickedImage.path);
           _displayText = pickedImage.name; // Update text to file name
         });
-        widget.onImagePicked(_imageFile!); // Call the callback with the picked file
+        widget.onImagePicked(
+            _imageFile!); // Call the callback with the picked file
       } else {
         errorSnackBar(context, StringManager.fileTooBig.tr());
       }
@@ -61,35 +65,50 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
 
   @override
   Widget build(BuildContext context) {
-    return  widget.initialImageUrl != null || _imageFile != null?
-      InkWell(
-        onTap: _openImagePicker,
-        child: Padding(
-          padding: EdgeInsets.only(top: AppSize.defaultSize! * 2),
-          child: _imageFile != null
-              ? Container(
-              decoration:   BoxDecoration(
-                shape: BoxShape.circle,
+    return
+            _imageFile != null ||
+            widget.initialImageUrl != ''
+        ? InkWell(
+            onTap: _openImagePicker,
+            child: Padding(
+              padding: EdgeInsets.only(top: AppSize.defaultSize! * 2),
+              child: _imageFile != null
+                  ? Container(
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                      ),
+                      child: ClipOval(
+                        child: Image.file(
+                          _imageFile!,
+                          width: AppSize.defaultSize! * 12,
+                          height: AppSize.defaultSize! * 12,
+                          fit: BoxFit
+                              .fill, // Ensures the image fits within the circle
+                        ),
+                      ),
+                    )
+                  : CachedNetworkCustom(
+                      url: widget.initialImageUrl ??
+                          '', // Provide a default empty string
+                      width: AppSize.defaultSize! * 12,
+                      height: AppSize.defaultSize! * 12,
 
-              ),
-
-            child: ClipOval(
-              child: Image.file(
-                _imageFile!,
-                width: AppSize.defaultSize! * 12,
-                height: AppSize.defaultSize! * 12,
-                fit: BoxFit.fill, // Ensures the image fits within the circle
+                      fit: BoxFit.cover,
+                    ),
+            ),
+          )
+        : InkWell(
+            onTap: _openImagePicker,
+            child: Padding(
+              padding: EdgeInsets.only(
+                  top: AppSize.defaultSize! * 2,
+                  left: AppSize.defaultSize! * 2),
+              child: Image.asset(
+                AssetPath.whiteProfileIcon,
+                width: AppSize.defaultSize! * 15,
+                height: AppSize.defaultSize! * 15,
               ),
             ),
-              )
-              : CachedNetworkCustom(
-            url: widget.initialImageUrl ?? '', // Provide a default empty string
-            width: AppSize.defaultSize! * 12,
-            height: AppSize.defaultSize! * 12,
-
-            fit: BoxFit.cover,
-          ),
-        ),
-      ):SizedBox();
+          );
   }
 }

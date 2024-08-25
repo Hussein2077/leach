@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/loading_widget.dart';
@@ -55,9 +56,7 @@ class _PersonalProfileState extends State<PersonalProfile> {
                       indent: AppSize.defaultSize! * 2,
                       endIndent: AppSize.defaultSize! * 2,
                     ),
-                    SizedBox(
-                      height: AppSize.defaultSize! * 2,
-                    ),
+
                     SizedBox(
                       width: AppSize.screenWidth! * .7,
                       child: CustomText(
@@ -86,7 +85,7 @@ class _PersonalProfileState extends State<PersonalProfile> {
                         pets: false,
                         commonType: CommonType(
                           pictures: state.postsModel.posts!.data!.map((e) => e.picture!).toList(),
-                          id: state.postsModel.posts!.data!.map((e) => e.id!.toString()).toList(),
+                          ids: state.postsModel.posts!.data!.map((e) => e.id!.toString()).toList(),
                         ),
                       );
                     }else{

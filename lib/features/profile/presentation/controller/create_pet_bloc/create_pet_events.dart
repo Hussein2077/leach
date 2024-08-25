@@ -85,10 +85,10 @@ class UpdatePetEvent extends BaseCreatePetEvent {
 
 class AddPhotoForPetEvent extends BaseCreatePetEvent {
   final String petId;
-  final File image;
+  final File? image;
 
   const AddPhotoForPetEvent({
     required this.petId,
-    required this.image,
+      this.image,
   });
 }

@@ -47,7 +47,10 @@ abstract class ProfileBaseRemotelyDataSource {
 
   Future<String> removeFriend({required String id});
 
-  Future<String> addPhotoForPet({required String petId, required File image});
+  Future<String> addPhotoForPet({
+    required String petId,
+    File? image,
+  });
 }
 
 class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
@@ -401,19 +404,33 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
   }
 
   @override
-  Future<String> addPhotoForPet(
-      {required String petId, required File image}) async {
+  Future<String> addPhotoForPet({required String petId, File? image}) async {
     Options options = await DioHelper().options();
-    final FormData formData = FormData.fromMap({
-      'pet_id': petId,
-      'picture': await MultipartFile.fromFile(image.path,
-          filename: image.path.split('/').last.toString(),
-          contentType: MediaType("image", "jpeg")),
-    });
+    FormData? formData;
+  late  Map<String, dynamic> data;
+    if (image != null) {
+      formData = FormData.fromMap({
+        'pet_id': petId,
+        'picture': await MultipartFile.fromFile(image.path,
+            filename: image.path.split('/').last.toString(),
+            contentType: MediaType("image", "jpeg")),
+      });
+    }
     try {
-      final response = await Dio()
+      if(image == null){
+        final response = await Dio().delete(
+          ConstantApi.removePhotoForPet(id: petId),
+          options: options,
+
+        );
+        data = response.data;
+
+      }else {
+        final response = await Dio()
           .post(ConstantApi.addPhotoForPet, options: options, data: formData);
-      Map<String, dynamic> data = response.data;
+        data = response.data;
+
+      }
 
       return data["message"] ?? "Success";
     } on DioException catch (e) {

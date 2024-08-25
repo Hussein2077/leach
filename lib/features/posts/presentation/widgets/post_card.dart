@@ -16,6 +16,7 @@ import 'comment_view.dart';
 
 class PostCard extends StatefulWidget {
   final PostData postData;
+
   const PostCard({super.key, required this.postData});
 
   @override
@@ -40,20 +41,17 @@ class _PostCardState extends State<PostCard> {
           padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 3.6),
           child: Row(
             children: [
-
               CachedNetworkCustom(
-                url: widget.postData.user?.profilePicture??"",
+                url: widget.postData.user?.profilePicture ?? "",
                 width: AppSize.defaultSize! * 3,
                 height: AppSize.defaultSize! * 3,
                 radius: AppSize.defaultSize! * 3,
               ),
-
               SizedBox(
                 width: AppSize.defaultSize!,
               ),
-
               CustomText(
-                text: widget.postData.user?.username??"",
+                text: widget.postData.user?.username ?? "",
                 fontSize: AppSize.defaultSize! * 2,
                 color: AppColors.primaryColor,
               )
@@ -63,14 +61,12 @@ class _PostCardState extends State<PostCard> {
         SizedBox(
           height: AppSize.defaultSize! * 2,
         ),
-
         CachedNetworkCustom(
-          url: widget.postData.picture??"",
+          url: widget.postData.picture ?? "",
           width: AppSize.screenWidth!,
           height: AppSize.defaultSize! * 20,
           shape: BoxShape.rectangle,
         ),
-
         SizedBox(
           height: AppSize.defaultSize! * 3,
         ),
@@ -80,10 +76,12 @@ class _PostCardState extends State<PostCard> {
             children: [
               InkWell(
                   onTap: () {
-                    if(!isLiked){
-                      BlocProvider.of<LikePostsBloc>(context).add(LikeEvent(id: widget.postData.uuid.toString()));
-                    }else{
-                      BlocProvider.of<LikePostsBloc>(context).add(UnLikeEvent(id: widget.postData.uuid.toString()));
+                    if (!isLiked) {
+                      BlocProvider.of<LikePostsBloc>(context)
+                          .add(LikeEvent(id: widget.postData.uuid.toString()));
+                    } else {
+                      BlocProvider.of<LikePostsBloc>(context).add(
+                          UnLikeEvent(id: widget.postData.uuid.toString()));
                     }
                     setState(() {
                       isLiked = !isLiked;
@@ -103,7 +101,6 @@ class _PostCardState extends State<PostCard> {
               InkWell(
                   onTap: () {
                     showHalfPageBottomSheet(context);
-
                   },
                   borderRadius:
                       BorderRadius.circular(AppSize.defaultSize! * 1.5),

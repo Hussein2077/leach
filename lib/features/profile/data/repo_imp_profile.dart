@@ -168,7 +168,7 @@ class ProfileRepositoryImp extends ProfileBaseRepository {
     }
   }
   @override
-  Future<Either<String, Failure>> addPhotoForPet ({required String petId , required File image}) async {
+  Future<Either<String, Failure>> addPhotoForPet ({required String petId ,   File? image}) async {
     try {
       final result = await profileBaseRemotelyDataSource.addPhotoForPet(petId: petId, image: image);
       return Left(result);

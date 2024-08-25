@@ -73,12 +73,3 @@ final Function()? onImageTap;
         ));
   }
 }
-class CommonType extends Equatable{
- final List <String>? id ;
-  final List <String> pictures;
-  final int? petId;
-  const CommonType( {  this.id, required this.pictures,this.petId,});
-  @override
-  List<Object?> get props => [id, pictures,petId];
-
-}

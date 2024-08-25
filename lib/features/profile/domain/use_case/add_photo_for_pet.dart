@@ -20,10 +20,10 @@ class AddPhotoForPetUseCase extends BaseUseCase<String, AddPhotoForPetParams> {
 
 class AddPhotoForPetParams {
   final String id;
-  final File image;
+  final File? image;
 
   AddPhotoForPetParams({
     required this.id,
-    required this.image,
+      this.image,
   });
 }

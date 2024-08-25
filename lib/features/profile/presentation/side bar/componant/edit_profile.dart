@@ -61,7 +61,7 @@ log('$area dsggerd $city');
       LoadingOverlay().hide();
       BlocProvider.of<GetMyDataBloc>(context).add(GetMyDataEvent());
 
-   Navigator.pushNamed(context, Routes.main);
+   Navigator.pushNamed(context, Routes.main,arguments: 3);
     }
     else if (state is UpdateMyDataErrorState) {
       LoadingOverlay().hide();
@@ -89,7 +89,7 @@ log('$area dsggerd $city');
                   const Spacer(
                     flex: 10,
                   ),
-                  if (UserModel.getInstance().image != null)
+                  // if (UserModel.getInstance().image != '')
                      StatefulBuilder(
                       builder: (context, setState) {
                         return Padding(
@@ -106,15 +106,7 @@ log('$area dsggerd $city');
                         );
                       }
                     ),
-                  if (UserModel.getInstance().image == null)
-                  Padding(
-                    padding: EdgeInsets.only(top: AppSize.defaultSize! * 2),
-                    child: Image.asset(
-                      AssetPath.whiteProfileIcon,
-                      width: AppSize.defaultSize! * 15,
-                      height: AppSize.defaultSize! * 15,
-                    ),
-                  ),
+
                   const Spacer(
                     flex: 12,
                   ),
@@ -188,20 +180,22 @@ log('$area dsggerd $city');
               SizedBox(
                 height: AppSize.defaultSize! * 3,
               ),
-              MainButton(
-                  text: StringManager.save.tr(),
-                  color: const Color.fromRGBO(68, 82, 255, 1),
-                  textColor: Colors.white,
-                  onTap: () {
-                    BlocProvider.of<GetMyDataBloc>(context) .add( UpdateMyDataEvent(
-                      name: nameController.text,
-                      username: usernameController.text,
-                      bio: bioController.text,
-                      city: city ,
-                      area: area  ,
-                      image: imageFile
-                    ));
-                  }),
+              Center(
+                child: MainButton(
+                    text: StringManager.save.tr(),
+                    color: const Color.fromRGBO(68, 82, 255, 1),
+                    textColor: Colors.white,
+                    onTap: () {
+                      BlocProvider.of<GetMyDataBloc>(context) .add( UpdateMyDataEvent(
+                        name: nameController.text,
+                        username: usernameController.text,
+                        bio: bioController.text,
+                        city: city ,
+                        area: area  ,
+                        image: imageFile
+                      ));
+                    }),
+              ),
               SizedBox(
                 height: AppSize.defaultSize! * 3,
               ),
