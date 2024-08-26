@@ -67,7 +67,11 @@ class _EditPostState extends State<EditPost> {
                 height: AppSize.defaultSize! * 2,
               ),
               Padding(
-                padding: Methods.instance.paddingCustom,
+                  padding: EdgeInsets.only(
+          left: AppSize.defaultSize! * 2,
+          right: AppSize.defaultSize! * 2,
+          top: AppSize.defaultSize! * 6,
+        ),
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

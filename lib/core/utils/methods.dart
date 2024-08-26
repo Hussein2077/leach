@@ -71,11 +71,6 @@ class Methods {
     return language;
   }
 
-  EdgeInsetsGeometry paddingCustom= EdgeInsets.only(
-    left: AppSize.defaultSize??10 * 2,
-    right: AppSize.defaultSize??10 * 2,
-    top: AppSize.defaultSize??10 * 6,
-  );
   String calculateAge(DateTime birthDate) {
     DateTime currentDate = DateTime.now();
 

@@ -7,7 +7,10 @@ abstract class BaseGetHowToEvent {}
 class InitEvent extends BaseGetHowToEvent {}
 
 class GetHowToEvent extends BaseGetHowToEvent {
-  final TypeOfVendor  type;
+  final String petType;
 
-  GetHowToEvent({required this.type});
+  final String category;
+
+  GetHowToEvent(
+      { required this.petType, required this.category});
 }

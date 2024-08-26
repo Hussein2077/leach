@@ -19,7 +19,11 @@ class SelectHowTo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: Methods.instance.paddingCustom,
+        padding: EdgeInsets.only(
+          left: AppSize.defaultSize! * 2,
+          right: AppSize.defaultSize! * 2,
+          top: AppSize.defaultSize! * 6,
+        ),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,21 +41,22 @@ class SelectHowTo extends StatelessWidget {
                   children: [
                     LargeButton(
                       text: StringManager.groomYourPet,
-                      onPressed: (){
-                        Navigator.pushNamed(context, Routes.typeOfPetScreen,arguments: TypeOfPetNavigator.groomingScreen);
+                      onPressed: () {
+                        Navigator.pushNamed(context, Routes.typeOfPetScreen,
+                            arguments: TypeOfPetNavigator.groomingScreen);
                       },
                       child: Image.asset(
                         AssetPath.groom,
                         color: AppColors.primaryColor,
-
                       ),
                     ),
                     SizedBox(
                       height: AppSize.defaultSize! * 2,
                     ),
                     LargeButton(
-                      onPressed: (){
-                        Navigator.pushNamed(context, Routes.typeOfPetScreen,arguments: TypeOfPetNavigator.trainingScreen);
+                      onPressed: () {
+                        Navigator.pushNamed(context, Routes.typeOfPetScreen,
+                            arguments: TypeOfPetNavigator.trainingScreen);
                       },
                       text: StringManager.trainYourPet,
                       child: Image.asset(
@@ -59,7 +64,6 @@ class SelectHowTo extends StatelessWidget {
                         color: AppColors.primaryColor,
                       ),
                     ),
-
                   ],
                 ),
               )

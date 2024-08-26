@@ -19,7 +19,11 @@ class BookingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: Methods.instance.paddingCustom,
+          padding: EdgeInsets.only(
+          left: AppSize.defaultSize! * 2,
+          right: AppSize.defaultSize! * 2,
+          top: AppSize.defaultSize! * 6,
+        ),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

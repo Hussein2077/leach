@@ -7,6 +7,7 @@ import 'package:leach/core/utils/enums.dart';
 import 'package:leach/features/home/data/models/breeding_model.dart';
 import 'package:leach/features/home/data/models/how_toModel.dart';
 import 'package:leach/features/home/data/models/vendor.dart';
+import 'package:leach/features/home/domain/use_case/how_to_uc.dart';
 import 'package:leach/features/home/domain/use_case/request_booking_uc.dart';
 import 'package:leach/features/home/presentation/widgets/times.dart';
 
@@ -15,7 +16,7 @@ abstract class HomeBaseRemotelyDataSource {
       {required String type, required String page});
 
   Future<List<Vendor>> getVendors(TypeOfVendor type);
-  Future<List<HowToModel>> getHowTo (TypeOfVendor type);
+  Future<List<HowToModel>> getHowTo (GetHowToParameter type);
 
   Future<void> requestBooking(RequestBookingParam requestBooking);
 }
@@ -66,15 +67,20 @@ class HomeRemotelyDateSource extends HomeBaseRemotelyDataSource {
     }
   }
   @override
-  Future<List<HowToModel>> getHowTo (TypeOfVendor type) async {
+  Future<List<HowToModel>> getHowTo (GetHowToParameter type) async {
     Map<String, String> headers = await DioHelper().header();
-
+    log('${type.petType} agagewrgq ${type.category}');
+final body = {
+  "pet_type": type.petType,
+  "category": type.category
+};
     try {
-      final response = await Dio().get(
+      final response = await Dio().post(
         ConstantApi.getHowToPosts,
         options: Options(
           headers: headers,
         ),
+        data: body
       );
       List<HowToModel>  jsonData = (response.data['posts']['data'] as List)
           .map((e) => HowToModel.fromJson(e))

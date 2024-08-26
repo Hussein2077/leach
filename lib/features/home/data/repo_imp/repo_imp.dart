@@ -7,6 +7,7 @@ import 'package:leach/features/home/data/models/breeding_model.dart';
 import 'package:leach/features/home/data/models/how_toModel.dart';
 import 'package:leach/features/home/data/models/vendor.dart';
 import 'package:leach/features/home/domain/repo/base_repo.dart';
+import 'package:leach/features/home/domain/use_case/how_to_uc.dart';
 import 'package:leach/features/home/domain/use_case/request_booking_uc.dart';
 
 class HomeRepositoryImp extends HomeBaseRepository {
@@ -36,7 +37,7 @@ class HomeRepositoryImp extends HomeBaseRepository {
     }
   }
   @override
-  Future<Either<List<HowToModel>, Failure>>  getHowTo(TypeOfVendor type) async {
+  Future<Either<List<HowToModel>, Failure>>  getHowTo(GetHowToParameter type) async {
     try {
       final result = await homeBaseRemotelyDataSource.getHowTo(type);
       return Left(result);

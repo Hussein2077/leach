@@ -50,7 +50,11 @@ class _PostsViewProfileState extends State<PostsViewProfile> {
             child: Column(
               children: [
                 Padding(
-                  padding: Methods.instance.paddingCustom,
+                    padding: EdgeInsets.only(
+          left: AppSize.defaultSize! * 2,
+          right: AppSize.defaultSize! * 2,
+          top: AppSize.defaultSize! * 6,
+        ),
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

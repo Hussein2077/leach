@@ -33,7 +33,11 @@ class _CalenderScreenState extends State<CalenderScreen> {
     log('${selectedDate}selectedDate');
     return Scaffold(
       body: Padding(
-        padding: Methods.instance.paddingCustom,
+          padding: EdgeInsets.only(
+          left: AppSize.defaultSize! * 2,
+          right: AppSize.defaultSize! * 2,
+          top: AppSize.defaultSize! * 6,
+        ),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

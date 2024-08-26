@@ -9,6 +9,7 @@ import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/large_botton.dart';
 import 'package:leach/core/widgets/leading_icon.dart';
+import 'package:leach/features/home/presentation/componant/trainYourDog.dart';
 
 class TypeOfPetScreen extends StatelessWidget {
   const TypeOfPetScreen({super.key, required this.typeOfPetNavigator});
@@ -54,9 +55,17 @@ class TypeOfPetScreen extends StatelessWidget {
                             Navigator.pushNamed(context, Routes.breedingScreen,
                                 arguments: "DOG");
                           case TypeOfPetNavigator.groomingScreen:
-                          // TODO: Handle this case.
+                            Navigator.pushNamed(context, Routes.trainYourDog,
+                                arguments: TrainParamRoute(
+                                  petType: "DOG",
+                                  category: "GROOM",
+                                ));
                           case TypeOfPetNavigator.trainingScreen:
-                            Navigator.pushNamed(context, Routes.trainYourDog);
+                            Navigator.pushNamed(context, Routes.trainYourDog,
+                                arguments: TrainParamRoute(
+                                  petType: "DOG",
+                                  category: "TRAIN",
+                                ));
                         }
                       },
                       child: Image.asset(AssetPath.dog)),
@@ -73,9 +82,17 @@ class TypeOfPetScreen extends StatelessWidget {
                             Navigator.pushNamed(context, Routes.breedingScreen,
                                 arguments: "CAT");
                           case TypeOfPetNavigator.groomingScreen:
-                          // TODO: Handle this case.
+                            Navigator.pushNamed(context, Routes.trainYourDog,
+                                arguments: TrainParamRoute(
+                                  petType: "CAT",
+                                  category: "GROOM",
+                                ));
                           case TypeOfPetNavigator.trainingScreen:
-                            Navigator.pushNamed(context, Routes.trainYourDog);
+                            Navigator.pushNamed(context, Routes.trainYourDog,
+                                arguments: TrainParamRoute(
+                                  petType: "CAT",
+                                  category: "TRAIN",
+                                ));
                         }
                       },
                       child: Image.asset(AssetPath.cat)),

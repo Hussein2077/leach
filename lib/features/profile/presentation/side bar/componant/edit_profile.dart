@@ -71,7 +71,11 @@ log('$area dsggerd $city');
   child: Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: Methods.instance.paddingCustom,
+            padding: EdgeInsets.only(
+          left: AppSize.defaultSize! * 2,
+          right: AppSize.defaultSize! * 2,
+          top: AppSize.defaultSize! * 6,
+        ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

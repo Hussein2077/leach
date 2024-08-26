@@ -326,9 +326,10 @@ class RouteGenerator {
                 const SelectHowTo(),
             transitionsBuilder: customAnimate);
       case Routes.trainYourDog:
-        return PageRouteBuilder(
+        TrainParamRoute trainParamRoute = settings.arguments as TrainParamRoute;
+         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const TrainYourDog(),
+                  TrainYourDog(trainParamRoute:   trainParamRoute,),
             transitionsBuilder: customAnimate);
       case Routes.notification:
         return PageRouteBuilder(
