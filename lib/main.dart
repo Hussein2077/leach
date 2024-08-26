@@ -111,7 +111,7 @@ class _MyAppState extends State<MyApp> {
           create: (context) => getIt<GetFriendsBloc>(),
         ),
         BlocProvider(
-          create: (context) => getIt<GetMyDataBloc>()..add(GetMyDataEvent()),
+          create: (context) => getIt<GetMyDataBloc>(),
         ),
         BlocProvider(
           create: (context) => getIt<GetTraitsBloc>(),

@@ -2,25 +2,32 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leach/core/models/profile_data_model.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
+import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/background.dart';
+import 'package:leach/core/widgets/loading_widget.dart';
+import 'package:leach/core/widgets/snack_bar.dart';
 import 'package:leach/features/chat/chat_list.dart';
 import 'package:leach/features/home/presentation/home_screen.dart';
 import 'package:leach/features/main_screen_bloc.dart';
 import 'package:leach/features/posts/presentation/posts_screen.dart';
 import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_event.dart';
+import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_state.dart';
 import 'package:leach/features/profile/presentation/pet_profile/pet_profile.dart';
 import 'package:leach/features/profile/presentation/profile/profile.dart';
 import 'package:leach/features/profile/presentation/widget/pet_or_profile.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({
-    super.key,   this.selectedIndex=4,
+    super.key,
+    this.selectedIndex = 4,
   });
-final int selectedIndex;
+
+  final int selectedIndex;
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -29,9 +36,9 @@ final int selectedIndex;
 class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
-    log('${widget.selectedIndex}nskjdgbowrgniowrgbipwo');
-    context.read<MainScreenBloc>().add(  ChangeTabEvent(widget.selectedIndex));
     BlocProvider.of<GetMyDataBloc>(context).add(GetMyDataEvent());
+
+    context.read<MainScreenBloc>().add(ChangeTabEvent(widget.selectedIndex));
     super.initState();
   }
 
@@ -174,7 +181,21 @@ class _MainScreenState extends State<MainScreen> {
                 ),
                 body: BackgroundScreen(
                   image: AssetPath.homeBackground,
-                  child: getScreen(selectedIndex),
+                  child: BlocBuilder<GetMyDataBloc, GetMyDataState>(
+                    builder: (context, state) {
+                      if (state is GetMyDataLoadingState) {
+                        return const LoadingWidget();
+                      }
+                      if (state is GetMyDataSuccessState) {
+                        return getScreen(selectedIndex);
+                      }
+                      if (state is GetMyDataErrorState) {
+                        Navigator.pushReplacementNamed(
+                            context, Routes.welcomePage);
+                      }
+                      return const SizedBox();
+                    },
+                  ),
                 )),
           );
         });
@@ -186,7 +207,7 @@ class _MainScreenState extends State<MainScreen> {
     if (selectedIndex == 0) {
       return const PostsScreen();
     } else if (selectedIndex == 1) {
-      return ChatList();
+      return const ChatList();
     } else if (selectedIndex == 2) {
       return const BackgroundScreen(
         image: AssetPath.homeBackground,
@@ -198,7 +219,7 @@ class _MainScreenState extends State<MainScreen> {
         child: PersonalProfile(),
       );
     } else {
-      return HomeScreen();
+      return const HomeScreen();
     }
   }
 }

@@ -26,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+
     onPressed = [
       () {
         context.read<MainScreenBloc>().add(const ChangeTabEvent(0));
@@ -63,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(
                         width: AppSize.screenWidth! * .5,
                         child: CustomText(
-                          text: '${StringManager.welcome}, ${UserModel.getInstance().name??""}',
+                          text: '${StringManager.welcome}, ${  UserModel.getInstance().name??""}',
                           fontWeight: FontWeight.w700,
                           maxLines: 2,
                           textAlign: TextAlign.start,
