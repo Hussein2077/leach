@@ -24,15 +24,18 @@ import 'package:leach/features/profile/presentation/profile/profile.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({
-    super.key,   this.selectedIndex=4,
+    super.key,
+    this.selectedIndex = 4,
   });
-final int selectedIndex;
+
+  final int selectedIndex;
 
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
+
   @override
   void initState() {
     log('${widget.selectedIndex}nskjdgbowrgniowrgbipwo');
@@ -47,7 +50,7 @@ class _MainScreenState extends State<MainScreen> {
     return BlocBuilder<MainScreenBloc, MainScreenState>(
       builder: (context, state) {
         final selectedIndex =
-        state is TabChangedState ? state.selectedIndex : 4;
+            state is TabChangedState ? state.selectedIndex : 4;
         return LayoutBuilder(builder: (context, constraints) {
           final isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
           return SizedBox(
@@ -58,40 +61,40 @@ class _MainScreenState extends State<MainScreen> {
               floatingActionButton: isKeyboardOpen
                   ? null
                   : Material(
-                elevation: 0,
-                shape: const CircleBorder(),
-                color: AppColors.primaryColor,
-                child: Padding(
-                  padding: EdgeInsets.all(AppSize.defaultSize! * .8),
-                  child: Container(
-                    width: AppSize.defaultSize! * 8,
-                    height: AppSize.defaultSize! * 8,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.primaryColor,
-                    ),
-                    child: FloatingActionButton.extended(
-                      onPressed: () {
-                        context
-                            .read<MainScreenBloc>()
-                            .add(const ChangeTabEvent(4));
-                      },
                       elevation: 0,
-                      focusElevation: 0,
-                      backgroundColor: AppColors.primaryColor,
                       shape: const CircleBorder(),
-                      disabledElevation: 0,
-                      label: Image.asset(
-                        AssetPath.home,
-                        width: AppSize.defaultSize! * 6,
-                        height: AppSize.defaultSize! * 6,
+                      color: AppColors.primaryColor,
+                      child: Padding(
+                        padding: EdgeInsets.all(AppSize.defaultSize! * .8),
+                        child: Container(
+                          width: AppSize.defaultSize! * 8,
+                          height: AppSize.defaultSize! * 8,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppColors.primaryColor,
+                          ),
+                          child: FloatingActionButton.extended(
+                            onPressed: () {
+                              context
+                                  .read<MainScreenBloc>()
+                                  .add(const ChangeTabEvent(4));
+                            },
+                            elevation: 0,
+                            focusElevation: 0,
+                            backgroundColor: AppColors.primaryColor,
+                            shape: const CircleBorder(),
+                            disabledElevation: 0,
+                            label: Image.asset(
+                              AssetPath.home,
+                              width: AppSize.defaultSize! * 6,
+                              height: AppSize.defaultSize! * 6,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-              ),
               floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
+                  FloatingActionButtonLocation.centerDocked,
               bottomNavigationBar: BottomAppBar(
                 color: AppColors.primaryColor,
                 shape: const CircularNotchedRectangle(),
@@ -104,32 +107,29 @@ class _MainScreenState extends State<MainScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       _buildNavItem(
-
                         icon: AssetPath.postsIcon,
+                        isSvg: false,
                         isSelected: selectedIndex == 0,
                         onTap: () => context
                             .read<MainScreenBloc>()
                             .add(const ChangeTabEvent(0)),
                       ),
-                      _buildNavItemSvg(
-
-                        icon:  AssetPath.chat2,
+                      _buildNavItem(
+                        icon: AssetPath.chat2,
                         isSelected: selectedIndex == 1,
                         onTap: () => context
                             .read<MainScreenBloc>()
                             .add(const ChangeTabEvent(1)),
                       ),
                       SizedBox(width: AppSize.defaultSize! * 5),
-                      _buildNavItemSvg(
-
+                      _buildNavItem(
                         icon: AssetPath.petProfile2,
                         isSelected: selectedIndex == 2,
                         onTap: () => context
                             .read<MainScreenBloc>()
                             .add(const ChangeTabEvent(2)),
                       ),
-                      _buildNavItemSvg(
-
+                      _buildNavItem(
                         icon: AssetPath.profile2,
                         isSelected: selectedIndex == 3,
                         onTap: () => context
@@ -142,7 +142,21 @@ class _MainScreenState extends State<MainScreen> {
               ),
               body: BackgroundScreen(
                 image: AssetPath.homeBackground,
-                child: getScreen(selectedIndex),
+                child: BlocBuilder<GetMyDataBloc, GetMyDataState>(
+                  builder: (context, state) {
+                    if (state is GetMyDataLoadingState) {
+                      return const LoadingWidget();
+                    }
+                    if (state is GetMyDataSuccessState) {
+                      return getScreen(selectedIndex);
+                    }
+                    if (state is GetMyDataErrorState) {
+                      Navigator.pushReplacementNamed(
+                          context, Routes.welcomePage);
+                    }
+                    return const SizedBox();
+                  },
+                ),
               ),
             ),
           );
@@ -151,10 +165,14 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-  Widget _buildNavItemSvg(
-      {required String icon,
-        required bool isSelected,
-        required Function() onTap}) {
+
+
+  Widget _buildNavItem({
+    required String icon,
+    required bool isSelected,
+    required Function() onTap,
+      bool isSvg=true, // New parameter to distinguish between Image and Svg
+  }) {
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -165,38 +183,14 @@ class _MainScreenState extends State<MainScreen> {
             padding: EdgeInsets.zero,
             highlightColor: Colors.transparent,
             onPressed: onTap,
-            icon: SvgPicture.asset(
+            icon: isSvg
+                ? SvgPicture.asset(
               icon,
               color: Colors.white,
               width: AppSize.defaultSize! * 3.5,
               height: AppSize.defaultSize! * 3.5,
-            ),
-          ),
-          if (isSelected)
-            Container(
-              height: 3,
-              width: 20,
-              color: Colors.white,
-            ),
-        ],
-      ),
-    );
-  }
-  Widget _buildNavItem(
-      {required String icon,
-        required bool isSelected,
-        required Function() onTap}) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          IconButton(
-            focusColor: AppColors.greyColor,
-            hoverColor: AppColors.greyColor,
-            padding: EdgeInsets.zero,
-            highlightColor: Colors.transparent,
-            onPressed: onTap,
-            icon: Image.asset(
+            )
+                : Image.asset(
               icon,
               color: Colors.white,
               width: AppSize.defaultSize! * 4,
@@ -213,6 +207,7 @@ class _MainScreenState extends State<MainScreen> {
       ),
     );
   }
+
 
   Widget getScreen(int selectedIndex) {
     if (selectedIndex == 0) {

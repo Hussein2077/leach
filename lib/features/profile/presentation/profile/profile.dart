@@ -91,7 +91,8 @@ class _PersonalProfileState extends State<PersonalProfile> {
                           ids: state.postsModel.posts!.data!.map((e) => e.id!.toString()).toList(),
                         ),
                       );
-                    }else{
+                    }
+                    else{
                       return Container(
                         width: AppSize.screenWidth!,
                         decoration: BoxDecoration(
