@@ -24,6 +24,9 @@ class AssetPath {
   static const String    posts         = '$pathImage/posts.png';
   static const String    profile         = '$pathImage/profile.png';
   static const String     chat         = '$pathImage/chat.png';
+  static const String   petProfile2         = '$pathImage/pet_profile.svg';
+  static const String    profile2         = '$pathImage/profile.svg';
+  static const String     chat2         = '$pathImage/Group 180.svg';
   static const String      homeBackground         = '$pathImage/home_back.png';
   static const String      homeBackground2         = '$pathImage/Home page – 1.png';
   static const String      menu         = '$pathImage/menu.png';

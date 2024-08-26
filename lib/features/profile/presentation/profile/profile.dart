@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leach/core/models/profile_data_model.dart';
+import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
@@ -16,6 +18,7 @@ import 'package:leach/features/profile/presentation/widget/profile_user_row.dart
 
 class PersonalProfile extends StatefulWidget {
   const PersonalProfile({super.key});
+
 
   @override
   State<PersonalProfile> createState() => _PersonalProfileState();
@@ -114,3 +117,5 @@ class _PersonalProfileState extends State<PersonalProfile> {
     );
   }
 }
+
+

@@ -113,7 +113,7 @@ class _PostCardState extends State<PostCard> {
               CustomTextField(
                 width: AppSize.screenWidth! * .65,
                 height: AppSize.defaultSize! * 2.6,
-                hintText: StringManager.comment,
+                hintText: StringManager.caption,
               ),
             ],
           ),
