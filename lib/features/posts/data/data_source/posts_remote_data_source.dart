@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:leach/core/utils/api_helper.dart';
 import 'package:leach/core/utils/constant_api.dart';
+import 'package:leach/features/posts/data/models/comments_model.dart';
 import 'package:leach/features/posts/data/models/posts_model.dart';
 
 abstract class PostsBaseRemotelyDataSource {
@@ -13,6 +14,7 @@ abstract class PostsBaseRemotelyDataSource {
   Future<String> deleteComment({required String id});
   Future<String> editePost({var postData, required String id});
   Future<String> createPost({var postData});
+  Future<CommentsModel> getComments({required String id});
 
 }
 
@@ -191,6 +193,25 @@ class PostsRemotelyDateSource extends PostsBaseRemotelyDataSource {
       return data["message"] ?? "success";
     } on DioException catch (e) {
       throw DioHelper.handleDioError(dioError: e, endpointName: 'createPost');
+    }
+  }
+
+  @override
+  Future<CommentsModel> getComments({required String id}) async {
+    Map<String, String> headers = await DioHelper().header();
+
+    try {
+      final response = await Dio().get(
+        ConstantApi.getComments(id: id),
+        options: Options(
+          headers: headers,
+        ),
+      );
+
+      return CommentsModel.fromJson(response.data);
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(
+          dioError: e, endpointName: 'getComments');
     }
   }
 

@@ -28,7 +28,6 @@ import 'package:leach/features/profile/presentation/controller/dogBreadBloc/bloc
 import 'package:leach/features/profile/presentation/controller/friends_manager/friends_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/get_user_manager/get_user_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_bloc.dart';
-import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_event.dart';
 import 'package:leach/features/profile/presentation/controller/pending_friend_request_manager/pending_friend_request_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/get_traits/bloc.dart';
 
@@ -40,8 +39,7 @@ void main() async {
   await ServerLocator().init();
 
   await EasyLocalization.ensureInitialized();
-  //token = await Methods.instance.returnUserToken();
-  token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS5sZWFzaHBldHMuY29tL2FwaS9sZWFzaC9sb2dpbiIsImlhdCI6MTcyNDQyMDAxNCwiZXhwIjoxNzI1NjI5NjE0LCJuYmYiOjE3MjQ0MjAwMTQsImp0aSI6IjdQdkp6bzVGaTFLM3ZwYUMiLCJzdWIiOiIxNCIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.d9oYHx8x6PS-GTslw32bjpOAqhAUsxWOio2bLPC5rN8";
+  token = await Methods.instance.returnUserToken();
   runApp(
     EasyLocalization(
       fallbackLocale: const Locale('en'),

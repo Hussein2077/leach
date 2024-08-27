@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:leach/core/error/failure.dart';
+import 'package:leach/features/posts/data/models/comments_model.dart';
 import 'package:leach/features/posts/data/models/posts_model.dart';
 
 abstract class PostsBaseRepository {
@@ -12,4 +13,5 @@ abstract class PostsBaseRepository {
   Future<Either<String, Failure>> deleteComment({required String id});
   Future<Either<String, Failure>> editePost({var postData, required String id});
   Future<Either<String, Failure>> createPost({var postData});
+  Future<Either<CommentsModel, Failure>> getComments({required String id});
 }

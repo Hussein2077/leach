@@ -1,41 +1,41 @@
-class PostsModel {
-  PostsModel({
+class CommentsModel {
+  CommentsModel({
       this.success, 
-      this.posts,});
+      this.comments,});
 
-  PostsModel.fromJson(dynamic json) {
+  CommentsModel.fromJson(dynamic json) {
     success = json['success'];
-    posts = json['posts'] != null ? Posts.fromJson(json['posts']) : null;
+    comments = json['comments'] != null ? Comments.fromJson(json['comments']) : null;
   }
   bool? success;
-  Posts? posts;
+  Comments? comments;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['success'] = success;
-    if (posts != null) {
-      map['posts'] = posts?.toJson();
+    if (comments != null) {
+      map['comments'] = comments?.toJson();
     }
     return map;
   }
 
 }
 
-class Posts {
-  Posts({
+class Comments {
+  Comments({
       this.data, 
       this.pagination,});
 
-  Posts.fromJson(dynamic json) {
+  Comments.fromJson(dynamic json) {
     if (json['data'] != null) {
       data = [];
       json['data'].forEach((v) {
-        data?.add(PostData.fromJson(v));
+        data?.add(Data.fromJson(v));
       });
     }
     pagination = json['pagination'] != null ? Pagination.fromJson(json['pagination']) : null;
   }
-  List<PostData>? data;
+  List<Data>? data;
   Pagination? pagination;
 
   Map<String, dynamic> toJson() {
@@ -80,44 +80,28 @@ class Pagination {
 
 }
 
-class PostData {
-  PostData({
-      this.id, 
+class Data {
+  Data({
       this.uuid, 
-      this.user, 
-      this.picture, 
-      this.caption, 
-      this.liked,
-      this.comments_allowed,});
+      this.comment, 
+      this.user,});
 
-  PostData.fromJson(dynamic json) {
-    id = json['id'];
+  Data.fromJson(dynamic json) {
     uuid = json['uuid'];
+    comment = json['comment'];
     user = json['user'] != null ? User.fromJson(json['user']) : null;
-    picture = json['picture'];
-    caption = json['caption'];
-    comments_allowed = json['comments_allowed']??1;
-    liked = json['liked']??false;
   }
-  int? id;
   String? uuid;
+  String? comment;
   User? user;
-  String? picture;
-  String? caption;
-  int? comments_allowed;
-  bool? liked;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['id'] = id;
     map['uuid'] = uuid;
+    map['comment'] = comment;
     if (user != null) {
       map['user'] = user?.toJson();
     }
-    map['picture'] = picture;
-    map['caption'] = caption;
-    map['comments_allowed'] = comments_allowed;
-    map['liked'] = liked;
     return map;
   }
 
@@ -143,29 +127,6 @@ class User {
     map['uuid'] = uuid;
     map['username'] = username;
     map['profile_picture'] = profilePicture;
-    return map;
-  }
-
-}
-
-class Likes {
-  Likes({
-      this.uuid, 
-      this.user,});
-
-  Likes.fromJson(dynamic json) {
-    uuid = json['uuid'];
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
-  }
-  String? uuid;
-  User? user;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['uuid'] = uuid;
-    if (user != null) {
-      map['user'] = user?.toJson();
-    }
     return map;
   }
 
