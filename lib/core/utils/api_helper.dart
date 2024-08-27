@@ -17,8 +17,8 @@ class DioHelper {
     Map<String, String> headers = await DioHelper().header();
     return Options(
       receiveDataWhenStatusError: true,
-      sendTimeout: const Duration(milliseconds: 5000),
-      receiveTimeout: const Duration(milliseconds: 5000),
+      sendTimeout: const Duration(milliseconds: 15000),
+      receiveTimeout: const Duration(milliseconds: 15000),
       headers: headers,
     );
   }
@@ -109,7 +109,7 @@ class DioHelper {
       case 401:
         Navigator.pushNamedAndRemoveUntil(
             getIt<NavigationService>().navigatorKey.currentContext!,
-            Routes.welcomePage,
+            Routes.login,
             (route) => false);
         if (response?.data.runtimeType == String) {
           throw ErrorModelException(errorMessage: response!.data);

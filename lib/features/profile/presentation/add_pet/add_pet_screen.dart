@@ -13,8 +13,8 @@ import 'package:leach/core/widgets/leading_icon.dart';
 import 'package:leach/features/auth/presentation/widgets/leading_with_icon.dart';
 
 class AddPetScreen extends StatelessWidget {
-  const AddPetScreen({super.key});
-
+  const AddPetScreen({super.key,   this.withLeadingIcon=true});
+  final bool withLeadingIcon ;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +29,7 @@ class AddPetScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              if (withLeadingIcon)
               const LeadingWithIcon(
                 withIcon: false,
                 color: Colors.white,

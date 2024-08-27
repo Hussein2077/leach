@@ -1,12 +1,14 @@
 class UserDataModel {
   UserDataModel({
-      this.success, 
-      this.data,});
+    this.success,
+    this.data,
+  });
 
   UserDataModel.fromJson(dynamic json) {
     success = json['success'];
     data = json['data'] != null ? UserData.fromJson(json['data']) : null;
   }
+
   bool? success;
   UserData? data;
 
@@ -18,24 +20,26 @@ class UserDataModel {
     }
     return map;
   }
-
 }
 
 class UserData {
   UserData({
-      this.username,
-      this.name,
-      this.profilePicture,
-      this.bio,
-      this.city,
-      this.area,
-      this.privateAccount,
-      this.accountStatus,
-      this.pets,
-      this.friends,
-      this.posts,});
+    this.username,
+    this.name,
+    this.profilePicture,
+    this.bio,
+    this.city,
+    this.area,
+    this.privateAccount,
+    this.accountStatus,
+    this.pets,
+    this.isFriend,
+    this.friends,
+    this.posts,
+  });
 
   UserData.fromJson(dynamic json) {
+    isFriend = json['isFriend'] ?? false;
     username = json['username'];
     name = json['name'];
     profilePicture = json['profile_picture'];
@@ -50,9 +54,11 @@ class UserData {
         pets?.add(Pets.fromJson(v));
       });
     }
-    friends = json['friends'] != null ? Friends.fromJson(json['friends']) : null;
+    friends =
+        json['friends'] != null ? Friends.fromJson(json['friends']) : null;
     posts = json['posts'] != null ? Posts.fromJson(json['posts']) : null;
   }
+
   String? username;
   String? name;
   String? profilePicture;
@@ -63,6 +69,8 @@ class UserData {
   String? accountStatus;
   List<Pets>? pets;
   Friends? friends;
+  bool? isFriend;
+
   Posts? posts;
 
   Map<String, dynamic> toJson() {
@@ -91,7 +99,8 @@ class UserData {
 class Friends {
   Friends({
     this.data,
-    this.pagination,});
+    this.pagination,
+  });
 
   Friends.fromJson(dynamic json) {
     if (json['data'] != null) {
@@ -100,8 +109,11 @@ class Friends {
         data?.add(FriendsData.fromJson(v));
       });
     }
-    pagination = json['pagination'] != null ? Pagination.fromJson(json['pagination']) : null;
+    pagination = json['pagination'] != null
+        ? Pagination.fromJson(json['pagination'])
+        : null;
   }
+
   List<FriendsData>? data;
   Pagination? pagination;
 
@@ -115,13 +127,13 @@ class Friends {
     }
     return map;
   }
-
 }
 
 class Posts {
   Posts({
-      this.data, 
-      this.pagination,});
+    this.data,
+    this.pagination,
+  });
 
   Posts.fromJson(dynamic json) {
     if (json['data'] != null) {
@@ -130,8 +142,11 @@ class Posts {
         data?.add(Data.fromJson(v));
       });
     }
-    pagination = json['pagination'] != null ? Pagination.fromJson(json['pagination']) : null;
+    pagination = json['pagination'] != null
+        ? Pagination.fromJson(json['pagination'])
+        : null;
   }
+
   List<Data>? data;
   Pagination? pagination;
 
@@ -145,15 +160,15 @@ class Posts {
     }
     return map;
   }
-
 }
 
 class Pagination {
   Pagination({
-      this.total, 
-      this.perPage, 
-      this.currentPage, 
-      this.lastPage,});
+    this.total,
+    this.perPage,
+    this.currentPage,
+    this.lastPage,
+  });
 
   Pagination.fromJson(dynamic json) {
     total = json['total'];
@@ -161,6 +176,7 @@ class Pagination {
     currentPage = json['current_page'];
     lastPage = json['last_page'];
   }
+
   int? total;
   int? perPage;
   int? currentPage;
@@ -174,17 +190,17 @@ class Pagination {
     map['last_page'] = lastPage;
     return map;
   }
-
 }
 
 class Data {
   Data({
-      this.id, 
-      this.uuid, 
-      this.picture,
-      this.caption, 
-      this.commentsAllowed, 
-      this.liked,});
+    this.id,
+    this.uuid,
+    this.picture,
+    this.caption,
+    this.commentsAllowed,
+    this.liked,
+  });
 
   Data.fromJson(dynamic json) {
     id = json['id'];
@@ -194,6 +210,7 @@ class Data {
     commentsAllowed = json['comments_allowed'];
     liked = json['liked'];
   }
+
   int? id;
   String? uuid;
   String? picture;
@@ -211,20 +228,21 @@ class Data {
     map['liked'] = liked;
     return map;
   }
-
 }
 
 class FriendsData {
   FriendsData({
-      this.uuid, 
-      this.username, 
-      this.profilePicture,});
+    this.uuid,
+    this.username,
+    this.profilePicture,
+  });
 
   FriendsData.fromJson(dynamic json) {
     uuid = json['uuid'];
     username = json['username'];
     profilePicture = json['profile_picture'];
   }
+
   String? uuid;
   String? username;
   dynamic profilePicture;
@@ -236,32 +254,32 @@ class FriendsData {
     map['profile_picture'] = profilePicture;
     return map;
   }
-
 }
 
 class Pets {
   Pets({
-      this.id, 
-      this.uuid, 
-      this.userId, 
-      this.username, 
-      this.name, 
-      this.gender, 
-      this.petType, 
-      this.pureBred, 
-      this.breed, 
-      this.secondBreed, 
-      this.dateOfBirth, 
-      this.age, 
-      this.weight, 
-      this.size, 
-      this.breedingExperience, 
-      this.neuteredSpayed, 
-      this.profilePicture, 
-      this.medicalPassport, 
-      this.breedingAvailable, 
-      this.adoptionAvailable,
-      this.pictures,});
+    this.id,
+    this.uuid,
+    this.userId,
+    this.username,
+    this.name,
+    this.gender,
+    this.petType,
+    this.pureBred,
+    this.breed,
+    this.secondBreed,
+    this.dateOfBirth,
+    this.age,
+    this.weight,
+    this.size,
+    this.breedingExperience,
+    this.neuteredSpayed,
+    this.profilePicture,
+    this.medicalPassport,
+    this.breedingAvailable,
+    this.adoptionAvailable,
+    this.pictures,
+  });
 
   Pets.fromJson(dynamic json) {
     id = json['id'];
@@ -291,6 +309,7 @@ class Pets {
       });
     }
   }
+
   int? id;
   String? uuid;
   int? userId;
@@ -340,18 +359,19 @@ class Pets {
     }
     return map;
   }
-
 }
 
 class Pictures {
   Pictures({
-      this.uuid, 
-      this.picture,});
+    this.uuid,
+    this.picture,
+  });
 
   Pictures.fromJson(dynamic json) {
     uuid = json['uuid'];
     picture = json['picture'];
   }
+
   String? uuid;
   String? picture;
 
@@ -361,5 +381,4 @@ class Pictures {
     map['picture'] = picture;
     return map;
   }
-
 }

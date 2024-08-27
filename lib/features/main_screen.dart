@@ -35,11 +35,9 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-
   @override
   void initState() {
     log('${widget.selectedIndex}nskjdgbowrgniowrgbipwo');
-    BlocProvider.of<GetMyDataBloc>(context).add(GetMyDataEvent());
 
     context.read<MainScreenBloc>().add(ChangeTabEvent(widget.selectedIndex));
     super.initState();
@@ -142,21 +140,7 @@ class _MainScreenState extends State<MainScreen> {
               ),
               body: BackgroundScreen(
                 image: AssetPath.homeBackground,
-                child: BlocBuilder<GetMyDataBloc, GetMyDataState>(
-                  builder: (context, state) {
-                    if (state is GetMyDataLoadingState) {
-                      return const LoadingWidget();
-                    }
-                    if (state is GetMyDataSuccessState) {
-                      return getScreen(selectedIndex);
-                    }
-                    if (state is GetMyDataErrorState) {
-                      Navigator.pushReplacementNamed(
-                          context, Routes.welcomePage);
-                    }
-                    return const SizedBox();
-                  },
-                ),
+                child:  getScreen(selectedIndex)
               ),
             ),
           );
@@ -165,13 +149,11 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-
-
   Widget _buildNavItem({
     required String icon,
     required bool isSelected,
     required Function() onTap,
-      bool isSvg=true, // New parameter to distinguish between Image and Svg
+    bool isSvg = true, // New parameter to distinguish between Image and Svg
   }) {
     return Center(
       child: Column(
@@ -185,17 +167,17 @@ class _MainScreenState extends State<MainScreen> {
             onPressed: onTap,
             icon: isSvg
                 ? SvgPicture.asset(
-              icon,
-              color: Colors.white,
-              width: AppSize.defaultSize! * 3.5,
-              height: AppSize.defaultSize! * 3.5,
-            )
+                    icon,
+                    color: Colors.white,
+                    width: AppSize.defaultSize! * 3.5,
+                    height: AppSize.defaultSize! * 3.5,
+                  )
                 : Image.asset(
-              icon,
-              color: Colors.white,
-              width: AppSize.defaultSize! * 4,
-              height: AppSize.defaultSize! * 4,
-            ),
+                    icon,
+                    color: Colors.white,
+                    width: AppSize.defaultSize! * 4,
+                    height: AppSize.defaultSize! * 4,
+                  ),
           ),
           if (isSelected)
             Container(
@@ -207,7 +189,6 @@ class _MainScreenState extends State<MainScreen> {
       ),
     );
   }
-
 
   Widget getScreen(int selectedIndex) {
     if (selectedIndex == 0) {

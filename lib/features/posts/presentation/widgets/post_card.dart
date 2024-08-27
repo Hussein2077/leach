@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
+import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cached_network_image.dart';
@@ -39,23 +40,29 @@ class _PostCardState extends State<PostCard> {
       children: [
         Padding(
           padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 3.6),
-          child: Row(
-            children: [
-              CachedNetworkCustom(
-                url: widget.postData.user?.profilePicture ?? "",
-                width: AppSize.defaultSize! * 3,
-                height: AppSize.defaultSize! * 3,
-                radius: AppSize.defaultSize! * 3,
-              ),
-              SizedBox(
-                width: AppSize.defaultSize!,
-              ),
-              CustomText(
-                text: widget.postData.user?.username ?? "",
-                fontSize: AppSize.defaultSize! * 2,
-                color: AppColors.primaryColor,
-              )
-            ],
+          child: InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, Routes.friendsView, arguments: widget.postData.user!.uuid  );
+
+            },
+            child: Row(
+              children: [
+                CachedNetworkCustom(
+                  url: widget.postData.user?.profilePicture ?? "",
+                  width: AppSize.defaultSize! * 3,
+                  height: AppSize.defaultSize! * 3,
+                  radius: AppSize.defaultSize! * 3,
+                ),
+                SizedBox(
+                  width: AppSize.defaultSize!,
+                ),
+                CustomText(
+                  text: widget.postData.user?.username ?? "",
+                  fontSize: AppSize.defaultSize! * 2,
+                  color: AppColors.primaryColor,
+                )
+              ],
+            ),
           ),
         ),
         SizedBox(
