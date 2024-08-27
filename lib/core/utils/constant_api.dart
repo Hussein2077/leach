@@ -51,7 +51,7 @@ class ConstantApi {
     return "${baseUrl}post/$id";
   }
   static deleteComment(String id) {
-    return "${baseUrl}post/comment/$id";
+    return "${baseUrl}post/deleteComment/$id";
   }
   static editePost(String id) {
     return "${baseUrl}post/$id";
@@ -69,8 +69,12 @@ class ConstantApi {
   }
   static removeFriend({required String id}) {
     return "${baseUrl}user/removeFriend/$id";
-  }  static removePhotoForPet({required String id}) {
+  }
+  static removePhotoForPet({required String id}) {
     return "${baseUrl}pet/picture/$id";
+  }
+  static getComments({required String id}) {
+    return "${baseUrl}post/viewComments/$id";
   }
 
 //////////////////////////////

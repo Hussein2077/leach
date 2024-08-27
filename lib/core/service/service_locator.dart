@@ -34,6 +34,7 @@ import 'package:leach/features/posts/domain/use_case/create_post_uc.dart';
 import 'package:leach/features/posts/domain/use_case/delete_comment_uc.dart';
 import 'package:leach/features/posts/domain/use_case/delete_post_uc.dart';
 import 'package:leach/features/posts/domain/use_case/edit_post_uc.dart';
+import 'package:leach/features/posts/domain/use_case/get_comments_uc.dart';
 import 'package:leach/features/posts/domain/use_case/get_posts_uc.dart';
 import 'package:leach/features/posts/domain/use_case/get_user_posts_uc.dart';
 import 'package:leach/features/posts/domain/use_case/like_post_uc.dart';
@@ -87,7 +88,7 @@ class ServerLocator {
         deleteUserPostUseCase: getIt(),
         editeUserPostUc: getIt(),
         createUserPostUseCase: getIt()));
-    getIt.registerLazySingleton(() => CommentBloc(addCommentUseCase: getIt()));
+    getIt.registerLazySingleton(() => CommentBloc(addCommentUseCase: getIt(), getCommentsUseCase: getIt()));
     getIt.registerLazySingleton(
         () => LikePostsBloc(likePostUc: getIt(), unLikePostUc: getIt()));
     getIt.registerLazySingleton(() =>
@@ -183,6 +184,7 @@ class ServerLocator {
         () => GetAllBookingUseCase(profileBaseRepository: getIt()));
     getIt.registerFactory(() => GetHowToUseCase(homeBaseRepository: getIt()));
     getIt.registerFactory(() => AddPhotoForPetUseCase(profileBaseRepository: getIt()));
+    getIt.registerFactory(() => GetCommentsUseCase(postsBaseRepository: getIt()));
 
     //remote data
     getIt.registerLazySingleton<BaseRemotelyDataSource>(
