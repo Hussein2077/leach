@@ -11,6 +11,11 @@ import 'package:leach/core/service/service_locator.dart';
 import 'package:leach/core/utils/enums.dart';
 import 'package:leach/core/widgets/background.dart';
 import 'package:leach/core/widgets/loading_widget.dart';
+import 'package:leach/features/auth/presentation/first_open/page_1.dart';
+import 'package:leach/features/auth/presentation/first_open/page_2.dart';
+import 'package:leach/features/auth/presentation/first_open/page_3.dart';
+import 'package:leach/features/auth/presentation/first_open/page_4.dart';
+import 'package:leach/features/auth/presentation/first_open/page_5.dart';
 import 'package:leach/features/auth/presentation/forgot_password/code_page.dart';
 import 'package:leach/features/auth/presentation/forgot_password/forgot_password.dart';
 import 'package:leach/features/auth/presentation/forgot_password/reset_password_from_profile.dart';
@@ -33,6 +38,7 @@ import 'package:leach/features/home/presentation/widgets/calender.dart';
 import 'package:leach/features/main_screen.dart';
 import 'package:leach/features/posts/data/models/posts_model.dart';
 import 'package:leach/features/profile/domain/model/create_pet.dart';
+import 'package:leach/features/profile/domain/use_case/report_user_uc.dart';
 import 'package:leach/features/profile/presentation/add_pet/add_pet_screen.dart';
 import 'package:leach/features/profile/presentation/add_pet/cat_bread.dart';
 import 'package:leach/features/profile/presentation/add_pet/dog_bread.dart';
@@ -43,6 +49,7 @@ import 'package:leach/features/profile/presentation/controller/my_data_manager/m
 import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_state.dart';
 import 'package:leach/features/profile/presentation/friends/friends_screen.dart';
 import 'package:leach/features/profile/presentation/friends/friends_view.dart';
+import 'package:leach/features/profile/presentation/friends/other_report.dart';
 import 'package:leach/features/profile/presentation/friends/report.dart';
 import 'package:leach/features/profile/presentation/friends/specific_messages_report.dart';
 import 'package:leach/features/profile/presentation/friends/submit_report.dart';
@@ -64,10 +71,16 @@ import 'package:leach/features/profile/presentation/side%20bar/componant/delete_
 import 'package:leach/features/profile/presentation/side%20bar/componant/edit_pet_profile.dart';
 import 'package:leach/features/profile/presentation/side%20bar/componant/edit_profile.dart';
 import 'package:leach/features/profile/presentation/side%20bar/side_bar.dart';
+import 'package:leach/features/splash.dart';
 
 class Routes {
   static const String login = "/login";
   static const String welcomePage = "/welcomePage";
+  static const String page1 = "/page1";
+  static const String page2 = "/page2";
+  static const String page3 = "/page3";
+  static const String page4 = "/page4";
+  static const String page5 = "/page5";
   static const String splash = "/splash";
   static const String main = "/main";
   static const String signUp = "/signUp";
@@ -113,6 +126,8 @@ class Routes {
   static const String editPost = "/edit_post";
   static const String bookingHistory = "/booking_history";
   static const String petPhotoView = "/pet_photo_view";
+  static const String otherReport = "/other_report";
+
 }
 
 class RouteGenerator {
@@ -120,6 +135,12 @@ class RouteGenerator {
 
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.splash:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const SplashScreen(),
+          transitionsBuilder: customAnimate,
+        ) ;
       case Routes.login:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
@@ -164,6 +185,31 @@ class RouteGenerator {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const WelcomePage(),
+            transitionsBuilder: customAnimate);
+      case Routes.page1:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const Page1(),
+            transitionsBuilder: customAnimate);
+      case Routes.page2:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const Page2(),
+            transitionsBuilder: customAnimate);
+      case Routes.page3:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const Page3(),
+            transitionsBuilder: customAnimate);
+      case Routes.page4:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const Page4(),
+            transitionsBuilder: customAnimate);
+      case Routes.page5:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const Page5(),
             transitionsBuilder: customAnimate);
       case Routes.signUp:
         return PageRouteBuilder(
@@ -357,14 +403,20 @@ class RouteGenerator {
                 const ResetPasswordScreenFromProfile(),
             transitionsBuilder: customAnimate);
       case Routes.specificMessagesReport:
+        String userId = settings.arguments as String;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const SpecificMessagesReport(),
+                SpecificMessagesReport(
+                  userId: userId,
+                ),
             transitionsBuilder: customAnimate);
       case Routes.submitReport:
+        ReportParameter message = settings.arguments as ReportParameter;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const SubmitReport(),
+                SubmitReport(
+                  message: message,
+                ),
             transitionsBuilder: customAnimate);
       case Routes.reportView:
         return PageRouteBuilder(
@@ -411,6 +463,14 @@ class RouteGenerator {
             pageBuilder: (context, animation, secondaryAnimation) =>
                 PetPhotoView(
                   commonType: commonType,
+                ),
+            transitionsBuilder: customAnimate);
+      case Routes.otherReport:
+        String userId = settings.arguments as String;
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                OtherReportScreen(
+                  userId: userId,
                 ),
             transitionsBuilder: customAnimate);
     }

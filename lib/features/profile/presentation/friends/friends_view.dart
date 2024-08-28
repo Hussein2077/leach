@@ -53,7 +53,7 @@ class _FriendsViewState extends State<FriendsView>
         return Dialog(
           alignment: Alignment.topCenter,
           backgroundColor: Colors.transparent,
-          insetPadding: EdgeInsets.only(top: AppSize.defaultSize! * 10),
+          insetPadding: EdgeInsets.only(top: AppSize.defaultSize! * 5),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.all(AppSize.defaultSize! * 2),
@@ -131,13 +131,13 @@ class _FriendsViewState extends State<FriendsView>
           return Dialog(
             alignment: Alignment.topCenter,
             backgroundColor: Colors.transparent,
-            insetPadding: EdgeInsets.only(top: AppSize.defaultSize! * 10),
+            insetPadding: EdgeInsets.only(top: AppSize.defaultSize! * 5),
             child: Container(
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.all(AppSize.defaultSize! * 2),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(AppSize.defaultSize! * 3),
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -177,7 +177,7 @@ class _FriendsViewState extends State<FriendsView>
                     text: StringManager.specificMessages.tr(),
                     onTap: () {
                       Navigator.pushNamed(
-                          context, Routes.specificMessagesReport);
+                          context, Routes.specificMessagesReport,arguments: widget.uuid );
                     },
                   ),
                   Divider(
@@ -194,6 +194,7 @@ class _FriendsViewState extends State<FriendsView>
                     text: StringManager.other.tr(),
                     onTap: () {
                       Navigator.of(context).pop();
+                      Navigator.pushNamed(context, Routes.otherReport,  arguments: widget.uuid );
                     },
                   ),
                   Divider(

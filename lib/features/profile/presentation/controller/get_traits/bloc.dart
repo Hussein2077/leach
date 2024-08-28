@@ -1,10 +1,10 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leach/core/base_use_case/base_use_case.dart';
 import 'package:leach/core/utils/api_helper.dart';
 import 'package:leach/features/profile/domain/use_case/get_traits_use_case.dart';
+import 'package:leach/features/profile/presentation/controller/get_traits/event.dart';
+import 'package:leach/features/profile/presentation/controller/get_traits/state.dart';
 
-import 'event.dart';
-import 'state.dart';
 
 class GetTraitsBloc extends Bloc<GetTraitEventBase, GetTraitsState> {
   final GetTraitsUseCase getTraitUseCase;

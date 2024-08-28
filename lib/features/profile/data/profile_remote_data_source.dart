@@ -12,6 +12,7 @@ import 'package:leach/features/profile/domain/model/pending_friend_requests_mode
 import 'package:leach/features/profile/domain/model/traits_model.dart';
 import 'package:leach/features/profile/domain/model/user_data_model.dart';
 import 'package:leach/features/profile/domain/use_case/CREATE_PET_USE_CASE.dart';
+import 'package:leach/features/profile/domain/use_case/report_user_uc.dart';
 import 'package:leach/features/profile/domain/use_case/update_my_data_use_case.dart';
 import 'package:leach/features/profile/presentation/profile/componant/add_photo_for_pet.dart';
 
@@ -46,6 +47,8 @@ abstract class ProfileBaseRemotelyDataSource {
   Future<UserDataModel> getUser({required String id});
 
   Future<String> removeFriend({required String id});
+
+  Future<String> reportUser(ReportParameter reportParameter);
 
   Future<String> addPhotoForPet({
     required String petId,
@@ -393,6 +396,47 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
       return data["message"] ?? "Success";
     } on DioException catch (e) {
       throw DioHelper.handleDioError(dioError: e, endpointName: 'removeFriend');
+    }
+  }
+
+  @override
+  Future<String> reportUser(ReportParameter reportParameter) async {
+    Options options = await DioHelper().options();
+    log('${reportParameter.picture} beiughe ${reportParameter.type}');
+    late FormData formData;
+    if (reportParameter.picture == null &&
+        (reportParameter.description == null) &&
+        reportParameter.type != null) {
+      log('messagemessagemessage');
+      formData = FormData.fromMap({
+        "fixed_report": reportParameter.type,
+      });
+    }
+   else if (reportParameter.picture == null) {
+      formData = FormData.fromMap({
+        "specific_report": reportParameter.description,
+      });
+    } else {
+      formData = FormData.fromMap({
+        "specific_report": reportParameter.description,
+        "picture": await MultipartFile.fromFile(
+          reportParameter.picture!.path,
+          filename: reportParameter.picture!.path.split('/').last,
+          contentType: MediaType("image", "jpeg"),
+        )
+      });
+    }
+    try {
+      final response = await Dio().post(
+        ConstantApi.reportUser(id: reportParameter.id),
+        options: options,
+        data: formData,
+      );
+      Map<String, dynamic> data = response.data;
+
+      return data["message"] ?? "Success";
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(dioError: e, endpointName: 'reportUser');
     }
   }
 

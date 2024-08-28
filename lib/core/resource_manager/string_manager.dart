@@ -33,14 +33,14 @@ class StringManager {
   static const String confirmPassword = "Confirm password";
   static const String country = "Country";
   static const String city = "City";
-  static const String area  = "Area";
+  static const String area = "Area";
   static const String selectYourCountry = "Select your country";
   static const String selectYourCity = "Select your city";
   static const String resetPassword = "Reset Password";
   static const String enterYourInformation = "Enter Your Information";
   static const String orLoginWith = "OR login with";
   static const String addPet = "Add Pet";
-  static const String addPhoto  = "Add Photo";
+  static const String addPhoto = "Add Photo";
   static const String findPetForAdoption = "Find Pet for Adoption";
   static const String code = "Code";
   static const String enterVerificationCode = "Enter verification code";
@@ -76,13 +76,14 @@ class StringManager {
   static List<String> sizeList = [small, medium, large, chunky];
   static List<String> sizeListDog = [small, medium, large, giant];
   static const String breedingExperience = "Breeding experience";
-  static const String neuteredSpayed  = "Neutered/Spayed ";
+  static const String neuteredSpayed = "Neutered/Spayed ";
   static const String yes = "Yes";
   static const String no = "No";
 
   static const String addAPicture = "Add a picture";
   static const String addPictureOfMedicalPassport =
-      "Add a picture of medical passport";  static const String editPictureOfMedicalPassport  =
+      "Add a picture of medical passport";
+  static const String editPictureOfMedicalPassport =
       "Edit picture of medical passport";
   static const String next = "Next";
   static const String dogBreed = "Dog Breed";
@@ -189,13 +190,14 @@ class StringManager {
   static const String choosePaymentOption = "Choose Payment Option";
   static const String debitCreditCard = "Debit / Credit Card";
   static const String cash = "Cash ";
-  static const String searchName  = "Search Name ";
-  static const String   areYouSure = "Are you sure you want to delete your account?";
-  static const String   newPost  = "New Post";
-  static const String   writeCaption   = "Write a Caption";
-  static const String   addMorePhotos    = "Add more photos ";
-  static const String   difficultyLevel     = "Difficulty Level";
-  static const String   tips      = "Tips";
+  static const String searchName = "Search Name ";
+  static const String areYouSure =
+      "Are you sure you want to delete your account?";
+  static const String newPost = "New Post";
+  static const String writeCaption = "Write a Caption";
+  static const String addMorePhotos = "Add more photos ";
+  static const String difficultyLevel = "Difficulty Level";
+  static const String tips = "Tips";
   static const String oldPassword = "Old Password";
   static const String reportUser = "Report user";
   static const String blockUser = "Block user";
@@ -203,28 +205,30 @@ class StringManager {
   static const String specificMessages = "Specific messages from user";
   static const String other = "Other";
   static const String block = "Block";
-
-  static const String nudityOrSexualActivity = "Nudity or sexual activity";
-  static const String hateSpeechOrSymbols = "Hate Speech or symbols";
-
-  static const String scamOrFraud = "Scam or fraud";
+  static const String nudityOrSexualActivity = "Nudity or Sexual Activity";
+  static const String hateSpeechOrSymbols = "Hate Speech or Symbols";
+  static const String scamOrFraud = "Scam or Fraud";
   static const String spam = "Spam";
+  static const String impersonation = "Impersonation";
+  static const String hackedAccount = "Hacked Account";
 
-  static const String bullyingOrHarassment = "Bullying or harassment";
+  static const String bullyingOrHarassment = "Bullying or Harassment";
 
   static const String cancel = "Cancel";
-  static const String areYouSureYouWantToBlockThisUser = "Are you sure you want to block this user?";
+  static const String areYouSureYouWantToBlockThisUser =
+      "Are you sure you want to block this user?";
   static const String selectaProblemToReport = "Select a problem to report";
-  static const String submitYourReport = "Submit your report to make our leash family feel safe";
+  static const String submitYourReport =
+      "Submit your report to make our leash family feel safe";
   static const String submitReport = "Submit Report";
   static const String reportSubmitted = "Report Submitted";
   static const String editPost = "Edit Post";
   static const String turnOffComments = "Turn off comments";
   static const String deletePost = "Delete Post";
-  static const String deletePhoto  = "Delete Photo";
+  static const String deletePhoto = "Delete Photo";
   static const String notifications = "Notifications";
   static const String friendRequests = "Friend Requests";
-  static const  List<String> citiesInEgypt = [
+  static const List<String> citiesInEgypt = [
     "Cairo",
     "Alexandria",
     "Giza",
@@ -262,10 +266,5 @@ class StringManager {
   static const String caption = "Caption";
   static const String deleteComment = "Delete Comment";
   static const String bookingHistory = "Booking History";
-
-  
-
-
-
-
+  static const String description  = "description";
 }
