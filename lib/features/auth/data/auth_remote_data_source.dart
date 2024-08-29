@@ -37,21 +37,24 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
   @override
   Future<UserModel> loginWithEmailAndPassword(AuthModel authModel) async {
     final Options options = await DioHelper().options();
-
+    final FormData body = FormData.fromMap({
+      'identifier': authModel.phoneOrEmail,
+      'password': authModel.password,
+    });
     try {
       final response = await Dio().post(
         ConstantApi.login,
-        data: {
-          'identifier': authModel.phoneOrEmail,
-          'password': authModel.password,
-        },
+        data: body,
         options: options,
       );
       UserModel jsonData = UserModel.fromMap(response.data['data']['user']);
-
-      await Methods.instance.saveUserToken(authToken: response.data['data']['token']);
+log('thththththth ${response.data['data']['token']}');
+      await Methods.instance
+          .saveUserToken(authToken: response.data['data']['token']);
       return jsonData;
     } on DioException catch (e) {
+      log('${authModel.phoneOrEmail} sdnhejte ${authModel.password}');
+
       throw DioHelper.handleDioError(
           dioError: e, endpointName: "loginWithEmailAndPassword");
     }
@@ -76,7 +79,6 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
         data: body,
         options: options,
       );
-      log('messagemessagemessage');
 
       UserModel jsonData = UserModel.fromMap(response.data['data']['user']);
 
@@ -105,7 +107,7 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
 
     try {
       final response = await Dio().post(
-         ConstantApi.changePassword,
+        ConstantApi.changePassword,
         data: body,
         options: options,
       );
@@ -174,7 +176,7 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
         options: options,
       );
 
-      Map<String, dynamic>  jsonData = response.data;
+      Map<String, dynamic> jsonData = response.data;
 
       return jsonData['message'];
     } on DioException catch (e) {
@@ -188,7 +190,8 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
     var _googleSignIn = GoogleSignIn(scopes: ['email']);
     if (Platform.isIOS || Platform.isMacOS) {
       _googleSignIn = GoogleSignIn(
-        clientId: "425921046469-ilf95skuemvoq9jd3dif4l1ttdjtq31h.apps.googleusercontent.com",
+        clientId:
+            "425921046469-ilf95skuemvoq9jd3dif4l1ttdjtq31h.apps.googleusercontent.com",
         scopes: [
           'email',
         ],
@@ -198,7 +201,7 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
 
     final userModel = await login();
 
-    Map<String, String> headers = await DioHelper().header( );
+    Map<String, String> headers = await DioHelper().header();
 
     if (userModel == null) {
       throw SiginGoogleException();
@@ -265,15 +268,10 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
 
       UserModel userData = UserModel.fromMap(resultData['data']);
 
-
       return AuthWithAppleModel(apiUserData: userData, userData: credential);
     } on DioError catch (e) {
       throw DioHelper.handleDioError(
           dioError: e, endpointName: 'sigInWithApple');
     }
   }
-
-
 }
-
-

@@ -30,11 +30,9 @@ class DioHelper {
     }
     Map<String, String> headers = {
       "Authorization": 'Bearer $token',
-      'accept': 'application/json',
+      'accept': '*/*',
       'content-type': 'application/json; charset=utf-8',
-      'date': 'Sun,18 Feb 2024 17:04:08 GMT',
-      'server': 'Microsoft-IIS/10.0',
-      'x-powered-by': 'ASP.NET',
+       'server': 'Microsoft-IIS/10.0',
     };
     return headers;
   }

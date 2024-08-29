@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +44,6 @@ import 'package:leach/features/profile/presentation/add_pet/dog_bread.dart';
 import 'package:leach/features/profile/presentation/add_pet/dog_breed3.dart';
 import 'package:leach/features/profile/presentation/add_pet/type_of_pet.dart';
 import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_bloc.dart';
-import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_event.dart';
 import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_state.dart';
 import 'package:leach/features/profile/presentation/friends/friends_screen.dart';
 import 'package:leach/features/profile/presentation/friends/friends_view.dart';
@@ -62,7 +60,6 @@ import 'package:leach/features/profile/presentation/profile/componant/add_photo_
 import 'package:leach/features/profile/presentation/profile/componant/add_post.dart';
 import 'package:leach/features/profile/presentation/profile/my_pet_profile.dart';
 import 'package:leach/features/profile/presentation/profile/pet_details.dart';
-import 'package:leach/features/profile/presentation/profile/widgets/posts_container.dart';
 import 'package:leach/features/profile/presentation/side%20bar/componant/account_privacy.dart';
 import 'package:leach/features/profile/presentation/side%20bar/componant/activity_and_history.dart';
 import 'package:leach/features/profile/presentation/side%20bar/componant/booking_history.dart';
@@ -147,12 +144,10 @@ class RouteGenerator {
                 const LoginScreen(),
             transitionsBuilder: customAnimate);
       case Routes.main:
-        int? selectedIndex = settings.arguments as int?;
+         int? selectedIndex = settings.arguments as int?;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                BlocProvider.of<GetMyDataBloc>(context).add(GetMyDataEvent());
-              });
+
               return BlocBuilder<GetMyDataBloc, GetMyDataState>(
                 builder: (context, state) {
                   if (state is GetMyDataLoadingState) {

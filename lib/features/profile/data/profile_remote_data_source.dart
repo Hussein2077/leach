@@ -118,10 +118,13 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
   @override
   Future<PetProfileModel> updatePet(UpdatePetRequest updatePetRequest) async {
     FormData? formData;
-    final Options options = await DioHelper().options();
-    log(' updatePetRequest.traits ${updatePetRequest.uuid}');
 
-    final Map<String, dynamic> formMap = {
+    final Options options = await DioHelper().options();
+    log('updatePetRequest.uuid ${updatePetRequest.uuid}');
+    log('updatePetRequest.uuid ${updatePetRequest.uuid}');
+    log('updatePetRequest.uuid ${updatePetRequest.username}');
+
+    formData = FormData.fromMap({
       'username': updatePetRequest.username,
       'name': updatePetRequest.name,
       'weight': updatePetRequest.weight,
@@ -131,24 +134,34 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
       'breeding_available': updatePetRequest.breedingAvailable! ? 1 : 0,
       'traits[]': updatePetRequest.traits,
       'subtraits[]': updatePetRequest.subtraits,
-    };
+    });
+
 
     if (updatePetRequest.profilePicture != null) {
-      formMap['profile_picture'] = await MultipartFile.fromFile(
-        updatePetRequest.profilePicture!.path,
-        filename: updatePetRequest.profilePicture!.path.split('/').last,
-        contentType: MediaType("image", "jpeg"),
-      );
+
+
+      formData.files.add(MapEntry(
+        'profile_picture',
+        await MultipartFile.fromFile(
+          updatePetRequest.profilePicture!.path,
+          filename: updatePetRequest.profilePicture!.path.split('/').last,
+          contentType: MediaType("image", "jpeg"),
+        ),
+      ));
     }
 
     if (updatePetRequest.medicalPassport != null) {
-      formMap['medical_passport'] = await MultipartFile.fromFile(
-        updatePetRequest.medicalPassport!.path,
-        filename: updatePetRequest.medicalPassport!.path.split('/').last,
-        contentType: MediaType("image", "jpeg"),
-      );
+
+      formData.files.add(MapEntry(
+        'medical_passport',
+        await MultipartFile.fromFile(
+          updatePetRequest.medicalPassport!.path,
+          filename: updatePetRequest.medicalPassport!.path.split('/').last,
+          contentType: MediaType("image", "jpeg"),
+        ),
+      ));
     }
-    log('$formMap erherheh');
+    log('$formData erherheh');
     try {
       final response = await Dio().post(
         ConstantApi.updatePet(updatePetRequest.uuid),
@@ -286,8 +299,10 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
     Options options = await DioHelper().options();
     try {
       final response = await Dio().get(ConstantApi.getMyData, options: options);
+      UserModel userModel = UserModel.fromMap(response.data['data']);
+      log('${ userModel.pets!.first.pictures.length}UserModel.fromMap(response.data');
 
-      return UserModel.fromMap(response.data['data']);
+      return    userModel;
     } on DioException catch (e) {
       throw DioHelper.handleDioError(dioError: e, endpointName: 'getMyData');
     }
@@ -407,7 +422,6 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
     if (reportParameter.picture == null &&
         (reportParameter.description == null) &&
         reportParameter.type != null) {
-      log('messagemessagemessage');
       formData = FormData.fromMap({
         "fixed_report": reportParameter.type,
       });

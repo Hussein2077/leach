@@ -109,7 +109,7 @@ class UserModel {
         accountStatus: map['account_status']?? '',
         privateAccount: map['private_account']==0 ? false: true,
         pets: map['pets'] == null ? [] :  (map['pets'] as List).map((e) => Pet.fromJson(e)).toList(),
-        friends:  Friends.fromJson(map['friends']),
+        friends: map['friends']==null ? null : Friends.fromJson(map['friends']),
       );
     }
     return _instance!;

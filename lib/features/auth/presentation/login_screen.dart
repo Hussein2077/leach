@@ -27,8 +27,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   late TextEditingController passwordController;
-  late TextEditingController phoneOrEmailController ;
-
+  late TextEditingController phoneOrEmailController;
 
   @override
   void initState() {
@@ -49,7 +48,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginWithEmailAndPasswordBloc, LoginWithEmailAndPasswordState>(
+    return BlocListener<LoginWithEmailAndPasswordBloc,
+        LoginWithEmailAndPasswordState>(
       listener: (context, state) {
         if (state is LoginWithEmailAndPasswordSuccessMessageState) {
           LoadingOverlay().hide();
@@ -90,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ColumnWithTextField(
                   text: StringManager.emailOrPhoneNumber.tr(),
                   hintText: StringManager.enterEmailOrPhoneNumber.tr(),
-                  controller:   phoneOrEmailController,
+                  controller: phoneOrEmailController,
                 ),
                 StatefulBuilder(builder: (context, setState) {
                   return ColumnWithTextField(
@@ -133,17 +133,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: MainButton(
                     text: StringManager.login.tr(),
                     onTap: () {
-                      if  (passwordController.text.isEmpty || phoneOrEmailController.text.isEmpty) {
-                        errorSnackBar(context, StringManager.enterEmailOrPhoneNumber.tr());
-                      }
-                      else if (passwordController.text.length < 6) {
-                        errorSnackBar(context, 'Password must be at least 6 characters long');
-                      }
-                      else {
-                        BlocProvider.of<LoginWithEmailAndPasswordBloc>(context).add(LoginWithEmailAndPasswordEvent(
-                        phoneOrEmail: phoneOrEmailController.text,
-                        password: passwordController.text,
-                      ));
+                      if (passwordController.text.isEmpty ||
+                          phoneOrEmailController.text.isEmpty) {
+                        errorSnackBar(context,
+                            StringManager.enterEmailOrPhoneNumber.tr());
+                      } else if (passwordController.text.length < 6) {
+                        errorSnackBar(context,
+                            'Password must be at least 6 characters long');
+                      } else {
+                        BlocProvider.of<LoginWithEmailAndPasswordBloc>(context)
+                            .add(LoginWithEmailAndPasswordEvent(
+                          phoneOrEmail: phoneOrEmailController.text,
+                          password: passwordController.text,
+                        ));
                       }
                     },
                     textColor: Colors.white,

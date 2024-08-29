@@ -30,6 +30,7 @@ import 'package:leach/features/profile/presentation/controller/dogBreadBloc/bloc
 import 'package:leach/features/profile/presentation/controller/friends_manager/friends_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/get_user_manager/get_user_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_bloc.dart';
+import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_event.dart';
 import 'package:leach/features/profile/presentation/controller/pending_friend_request_manager/pending_friend_request_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/get_traits/bloc.dart';
 import 'package:leach/features/profile/presentation/controller/report_user/bloc.dart';
@@ -112,7 +113,7 @@ class _MyAppState extends State<MyApp> {
           create: (context) => getIt<GetFriendsBloc>(),
         ),
         BlocProvider(
-          create: (context) => getIt<GetMyDataBloc>(),
+          create: (context) => getIt<GetMyDataBloc>()..add(GetMyDataEvent()),
         ),
         BlocProvider(
           create: (context) => getIt<GetTraitsBloc>(),

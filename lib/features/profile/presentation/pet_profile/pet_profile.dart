@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +15,7 @@ import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/icon_with_matrial.dart';
 import 'package:leach/core/widgets/loading_widget.dart';
 import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_bloc.dart';
+import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_event.dart';
 import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_state.dart';
 import 'package:leach/features/profile/presentation/profile/widgets/posts_container.dart';
 import 'package:leach/features/profile/presentation/widget/medals_abd_freinds.dart';
@@ -33,22 +36,21 @@ class _PetProfileState extends State<PetProfile> {
   UserModel? userModel;
 
   @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<GetMyDataBloc, GetMyDataState>(
-      builder: (context, state) {
-        if (state is GetMyDataLoadingState) {
-          return _buildLoadingOrProfile();
-        } else if (state is GetMyDataSuccessState) {
-          PetProfile.currentPet ??= state.userModel.pets![0];
-          userModel = state.userModel;
-          return petProfile(userModel!);
-        } else if (state is GetMyDataErrorState) {
-          return ErrorWidget(state.errorMessage);
-        } else {
-          return const SizedBox();
-        }
-      },
+  void initState() {
+    final pets = UserModel.getInstance().pets;
+    PetProfile.currentPet ??= pets![0];
+
+    PetProfile.currentPet = pets!.firstWhere(
+          (pet) => pet.uuid == PetProfile.currentPet?.uuid,
+      orElse: () => pets[0], // Fall back to the first pet if no match is found
     );
+    userModel = UserModel.getInstance();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return petProfile(userModel!);
   }
 
   Widget _buildLoadingOrProfile() {
@@ -236,9 +238,7 @@ class _PetProfileState extends State<PetProfile> {
     return SizedBox(
       width: AppSize.screenWidth! * .7,
       child: CustomText(
-        text: PetProfile.currentPet!.traits
-            .map((e) => e.name)
-            .join(', '),
+        text: PetProfile.currentPet!.traits.map((e) => e.name).join(', '),
         fontSize: AppSize.defaultSize! * 1.5,
         color: Colors.white,
         maxLines: 6,
@@ -256,14 +256,17 @@ class _PetProfileState extends State<PetProfile> {
             context,
             Routes.petPhotoView,
             arguments: CommonType(
-              pictures: PetProfile.currentPet!.pictures.map((e) => e.picture).toList(),
+              pictures: PetProfile.currentPet!.pictures
+                  .map((e) => e.picture)
+                  .toList(),
               petId: PetProfile.currentPet!.id,
               ids: PetProfile.currentPet!.pictures.map((e) => e.uuid).toList(),
             ),
           );
         },
         commonType: CommonType(
-          pictures: PetProfile.currentPet!.pictures.map((e) => e.picture).toList(),
+          pictures:
+              PetProfile.currentPet!.pictures.map((e) => e.picture).toList(),
           petId: PetProfile.currentPet!.id,
         ),
       ),

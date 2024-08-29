@@ -5,6 +5,7 @@ import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
+import 'package:leach/core/utils/methods.dart';
 import 'package:leach/core/widgets/background.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/main_button.dart';
@@ -68,6 +69,7 @@ class Page1 extends StatelessWidget {
                   MainButton(
                     text: 'Skip',
                     onTap: () {
+                      // Methods.instance.saveFirstOpen(false);
                       Navigator.pushNamed(context, Routes.welcomePage);
                     },
                     color: Colors.white,

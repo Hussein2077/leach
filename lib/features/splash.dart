@@ -1,10 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/utils/methods.dart';
 import 'package:leach/core/widgets/background.dart';
 import 'package:leach/core/widgets/loading_widget.dart';
+import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_bloc.dart';
+import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_event.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -28,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(const Duration(seconds: 3));
     bool firstOpen = await Methods.instance.returnFirstOpen();
     token = await Methods.instance.returnUserToken();
-
+    log('$token mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm');
     _navigateBasedOnToken(firstOpen);
   }
 
