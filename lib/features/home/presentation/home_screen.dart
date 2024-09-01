@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.pushNamed(context, Routes.notification);
                           },
                           icon: Icon(
-                            Icons.notifications,
+                            Icons.search_outlined,
                             size: AppSize.defaultSize! * 3.5,
                             color: Colors.white,
                           )),

@@ -91,6 +91,18 @@ class _DoctorCard2State extends State<DoctorCard2> {
                           ),
                         ],
                       ),
+                      const Spacer(),
+                      IconButton(
+                        onPressed: () {
+                          Methods.instance.showAlertDialog(context,
+                              title: 'Are you sure to cancel this booking ? ',
+                              onPressed: () {
+                            BlocProvider.of<BookingBloc>(context).add(
+                                CancelBookingEvent(bookingId: widget.data.id));
+                          });
+                        },
+                        icon: const Icon(Icons.free_cancellation,color: AppColors.primaryColor,),
+                      ),
                     ],
                   ),
                 ),
@@ -129,27 +141,8 @@ class _DoctorCard2State extends State<DoctorCard2> {
                           '${StringManager.phone}:${widget.data.vendor.phoneNumber}',
                       image: AssetPath.phone,
                     ),
-                    SizedBox(height: AppSize.defaultSize! * 7),
-                    Center(
-                      child: MainButton(
-                        text: StringManager.cancel.tr(),
-                        fontSize: AppSize.defaultSize! * 2.5,
-                        onTap: () {
-                          //show alert dialog
-
-                          Methods.instance.showAlertDialog(context,
-                              title: 'Are you sure to cancel this booking ? ',
-                              onPressed: () {
-                            BlocProvider.of<BookingBloc>(context).add(
-                                CancelBookingEvent(bookingId: widget.data.id));
-                          });
-                        },
-                        color: Colors.white,
-                        textColor: Colors.red.withOpacity(.9),
-                      ),
-                    ),
                     SizedBox(
-                      height: AppSize.defaultSize! * 1.4,
+                      height: AppSize.defaultSize! * 3,
                     ),
                   ],
                 ),

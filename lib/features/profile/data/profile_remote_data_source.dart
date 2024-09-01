@@ -305,8 +305,6 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
     try {
       final response = await Dio().get(ConstantApi.getMyData, options: options);
       UserModel userModel = UserModel.fromMap(response.data['data']);
-      log('${ userModel.pets!.first.pictures.length}UserModel.fromMap(response.data');
-
       return    userModel;
     } on DioException catch (e) {
       throw DioHelper.handleDioError(dioError: e, endpointName: 'getMyData');
