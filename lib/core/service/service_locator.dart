@@ -19,12 +19,14 @@ import 'package:leach/features/home/data/data_source/home_remote_data_source.dar
 import 'package:leach/features/home/data/repo_imp/repo_imp.dart';
 import 'package:leach/features/home/domain/repo/base_repo.dart';
 import 'package:leach/features/home/domain/use_case/get_breeding_uc.dart';
+import 'package:leach/features/home/domain/use_case/get_search_user_uc.dart';
 import 'package:leach/features/home/domain/use_case/get_vendors_use_case.dart';
 import 'package:leach/features/home/domain/use_case/how_to_uc.dart';
 import 'package:leach/features/home/domain/use_case/request_booking_uc.dart';
 import 'package:leach/features/home/presentation/manager/get_breeding_manager/get_breeding_bloc.dart';
 import 'package:leach/features/home/presentation/manager/get_vendor/bloc.dart';
 import 'package:leach/features/home/presentation/manager/how_to/bloc.dart';
+import 'package:leach/features/home/presentation/manager/search_bloc/bloc.dart';
 import 'package:leach/features/main_screen_bloc.dart';
 import 'package:leach/features/posts/data/data_source/posts_remote_data_source.dart';
 import 'package:leach/features/posts/data/repo_imp/repo_imp.dart';
@@ -126,6 +128,7 @@ class ServerLocator {
         sendCodeUseCase: getIt()));
     getIt.registerLazySingleton(() => GetUserBloc(getUserUseCase: getIt()));
     getIt.registerLazySingleton(() => ReportUserBloc(reportUserUseCase: getIt()));
+    getIt.registerLazySingleton(() => GetSearchUserBloc(getSearchUserUseCase: getIt()));
     getIt.registerLazySingleton(() => SignInWithPlatformBloc(signInWithAppleUC: getIt(), signInWithGoogleUC: getIt()));
 
     //use_case
@@ -193,6 +196,7 @@ class ServerLocator {
     getIt.registerFactory(() => AddPhotoForPetUseCase(profileBaseRepository: getIt()));
     getIt.registerFactory(() => GetCommentsUseCase(postsBaseRepository: getIt()));
     getIt.registerFactory(() => ReportUserUseCase(profileBaseRepository: getIt()));
+    getIt.registerFactory(() => GetSearchUserUseCase(baseRepository: getIt()));
 
     //remote data
     getIt.registerLazySingleton<BaseRemotelyDataSource>(

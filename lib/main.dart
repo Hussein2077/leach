@@ -16,6 +16,7 @@ import 'package:leach/features/auth/presentation/controller/sign_up_bloc/sign_up
 import 'package:leach/features/home/presentation/manager/get_breeding_manager/get_breeding_bloc.dart';
 import 'package:leach/features/home/presentation/manager/get_vendor/bloc.dart';
 import 'package:leach/features/home/presentation/manager/how_to/bloc.dart';
+import 'package:leach/features/home/presentation/manager/search_bloc/bloc.dart';
 import 'package:leach/features/main_screen_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/comment_manager/comment_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/delete_comment_manager/delete_comment_bloc.dart';
@@ -143,6 +144,8 @@ class _MyAppState extends State<MyApp> {
           create: (context) => getIt<SignInWithPlatformBloc>(),
         ),  BlocProvider(
           create: (context) => getIt<ReportUserBloc>(),
+        ),BlocProvider(
+          create: (context) => getIt<GetSearchUserBloc>(),
         ),
       ],
       child: MaterialApp(

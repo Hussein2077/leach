@@ -22,7 +22,7 @@ abstract class HomeBaseRemotelyDataSource {
 
   Future<void> requestBooking(RequestBookingParam requestBooking);
 
-  Future<SearchUserResponse> getSearchUser({required String page});
+  Future<SearchUserResponse> getSearchUser({required String page,required String search});
 }
 
 class HomeRemotelyDateSource extends HomeBaseRemotelyDataSource {
@@ -115,20 +115,20 @@ class HomeRemotelyDateSource extends HomeBaseRemotelyDataSource {
   }
 
   @override
-  Future<SearchUserResponse> getSearchUser({required String page}) async {
+  Future<SearchUserResponse> getSearchUser({required String page,required String search}) async {
     Map<String, String> headers = await DioHelper().header();
 
     try {
       final response = await Dio().get(
-        ConstantApi.getFriends(page),
+        ConstantApi.getSearchUser(page,search),
         options: Options(
           headers: headers,
         ),
       );
-
+log('${response.data['data']} hushushsuhsuhsushushushsuhsu');
       return SearchUserResponse.fromJson(response.data['data']);
     } on DioException catch (e) {
-      throw DioHelper.handleDioError(dioError: e, endpointName: 'getFriends');
+      throw DioHelper.handleDioError(dioError: e, endpointName: 'getSearchUser');
     }
   }
 }
