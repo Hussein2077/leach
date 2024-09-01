@@ -167,10 +167,31 @@ class ProfileRepositoryImp extends ProfileBaseRepository {
       return right(DioHelper.buildFailure(e));
     }
   }
+
   @override
   Future<Either<String, Failure>> addPhotoForPet ({required String petId ,   File? image}) async {
     try {
       final result = await profileBaseRemotelyDataSource.addPhotoForPet(petId: petId, image: image);
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<String, Failure>> blockUser({required String id}) async {
+    try {
+      final result = await profileBaseRemotelyDataSource.blockUser(id: id);
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<String, Failure>> unBlockUser({required String id}) async {
+    try {
+      final result = await profileBaseRemotelyDataSource.unBlockUser(id: id);
       return Left(result);
     } on Exception catch (e) {
       return right(DioHelper.buildFailure(e));

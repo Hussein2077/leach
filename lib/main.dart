@@ -84,7 +84,7 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) =>
-              getIt<PostsBloc>()..add(const GetPostsEvent(page: '1')),
+              getIt<PostsBloc>(),
         ),
         BlocProvider(
           create: (context) =>

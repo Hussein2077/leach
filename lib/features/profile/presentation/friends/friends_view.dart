@@ -33,11 +33,9 @@ class FriendsView extends StatefulWidget {
   State<FriendsView> createState() => _FriendsViewState();
 }
 
-class _FriendsViewState extends State<FriendsView>
-    with TickerProviderStateMixin {
+class _FriendsViewState extends State<FriendsView> with TickerProviderStateMixin {
   late TabController tabController;
 
-  bool friendsView = false;
 
   @override
   void initState() {
@@ -46,7 +44,7 @@ class _FriendsViewState extends State<FriendsView>
     super.initState();
   }
 
-  void _showOptionsDialog(BuildContext context) {
+  void _showOptionsDialog({required BuildContext context, required bool isFriend}) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -97,10 +95,10 @@ class _FriendsViewState extends State<FriendsView>
                   indent: AppSize.defaultSize! * 2.2,
                   endIndent: AppSize.defaultSize! * 2.8,
                 ),
-                SizedBox(
+                if(isFriend)SizedBox(
                   height: AppSize.defaultSize! * 0.7,
                 ),
-                SideBarRow(
+                if(isFriend)SideBarRow(
                   text: StringManager.unfriendUser.tr(),
                   color: Colors.red,
                   onTap: () {
@@ -109,7 +107,7 @@ class _FriendsViewState extends State<FriendsView>
                     Navigator.of(context).pop();
                   },
                 ),
-                Divider(
+                if(isFriend)Divider(
                   color: Colors.black,
                   height: 5,
                   thickness: 0.6,
@@ -263,6 +261,8 @@ class _FriendsViewState extends State<FriendsView>
                     text: StringManager.block.tr(),
                     color: Colors.red,
                     onTap: () {
+                      BlocProvider.of<GetFriendRequestBloc>(context)
+                          .add(BlockUserEvent(id: widget.uuid));
                       Navigator.of(context).pop();
                     },
                   ),
@@ -301,21 +301,26 @@ class _FriendsViewState extends State<FriendsView>
     return BlocListener<GetFriendRequestBloc, GetFriendRequestState>(
       listener: (context, state) {
         if (state is RemoveFriendSuccessState) {
-          setState(() {
-            friendsView = true;
-          });
           successSnackBar(context, state.message);
-          BlocProvider.of<GetFriendsBloc>(context).add(
-              const GetFriendsEvent(page: "1"));
+          BlocProvider.of<GetFriendsBloc>(context).add(const GetFriendsEvent(page: "1"));
+          BlocProvider.of<GetUserBloc>(context).add(GetUserEvent(id: widget.uuid));
         }else if(state is RemoveFriendErrorState){
           errorSnackBar(context, state.errorMessage);
         }else if(state is SendFriendRequestsSuccessState){
-          setState(() {
-            friendsView = false;
-          });
           successSnackBar(context, state.message);
+          BlocProvider.of<GetUserBloc>(context).add(GetUserEvent(id: widget.uuid));
         }else if(state is SendFriendRequestsErrorState){
           errorSnackBar(context, state.errorMessage);
+        }else if(state is AcceptFriendRequestsSuccessState){
+          successSnackBar(context, state.message);
+          BlocProvider.of<GetFriendsBloc>(context).add(const GetFriendsEvent(page: "1"));
+          BlocProvider.of<GetUserBloc>(context).add(GetUserEvent(id: widget.uuid));
+        }else if(state is RejectFriendRequestsSuccessState){
+          successSnackBar(context, state.message);
+          BlocProvider.of<GetUserBloc>(context).add(GetUserEvent(id: widget.uuid));
+        }else if(state is BlockUserSuccessState){
+          successSnackBar(context, state.message);
+          BlocProvider.of<GetUserBloc>(context).add(GetUserEvent(id: widget.uuid));
         }
       },
       child: DefaultTabController(
@@ -344,7 +349,7 @@ class _FriendsViewState extends State<FriendsView>
                                   ),
                                   IconButton(
                                     onPressed: () {
-                                      _showOptionsDialog(context);
+                                      _showOptionsDialog(context: context, isFriend: state.userDataModel.data?.isFriend??false);
                                     },
                                     icon: Image.asset(AssetPath.menuFriend),
                                     color: Colors.white,
@@ -356,13 +361,13 @@ class _FriendsViewState extends State<FriendsView>
                               ),
                               ProfileUserRow(
                                 uuid: widget.uuid,
-                                friendsView: friendsView,
+                                friendsView: true,
                                 name: state.userDataModel.data?.name ?? "",
-                                userName:
-                                    state.userDataModel.data?.username ?? "",
-                                image:
-                                    state.userDataModel.data?.profilePicture ??
-                                        "",
+                                userName: state.userDataModel.data?.username ?? "",
+                                image: state.userDataModel.data?.profilePicture ?? "",
+                                isFriend: state.userDataModel.data?.isFriend??false,
+                                friendRequestSent: state.userDataModel.data?.friendRequestSent??false,
+                                friendRequestReceived: state.userDataModel.data?.friendRequestReceived??false,
                               ),
                               SizedBox(
                                 height: AppSize.defaultSize!,

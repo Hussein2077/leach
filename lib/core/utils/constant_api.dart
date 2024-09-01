@@ -76,6 +76,12 @@ class ConstantApi {
   static getComments({required String id}) {
     return "${baseUrl}post/viewComments/$id";
   }
+  static blockUser({required String id}) {
+    return "${baseUrl}user/block/$id";
+  }
+  static unBlockUser({required String id}) {
+    return "${baseUrl}user/unblock/$id";
+  }
 
 //////////////////////////////
   static const String sendCode = "${baseUrl}NewAu";

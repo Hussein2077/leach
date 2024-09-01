@@ -36,3 +36,13 @@ class SendFriendRequestEvent extends GetFriendRequestEventBase {
   final String id;
   const SendFriendRequestEvent({required this.id});
 }
+
+class BlockUserEvent extends GetFriendRequestEventBase {
+  final String id;
+  const BlockUserEvent({required this.id});
+}
+
+class UnBlockUserEvent extends GetFriendRequestEventBase {
+  final String id;
+  const UnBlockUserEvent({required this.id});
+}

@@ -50,6 +50,7 @@ import 'package:leach/features/profile/domain/base_repo/profie_base_repo.dart';
 import 'package:leach/features/profile/domain/use_case/CREATE_PET_USE_CASE.dart';
 import 'package:leach/features/profile/domain/use_case/accept_friend_request_uc.dart';
 import 'package:leach/features/profile/domain/use_case/add_photo_for_pet.dart';
+import 'package:leach/features/profile/domain/use_case/block_user_uc.dart';
 import 'package:leach/features/profile/domain/use_case/change_privacy_use_case.dart';
 import 'package:leach/features/profile/domain/use_case/get_all_booking_uc.dart';
 import 'package:leach/features/profile/domain/use_case/get_friends_uc.dart';
@@ -60,6 +61,7 @@ import 'package:leach/features/profile/domain/use_case/reject_friend_request_uc.
 import 'package:leach/features/profile/domain/use_case/get_traits_use_case.dart';
 import 'package:leach/features/profile/domain/use_case/remove_friend_uc.dart';
 import 'package:leach/features/profile/domain/use_case/sned_friend_request_uc.dart';
+import 'package:leach/features/profile/domain/use_case/un_block_user_uc.dart';
 import 'package:leach/features/profile/domain/use_case/update_my_data_use_case.dart';
 import 'package:leach/features/profile/presentation/controller/booking/bloc.dart';
 import 'package:leach/features/profile/presentation/controller/create_pet_bloc/create_pet_bloc.dart';
@@ -97,7 +99,7 @@ class ServerLocator {
     getIt.registerLazySingleton(() => GetFriendRequestBloc(
         getFriendRequestUseCase: getIt(),
         acceptFriendRequestsUseCase: getIt(),
-        rejectFriendRequestsUseCase: getIt(), removeFriendUseCase: getIt(), sendFriendRequestsUseCase: getIt(),));
+        rejectFriendRequestsUseCase: getIt(), removeFriendUseCase: getIt(), sendFriendRequestsUseCase: getIt(), blockUserUseCase: getIt(), unBlockUserUseCase: getIt(),));
     getIt.registerLazySingleton(
         () => GetFriendsBloc(getFriendsUseCase: getIt()));
     getIt.registerLazySingleton(() => GetMyDataBloc(
@@ -125,6 +127,8 @@ class ServerLocator {
 
     //use_case
     getIt.registerFactory(() => SignInWithAppleUC(baseRepository: getIt()));
+    getIt.registerFactory(() => BlockUserUseCase(profileBaseRepository: getIt()));
+    getIt.registerFactory(() => UnBlockUserUseCase(profileBaseRepository: getIt()));
     getIt.registerFactory(() => SignInWithGoogleUC(baseRepository: getIt()));
     getIt.registerFactory(() => GetUserUseCase(profileBaseRepository: getIt()));
     getIt.registerFactory(() => ChangePasswordUseCase(baseRepository: getIt()));

@@ -32,5 +32,8 @@ abstract class ProfileBaseRepository {
   Future<Either<UserDataModel, Failure>> getUser({required String id});
   Future<Either<String, Failure>> removeFriend({required String id});
   Future<Either<String, Failure>> addPhotoForPet({required String petId ,   File? image});
+  Future<Either<String, Failure>> blockUser({required String id});
+  Future<Either<String, Failure>> unBlockUser({required String id});
+
 }
 
