@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
+import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/background.dart';
 import 'package:leach/core/widgets/cached_network_image.dart';
+import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/leading_icon.dart';
 
 class FriendPostPet extends StatefulWidget {
   final List<String> images;
-  const FriendPostPet({super.key, required this.images});
+  final List<String>? body;
+  const FriendPostPet({super.key, required this.images, this.body});
 
   @override
   State<FriendPostPet> createState() => _FriendPostPetState();
@@ -60,11 +63,25 @@ class _FriendPostPetState extends State<FriendPostPet> {
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: EdgeInsets.symmetric(vertical: AppSize.defaultSize! * 1),
-                          child: CachedNetworkCustom(
-                            url: widget.images[index],
-                            width: AppSize.screenWidth!,
-                            height: AppSize.defaultSize! * 20,
-                            shape: BoxShape.rectangle,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if(widget.body!.isNotEmpty) Padding(
+                                padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 2),
+                                child: CustomText(
+                                  text: widget.body?[index]??"",
+                                  fontSize: AppSize.defaultSize! * 2,
+                                  color: AppColors.primaryColor,
+                                ),
+                              ),
+
+                              CachedNetworkCustom(
+                                url: widget.images[index],
+                                width: AppSize.screenWidth!,
+                                height: AppSize.defaultSize! * 20,
+                                shape: BoxShape.rectangle,
+                              ),
+                            ],
                           ),
                         );
                       },

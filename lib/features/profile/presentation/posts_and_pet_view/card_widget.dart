@@ -9,6 +9,7 @@ import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cached_network_image.dart';
+import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/icon_with_matrial.dart';
 import 'package:leach/features/posts/data/models/posts_model.dart';
 import 'package:leach/features/posts/presentation/manager/user_posts_manager/user_posts_bloc.dart';
@@ -243,6 +244,7 @@ class _CardWidgetState extends State<CardWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -276,6 +278,15 @@ class _CardWidgetState extends State<CardWidget> {
               ),
             ),
           ],
+        ),
+
+        if(widget.data.caption !=null) Padding(
+          padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 2),
+          child: CustomText(
+            text: widget.data.caption??"",
+            fontSize: AppSize.defaultSize! * 2,
+            color: AppColors.primaryColor,
+          ),
         ),
 
         CachedNetworkCustom(
