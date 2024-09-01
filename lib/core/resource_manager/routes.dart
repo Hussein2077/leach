@@ -474,11 +474,12 @@ class RouteGenerator {
                 ),
             transitionsBuilder: customAnimate);
         case Routes.friendPostPet:
-        List<String> images = settings.arguments as List<String>;
+        PostPetsParamRoute data = settings.arguments as PostPetsParamRoute;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 FriendPostPet(
-                  images: images,
+                  images: data.images,
+                  body: data.body,
                 ),
             transitionsBuilder: customAnimate);
       case Routes.search:
@@ -542,6 +543,14 @@ class SelectionPetTypeParamRoute {
 
   SelectionPetTypeParamRoute(
       {required this.petProfileModel, required this.petType});
+}
+
+class PostPetsParamRoute {
+  final List<String> images;
+
+  final List<String> body;
+
+  PostPetsParamRoute({required this.images, required this.body});
 }
 
 class CommonType extends Equatable {
