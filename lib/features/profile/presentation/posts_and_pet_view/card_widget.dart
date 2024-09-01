@@ -13,6 +13,7 @@ import 'package:leach/core/widgets/icon_with_matrial.dart';
 import 'package:leach/features/posts/data/models/posts_model.dart';
 import 'package:leach/features/posts/presentation/manager/user_posts_manager/user_posts_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/user_posts_manager/user_posts_event.dart';
+import 'package:leach/features/posts/presentation/widgets/comment_view.dart';
 import 'package:leach/features/profile/presentation/side%20bar/side_bar_row.dart';
 
 class CardWidget extends StatefulWidget {
@@ -311,7 +312,16 @@ class _CardWidgetState extends State<CardWidget> {
               width: AppSize.defaultSize!,
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  backgroundColor: Colors.white,
+                  isScrollControlled: true,
+                  builder: (BuildContext context) {
+                    return CommentView(postId: widget.data.uuid!.toString());
+                  },
+                );
+              },
               borderRadius: BorderRadius.circular(
                   AppSize.defaultSize! * 1.5),
               child: IconWithMaterial(

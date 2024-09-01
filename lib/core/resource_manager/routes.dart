@@ -45,6 +45,7 @@ import 'package:leach/features/profile/presentation/add_pet/dog_breed3.dart';
 import 'package:leach/features/profile/presentation/add_pet/type_of_pet.dart';
 import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_state.dart';
+import 'package:leach/features/profile/presentation/friends/friend_post_pet_view.dart';
 import 'package:leach/features/profile/presentation/friends/friends_screen.dart';
 import 'package:leach/features/profile/presentation/friends/friends_view.dart';
 import 'package:leach/features/profile/presentation/friends/other_report.dart';
@@ -124,6 +125,7 @@ class Routes {
   static const String bookingHistory = "/booking_history";
   static const String petPhotoView = "/pet_photo_view";
   static const String otherReport = "/other_report";
+  static const String friendPostPet = "/friend_post_pet_view";
 
 }
 
@@ -466,6 +468,14 @@ class RouteGenerator {
             pageBuilder: (context, animation, secondaryAnimation) =>
                 OtherReportScreen(
                   userId: userId,
+                ),
+            transitionsBuilder: customAnimate);
+        case Routes.friendPostPet:
+        List<String> images = settings.arguments as List<String>;
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                FriendPostPet(
+                  images: images,
                 ),
             transitionsBuilder: customAnimate);
     }

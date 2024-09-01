@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leach/core/models/profile_data_model.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
@@ -11,6 +12,7 @@ import 'package:leach/core/widgets/icon_with_matrial.dart';
 import 'package:leach/core/widgets/leading_icon.dart';
 import 'package:leach/core/widgets/loading_widget.dart';
 import 'package:leach/core/widgets/snack_bar.dart';
+import 'package:leach/features/profile/domain/model/user_data_model.dart';
 import 'package:leach/features/profile/presentation/controller/friends_manager/friends_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/friends_manager/friends_event.dart';
 import 'package:leach/features/profile/presentation/controller/get_user_manager/get_user_bloc.dart';
@@ -348,7 +350,7 @@ class _FriendsViewState extends State<FriendsView> with TickerProviderStateMixin
                                   const LeadingIcon(
                                     color: Colors.white,
                                   ),
-                                  IconButton(
+                                  if(UserModel.getInstance().uuid != widget.uuid)IconButton(
                                     onPressed: () {
                                       _showOptionsDialog(context: context, isFriend: state.userDataModel.data?.isFriend??false);
                                     },
@@ -434,6 +436,9 @@ class _FriendsViewState extends State<FriendsView> with TickerProviderStateMixin
                                   PostsContainer(
                                     addIcon: false,
                                     pets: false,
+                                    onImageTap: (){
+                                      Navigator.pushNamed(context, Routes.friendPostPet, arguments: state.userDataModel.data!.posts!.data!.map((e) => e.picture!).toList(),);
+                                    },
                                     commonType: CommonType(
                                       pictures: state
                                           .userDataModel.data!.posts!.data!
@@ -446,6 +451,9 @@ class _FriendsViewState extends State<FriendsView> with TickerProviderStateMixin
                                   ),
                                   PostsContainer(
                                     addIcon: false,
+                                    onImageTap: (){
+                                      Navigator.pushNamed(context, Routes.friendPostPet, arguments: state.userDataModel.data!.pets!.map((e) => e.profilePicture!).toList(),);
+                                    },
                                     commonType: CommonType(
                                       pictures: state.userDataModel.data!.pets!
                                           .map((e) => e.profilePicture!)
