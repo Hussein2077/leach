@@ -267,4 +267,6 @@ class StringManager {
   static const String deleteComment = "Delete Comment";
   static const String bookingHistory = "Booking History";
   static const String description  = "description";
+  static const String searchFriends  = "search friends";
+
 }
