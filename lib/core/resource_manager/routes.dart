@@ -30,6 +30,7 @@ import 'package:leach/features/home/presentation/componant/breeding/breeding.dar
 import 'package:leach/features/home/presentation/componant/cash_or_credit.dart';
 import 'package:leach/features/home/presentation/componant/how_to.dart';
 import 'package:leach/features/home/presentation/componant/review.dart';
+import 'package:leach/features/home/presentation/componant/search_screen.dart';
 import 'package:leach/features/home/presentation/componant/select_how_to.dart';
 import 'package:leach/features/home/presentation/componant/trainYourDog.dart';
 import 'package:leach/features/home/presentation/doctors.dart';
@@ -124,6 +125,8 @@ class Routes {
   static const String bookingHistory = "/booking_history";
   static const String petPhotoView = "/pet_photo_view";
   static const String otherReport = "/other_report";
+  static const String search = "/search_screen";
+
 
 }
 
@@ -467,6 +470,11 @@ class RouteGenerator {
                 OtherReportScreen(
                   userId: userId,
                 ),
+            transitionsBuilder: customAnimate);
+      case Routes.search:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+            const SearchScreen(),
             transitionsBuilder: customAnimate);
     }
     return unDefinedRoute(

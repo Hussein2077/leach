@@ -75,10 +75,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       const Spacer(),
                       IconButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, Routes.notification);
+                            Navigator.pushNamed(context, Routes.search);
                           },
                           icon: Icon(
-                            Icons.notifications,
+                            Icons.search_outlined,
                             size: AppSize.defaultSize! * 3.5,
                             color: Colors.white,
                           )),
