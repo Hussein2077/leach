@@ -54,6 +54,11 @@ abstract class ProfileBaseRemotelyDataSource {
     required String petId,
     File? image,
   });
+
+  Future<String> blockUser({required String id});
+
+  Future<String> unBlockUser({required String id});
+
 }
 
 class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
@@ -405,7 +410,7 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
 
     try {
       final response =
-          await Dio().get(ConstantApi.removeFriend(id: id), options: options);
+          await Dio().delete(ConstantApi.removeFriend(id: id), options: options);
       Map<String, dynamic> data = response.data;
 
       return data["message"] ?? "Success";
@@ -484,6 +489,36 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
     } on DioException catch (e) {
       throw DioHelper.handleDioError(
           dioError: e, endpointName: 'addPhotoForPet');
+    }
+  }
+
+  @override
+  Future<String> blockUser({required String id}) async {
+    Options options = await DioHelper().options();
+
+    try {
+      final response =
+      await Dio().get(ConstantApi.blockUser(id: id), options: options);
+      Map<String, dynamic> data = response.data;
+
+      return data["message"] ?? "Success";
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(dioError: e, endpointName: 'blockUser');
+    }
+  }
+
+  @override
+  Future<String> unBlockUser({required String id}) async {
+    Options options = await DioHelper().options();
+
+    try {
+      final response =
+      await Dio().delete(ConstantApi.unBlockUser(id: id), options: options);
+      Map<String, dynamic> data = response.data;
+
+      return data["message"] ?? "Success";
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(dioError: e, endpointName: 'unBlockUser');
     }
   }
 }

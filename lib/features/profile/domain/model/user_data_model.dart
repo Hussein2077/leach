@@ -20,26 +20,27 @@ class UserDataModel {
     }
     return map;
   }
+
 }
 
 class UserData {
   UserData({
-    this.username,
-    this.name,
-    this.profilePicture,
-    this.bio,
-    this.city,
-    this.area,
-    this.privateAccount,
-    this.accountStatus,
-    this.pets,
-    this.isFriend,
-    this.friends,
-    this.posts,
-  });
+      this.username,
+      this.name,
+      this.profilePicture,
+      this.bio,
+      this.city,
+      this.area,
+      this.privateAccount,
+      this.accountStatus,
+      this.pets,
+      this.friends,
+      this.friendRequestSent,
+      this.friendRequestReceived,
+      this.isFriend,
+      this.posts,});
 
   UserData.fromJson(dynamic json) {
-    isFriend = json['isFriend'] ?? false;
     username = json['username'];
     name = json['name'];
     profilePicture = json['profile_picture'];
@@ -48,6 +49,9 @@ class UserData {
     area = json['area'];
     privateAccount = json['private_account'];
     accountStatus = json['account_status'];
+    friendRequestSent = json['friend_request_sent'];
+    friendRequestReceived = json['friend_request_received'];
+    isFriend = json['isFriend'];
     if (json['pets'] != null) {
       pets = [];
       json['pets'].forEach((v) {
@@ -69,9 +73,10 @@ class UserData {
   String? accountStatus;
   List<Pets>? pets;
   Friends? friends;
-  bool? isFriend;
-
   Posts? posts;
+  bool? friendRequestSent;
+  bool? friendRequestReceived;
+  bool? isFriend;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -83,6 +88,9 @@ class UserData {
     map['area'] = area;
     map['private_account'] = privateAccount;
     map['account_status'] = accountStatus;
+    map['friend_request_sent'] = friendRequestSent;
+    map['friend_request_received'] = friendRequestReceived;
+    map['isFriend'] = isFriend;
     if (pets != null) {
       map['pets'] = pets?.map((v) => v.toJson()).toList();
     }
@@ -210,7 +218,6 @@ class Data {
     commentsAllowed = json['comments_allowed'];
     liked = json['liked'];
   }
-
   int? id;
   String? uuid;
   String? picture;
@@ -242,7 +249,6 @@ class FriendsData {
     username = json['username'];
     profilePicture = json['profile_picture'];
   }
-
   String? uuid;
   String? username;
   dynamic profilePicture;
@@ -254,6 +260,7 @@ class FriendsData {
     map['profile_picture'] = profilePicture;
     return map;
   }
+
 }
 
 class Pets {
@@ -359,6 +366,7 @@ class Pets {
     }
     return map;
   }
+
 }
 
 class Pictures {

@@ -85,3 +85,27 @@ class SendFriendRequestsSuccessState extends GetFriendRequestState {
   final String message;
   const SendFriendRequestsSuccessState({required this.message});
 }
+
+class BlockUserLoadingState extends GetFriendRequestState {}
+
+class BlockUserErrorState extends GetFriendRequestState {
+  final String errorMessage;
+  const BlockUserErrorState({required this.errorMessage});
+}
+
+class BlockUserSuccessState extends GetFriendRequestState {
+  final String message;
+  const BlockUserSuccessState({required this.message});
+}
+
+class UnBlockUserLoadingState extends GetFriendRequestState {}
+
+class UnBlockUserErrorState extends GetFriendRequestState {
+  final String errorMessage;
+  const UnBlockUserErrorState({required this.errorMessage});
+}
+
+class UnBlockUserSuccessState extends GetFriendRequestState {
+  final String message;
+  const UnBlockUserSuccessState({required this.message});
+}

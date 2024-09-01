@@ -20,23 +20,22 @@ class _PostsScreenState extends State<PostsScreen> {
 
   int page = 1;
   int totalPages = 0;
+  List<PostData> data = [];
   final scrollcontroller = ScrollController();
 
-  List<PostData> data = [];
 
   @override
   void initState() {
     scrollcontroller.addListener(_scrollListener);
+    BlocProvider.of<PostsBloc>(context).add(GetPostsEvent(page: page.toString()));
     super.initState();
   }
 
   void _scrollListener() {
-    if (scrollcontroller.position.pixels ==
-        scrollcontroller.position.maxScrollExtent) {
+    if (scrollcontroller.position.pixels == scrollcontroller.position.maxScrollExtent) {
       if (page < totalPages) {
         page = page + 1;
-        BlocProvider.of<PostsBloc>(context).add(
-            GetMorePostsEvent(page: page.toString()));
+        BlocProvider.of<PostsBloc>(context).add(GetMorePostsEvent(page: page.toString()));
       }
     }
   }

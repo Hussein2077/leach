@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
@@ -16,6 +17,9 @@ class ProfileUserRow extends StatelessWidget {
       this.kind,
       this.image,
       this.uuid,
+      this.isFriend,
+      this.friendRequestSent,
+      this.friendRequestReceived,
       this.friendsView = false});
 
   final String? name;
@@ -24,6 +28,9 @@ class ProfileUserRow extends StatelessWidget {
   final String? image;
   final String? uuid;
   final bool friendsView;
+  final bool? isFriend;
+  final bool? friendRequestSent;
+  final bool? friendRequestReceived;
 
   @override
   Widget build(BuildContext context) {
@@ -94,13 +101,40 @@ class ProfileUserRow extends StatelessWidget {
           ],
         ),
         if (friendsView) const Spacer(),
-        if (friendsView)
+        if (friendsView) friendButton(context: context),
+      ],
+    );
+  }
+
+  Widget friendButton({required BuildContext context}){
+    if(isFriend!){
+      return const SizedBox();
+    }else if(friendRequestSent!){
+      return Column(
+        children: [
+          IconButton(
+              onPressed: (){
+                BlocProvider.of<GetFriendRequestBloc>(context).add(RemoveFriendEvent(id: uuid!));
+              },
+              icon: Icon(
+                Icons.watch_later_outlined,
+                color: Colors.white,
+                size: AppSize.defaultSize! * 3,
+              )),
+          const CustomText(
+            text: 'pending',
+            color: Colors.white,
+          )
+        ],
+      );
+    }else if(friendRequestReceived!){
+      return Row(
+        children: [
           Column(
             children: [
               IconButton(
                   onPressed: () {
-                    BlocProvider.of<GetFriendRequestBloc>(context)
-                        .add(SendFriendRequestEvent(id: uuid!));
+                    BlocProvider.of<GetFriendRequestBloc>(context).add(AcceptFriendRequestEvent(id: uuid!));
                   },
                   icon: Icon(
                     Icons.add,
@@ -108,12 +142,52 @@ class ProfileUserRow extends StatelessWidget {
                     size: AppSize.defaultSize! * 3,
                   )),
               const CustomText(
-                text: 'Add Friend',
+                text: 'Accept',
+                color: Colors.white,
+              )
+            ],
+          ),
+          SizedBox(
+            width: AppSize.defaultSize! * 2,
+          ),
+          Column(
+            children: [
+              IconButton(
+                  onPressed: () {
+                    BlocProvider.of<GetFriendRequestBloc>(context).add(RejectFriendRequestEvent(id: uuid!));
+                  },
+                  icon: Icon(
+                    Icons.add,
+                    color: Colors.white,
+                    size: AppSize.defaultSize! * 3,
+                  )),
+              const CustomText(
+                text: 'Reject',
                 color: Colors.white,
               )
             ],
           )
-      ],
-    );
+        ],
+      );
+    }else{
+     return Column(
+       children: [
+         IconButton(
+             onPressed: () {
+               BlocProvider.of<GetFriendRequestBloc>(context).add(SendFriendRequestEvent(id: uuid!));
+             },
+             icon: Icon(
+               Icons.add,
+               color: Colors.white,
+               size: AppSize.defaultSize! * 3,
+             )),
+         const CustomText(
+           text: 'Add Friend',
+           color: Colors.white,
+         )
+       ],
+     );
+    }
   }
+
 }

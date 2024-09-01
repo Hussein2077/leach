@@ -4,6 +4,7 @@ import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
+import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cached_network_image.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
@@ -40,9 +41,8 @@ class _PostCardState extends State<PostCard> {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 3.6),
           child: InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, Routes.friendsView, arguments: widget.postData.user!.uuid  );
-
+            onTap: (){
+              Navigator.pushNamed(context, Routes.friendsView, arguments: widget.postData.user?.uuid);
             },
             child: Row(
               children: [
@@ -104,8 +104,7 @@ class _PostCardState extends State<PostCard> {
                       widget.postData.liked = isLiked;
                     });
                   },
-                  borderRadius:
-                      BorderRadius.circular(AppSize.defaultSize! * 1.5),
+                  borderRadius: BorderRadius.circular(AppSize.defaultSize! * 1.5),
                   child: IconWithMaterial(
                     imagePath: AssetPath.like,
                     color: isLiked ? AppColors.primaryColor : null,

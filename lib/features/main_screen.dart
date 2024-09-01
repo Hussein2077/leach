@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,12 +5,14 @@ import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/background.dart';
+import 'package:leach/core/widgets/loading_widget.dart';
 import 'package:leach/features/chat/chat_list.dart';
 import 'package:leach/features/home/presentation/home_screen.dart';
 import 'package:leach/features/main_screen_bloc.dart';
 import 'package:leach/features/posts/presentation/posts_screen.dart';
 import 'package:leach/features/profile/presentation/pet_profile/pet_profile.dart';
 import 'package:leach/features/profile/presentation/profile/profile.dart';
+
 
 class MainScreen extends StatefulWidget {
   const MainScreen({
@@ -29,7 +29,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
-    log('${widget.selectedIndex}nskjdgbowrgniowrgbipwo');
+    BlocProvider.of<GetMyDataBloc>(context).add(GetMyDataEvent());
     context.read<MainScreenBloc>().add(ChangeTabEvent(widget.selectedIndex));
 
     super.initState();
@@ -140,6 +140,8 @@ class _MainScreenState extends State<MainScreen> {
       },
     );
   }
+
+
 
   Widget _buildNavItem({
     required String icon,

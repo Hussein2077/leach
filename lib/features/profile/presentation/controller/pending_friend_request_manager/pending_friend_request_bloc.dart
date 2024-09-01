@@ -1,10 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leach/core/utils/api_helper.dart';
 import 'package:leach/features/profile/domain/use_case/accept_friend_request_uc.dart';
+import 'package:leach/features/profile/domain/use_case/block_user_uc.dart';
 import 'package:leach/features/profile/domain/use_case/get_pending_friend_requests_uc.dart';
 import 'package:leach/features/profile/domain/use_case/reject_friend_request_uc.dart';
 import 'package:leach/features/profile/domain/use_case/remove_friend_uc.dart';
 import 'package:leach/features/profile/domain/use_case/sned_friend_request_uc.dart';
+import 'package:leach/features/profile/domain/use_case/un_block_user_uc.dart';
 import 'package:leach/features/profile/presentation/controller/pending_friend_request_manager/pending_friend_request_event.dart';
 import 'package:leach/features/profile/presentation/controller/pending_friend_request_manager/pending_friend_request_state.dart';
 
@@ -14,8 +16,10 @@ class GetFriendRequestBloc extends Bloc<GetFriendRequestEventBase, GetFriendRequ
   final RejectFriendRequestsUseCase rejectFriendRequestsUseCase;
   final SendFriendRequestsUseCase sendFriendRequestsUseCase;
   final RemoveFriendUseCase removeFriendUseCase;
+  final BlockUserUseCase blockUserUseCase;
+  final UnBlockUserUseCase unBlockUserUseCase;
 
-  GetFriendRequestBloc({required this.getFriendRequestUseCase, required this.acceptFriendRequestsUseCase, required this.rejectFriendRequestsUseCase, required this.removeFriendUseCase, required this.sendFriendRequestsUseCase}) : super(FriendRequestInitialState()) {
+  GetFriendRequestBloc({required this.getFriendRequestUseCase, required this.acceptFriendRequestsUseCase, required this.rejectFriendRequestsUseCase, required this.removeFriendUseCase, required this.sendFriendRequestsUseCase, required this.blockUserUseCase, required this.unBlockUserUseCase}) : super(FriendRequestInitialState()) {
 
     on<GetFriendRequestEvent>((event, emit) async {
       emit(GetFriendRequestsLoadingState());
@@ -65,6 +69,22 @@ class GetFriendRequestBloc extends Bloc<GetFriendRequestEventBase, GetFriendRequ
       result.fold(
               (l) => emit(SendFriendRequestsSuccessState(message: l)),
               (r) => emit(SendFriendRequestsErrorState(errorMessage: DioHelper().getTypeOfFailure(r))));
+    });
+
+    on<BlockUserEvent>((event, emit) async {
+      emit(BlockUserLoadingState());
+      final result = await blockUserUseCase.call(event.id);
+      result.fold(
+              (l) => emit(BlockUserSuccessState(message: l)),
+              (r) => emit(BlockUserErrorState(errorMessage: DioHelper().getTypeOfFailure(r))));
+    });
+
+    on<UnBlockUserEvent>((event, emit) async {
+      emit(UnBlockUserLoadingState());
+      final result = await unBlockUserUseCase.call(event.id);
+      result.fold(
+              (l) => emit(UnBlockUserSuccessState(message: l)),
+              (r) => emit(UnBlockUserErrorState(errorMessage: DioHelper().getTypeOfFailure(r))));
     });
 
   }
