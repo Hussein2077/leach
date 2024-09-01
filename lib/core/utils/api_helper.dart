@@ -17,8 +17,8 @@ class DioHelper {
     Map<String, String> headers = await DioHelper().header();
     return Options(
       receiveDataWhenStatusError: true,
-      sendTimeout: const Duration(milliseconds: 10000),
-      receiveTimeout: const Duration(milliseconds: 10000),
+      sendTimeout: const Duration(milliseconds: 15000),
+      receiveTimeout: const Duration(milliseconds: 15000),
       headers: headers,
     );
   }
@@ -30,11 +30,9 @@ class DioHelper {
     }
     Map<String, String> headers = {
       "Authorization": 'Bearer $token',
-      'accept': 'application/json',
+      'accept': '*/*',
       'content-type': 'application/json; charset=utf-8',
-      'date': 'Sun,18 Feb 2024 17:04:08 GMT',
-      'server': 'Microsoft-IIS/10.0',
-      'x-powered-by': 'ASP.NET',
+       'server': 'Microsoft-IIS/10.0',
     };
     return headers;
   }
@@ -109,7 +107,7 @@ class DioHelper {
       case 401:
         Navigator.pushNamedAndRemoveUntil(
             getIt<NavigationService>().navigatorKey.currentContext!,
-            Routes.welcomePage,
+            Routes.login,
             (route) => false);
         if (response?.data.runtimeType == String) {
           throw ErrorModelException(errorMessage: response!.data);

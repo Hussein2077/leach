@@ -107,8 +107,8 @@ class AssetPath {
   static const String           dogSmall         = '$pathImage/dog_small.png';
   static const String           edit         = '$pathImage/edit.png';
   static const String           messageX         = '$pathImage/messageX.png';
-  static const String           mayaMP4         = '$pathImage/Mayaaa.gif';
-  static const String             maya1MP4         = '$pathImage/mmaayyy_1.gif';
+  static const String           mayaMP4         = '$pathImage/maya.gif';
+  static const String             maya1MP4         = '$pathImage/Mayaaa.gif';
   static const String             vistaMP4          = '$pathImage/vistaaaa.gif';
   static const String             loading           = '$pathImage/loading.png';
   static const String             accept           = '$pathImage/accept.png';
@@ -116,5 +116,9 @@ class AssetPath {
   static const String             dots           = '$pathImage/dots.png';
   static const String             smallCalendar           = '$pathImage/small_calendar.png';
   static const String             smallWhiteCalendar           = '$pathImage/small_white_calendar.png';
+  static const String             page2           = '$pathImage/page2.png';
+    static const String             page3           = '$pathImage/page3.png';
+    static const String             page4           = '$pathImage/page4.png';
+
 
 }

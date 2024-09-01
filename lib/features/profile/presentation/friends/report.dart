@@ -14,53 +14,49 @@ class ReportView extends StatefulWidget {
   State<ReportView> createState() => _ReportViewState();
 }
 
-class _ReportViewState extends State<ReportView>
-    with TickerProviderStateMixin {
-  late TabController tabController;
+class _ReportViewState extends State<ReportView> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    tabController = TabController(length: 2, vsync: this);
+    //make a timer to navigate to main
+    if(mounted) {
+      Future.delayed(const Duration(seconds: 3), () {
+      Navigator.pushNamedAndRemoveUntil(
+          context, Routes.main, (route) => false);
+    });
+    }
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: InkWell(
         onTap: () {
-          Navigator.pop(context);
-          Navigator.pushNamed(context,Routes.friends);
+          // Navigator.pop(context);
+          Navigator.pushNamedAndRemoveUntil(
+              context, Routes.main, (route) => false);
         },
         child: BackgroundScreen(
           image: AssetPath.homeBackground,
           child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomText(
+                  text: StringManager.reportSubmitted.tr(),
+                  fontSize: AppSize.defaultSize! * 4,
+                  maxLines: 5,
+                  fontFamily: 'Brodie',
+                  color: Colors.white,
+                ),
+                Image.asset(AssetPath.tick)
 
-               child: Column(
-                 mainAxisAlignment: MainAxisAlignment.center,
-
-                 children: [
-
-                   CustomText(
-                     text: StringManager.reportSubmitted.tr(),
-                     fontSize: AppSize.defaultSize! * 4,
-                     maxLines: 5,
-                     fontFamily: 'Brodie',
-                     color: Colors.white,
-
-
-                   ),
-                   Image(image: AssetImage(AssetPath.tick),),
-                 ],
-
-               ),
-
-
-
-
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 }
-

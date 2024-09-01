@@ -9,15 +9,15 @@ import 'package:leach/core/widgets/background.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/main_button.dart';
 
-class WelcomePage extends StatelessWidget {
-  const WelcomePage({super.key});
+class Page4 extends StatelessWidget {
+  const Page4({super.key});
 
   @override
   Widget build(BuildContext context) {
     AppSize().init(context);
     return Scaffold(
       body: BackgroundScreen(
-image: AssetPath.mayaMP4,
+        image: AssetPath.vistaMP4,
         child: Align(
           alignment: Alignment.bottomCenter,
           child: Container(
@@ -37,51 +37,37 @@ image: AssetPath.mayaMP4,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: AppSize.defaultSize! * 10,
+                    height: AppSize.defaultSize! * 1,
                   ),
                   Image.asset(AssetPath.logoWhite),
                   SizedBox(
                     height: AppSize.defaultSize!,
                   ),
                   CustomText(
-                    text: StringManager.petJourney.tr(),
+                    text:
+                        'Leash makes setting up pet playdates a breeze! Connect with local pet owners, schedule playdates, and let your pets socialize and have fun together. It’s a great way to keep your furry friends happy and active while making new pals!',
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
-                    fontSize: AppSize.defaultSize! * 2.5,
-                    maxLines: 2,
+                    fontSize: AppSize.defaultSize! * 1.5,
+                    maxLines: 7,
                     fontFamily: 'Gully',
                     textAlign: TextAlign.start,
                   ),
                   SizedBox(
-                    height: AppSize.defaultSize! * 4,
+                    height: AppSize.defaultSize! * 2,
                   ),
-                  Center(
-                    child: CustomText(
-                      text: StringManager.terms.tr(),
-                      color: Colors.white,
-                      fontSize: AppSize.defaultSize! * .9,
-                      textAlign: TextAlign.center,
-                    ),
+                  Center(child: Image.asset(AssetPath.page4)),
+                  const Spacer(),
+                  MainButton(
+                    text: 'Continue',
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.page5);
+                    },
+                    color: Colors.white,
                   ),
                   SizedBox(
-                    height: AppSize.defaultSize!  *.5 ,
+                    height: AppSize.defaultSize! * 6,
                   ),
-                  MainButton(
-                    text: StringManager.login.tr(),
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.login);
-                    },
-                    color: Colors.white,
-                  ) , SizedBox(
-                    height: AppSize.defaultSize! *2,
-                  ),
-                  MainButton(
-                    text: StringManager.register.tr(),
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.signUp);
-                    },
-                    color: Colors.white,
-                  )
                 ],
               ),
             ),

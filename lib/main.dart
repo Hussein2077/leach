@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,10 +30,11 @@ import 'package:leach/features/profile/presentation/controller/dogBreadBloc/bloc
 import 'package:leach/features/profile/presentation/controller/friends_manager/friends_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/get_user_manager/get_user_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_bloc.dart';
+import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_event.dart';
 import 'package:leach/features/profile/presentation/controller/pending_friend_request_manager/pending_friend_request_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/get_traits/bloc.dart';
+import 'package:leach/features/profile/presentation/controller/report_user/bloc.dart';
 
-String? token;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,7 +42,7 @@ void main() async {
   await ServerLocator().init();
 
   await EasyLocalization.ensureInitialized();
-  token = await Methods.instance.returnUserToken();
+
   runApp(
     EasyLocalization(
       fallbackLocale: const Locale('en'),
@@ -68,6 +71,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     AppSize().init(context);
@@ -109,7 +113,7 @@ class _MyAppState extends State<MyApp> {
           create: (context) => getIt<GetFriendsBloc>(),
         ),
         BlocProvider(
-          create: (context) => getIt<GetMyDataBloc>(),
+          create: (context) => getIt<GetMyDataBloc>()..add(GetMyDataEvent()),
         ),
         BlocProvider(
           create: (context) => getIt<GetTraitsBloc>(),
@@ -137,6 +141,8 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => getIt<SignInWithPlatformBloc>(),
+        ),  BlocProvider(
+          create: (context) => getIt<ReportUserBloc>(),
         ),
       ],
       child: MaterialApp(
@@ -146,9 +152,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RouteGenerator.getRoute,
         navigatorKey: getIt<NavigationService>().navigatorKey,
-        initialRoute: token == null || token == 'noToken'
-            ? Routes.welcomePage
-            : Routes.main,
+        initialRoute:   Routes.splash,
         theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,

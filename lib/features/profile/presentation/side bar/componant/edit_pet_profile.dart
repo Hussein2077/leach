@@ -77,6 +77,17 @@ class _EditPetProfileState extends State<EditPetProfile> {
     }
     super.initState();
   }
+  @override
+  void dispose() {
+    LoadingOverlay().hide();
+
+    nameController.dispose();
+    usernameController.dispose();
+    weightController.dispose();
+    profilePicture = null;
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +96,7 @@ class _EditPetProfileState extends State<EditPetProfile> {
         if (state is UpdatePetSuccessMessageState) {
           LoadingOverlay().hide();
 
-          Navigator.pushNamed(context, Routes.main,arguments: 3);
+          Navigator.pushNamed(context, Routes.main,arguments: 2);
           BlocProvider.of<GetMyDataBloc>(context).add(GetMyDataEvent());
         } else if (state is UpdatePetErrorMessageState) {
           LoadingOverlay().hide();
@@ -353,7 +364,7 @@ class _EditPetProfileState extends State<EditPetProfile> {
               MainButton(
                 text: StringManager.save.tr(),
                 onTap: () {
-                  log(' currentPet!.uuid  ${currentPet?.petType}');
+                  log(' currentPet!.uuid  ${usernameController.text}');
                   BlocProvider.of<CreatePetBloc>(context).add(UpdatePetEvent(
                     uuid: currentPet?.uuid??widget.pets[0].uuid,
                     profilePicture: imageFile,

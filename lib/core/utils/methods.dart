@@ -3,22 +3,16 @@ import 'dart:io';
 
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:leach/core/models/profile_data_model.dart';
 import 'package:leach/core/resource_manager/colors.dart';
-import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
-import 'package:leach/core/service/navigator_services.dart';
-import 'package:leach/core/service/service_locator.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/features/home/presentation/manager/get_vendor/bloc.dart';
 import 'package:leach/features/home/presentation/manager/get_vendor/event.dart';
 
-import 'package:leach/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'enums.dart';
@@ -27,9 +21,10 @@ class Methods {
 //singleton class
   Methods._internal();
 
-  static final   instance =   Methods._internal() ;
+  static final instance = Methods._internal();
 
-  factory  Methods() => instance ;
+  factory Methods() => instance;
+
   Future<void> saveUserToken({String? authToken}) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     log('$authToken hussssssssssssssssmmm');
@@ -38,7 +33,6 @@ class Methods {
     } else {
       preferences.setString(StringManager.userTokenKey, authToken ?? "noToken");
     }
-
   }
 
   Future<String> returnUserToken() async {
@@ -48,6 +42,19 @@ class Methods {
         preferences.getString(StringManager.userTokenKey) ?? "noToken";
     log('$tokenPref dhjeyjeyjeyjye');
     return tokenPref;
+  }
+
+  Future<void> saveFirstOpen(bool firstOpen) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setBool('firstOpen', firstOpen);
+  }
+
+  Future<bool> returnFirstOpen() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+
+    bool firstOpen = preferences.getBool('firstOpen') ?? true;
+    log('$firstOpen dhjeyjeyjeyjye');
+    return firstOpen;
   }
 
   List<T> combineLists<T>(List<T> list1, List<T> list2) {
@@ -88,22 +95,24 @@ class Methods {
       return '$years Y';
     }
   }
+
   var config = CalendarDatePicker2WithActionButtonsConfig(
     dayTextStyle: const TextStyle(color: AppColors.primaryColor),
     selectedDayHighlightColor: AppColors.primaryColor,
     calendarType: CalendarDatePicker2Type.single,
     controlsTextStyle: const TextStyle(color: AppColors.primaryColor),
-    weekdayLabelTextStyle:
-    const TextStyle(color: AppColors.primaryColor),
+    weekdayLabelTextStyle: const TextStyle(color: AppColors.primaryColor),
     selectedDayTextStyle: const TextStyle(color: Colors.white),
     okButtonTextStyle: const TextStyle(color: AppColors.primaryColor),
-    cancelButtonTextStyle:
-    const TextStyle(color: AppColors.primaryColor),
-    firstDate: DateTime(1900), // Set this to the earliest date you want to allow
-    lastDate: DateTime.now() ,
+    cancelButtonTextStyle: const TextStyle(color: AppColors.primaryColor),
+    firstDate: DateTime(1900),
+    // Set this to the earliest date you want to allow
+    lastDate: DateTime.now(),
   );
-  Future<void> chooseVendorType( BuildContext context,{required TypeOfVendor type}) async {
-    switch (type){
+
+  Future<void> chooseVendorType(BuildContext context,
+      {required TypeOfVendor type}) async {
+    switch (type) {
       case TypeOfVendor.vet:
         BlocProvider.of<VendorsBloc>(context)
             .add(GetVendorsEvent(type: TypeOfVendor.vet));
@@ -119,25 +128,17 @@ class Methods {
             .add(GetVendorsEvent(type: TypeOfVendor.training));
 
         break;
-
     }
   }
-  showAlertDialog(
-      BuildContext context,
-      {
 
-        required String title,
-
-        required VoidCallback? onPressed
-}
-      ){
+  showAlertDialog(BuildContext context,
+      {required String title, required VoidCallback? onPressed}) {
     showDialog(
         context: context,
         builder: (context) {
           return CupertinoAlertDialog(
             title: CustomText(
-              text:
-              title,
+              text: title,
               fontWeight: FontWeight.w700,
               fontFamily: 'Gully',
               fontSize: 1.7 * AppSize.defaultSize!,
@@ -149,7 +150,6 @@ class Methods {
                 },
                 child: CustomText(
                   text: StringManager.no.tr(),
-
                   fontWeight: FontWeight.w700,
                   fontFamily: 'Gully',
                   fontSize: 2 * AppSize.defaultSize!,
@@ -173,4 +173,3 @@ class Methods {
         });
   }
 }
-

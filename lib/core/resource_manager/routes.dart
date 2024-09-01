@@ -1,10 +1,20 @@
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leach/core/models/pet_model.dart';
+import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/enums.dart';
 import 'package:leach/core/service/navigator_services.dart';
 import 'package:leach/core/service/service_locator.dart';
 import 'package:leach/core/utils/enums.dart';
+import 'package:leach/core/widgets/background.dart';
+import 'package:leach/core/widgets/loading_widget.dart';
+import 'package:leach/features/auth/presentation/first_open/page_1.dart';
+import 'package:leach/features/auth/presentation/first_open/page_2.dart';
+import 'package:leach/features/auth/presentation/first_open/page_3.dart';
+import 'package:leach/features/auth/presentation/first_open/page_4.dart';
+import 'package:leach/features/auth/presentation/first_open/page_5.dart';
 import 'package:leach/features/auth/presentation/forgot_password/code_page.dart';
 import 'package:leach/features/auth/presentation/forgot_password/forgot_password.dart';
 import 'package:leach/features/auth/presentation/forgot_password/reset_password_from_profile.dart';
@@ -27,13 +37,17 @@ import 'package:leach/features/home/presentation/widgets/calender.dart';
 import 'package:leach/features/main_screen.dart';
 import 'package:leach/features/posts/data/models/posts_model.dart';
 import 'package:leach/features/profile/domain/model/create_pet.dart';
+import 'package:leach/features/profile/domain/use_case/report_user_uc.dart';
 import 'package:leach/features/profile/presentation/add_pet/add_pet_screen.dart';
 import 'package:leach/features/profile/presentation/add_pet/cat_bread.dart';
 import 'package:leach/features/profile/presentation/add_pet/dog_bread.dart';
 import 'package:leach/features/profile/presentation/add_pet/dog_breed3.dart';
 import 'package:leach/features/profile/presentation/add_pet/type_of_pet.dart';
+import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_bloc.dart';
+import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_state.dart';
 import 'package:leach/features/profile/presentation/friends/friends_screen.dart';
 import 'package:leach/features/profile/presentation/friends/friends_view.dart';
+import 'package:leach/features/profile/presentation/friends/other_report.dart';
 import 'package:leach/features/profile/presentation/friends/report.dart';
 import 'package:leach/features/profile/presentation/friends/specific_messages_report.dart';
 import 'package:leach/features/profile/presentation/friends/submit_report.dart';
@@ -46,7 +60,6 @@ import 'package:leach/features/profile/presentation/profile/componant/add_photo_
 import 'package:leach/features/profile/presentation/profile/componant/add_post.dart';
 import 'package:leach/features/profile/presentation/profile/my_pet_profile.dart';
 import 'package:leach/features/profile/presentation/profile/pet_details.dart';
-import 'package:leach/features/profile/presentation/profile/widgets/posts_container.dart';
 import 'package:leach/features/profile/presentation/side%20bar/componant/account_privacy.dart';
 import 'package:leach/features/profile/presentation/side%20bar/componant/activity_and_history.dart';
 import 'package:leach/features/profile/presentation/side%20bar/componant/booking_history.dart';
@@ -55,10 +68,16 @@ import 'package:leach/features/profile/presentation/side%20bar/componant/delete_
 import 'package:leach/features/profile/presentation/side%20bar/componant/edit_pet_profile.dart';
 import 'package:leach/features/profile/presentation/side%20bar/componant/edit_profile.dart';
 import 'package:leach/features/profile/presentation/side%20bar/side_bar.dart';
+import 'package:leach/features/splash.dart';
 
 class Routes {
   static const String login = "/login";
   static const String welcomePage = "/welcomePage";
+  static const String page1 = "/page1";
+  static const String page2 = "/page2";
+  static const String page3 = "/page3";
+  static const String page4 = "/page4";
+  static const String page5 = "/page5";
   static const String splash = "/splash";
   static const String main = "/main";
   static const String signUp = "/signUp";
@@ -104,7 +123,7 @@ class Routes {
   static const String editPost = "/edit_post";
   static const String bookingHistory = "/booking_history";
   static const String petPhotoView = "/pet_photo_view";
-
+  static const String otherReport = "/other_report";
 
 }
 
@@ -113,21 +132,79 @@ class RouteGenerator {
 
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.splash:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const SplashScreen(),
+          transitionsBuilder: customAnimate,
+        ) ;
       case Routes.login:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const LoginScreen(),
             transitionsBuilder: customAnimate);
       case Routes.main:
-        int ?selectedIndex = settings.arguments as int?;
+         int? selectedIndex = settings.arguments as int?;
         return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) =>
-                  MainScreen(selectedIndex: selectedIndex??4,),
+            pageBuilder: (context, animation, secondaryAnimation) {
+
+              return BlocBuilder<GetMyDataBloc, GetMyDataState>(
+                builder: (context, state) {
+                  if (state is GetMyDataLoadingState) {
+                    return const Scaffold(
+                        body: BackgroundScreen(
+                      image:  AssetPath.welcomeImage,
+                      child: LoadingWidget(),
+                    ));
+                  }
+                  if (state is GetMyDataSuccessState) {
+                    if (state.userModel.pets!.isEmpty) {
+                      return const AddPetScreen(
+                        withLeadingIcon: false,
+                      );
+                    } else {
+                      return MainScreen(
+                        selectedIndex: selectedIndex ?? 4,
+                      );
+                    }
+                  }
+                  if (state is GetMyDataErrorState) {
+                    return const LoginScreen();
+                  }
+                  return const SizedBox();
+                },
+              );
+            },
             transitionsBuilder: customAnimate);
       case Routes.welcomePage:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const WelcomePage(),
+            transitionsBuilder: customAnimate);
+      case Routes.page1:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const Page1(),
+            transitionsBuilder: customAnimate);
+      case Routes.page2:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const Page2(),
+            transitionsBuilder: customAnimate);
+      case Routes.page3:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const Page3(),
+            transitionsBuilder: customAnimate);
+      case Routes.page4:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const Page4(),
+            transitionsBuilder: customAnimate);
+      case Routes.page5:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const Page5(),
             transitionsBuilder: customAnimate);
       case Routes.signUp:
         return PageRouteBuilder(
@@ -150,9 +227,12 @@ class RouteGenerator {
                 const ResetPasswordScreen(),
             transitionsBuilder: customAnimate);
       case Routes.addPetScreen:
+        bool? withLeading = settings.arguments as bool?;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const AddPetScreen(),
+                AddPetScreen(
+                  withLeadingIcon: withLeading ?? true,
+                ),
             transitionsBuilder: customAnimate);
       case Routes.typeOfPetScreen:
         TypeOfPetNavigator typeOfPetNavigator =
@@ -166,8 +246,9 @@ class RouteGenerator {
       case Routes.doctor:
         TypeOfVendor typeOfVendor = settings.arguments as TypeOfVendor;
         return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) =>
-                  Doctors(typeOfVendor: typeOfVendor ,),
+            pageBuilder: (context, animation, secondaryAnimation) => Doctors(
+                  typeOfVendor: typeOfVendor,
+                ),
             transitionsBuilder: customAnimate);
       case Routes.catBread:
         return PageRouteBuilder(
@@ -181,10 +262,12 @@ class RouteGenerator {
             transitionsBuilder: customAnimate);
 
       case Routes.dogBreed3:
-        SelectionPetTypeParamRoute  selectionPetTypeParamRoute = settings.arguments as SelectionPetTypeParamRoute;
+        SelectionPetTypeParamRoute selectionPetTypeParamRoute =
+            settings.arguments as SelectionPetTypeParamRoute;
         return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) => PetBreedSelection(
-            selectionPetTypeParamRoute: selectionPetTypeParamRoute,
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                PetBreedSelection(
+                  selectionPetTypeParamRoute: selectionPetTypeParamRoute,
                 ),
             transitionsBuilder: customAnimate);
 
@@ -221,10 +304,11 @@ class RouteGenerator {
       case Routes.breedingScreen:
         String type = settings.arguments as String;
         return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) => BreedingScreen(type: type),
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                BreedingScreen(type: type),
             transitionsBuilder: customAnimate);
       case Routes.editPetProfile:
-        List<Pet> currentPet = settings.arguments as List<Pet> ;
+        List<Pet> currentPet = settings.arguments as List<Pet>;
 
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
@@ -238,16 +322,20 @@ class RouteGenerator {
                 const DeleteAccount(),
             transitionsBuilder: customAnimate);
       case Routes.calenderScreen:
-        Vendor vendor = settings.arguments as Vendor ;
+        Vendor vendor = settings.arguments as Vendor;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                  CalenderScreen(vendor:  vendor,),
+                CalenderScreen(
+                  vendor: vendor,
+                ),
             transitionsBuilder: customAnimate);
       case Routes.reviewScreen:
         ReviewParams reviewParams = settings.arguments as ReviewParams;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                  ReviewScreen(reviewParams:reviewParams ,),
+                ReviewScreen(
+                  reviewParams: reviewParams,
+                ),
             transitionsBuilder: customAnimate);
       case Routes.cashOrCredit:
         return PageRouteBuilder(
@@ -277,7 +365,8 @@ class RouteGenerator {
       case Routes.friendsView:
         String uuid = settings.arguments as String;
         return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) => FriendsView(uuid: uuid),
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                FriendsView(uuid: uuid),
             transitionsBuilder: customAnimate);
       case Routes.postsViewProfile:
         return PageRouteBuilder(
@@ -292,13 +381,16 @@ class RouteGenerator {
         int petId = settings.arguments as int;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                  AddPhotoForPet(petId: petId ,),
+                AddPhotoForPet(
+                  petId: petId,
+                ),
             transitionsBuilder: customAnimate);
       case Routes.howTo:
-          HowToModel howToModel = settings.arguments as HowToModel;
+        HowToModel howToModel = settings.arguments as HowToModel;
         return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) =>
-                  HowTo(howToModel: howToModel ,),
+            pageBuilder: (context, animation, secondaryAnimation) => HowTo(
+                  howToModel: howToModel,
+                ),
             transitionsBuilder: customAnimate);
       case Routes.resetPasswordFromProfile:
         return PageRouteBuilder(
@@ -306,14 +398,20 @@ class RouteGenerator {
                 const ResetPasswordScreenFromProfile(),
             transitionsBuilder: customAnimate);
       case Routes.specificMessagesReport:
+        String userId = settings.arguments as String;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const SpecificMessagesReport(),
+                SpecificMessagesReport(
+                  userId: userId,
+                ),
             transitionsBuilder: customAnimate);
       case Routes.submitReport:
+        ReportParameter message = settings.arguments as ReportParameter;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const SubmitReport(),
+                SubmitReport(
+                  message: message,
+                ),
             transitionsBuilder: customAnimate);
       case Routes.reportView:
         return PageRouteBuilder(
@@ -327,9 +425,11 @@ class RouteGenerator {
             transitionsBuilder: customAnimate);
       case Routes.trainYourDog:
         TrainParamRoute trainParamRoute = settings.arguments as TrainParamRoute;
-         return PageRouteBuilder(
+        return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                  TrainYourDog(trainParamRoute:   trainParamRoute,),
+                TrainYourDog(
+                  trainParamRoute: trainParamRoute,
+                ),
             transitionsBuilder: customAnimate);
       case Routes.notification:
         return PageRouteBuilder(
@@ -344,18 +444,29 @@ class RouteGenerator {
       case Routes.editPost:
         PostData postData = settings.arguments as PostData;
         return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) => EditPost(data: postData),
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                EditPost(data: postData),
             transitionsBuilder: customAnimate);
       case Routes.bookingHistory:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-            const BookingHistory(),
+                const BookingHistory(),
             transitionsBuilder: customAnimate);
       case Routes.petPhotoView:
-        CommonType commonType = settings.arguments as   CommonType ;
+        CommonType commonType = settings.arguments as CommonType;
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-              PetPhotoView(commonType: commonType ,),
+                PetPhotoView(
+                  commonType: commonType,
+                ),
+            transitionsBuilder: customAnimate);
+      case Routes.otherReport:
+        String userId = settings.arguments as String;
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                OtherReportScreen(
+                  userId: userId,
+                ),
             transitionsBuilder: customAnimate);
     }
     return unDefinedRoute(
@@ -405,17 +516,28 @@ Widget customAnimate(BuildContext context, Animation<double> animation,
     child: child,
   );
 }
-class SelectionPetTypeParamRoute {
-  final PetProfileModel petProfileModel ;
-  final String petType;
-  SelectionPetTypeParamRoute({ required this.petProfileModel, required this.petType});
-}
-class CommonType extends Equatable{
-  final List <String>? ids ;
-  final List <String> pictures;
-  final int? petId;
-  const CommonType( {  this.ids, required this.pictures,this.petId,});
-  @override
-  List<Object?> get props => [ids, pictures,petId];
 
+class SelectionPetTypeParamRoute {
+  final PetProfileModel petProfileModel;
+
+  final String petType;
+
+  SelectionPetTypeParamRoute(
+      {required this.petProfileModel, required this.petType});
+}
+
+class CommonType extends Equatable {
+  final List<String>? ids;
+
+  final List<String> pictures;
+  final int? petId;
+
+  const CommonType({
+    this.ids,
+    required this.pictures,
+    this.petId,
+  });
+
+  @override
+  List<Object?> get props => [ids, pictures, petId];
 }

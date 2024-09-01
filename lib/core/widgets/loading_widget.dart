@@ -5,11 +5,10 @@ import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/utils/app_size.dart';
 
 class LoadingWidget extends StatefulWidget {
-  const LoadingWidget({super.key, this.height, this.width, this.size, this.color, this.padding});
+  const LoadingWidget({super.key, this.height, this.width,  this.color, this.padding});
 
   final double? height;
   final double? width;
-  final double? size;
   final double? padding;
   final Color? color;
 

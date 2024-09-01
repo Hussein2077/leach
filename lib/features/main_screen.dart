@@ -1,9 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
-import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/background.dart';
 import 'package:leach/core/widgets/loading_widget.dart';
@@ -13,7 +14,6 @@ import 'package:leach/features/main_screen_bloc.dart';
 import 'package:leach/features/posts/presentation/posts_screen.dart';
 import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_bloc.dart';
 import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_event.dart';
-import 'package:leach/features/profile/presentation/controller/my_data_manager/my_data_state.dart';
 import 'package:leach/features/profile/presentation/pet_profile/pet_profile.dart';
 import 'package:leach/features/profile/presentation/profile/profile.dart';
 
@@ -31,11 +31,11 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-
   @override
   void initState() {
-    BlocProvider.of<GetMyDataBloc>(context).add(GetMyDataEvent());
+
     context.read<MainScreenBloc>().add(ChangeTabEvent(widget.selectedIndex));
+
     super.initState();
   }
 
@@ -136,21 +136,7 @@ class _MainScreenState extends State<MainScreen> {
               ),
               body: BackgroundScreen(
                 image: AssetPath.homeBackground,
-                child: BlocBuilder<GetMyDataBloc, GetMyDataState>(
-                  builder: (context, state) {
-                    if (state is GetMyDataLoadingState) {
-                      return const LoadingWidget();
-                    }
-                    if (state is GetMyDataSuccessState) {
-                      return getScreen(selectedIndex);
-                    }
-                    if (state is GetMyDataErrorState) {
-                      Navigator.pushReplacementNamed(
-                          context, Routes.welcomePage);
-                    }
-                    return const SizedBox();
-                  },
-                ),
+                child:  getScreen(selectedIndex)
               ),
             ),
           );
@@ -165,7 +151,7 @@ class _MainScreenState extends State<MainScreen> {
     required String icon,
     required bool isSelected,
     required Function() onTap,
-      bool isSvg = true,
+    bool isSvg = true, // New parameter to distinguish between Image and Svg
   }) {
     return Center(
       child: Column(
@@ -179,17 +165,17 @@ class _MainScreenState extends State<MainScreen> {
             onPressed: onTap,
             icon: isSvg
                 ? SvgPicture.asset(
-              icon,
-              color: Colors.white,
-              width: AppSize.defaultSize! * 3.5,
-              height: AppSize.defaultSize! * 3.5,
-            )
+                    icon,
+                    color: Colors.white,
+                    width: AppSize.defaultSize! * 3.5,
+                    height: AppSize.defaultSize! * 3.5,
+                  )
                 : Image.asset(
-              icon,
-              color: Colors.white,
-              width: AppSize.defaultSize! * 4,
-              height: AppSize.defaultSize! * 4,
-            ),
+                    icon,
+                    color: Colors.white,
+                    width: AppSize.defaultSize! * 4,
+                    height: AppSize.defaultSize! * 4,
+                  ),
           ),
           if (isSelected)
             Container(
@@ -201,7 +187,6 @@ class _MainScreenState extends State<MainScreen> {
       ),
     );
   }
-
 
   Widget getScreen(int selectedIndex) {
     if (selectedIndex == 0) {

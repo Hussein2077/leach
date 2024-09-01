@@ -15,6 +15,7 @@ void errorSnackBar(BuildContext context, String message) {
     content: Center(
       child: CustomText(
         text: message,
+        maxLines: 2,
         color: Colors.white,
         fontSize: AppSize.defaultSize! * 2,
       ),

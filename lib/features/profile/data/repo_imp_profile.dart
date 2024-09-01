@@ -13,6 +13,7 @@ import 'package:leach/features/profile/domain/model/user_data_model.dart';
 import 'package:leach/features/profile/domain/use_case/CREATE_PET_USE_CASE.dart';
 import 'package:leach/features/profile/domain/model/friends_model.dart';
 import 'package:leach/features/profile/domain/model/pending_friend_requests_model.dart';
+import 'package:leach/features/profile/domain/use_case/report_user_uc.dart';
 import 'package:leach/features/profile/domain/use_case/update_my_data_use_case.dart';
 
 class ProfileRepositoryImp extends ProfileBaseRepository {
@@ -172,6 +173,14 @@ class ProfileRepositoryImp extends ProfileBaseRepository {
   Future<Either<String, Failure>> addPhotoForPet ({required String petId ,   File? image}) async {
     try {
       final result = await profileBaseRemotelyDataSource.addPhotoForPet(petId: petId, image: image);
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }  @override
+  Future<Either<String, Failure>> reportUser (ReportParameter reportParameter) async {
+    try {
+      final result = await profileBaseRemotelyDataSource.reportUser(reportParameter);
       return Left(result);
     } on Exception catch (e) {
       return right(DioHelper.buildFailure(e));

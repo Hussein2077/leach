@@ -9,15 +9,15 @@ import 'package:leach/core/widgets/background.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/main_button.dart';
 
-class WelcomePage extends StatelessWidget {
-  const WelcomePage({super.key});
+class Page3 extends StatelessWidget {
+  const Page3({super.key});
 
   @override
   Widget build(BuildContext context) {
     AppSize().init(context);
     return Scaffold(
       body: BackgroundScreen(
-image: AssetPath.mayaMP4,
+        image: AssetPath.maya1MP4,
         child: Align(
           alignment: Alignment.bottomCenter,
           child: Container(
@@ -32,56 +32,42 @@ image: AssetPath.mayaMP4,
             ),
             child: Padding(
               padding:
-                  EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 4),
+              EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 4),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: AppSize.defaultSize! * 10,
+                    height: AppSize.defaultSize! * 1,
                   ),
                   Image.asset(AssetPath.logoWhite),
                   SizedBox(
                     height: AppSize.defaultSize!,
                   ),
                   CustomText(
-                    text: StringManager.petJourney.tr(),
+                    text:
+                    '''Leash makes pet breeding easy and fun! Connect with other pet owners, track histories, and ensure healthy practices—all in one place. It’s the go-to app for responsible and joyful pet breeding!''',
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
-                    fontSize: AppSize.defaultSize! * 2.5,
-                    maxLines: 2,
+                    fontSize: AppSize.defaultSize! * 1.5,
+                    maxLines: 7,
                     fontFamily: 'Gully',
                     textAlign: TextAlign.start,
                   ),
                   SizedBox(
-                    height: AppSize.defaultSize! * 4,
+                    height: AppSize.defaultSize! * 2,
                   ),
-                  Center(
-                    child: CustomText(
-                      text: StringManager.terms.tr(),
-                      color: Colors.white,
-                      fontSize: AppSize.defaultSize! * .9,
-                      textAlign: TextAlign.center,
-                    ),
+                  Center(child: Image.asset(AssetPath.page3)),
+                 const Spacer(),
+                  MainButton(
+                    text: 'Continue',
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.page4);
+                    },
+                    color: Colors.white,
                   ),
                   SizedBox(
-                    height: AppSize.defaultSize!  *.5 ,
+                    height: AppSize.defaultSize! * 6,
                   ),
-                  MainButton(
-                    text: StringManager.login.tr(),
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.login);
-                    },
-                    color: Colors.white,
-                  ) , SizedBox(
-                    height: AppSize.defaultSize! *2,
-                  ),
-                  MainButton(
-                    text: StringManager.register.tr(),
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.signUp);
-                    },
-                    color: Colors.white,
-                  )
                 ],
               ),
             ),

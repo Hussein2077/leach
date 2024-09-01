@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -7,7 +9,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
-import 'package:leach/core/utils/methods.dart';
 import 'package:leach/core/widgets/leading_icon.dart';
 import 'package:leach/core/widgets/loading_widget.dart';
 import 'package:leach/core/widgets/main_button.dart';
@@ -30,11 +31,40 @@ class AddPhotoForPet extends StatefulWidget {
 
 class _AddPhotoForPetState extends State<AddPhotoForPet> {
   File? _imageFile;
+  StreamSubscription<CreatePetState>? _createPetBlocSubscription;
 
   @override
   void initState() {
-    _imageFile=null;
+    _imageFile = null;
+    _createPetBlocSubscription =
+        BlocProvider.of<CreatePetBloc>(context).stream.listen((state) {
+      if (state is AddPhotoForPetLoadingState) {
+        LoadingOverlay().show(context);
+      }
+
+      if (state is AddPhotoForPetSuccessMessageState) {
+        _handleSuccessState(); // Call the method to handle success state
+      }
+
+      if (state is AddPhotoForPetErrorMessageState) {
+        LoadingOverlay().hide();
+        errorSnackBar(context, state.errorMessage);
+      }
+    });
     super.initState();
+  }
+
+  void _handleSuccessState() {
+    LoadingOverlay().hide();
+    BlocProvider.of<GetMyDataBloc>(context).add(GetMyDataEvent());
+    Navigator.pushNamed(context, Routes.main, arguments: 2);
+    _createPetBlocSubscription?.cancel();
+  }
+
+  @override
+  void dispose() {
+    _createPetBlocSubscription?.cancel();
+    super.dispose();
   }
 
   Future<void> _openImagePicker() async {
@@ -60,69 +90,52 @@ class _AddPhotoForPetState extends State<AddPhotoForPet> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<CreatePetBloc, CreatePetState>(
-      listener: (context, state) {
-        if (state is AddPhotoForPetLoadingState) {
-          LoadingOverlay().show(context);
-        }
-        if (state is AddPhotoForPetSuccessMessageState) {
-          LoadingOverlay().hide();
-          BlocProvider.of<GetMyDataBloc>(context).add(GetMyDataEvent());
-
-          Navigator.pushNamed(context, Routes.main, arguments: 2);
-        }
-        if (state is AddPhotoForPetErrorMessageState) {
-          LoadingOverlay().hide();
-          errorSnackBar(context, state.errorMessage);
-        }
-      },
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Padding(
-              padding: EdgeInsets.only(
-          left: AppSize.defaultSize! * 2,
-          right: AppSize.defaultSize! * 2,
-          top: AppSize.defaultSize! * 6,
-        ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: AppSize.defaultSize! * 3,
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.only(
+            left: AppSize.defaultSize! * 2,
+            right: AppSize.defaultSize! * 2,
+            top: AppSize.defaultSize! * 6,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: AppSize.defaultSize! * 3,
+              ),
+              const LeadingIcon(),
+              SizedBox(
+                height: AppSize.defaultSize! * 3,
+              ),
+              DottedBorderCustom(
+                text: StringManager.addPhoto.tr(),
+                onTap: _openImagePicker,
+                imageFile: _imageFile,
+              ),
+              SizedBox(
+                height: AppSize.defaultSize! * 10,
+              ),
+              Center(
+                child: MainButton(
+                  text: StringManager.save.tr(),
+                  onTap: () {
+                    if (_imageFile == null) {
+                      errorSnackBar(context, 'Please select an image');
+                    } else {
+                      BlocProvider.of<CreatePetBloc>(context).add(
+                        AddPhotoForPetEvent(
+                          image: _imageFile!,
+                          petId: widget.petId.toString(),
+                        ),
+                      );
+                    }
+                  },
+                  textColor: Colors.white,
                 ),
-                const LeadingIcon(),
-                SizedBox(
-                  height: AppSize.defaultSize! * 3,
-                ),
-                DottedBorderCustom(
-                  text: StringManager.addPhoto.tr(),
-                  onTap: _openImagePicker,
-                  imageFile: _imageFile,
-                ),
-                SizedBox(
-                  height: AppSize.defaultSize! * 10,
-                ),
-                Center(
-                  child: MainButton(
-                    text: StringManager.save.tr(),
-                    onTap: () {
-                      if (_imageFile == null) {
-                        errorSnackBar(context, 'Please select an image');
-                      } else {
-                        BlocProvider.of<CreatePetBloc>(context).add(
-                          AddPhotoForPetEvent(
-                            image: _imageFile!,
-                            petId: widget.petId.toString(),
-                          ),
-                        );
-                      }
-                    },
-                    textColor: Colors.white,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
