@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leach/core/models/profile_data_model.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/utils/app_size.dart';
@@ -101,7 +102,7 @@ class ProfileUserRow extends StatelessWidget {
           ],
         ),
         if (friendsView) const Spacer(),
-        if (friendsView) friendButton(context: context),
+        if (friendsView && UserModel.getInstance().uuid != uuid) friendButton(context: context),
       ],
     );
   }

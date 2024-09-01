@@ -496,7 +496,7 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
 
     try {
       final response =
-      await Dio().get(ConstantApi.blockUser(id: id), options: options);
+      await Dio().post(ConstantApi.blockUser(id: id), options: options);
       Map<String, dynamic> data = response.data;
 
       return data["message"] ?? "Success";
