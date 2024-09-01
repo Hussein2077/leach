@@ -153,7 +153,7 @@ class RouteGenerator {
                   if (state is GetMyDataLoadingState) {
                     return const Scaffold(
                         body: BackgroundScreen(
-                      image: AssetPath.homeBackground,
+                      image:  AssetPath.welcomeImage,
                       child: LoadingWidget(),
                     ));
                   }

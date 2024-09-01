@@ -29,10 +29,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _initializeSplash() async {
     if (!mounted) return;
-
-    await Future.delayed(const Duration(seconds: 3));
-    bool firstOpen = await Methods.instance.returnFirstOpen();
     token = await Methods.instance.returnUserToken();
+    await Future.delayed(  Duration(seconds:(token != "noToken" || token != null)?0: 3));
+    bool firstOpen = await Methods.instance.returnFirstOpen();
+
     log('$token mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm');
     _navigateBasedOnToken(firstOpen);
   }
