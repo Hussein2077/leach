@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/leading_icon.dart';
 import 'package:leach/core/widgets/loading_widget.dart';
@@ -19,7 +20,6 @@ class BreedingScreen extends StatefulWidget {
 }
 
 class _BreedingScreenState extends State<BreedingScreen> {
-
   int page = 1;
   int totalPages = 0;
   final scrollcontroller = ScrollController();
@@ -29,13 +29,14 @@ class _BreedingScreenState extends State<BreedingScreen> {
   @override
   void initState() {
     scrollcontroller.addListener(_scrollListener);
-    BlocProvider.of<BreedingBloc>(context).add(
-        GetBreedingEvent(page: '1', type: widget.type));
+    BlocProvider.of<BreedingBloc>(context)
+        .add(GetBreedingEvent(page: '1', type: widget.type));
     super.initState();
   }
 
   void _scrollListener() {
-    if (scrollcontroller.position.pixels == scrollcontroller.position.maxScrollExtent) {
+    if (scrollcontroller.position.pixels ==
+        scrollcontroller.position.maxScrollExtent) {
       if (page < totalPages) {
         page = page + 1;
         BlocProvider.of<BreedingBloc>(context).add(
@@ -59,7 +60,8 @@ class _BreedingScreenState extends State<BreedingScreen> {
                 child: BlocBuilder<BreedingBloc, BreedingState>(
                   builder: (context, state) {
                     if (state is GetBreedingSuccessState) {
-                      totalPages = state.breedingModel.breeding?.pagination?.total ?? 1;
+                      totalPages =
+                          state.breedingModel.breeding?.pagination?.total ?? 1;
                       page = 1;
                       data = [];
                       for (final e in state.breedingModel.breeding!.data!) {
@@ -70,10 +72,12 @@ class _BreedingScreenState extends State<BreedingScreen> {
                         cacheExtent: 1000,
                         itemCount: data.length,
                         itemBuilder: (context, index) {
-                          return BreedingCard(data: data[index],);
+                          return BreedingCard(
+                            data: data[index],
+                          );
                         },
                       );
-                    }else if (state is GetMoreBreedingLoadingState) {
+                    } else if (state is GetMoreBreedingLoadingState) {
                       return ListView.builder(
                         controller: scrollcontroller,
                         cacheExtent: 1000,
@@ -96,7 +100,9 @@ class _BreedingScreenState extends State<BreedingScreen> {
                       );
                     } else {
                       return const Center(
-                        child: LoadingWidget(),
+                        child: LoadingWidget(
+                          color: AppColors.primaryColor,
+                        ),
                       );
                     }
                   },
