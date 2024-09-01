@@ -337,9 +337,7 @@ class _FriendViewBodyState extends State<FriendViewBody> with TickerProviderStat
                   indent: AppSize.defaultSize! * 2,
                   endIndent: AppSize.defaultSize! * 2,
                 ),
-                SizedBox(
-                  height: AppSize.defaultSize! * 2,
-                ),
+
                 SizedBox(
                   width: AppSize.screenWidth! * .7,
                   child: CustomText(
