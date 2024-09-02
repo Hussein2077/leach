@@ -390,7 +390,7 @@ class _FriendViewBodyState extends State<FriendViewBody> with TickerProviderStat
                     addIcon: false,
                     pets: false,
                     onImageTap: (){
-                      Navigator.pushNamed(context, Routes.friendPostPet, arguments: PostPetsParamRoute(images: widget.userDataModel.data!.posts!.data!.map((e) => e.picture!).toList(), body: widget.userDataModel.data!.posts!.data!.map((e) => e.caption!).toList()));
+                      Navigator.pushNamed(context, Routes.friendPostPet, arguments: PostPetsParamRoute(images: widget.userDataModel.data!.posts!.data!.map((e) => e.picture??"").toList(), body: widget.userDataModel.data!.posts!.data!.map((e) => e.caption??"").toList()));
                     },
                     commonType: CommonType(
                       pictures: widget.userDataModel.data!.posts!.data!.map((e) => e.picture!).toList(),

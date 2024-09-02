@@ -79,67 +79,67 @@ class _PostCardState extends State<PostCard> {
             ),
           ),
 
-          CachedNetworkCustom(
-            url: widget.postData.picture ?? "",
-            width: AppSize.screenWidth!,
-            height: AppSize.defaultSize! * 25,
-            fit: BoxFit.fill,
-            shape: BoxShape.rectangle,
-          ),
-          SizedBox(
-            height: AppSize.defaultSize! * 3,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 3.6),
-            child: Row(
-              children: [
-                InkWell(
-                    onTap: () {
-                      if (!isLiked) {
-                        BlocProvider.of<LikePostsBloc>(context)
-                            .add(LikeEvent(id: widget.postData.uuid.toString()));
-                      } else {
-                        BlocProvider.of<LikePostsBloc>(context).add(
-                            UnLikeEvent(id: widget.postData.uuid.toString()));
-                      }
-                      setState(() {
-                        isLiked = !isLiked;
-                        widget.postData.liked = isLiked;
-                      });
-                    },
-                    borderRadius: BorderRadius.circular(AppSize.defaultSize! * 1.5),
-                    child: IconWithMaterial(
-                      imagePath: AssetPath.like,
-                      color: isLiked ? AppColors.primaryColor : null,
-                      color2: isLiked ? Colors.white : null,
-                    )),
-                SizedBox(
-                  width: AppSize.defaultSize!,
-                ),
-                InkWell(
+        CachedNetworkCustom(
+          url: widget.postData.picture ?? "",
+          width: AppSize.screenWidth!,
+          height: AppSize.defaultSize! * 25,
+          shape: BoxShape.rectangle,
+          fit: BoxFit.fill,
+        ),
+        SizedBox(
+          height: AppSize.defaultSize! * 3,
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 3.6),
+          child: Row(
+            children: [
+              InkWell(
                   onTap: () {
-                    showModalBottomSheet(
-                      context: context,
-                      backgroundColor: Colors.white,
-                      isScrollControlled: true,
-                      builder: (BuildContext context) {
-                        return CommentView(postId: widget.postData.uuid!.toString());
-                        },
-                    );
-                    },
+                    if (!isLiked) {
+                      BlocProvider.of<LikePostsBloc>(context)
+                          .add(LikeEvent(id: widget.postData.uuid.toString()));
+                    } else {
+                      BlocProvider.of<LikePostsBloc>(context).add(
+                          UnLikeEvent(id: widget.postData.uuid.toString()));
+                    }
+                    setState(() {
+                      isLiked = !isLiked;
+                      widget.postData.liked = isLiked;
+                    });
+                  },
                   borderRadius: BorderRadius.circular(AppSize.defaultSize! * 1.5),
-                  child: const IconWithMaterial(
-                      imagePath: AssetPath.comment,
-                    ),
-                ),
-              ],
-            ),
+                  child: IconWithMaterial(
+                    imagePath: AssetPath.like,
+                    color: isLiked ? AppColors.primaryColor : null,
+                    color2: isLiked ? Colors.white : null,
+                  )),
+              SizedBox(
+                width: AppSize.defaultSize!,
+              ),
+              InkWell(
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    backgroundColor: Colors.white,
+                    isScrollControlled: true,
+                    builder: (BuildContext context) {
+                      return CommentView(postId: widget.postData.uuid!.toString());
+                      },
+                  );
+                  },
+                borderRadius: BorderRadius.circular(AppSize.defaultSize! * 1.5),
+                child: const IconWithMaterial(
+                    imagePath: AssetPath.comment,
+                  ),
+              ),
+            ],
           ),
-          SizedBox(
-            height: AppSize.defaultSize! * 5,
-          ),
-        ],
-      ),
+        ),
+
+        SizedBox(
+          height: AppSize.defaultSize! * 5,
+        ),
+      ],
     );
   }
 

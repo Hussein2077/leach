@@ -30,12 +30,12 @@ class Comments {
     if (json['data'] != null) {
       data = [];
       json['data'].forEach((v) {
-        data?.add(Data.fromJson(v));
+        data?.add(CommentData.fromJson(v));
       });
     }
     pagination = json['pagination'] != null ? Pagination.fromJson(json['pagination']) : null;
   }
-  List<Data>? data;
+  List<CommentData>? data;
   Pagination? pagination;
 
   Map<String, dynamic> toJson() {
@@ -80,13 +80,13 @@ class Pagination {
 
 }
 
-class Data {
-  Data({
+class CommentData {
+  CommentData({
       this.uuid, 
       this.comment, 
       this.user,});
 
-  Data.fromJson(dynamic json) {
+  CommentData.fromJson(dynamic json) {
     uuid = json['uuid'];
     comment = json['comment'];
     user = json['user'] != null ? User.fromJson(json['user']) : null;
