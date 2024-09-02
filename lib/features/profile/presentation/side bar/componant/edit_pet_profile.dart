@@ -96,7 +96,7 @@ class _EditPetProfileState extends State<EditPetProfile> {
         if (state is UpdatePetSuccessMessageState) {
           LoadingOverlay().hide();
 
-          Navigator.pushNamed(context, Routes.main,arguments: 2);
+          Navigator.pushNamedAndRemoveUntil(context, Routes.main,arguments: 2, (route) => false);
           BlocProvider.of<GetMyDataBloc>(context).add(GetMyDataEvent());
         } else if (state is UpdatePetErrorMessageState) {
           LoadingOverlay().hide();

@@ -32,7 +32,7 @@ class EditProfile extends StatefulWidget {
 class _EditProfileState extends State<EditProfile> {
   String? area;
   String? city;
-  File ? imageFile;
+  File? imageFile;
   late TextEditingController bioController;
 
   late TextEditingController nameController;
@@ -46,168 +46,166 @@ class _EditProfileState extends State<EditProfile> {
     bioController = TextEditingController(text: UserModel.getInstance().bio);
     city = UserModel.getInstance().city;
     area = UserModel.getInstance().area;
-log('$area dsggerd $city');
+    log('$area dsggerd $city');
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<GetMyDataBloc, GetMyDataState >(
-  listener: (context, state) {
-    if (state is UpdateMyDataLoadingState) {
-      LoadingOverlay().show(context);
-    }
-    else if (state is UpdateMyDataSuccessState) {
-      LoadingOverlay().hide();
-      BlocProvider.of<GetMyDataBloc>(context).add(GetMyDataEvent());
+    return BlocListener<GetMyDataBloc, GetMyDataState>(
+      listener: (context, state) {
+        if (state is UpdateMyDataLoadingState) {
+          LoadingOverlay().show(context);
+        } else if (state is UpdateMyDataSuccessState) {
+          LoadingOverlay().hide();
+          BlocProvider.of<GetMyDataBloc>(context).add(GetMyDataEvent());
 
-   Navigator.pushNamed(context, Routes.main,arguments: 3);
-    }
-    else if (state is UpdateMyDataErrorState) {
-      LoadingOverlay().hide();
- errorSnackBar(context, state.errorMessage);
-     }
-  },
-  child: Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
+          Navigator.pushNamedAndRemoveUntil(
+              context, Routes.main, arguments: 3, (route) => false);
+        } else if (state is UpdateMyDataErrorState) {
+          LoadingOverlay().hide();
+          errorSnackBar(context, state.errorMessage);
+        }
+      },
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Padding(
             padding: EdgeInsets.only(
-          left: AppSize.defaultSize! * 2,
-          right: AppSize.defaultSize! * 2,
-          top: AppSize.defaultSize! * 6,
-        ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: AppSize.defaultSize! * 2,
-                width: AppSize.defaultSize! * 2,
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const LeadingIcon(
-                    color: AppColors.primaryColor,
-                  ),
-                  const Spacer(
-                    flex: 10,
-                  ),
-                  // if (UserModel.getInstance().image != '')
-                     StatefulBuilder(
-                      builder: (context, setState) {
-                        return Padding(
-                          padding: EdgeInsets.only(top: AppSize.defaultSize! * 2),
-                          child: ProfileImagePicker(
-                            initialImageUrl: UserModel.getInstance().image, // Your initial image URL
-                            initialText: 'Pick an image',
-                            onImagePicked: (File image) {
-                              setState(() {
-                                imageFile = image;
-                              });
-                            },
-                          ),
-                        );
-                      }
-                    ),
-
-                  const Spacer(
-                    flex: 12,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: AppSize.defaultSize! ,
-              ),
-              Center(
-                child: CustomText(
-                  text: StringManager.changePicture.tr(),
-                  fontSize: AppSize.defaultSize! * 2,
+              left: AppSize.defaultSize! * 2,
+              right: AppSize.defaultSize! * 2,
+              top: AppSize.defaultSize! * 6,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: AppSize.defaultSize! * 2,
+                  width: AppSize.defaultSize! * 2,
                 ),
-              ),
-              SizedBox(
-                height: AppSize.defaultSize! * 2,
-              ),
-              CustomText(
-                fontFamily: 'Gully-CD',
-                text: StringManager.enterInformation.tr(),
-                fontSize: AppSize.defaultSize! * 1.5,
-                color: const Color.fromRGBO(112, 112, 112, 1),
-              ),
-              ColumnWithTextField(
-                text: StringManager.name.tr(),
-                hintText: StringManager.enterYourName.tr(),
-                rightText: StringManager.optional.tr(),
-                controller: nameController,
-              ),
-              ColumnWithTextField(
-                text: StringManager.userName.tr(),
-                hintText: StringManager.enterUserName.tr(),
-                controller: usernameController,
-                rightText: StringManager.optional.tr(),
-              ),
-              ColumnWithTextField(
-                text: StringManager.editBio.tr(),
-                hintText: StringManager.enterNewBio.tr(),
-                rightText: StringManager.optional.tr(),
-                controller: bioController,
-              ),
-              StatefulBuilder(builder: (context, setState) {
-                return ColumnWithTextField(
-                  text: StringManager.city.tr(),
-                  child: CountryDropDown(
-                    countryOrCity: StringManager.citiesInEgypt,
-                    initialValue: city,
-                    onChanged: (String? value) {
-                      setState(() {
-                        city = value;
-                      });
-                    },
-                    hint: StringManager.selectYourCity.tr(),
-                  ),
-                );
-              }),
-              StatefulBuilder(builder: (context, setState) {
-                return ColumnWithTextField(
-                  text: StringManager.area.tr(),
-                  child: CountryDropDown(
-                    countryOrCity: const ['6 Of October','zayed'],
-                    initialValue: area,
-                    onChanged: (String? value) {
-                      setState(() {
-                        area = value;
-                      });
-                    },
-                  ),
-                );
-              }),
-              SizedBox(
-                height: AppSize.defaultSize! * 3,
-              ),
-              Center(
-                child: MainButton(
-                    text: StringManager.save.tr(),
-                    color: const Color.fromRGBO(68, 82, 255, 1),
-                    textColor: Colors.white,
-                    onTap: () {
-                      BlocProvider.of<GetMyDataBloc>(context) .add( UpdateMyDataEvent(
-                        name: nameController.text,
-                        username: usernameController.text,
-                        bio: bioController.text,
-                        city: city ,
-                        area: area  ,
-                        image: imageFile
-                      ));
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const LeadingIcon(
+                      color: AppColors.primaryColor,
+                    ),
+                    const Spacer(
+                      flex: 10,
+                    ),
+                    // if (UserModel.getInstance().image != '')
+                    StatefulBuilder(builder: (context, setState) {
+                      return Padding(
+                        padding: EdgeInsets.only(top: AppSize.defaultSize! * 2),
+                        child: ProfileImagePicker(
+                          initialImageUrl: UserModel.getInstance()
+                              .image, // Your initial image URL
+                          initialText: 'Pick an image',
+                          onImagePicked: (File image) {
+                            setState(() {
+                              imageFile = image;
+                            });
+                          },
+                        ),
+                      );
                     }),
-              ),
-              SizedBox(
-                height: AppSize.defaultSize! * 3,
-              ),
-            ],
+
+                    const Spacer(
+                      flex: 12,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: AppSize.defaultSize!,
+                ),
+                Center(
+                  child: CustomText(
+                    text: StringManager.changePicture.tr(),
+                    fontSize: AppSize.defaultSize! * 2,
+                  ),
+                ),
+                SizedBox(
+                  height: AppSize.defaultSize! * 2,
+                ),
+                CustomText(
+                  fontFamily: 'Gully-CD',
+                  text: StringManager.enterInformation.tr(),
+                  fontSize: AppSize.defaultSize! * 1.5,
+                  color: const Color.fromRGBO(112, 112, 112, 1),
+                ),
+                ColumnWithTextField(
+                  text: StringManager.name.tr(),
+                  hintText: StringManager.enterYourName.tr(),
+                  rightText: StringManager.optional.tr(),
+                  controller: nameController,
+                ),
+                ColumnWithTextField(
+                  text: StringManager.userName.tr(),
+                  hintText: StringManager.enterUserName.tr(),
+                  controller: usernameController,
+                  rightText: StringManager.optional.tr(),
+                ),
+                ColumnWithTextField(
+                  text: StringManager.editBio.tr(),
+                  hintText: StringManager.enterNewBio.tr(),
+                  rightText: StringManager.optional.tr(),
+                  controller: bioController,
+                ),
+                StatefulBuilder(builder: (context, setState) {
+                  return ColumnWithTextField(
+                    text: StringManager.city.tr(),
+                    child: CountryDropDown(
+                      countryOrCity: StringManager.citiesInEgypt,
+                      initialValue: city,
+                      onChanged: (String? value) {
+                        setState(() {
+                          city = value;
+                        });
+                      },
+                      hint: StringManager.selectYourCity.tr(),
+                    ),
+                  );
+                }),
+                StatefulBuilder(builder: (context, setState) {
+                  return ColumnWithTextField(
+                    text: StringManager.area.tr(),
+                    child: CountryDropDown(
+                      countryOrCity: const ['6 Of October', 'zayed'],
+                      initialValue: area,
+                      onChanged: (String? value) {
+                        setState(() {
+                          area = value;
+                        });
+                      },
+                    ),
+                  );
+                }),
+                SizedBox(
+                  height: AppSize.defaultSize! * 3,
+                ),
+                Center(
+                  child: MainButton(
+                      text: StringManager.save.tr(),
+                      color: const Color.fromRGBO(68, 82, 255, 1),
+                      textColor: Colors.white,
+                      onTap: () {
+                        BlocProvider.of<GetMyDataBloc>(context).add(
+                            UpdateMyDataEvent(
+                                name: nameController.text,
+                                username: usernameController.text,
+                                bio: bioController.text,
+                                city: city,
+                                area: area,
+                                image: imageFile));
+                      }),
+                ),
+                SizedBox(
+                  height: AppSize.defaultSize! * 3,
+                ),
+              ],
+            ),
           ),
         ),
       ),
-    ),
-);
+    );
   }
 }

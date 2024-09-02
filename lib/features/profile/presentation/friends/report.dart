@@ -15,15 +15,14 @@ class ReportView extends StatefulWidget {
 }
 
 class _ReportViewState extends State<ReportView> with TickerProviderStateMixin {
-
   @override
   void initState() {
     //make a timer to navigate to main
-    if(mounted) {
+    if (mounted) {
       Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushNamedAndRemoveUntil(
-          context, Routes.main, (route) => false);
-    });
+        Navigator.pushNamedAndRemoveUntil(
+            context, Routes.main, (route) => false);
+      });
     }
     super.initState();
   }
@@ -51,7 +50,6 @@ class _ReportViewState extends State<ReportView> with TickerProviderStateMixin {
                   color: Colors.white,
                 ),
                 Image.asset(AssetPath.tick)
-
               ],
             ),
           ),

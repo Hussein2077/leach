@@ -131,7 +131,7 @@ class Methods {
     }
   }
 
-  showAlertDialog(BuildContext context, {required String title, required VoidCallback? onPressed}) {
+  showAlertDialog(BuildContext context, {required String title, required VoidCallback? onPressed,}) {
     showDialog(
         context: context,
         builder: (context) {

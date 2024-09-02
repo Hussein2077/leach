@@ -57,7 +57,7 @@ class _AddPhotoForPetState extends State<AddPhotoForPet> {
   void _handleSuccessState() {
     LoadingOverlay().hide();
     BlocProvider.of<GetMyDataBloc>(context).add(GetMyDataEvent());
-    Navigator.pushNamed(context, Routes.main, arguments: 2);
+    Navigator.pushNamedAndRemoveUntil(context, Routes.main, arguments: 2, (route) => false);
     _createPetBlocSubscription?.cancel();
   }
 

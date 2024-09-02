@@ -17,8 +17,8 @@ class DioHelper {
     Map<String, String> headers = await DioHelper().header();
     return Options(
       receiveDataWhenStatusError: true,
-      sendTimeout: const Duration(milliseconds: 15000),
-      receiveTimeout: const Duration(milliseconds: 15000),
+      // sendTimeout: const Duration(milliseconds: 15000),
+      // receiveTimeout: const Duration(milliseconds: 15000),
       headers: headers,
     );
   }

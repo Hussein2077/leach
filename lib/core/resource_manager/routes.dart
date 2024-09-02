@@ -1,12 +1,11 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leach/core/models/pet_model.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/enums.dart';
-import 'package:leach/core/service/navigator_services.dart';
-import 'package:leach/core/service/service_locator.dart';
 import 'package:leach/core/utils/enums.dart';
 import 'package:leach/core/widgets/background.dart';
 import 'package:leach/core/widgets/loading_widget.dart';
@@ -487,45 +486,34 @@ class RouteGenerator {
             pageBuilder: (context, animation, secondaryAnimation) =>
             const SearchScreen(),
             transitionsBuilder: customAnimate);
+
+    // Include other cases here...
+      default:
+      // Return a route that closes the app when the back button is pressed
+        return MaterialPageRoute(
+          builder: (context) {
+            return WillPopScope(
+              onWillPop: () async {
+                // Closes the app when back button is pressed
+                SystemNavigator.pop();
+                return false; // Prevents default back navigation
+              },
+              child: const Scaffold(
+                body: Center(
+                  child: Text(
+                    'Page not found. Press back to exit.',
+                    style: TextStyle(fontSize: 18, color: Colors.red),
+                  ),
+                ),
+              ),
+            );
+          },
+        );
+
     }
-    return unDefinedRoute(
-        getIt<NavigationService>().navigatorKey.currentContext!);
+
   }
 
-  static Route<dynamic> unDefinedRoute(BuildContext context) {
-    return MaterialPageRoute(
-      builder: (context) => WillPopScope(
-        onWillPop: () async {
-          bool leaveApp = await showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: const Text('Confirm Exit'),
-              content: const Text('Are you sure you want to leave the app?'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                      Routes.main,
-                      (route) => false,
-                    );
-                  },
-                  child: const Text('Cancel'),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(true);
-                  },
-                  child: const Text('Exit'),
-                ),
-              ],
-            ),
-          );
-          return leaveApp;
-        },
-        child: Container(),
-      ),
-    );
-  }
 }
 
 Widget customAnimate(BuildContext context, Animation<double> animation,

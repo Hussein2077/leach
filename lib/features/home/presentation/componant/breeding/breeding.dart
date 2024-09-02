@@ -48,68 +48,71 @@ class _BreedingScreenState extends State<BreedingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        bottom: false,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 2),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const LeadingIcon(),
-              Expanded(
-                child: BlocBuilder<BreedingBloc, BreedingState>(
-                  builder: (context, state) {
-                    if (state is GetBreedingSuccessState) {
-                      totalPages =
-                          state.breedingModel.breeding?.pagination?.total ?? 1;
-                      page = 1;
-                      data = [];
-                      for (final e in state.breedingModel.breeding!.data!) {
-                        data.add(e);
-                      }
-                      return ListView.builder(
-                        controller: scrollcontroller,
-                        cacheExtent: 1000,
-                        itemCount: data.length,
-                        itemBuilder: (context, index) {
-                          return BreedingCard(
-                            data: data[index],
-                          );
-                        },
-                      );
-                    } else if (state is GetMoreBreedingLoadingState) {
-                      return ListView.builder(
-                        controller: scrollcontroller,
-                        cacheExtent: 1000,
-                        itemBuilder: (context, index) => BreedingCard(
-                          data: data[index],
-                        ),
-                        itemCount: data.length,
-                      );
-                    } else if (state is GetMoreBreedingSuccessState) {
-                      for (final e in state.breedingModel.breeding!.data!) {
-                        data.add(e);
-                      }
-                      return ListView.builder(
-                        controller: scrollcontroller,
-                        cacheExtent: 1000,
-                        itemBuilder: (context, index) => BreedingCard(
-                          data: data[index],
-                        ),
-                        itemCount: data.length,
-                      );
-                    } else {
-                      return const Center(
-                        child: LoadingWidget(
-                          color: AppColors.primaryColor,
-                        ),
-                      );
+      body: Padding(
+        padding: EdgeInsets.only(
+          left: AppSize.defaultSize! * 2,
+          right: AppSize.defaultSize! * 2,
+          top: AppSize.defaultSize! * 6,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const LeadingIcon(),
+            Expanded(
+              child: BlocBuilder<BreedingBloc, BreedingState>(
+                builder: (context, state) {
+                  if (state is GetBreedingSuccessState) {
+                    totalPages =
+                        state.breedingModel.breeding?.pagination?.total ?? 1;
+                    page = 1;
+                    data = [];
+                    for (final e in state.breedingModel.breeding!.data!) {
+                      data.add(e);
                     }
-                  },
-                ),
+                    return ListView.builder(
+                      controller: scrollcontroller,
+                      cacheExtent: 1000,
+                      itemCount: data.length,
+                      physics: const BouncingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return BreedingCard(
+                          data: data[index],
+                        );
+                      },
+                    );
+                  } else if (state is GetMoreBreedingLoadingState) {
+                    return ListView.builder(
+                      controller: scrollcontroller,
+                      cacheExtent: 1000,
+                      physics: const BouncingScrollPhysics(),
+                      itemBuilder: (context, index) => BreedingCard(
+                        data: data[index],
+                      ),
+                      itemCount: data.length,
+                    );
+                  } else if (state is GetMoreBreedingSuccessState) {
+                    for (final e in state.breedingModel.breeding!.data!) {
+                      data.add(e);
+                    }
+                    return ListView.builder(
+                      controller: scrollcontroller,
+                      cacheExtent: 1000,
+                      itemBuilder: (context, index) => BreedingCard(
+                        data: data[index],
+                      ),
+                      itemCount: data.length,
+                    );
+                  } else {
+                    return const Center(
+                      child: LoadingWidget(
+                        color: AppColors.primaryColor,
+                      ),
+                    );
+                  }
+                },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
