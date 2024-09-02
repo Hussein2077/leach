@@ -132,6 +132,7 @@ class _PostCardState extends State<PostCard> {
             ],
           ),
         ),
+
         SizedBox(
           height: AppSize.defaultSize! * 5,
         ),
