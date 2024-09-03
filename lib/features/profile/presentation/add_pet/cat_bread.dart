@@ -150,6 +150,8 @@ class _CatBreadState extends State<CatBread> {
                             cubit.setPureBredSelected(true);
                           },
                         ),
+                        SizedBox(width: AppSize.defaultSize! * 10.5,),
+
                         CircularCheckbox(
                           text: 'MixedBreed',
                           initialValue: state.isPureBredSelected == false,
@@ -247,6 +249,8 @@ class _CatBreadState extends State<CatBread> {
                               cubit.setBreedingExperience(true);
                             },
                           ),
+                          SizedBox(width: AppSize.defaultSize! * 14.5,),
+
                           CircularCheckbox(
                             text: StringManager.no.tr(),
                             initialValue: state.breedingExperience == false,
@@ -268,6 +272,8 @@ class _CatBreadState extends State<CatBread> {
                               cubit.setBreedingAvailable(true);
                             },
                           ),
+                          SizedBox(width: AppSize.defaultSize! * 14.5,),
+
                           CircularCheckbox(
                             text: StringManager.no.tr(),
                             initialValue: state.breedingAvailable == false,
@@ -289,6 +295,8 @@ class _CatBreadState extends State<CatBread> {
                               cubit.setNeuteredSpayed(true);
                             },
                           ),
+                          SizedBox(width: AppSize.defaultSize! * 14.5,),
+
                           CircularCheckbox(
                             text: StringManager.no.tr(),
                             initialValue: state.neuteredSpayed == false,
