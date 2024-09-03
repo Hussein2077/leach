@@ -114,6 +114,8 @@ class _PostCardState extends State<PostCard> {
                       borderRadius:
                           BorderRadius.circular(AppSize.defaultSize! * 1.5),
                       child: IconWithMaterial(
+                        width: AppSize.defaultSize!*3,
+                        height: AppSize.defaultSize!*3,
                         imagePath: AssetPath.like,
                         color: isLiked ? AppColors.primaryColor : null,
                         color2: isLiked ? Colors.white : null,
@@ -135,7 +137,9 @@ class _PostCardState extends State<PostCard> {
                     },
                     borderRadius:
                         BorderRadius.circular(AppSize.defaultSize! * 1.5),
-                    child: const IconWithMaterial(
+                    child:  IconWithMaterial(
+                      width: AppSize.defaultSize!*3,
+                      height: AppSize.defaultSize!*3,
                       imagePath: AssetPath.comment,
                     ),
                   ),
