@@ -104,14 +104,17 @@ class DeleteAccount2 extends StatelessWidget {
                 },
               ),
               SizedBox(height: AppSize.defaultSize! * 1.3),
-              CircularCheckbox(
-                text: StringManager.no.tr(),
-               onChanged:   (value) {
-                 if (value!) {
-                   Navigator.pushNamedAndRemoveUntil(
-                       context, Routes.main, (route) => false);
-                 }
-               },
+              Padding(
+                padding: EdgeInsets.only(right: AppSize.defaultSize! * 0.4),
+                child: CircularCheckbox(
+                  text: StringManager.no.tr(),
+                 onChanged:   (value) {
+                   if (value!) {
+                     Navigator.pushNamedAndRemoveUntil(
+                         context, Routes.main, (route) => false);
+                   }
+                 },
+                ),
               ),
             ],
           ),

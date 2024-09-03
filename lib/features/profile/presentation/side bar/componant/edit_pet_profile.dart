@@ -288,6 +288,8 @@ class _EditPetProfileState extends State<EditPetProfile> {
                         });
                       },
                     ),
+                    SizedBox(width: AppSize.defaultSize! * 14.5,),
+
                     CircularCheckbox(
                       text: StringManager.no.tr(),
                       initialValue: breedingExperience == false,
@@ -313,6 +315,8 @@ class _EditPetProfileState extends State<EditPetProfile> {
                         });
                       },
                     ),
+                    SizedBox(width: AppSize.defaultSize! * 14.5,),
+
                     CircularCheckbox(
                       text: StringManager.no.tr(),
                       initialValue: breedingAvailable == false,
@@ -338,6 +342,8 @@ class _EditPetProfileState extends State<EditPetProfile> {
                         });
                       },
                     ),
+                    SizedBox(width: AppSize.defaultSize! * 14.5,),
+
                     CircularCheckbox(
                       text: StringManager.no.tr(),
                       initialValue: neuteredSpayed == false,

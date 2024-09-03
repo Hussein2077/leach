@@ -147,6 +147,8 @@ class _DogBreadState extends State<DogBread> {
                             cubit.setPureBredSelected(true);
                           },
                         ),
+                        SizedBox(width: AppSize.defaultSize! * 10.5,),
+
                         CircularCheckbox(
                           text: 'MixedBreed',
                           initialValue: state.isPureBredSelected == false,
