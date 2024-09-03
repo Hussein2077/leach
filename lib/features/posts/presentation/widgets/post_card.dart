@@ -43,7 +43,7 @@ class _PostCardState extends State<PostCard> {
           children: [
             Padding(
               padding:
-                  EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 3.6),
+                  EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 2),
               child: InkWell(
                 onTap: () {
                   Navigator.pushNamed(context, Routes.friendsView,
@@ -53,16 +53,16 @@ class _PostCardState extends State<PostCard> {
                   children: [
                     CachedNetworkCustom(
                       url: widget.postData.user?.profilePicture ?? "",
-                      width: AppSize.defaultSize! * 3,
-                      height: AppSize.defaultSize! * 3,
-                      radius: AppSize.defaultSize! * 3,
+                      width: AppSize.defaultSize! * 7,
+                      height: AppSize.defaultSize! * 7,
+                      radius: AppSize.defaultSize! * 5,
                     ),
                     SizedBox(
                       width: AppSize.defaultSize!,
                     ),
                     CustomText(
                       text: widget.postData.user?.username ?? "",
-                      fontSize: AppSize.defaultSize! * 2,
+                      fontSize: AppSize.defaultSize! * 2.6,
                       color: AppColors.primaryColor,
                     )
                   ],
@@ -78,7 +78,7 @@ class _PostCardState extends State<PostCard> {
                     EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 2),
                 child: CustomText(
                   text: widget.postData.caption ?? "",
-                  fontSize: AppSize.defaultSize! * 2,
+                  fontSize: AppSize.defaultSize! * 2.1,
                   color: AppColors.primaryColor,
                 ),
               ),

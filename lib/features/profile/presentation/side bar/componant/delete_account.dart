@@ -79,10 +79,29 @@ class DeleteAccount extends StatelessWidget {
         SizedBox(width: AppSize.defaultSize!*8 ),
 
         Expanded(
-          child: SvgPicture.asset(
-            AssetPath.myaFull,
-            width: AppSize.screenWidth! * .8
-            // height: AppSize.screenHeight! * .35,
+          child: Stack(
+            children:[SvgPicture.asset(
+                AssetPath.myaFull,
+                width: AppSize.screenWidth! * .8
+              // height: AppSize.screenHeight! * .35,
+            ),
+              Padding(
+                padding:  EdgeInsets.only(top: AppSize.defaultSize! * 19,left: AppSize.defaultSize!*0.5),
+                child: Container(
+                  width: AppSize.defaultSize! * 19,
+                  child: CustomText(text: StringManager.deleteAccountText.tr(),
+                    maxLines: 3,
+                    fontSize: AppSize.defaultSize! * 1.3,
+                    color: Colors.white,
+
+
+                  ),
+                ),
+              ),
+
+
+
+            ]
           ),
         ),
       ],

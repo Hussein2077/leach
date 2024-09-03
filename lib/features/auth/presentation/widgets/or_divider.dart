@@ -18,7 +18,8 @@ class OrAndDivider extends StatelessWidget {
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 7),
-          child: const CustomText(
+          child:  CustomText(
+            fontSize: AppSize.defaultSize! * 1.7,
             text: StringManager.orLoginWith,
             color: AppColors.greyColor,
           ),

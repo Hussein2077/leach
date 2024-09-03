@@ -268,5 +268,7 @@ class StringManager {
   static const String bookingHistory = "Booking History";
   static const String description  = "description";
   static const String searchFriends  = "search friends";
+  static const String deleteAccountText  = "By deleting your account, you will no longer have access to the app features.";
+
 
 }

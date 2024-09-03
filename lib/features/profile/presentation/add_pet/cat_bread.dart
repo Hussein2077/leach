@@ -107,7 +107,7 @@ class _CatBreadState extends State<CatBread> {
                     ),
                     CustomText(
                       text: StringManager.enterPersonalInformation.tr(),
-                      fontSize: AppSize.defaultSize! * 1.5,
+                      fontSize: AppSize.defaultSize! * 1.8,
                       color: AppColors.greyColor,
                     ),
                     ColumnWithTextField(
