@@ -59,7 +59,7 @@ dependencies:
   calendar_date_picker2: ^1.1.5
   google_sign_in: ^6.2.1
   sign_in_with_apple: ^6.1.1
-  
+  top_snackbar_flutter:
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -39,7 +39,7 @@ class _PetPhotoViewState extends State<PetPhotoView> {
           LoadingOverlay().hide();
           BlocProvider.of<GetMyDataBloc>(context).add(GetMyDataEvent());
 
-          Navigator.pushNamed(context, Routes.main, arguments: 2);
+          Navigator.pushNamedAndRemoveUntil(context, Routes.main, arguments: 2, (route) => false);
         }
         if (state is AddPhotoForPetErrorMessageState) {
           LoadingOverlay().hide();

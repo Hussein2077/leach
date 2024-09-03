@@ -14,28 +14,29 @@ class PostsScreen extends StatefulWidget {
 
   @override
   State<PostsScreen> createState() => _PostsScreenState();
+
+  static int page = 1;
+  static int totalPages = 0;
+  static List<PostData> data = [];
+
 }
 
 class _PostsScreenState extends State<PostsScreen> {
 
-  int page = 1;
-  int totalPages = 0;
-  List<PostData> data = [];
   final scrollcontroller = ScrollController();
 
 
   @override
   void initState() {
     scrollcontroller.addListener(_scrollListener);
-    BlocProvider.of<PostsBloc>(context).add(GetPostsEvent(page: page.toString()));
     super.initState();
   }
 
   void _scrollListener() {
     if (scrollcontroller.position.pixels == scrollcontroller.position.maxScrollExtent) {
-      if (page < totalPages) {
-        page = page + 1;
-        BlocProvider.of<PostsBloc>(context).add(GetMorePostsEvent(page: page.toString()));
+      if (PostsScreen.page < PostsScreen.totalPages) {
+        PostsScreen.page = PostsScreen.page + 1;
+        BlocProvider.of<PostsBloc>(context).add(GetMorePostsEvent(page: PostsScreen.page.toString()));
       }
     }
   }
@@ -48,40 +49,40 @@ class _PostsScreenState extends State<PostsScreen> {
         child: BlocBuilder<PostsBloc, PostState>(
           builder: (context, state) {
             if(state is GetPostsSuccessState) {
-              totalPages = state.postsModel.posts?.pagination?.total ?? 1;
-              page = 1;
-              data = [];
+              PostsScreen.totalPages = state.postsModel.posts?.pagination?.total ?? 1;
+              PostsScreen.page = 1;
+              PostsScreen.data = [];
               for (final e in state.postsModel.posts!.data!) {
-                data.add(e);
+                PostsScreen.data.add(e);
               }
               return ListView.builder(
                 controller: scrollcontroller,
                 cacheExtent: 1000,
                 itemBuilder: (context, index) => PostCard(
-                  postData: data[index],
+                  postData: PostsScreen.data[index],
                 ),
-                itemCount: data.length,
+                itemCount: PostsScreen.data.length,
               );
             } else if (state is GetMorePostsLoadingState) {
               return ListView.builder(
                 controller: scrollcontroller,
                 cacheExtent: 1000,
                 itemBuilder: (context, index) => PostCard(
-                  postData: data[index],
+                  postData: PostsScreen.data[index],
                 ),
-                itemCount: data.length,
+                itemCount: PostsScreen.data.length,
               );
             } else if (state is GetMorePostsSuccessState) {
               for (final e in state.postsModel.posts!.data!) {
-                data.add(e);
+                PostsScreen.data.add(e);
               }
               return ListView.builder(
                 controller: scrollcontroller,
                 cacheExtent: 1000,
                 itemBuilder: (context, index) => PostCard(
-                  postData: data[index],
+                  postData: PostsScreen.data[index],
                 ),
-                itemCount: data.length,
+                itemCount: PostsScreen.data.length,
               );
             } else {
               return const LoadingWidget(

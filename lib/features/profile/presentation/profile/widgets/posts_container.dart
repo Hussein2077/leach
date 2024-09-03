@@ -32,7 +32,7 @@ final Function()? onImageTap;
                   return Padding(
                     padding:   EdgeInsets.all(AppSize.defaultSize! ),
                     child: InkWell(
-                      onTap:onImageTap ?? () {
+                      onTap: onImageTap ?? () {
                         Navigator.pushNamed(context, Routes.postsViewProfile);
                       },
                       child: CachedNetworkCustom(

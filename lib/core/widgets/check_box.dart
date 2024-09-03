@@ -38,50 +38,50 @@ class _CircularCheckboxState extends State<CircularCheckbox> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              _isChecked = !_isChecked!;
-            });
-            if (widget.onChanged != null) {
-              widget.onChanged!(_isChecked);
-            }
-          },
-          child: Material(
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _isChecked = !_isChecked!;
+        });
+        if (widget.onChanged != null) {
+          widget.onChanged!(_isChecked);
+        }
+      },
+      child: Row(
+        children: [
+          Material(
             elevation: 10,
             shape: const CircleBorder(),
             child: Container(
-              width: AppSize.defaultSize! * 1.9,
+              width: AppSize.defaultSize! * 1.5,
               height: AppSize.defaultSize! * 1.9,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: _isChecked! ? AppColors.primaryColor : Colors.transparent,
               ),
               child: _isChecked!
-                  ? const Icon(
+                  ?  Icon(
                 Icons.check,
                 color: Colors.white,
-                size: 16,
+                size: AppSize.defaultSize! * 1.5,
               )
                   : null,
             ),
           ),
-        ),
-        SizedBox(width: AppSize.defaultSize!),
-        SizedBox(
-          width: AppSize.defaultSize! * 14.5,
-          child: CustomText(
-            fontFamily: 'Gully-CD',
-            text: widget.text,
-            textAlign: TextAlign.start,
-            fontSize: AppSize.defaultSize! * 1.5,
-            color: AppColors.greyColor,
-            fontWeight: FontWeight.w400,
+          SizedBox(width: AppSize.defaultSize!),
+          SizedBox(
+
+            child: CustomText(
+              fontFamily: 'Gully-CD',
+              text: widget.text,
+              textAlign: TextAlign.start,
+              fontSize: AppSize.defaultSize! * 1.5,
+              color: AppColors.greyColor,
+              fontWeight: FontWeight.w400,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

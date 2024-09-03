@@ -9,10 +9,12 @@ import 'package:leach/core/resource_manager/routes.dart';
 import 'package:leach/core/resource_manager/string_manager.dart';
 import 'package:leach/core/utils/app_size.dart';
 import 'package:leach/core/widgets/cached_network_image.dart';
+import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/core/widgets/icon_with_matrial.dart';
 import 'package:leach/features/posts/data/models/posts_model.dart';
 import 'package:leach/features/posts/presentation/manager/user_posts_manager/user_posts_bloc.dart';
 import 'package:leach/features/posts/presentation/manager/user_posts_manager/user_posts_event.dart';
+import 'package:leach/features/posts/presentation/widgets/comment_view.dart';
 import 'package:leach/features/profile/presentation/side%20bar/side_bar_row.dart';
 
 class CardWidget extends StatefulWidget {
@@ -242,6 +244,7 @@ class _CardWidgetState extends State<CardWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -275,6 +278,15 @@ class _CardWidgetState extends State<CardWidget> {
               ),
             ),
           ],
+        ),
+
+        if(widget.data.caption !=null) Padding(
+          padding: EdgeInsets.symmetric(horizontal: AppSize.defaultSize! * 2),
+          child: CustomText(
+            text: widget.data.caption??"",
+            fontSize: AppSize.defaultSize! * 2,
+            color: AppColors.primaryColor,
+          ),
         ),
 
         CachedNetworkCustom(
@@ -311,7 +323,16 @@ class _CardWidgetState extends State<CardWidget> {
               width: AppSize.defaultSize!,
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  backgroundColor: Colors.white,
+                  isScrollControlled: true,
+                  builder: (BuildContext context) {
+                    return CommentView(postId: widget.data.uuid!.toString());
+                  },
+                );
+              },
               borderRadius: BorderRadius.circular(
                   AppSize.defaultSize! * 1.5),
               child: IconWithMaterial(

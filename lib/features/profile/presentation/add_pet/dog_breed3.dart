@@ -24,9 +24,12 @@ import 'package:leach/features/profile/presentation/controller/get_traits/state.
 import '../widget/circular_checkbox.dart';
 
 class PetBreedSelection extends StatefulWidget {
-  const PetBreedSelection({super.key, required this.selectionPetTypeParamRoute,  });
-  final SelectionPetTypeParamRoute selectionPetTypeParamRoute;
+  const PetBreedSelection({
+    super.key,
+    required this.selectionPetTypeParamRoute,
+  });
 
+  final SelectionPetTypeParamRoute selectionPetTypeParamRoute;
 
   @override
   State<PetBreedSelection> createState() => _PetBreedSelectionState();
@@ -55,7 +58,8 @@ class _PetBreedSelectionState extends State<PetBreedSelection> {
       listener: (context, state) {
         if (state is UpdatePetSuccessMessageState) {
           LoadingOverlay().hide();
-          Navigator.pushNamed(context, Routes.main);
+          Navigator.pushNamedAndRemoveUntil(
+              context, Routes.main, (route) => false);
         } else if (state is UpdatePetErrorMessageState) {
           LoadingOverlay().hide();
           errorSnackBar(context, state.errorMessage);
@@ -74,7 +78,9 @@ class _PetBreedSelectionState extends State<PetBreedSelection> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               LeadingWithIcon(
-                image: widget.selectionPetTypeParamRoute.petType == 'dog' ? AssetPath.dogIcon : AssetPath.catIcon,
+                image: widget.selectionPetTypeParamRoute.petType == 'dog'
+                    ? AssetPath.dogIcon
+                    : AssetPath.catIcon,
                 color: AppColors.primaryColor,
               ),
               CustomText(
@@ -102,7 +108,8 @@ class _PetBreedSelectionState extends State<PetBreedSelection> {
                       color: AppColors.primaryColor,
                     );
                   } else if (state is GetTraitSuccessMessageState) {
-                    petTraits = state.petTraits.map((trait) => trait.id).toList();
+                    petTraits =
+                        state.petTraits.map((trait) => trait.id).toList();
                     if (state.petTraits.isEmpty) {
                       return const EmptyWidget();
                     }
@@ -117,13 +124,18 @@ class _PetBreedSelectionState extends State<PetBreedSelection> {
                             padding: EdgeInsets.all(AppSize.defaultSize!),
                             child: Column(
                               children: [
-                                buildTemperamentCheckbox(trait.id, trait.trait, isSubtrait: false),
-                                if (selectedPetTraitIds.contains(trait.id) && trait.subtraits.isNotEmpty)
+                                buildTemperamentCheckbox(trait.id, trait.trait,
+                                    isSubtrait: false),
+                                if (selectedPetTraitIds.contains(trait.id) &&
+                                    trait.subtraits.isNotEmpty)
                                   Column(
                                     children: [
-                                      for (int i = 0; i < trait.subtraits.length; i++)
+                                      for (int i = 0;
+                                          i < trait.subtraits.length;
+                                          i++)
                                         Padding(
-                                          padding: EdgeInsets.all(AppSize.defaultSize!),
+                                          padding: EdgeInsets.all(
+                                              AppSize.defaultSize!),
                                           child: buildTemperamentCheckbox(
                                             trait.subtraits[i].id,
                                             trait.subtraits[i].subTrait,
@@ -147,17 +159,30 @@ class _PetBreedSelectionState extends State<PetBreedSelection> {
                 child: MainButton(
                   text: StringManager.save.tr(),
                   onTap: () {
-                    bool areTraitsValid = selectedPetTraitIds.every((id) => petTraits!.contains(id));
-                    bool areSubtraitsValid = selectedSubtraitIds.every((id) => petTraits!.contains(id));
-                    if (areTraitsValid && areSubtraitsValid) {
-                      BlocProvider.of<CreatePetBloc>(context).add(UpdatePetEvent(
-                        uuid: widget.selectionPetTypeParamRoute.petProfileModel.uuid ?? "",
+                    bool areTraitsValid = selectedPetTraitIds
+                        .every((id) => petTraits!.contains(id));
+                    bool areSubtraitsValid = selectedSubtraitIds
+                        .every((id) => petTraits!.contains(id));
+                    // add validation here
+                    if (selectedPetTraitIds.isEmpty) {
+                      errorSnackBar(
+                          context, 'Please select at least one trait');
+                    } else if (areTraitsValid && areSubtraitsValid) {
+                      BlocProvider.of<CreatePetBloc>(context)
+                          .add(UpdatePetEvent(
+                        uuid: widget.selectionPetTypeParamRoute.petProfileModel
+                                .uuid ??
+                            "",
                         traits: selectedPetTraitIds.toList(),
                         subtraits: selectedSubtraitIds.toList(),
-                        breedingAvailable: widget.selectionPetTypeParamRoute.petProfileModel.breedingAvailable,
-                        neuteredSpayed: widget.selectionPetTypeParamRoute.petProfileModel.neuteredSpayed,
-                        breedingExperience: widget.selectionPetTypeParamRoute.petProfileModel.breedingExperience,
-                        size: widget.selectionPetTypeParamRoute.petProfileModel.breedSize,
+                        breedingAvailable: widget.selectionPetTypeParamRoute
+                            .petProfileModel.breedingAvailable,
+                        neuteredSpayed: widget.selectionPetTypeParamRoute
+                            .petProfileModel.neuteredSpayed,
+                        breedingExperience: widget.selectionPetTypeParamRoute
+                            .petProfileModel.breedingExperience,
+                        size: widget.selectionPetTypeParamRoute.petProfileModel
+                            .breedSize,
                       ));
                     } else {
                       errorSnackBar(context, StringManager.unexpectedError);
@@ -176,7 +201,8 @@ class _PetBreedSelectionState extends State<PetBreedSelection> {
     );
   }
 
-  Widget buildTemperamentCheckbox(int id, String text, {required bool isSubtrait}) {
+  Widget buildTemperamentCheckbox(int id, String text,
+      {required bool isSubtrait}) {
     return CircularCheckbox(
       onChanged: (isChecked) {
         setState(() {

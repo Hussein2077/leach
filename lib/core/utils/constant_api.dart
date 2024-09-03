@@ -46,6 +46,8 @@ class ConstantApi {
   }
   static getFriends(String page) {
     return "${baseUrl}user/listAllFriends?page=$page";
+  } static getSearchUser(String page, String search) {
+    return "${baseUrl}user/indexUsers?search=$search&page=$page";
   }
   static deletePost(String id) {
     return "${baseUrl}post/$id";

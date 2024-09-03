@@ -305,7 +305,6 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
     try {
       final response = await Dio().get(ConstantApi.getMyData, options: options);
       UserModel userModel = UserModel.fromMap(response.data['data']);
-
       return    userModel;
     } on DioException catch (e) {
       throw DioHelper.handleDioError(dioError: e, endpointName: 'getMyData');
@@ -497,7 +496,7 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
 
     try {
       final response =
-      await Dio().get(ConstantApi.blockUser(id: id), options: options);
+      await Dio().post(ConstantApi.blockUser(id: id), options: options);
       Map<String, dynamic> data = response.data;
 
       return data["message"] ?? "Success";

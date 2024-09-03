@@ -45,8 +45,8 @@ class _BreedingCardState extends State<BreedingCard> {
                     alignment: Alignment.topRight,
                     child: IconWithMaterial(
                       imagePath: AssetPath.chat,
-                      width: AppSize.defaultSize! * 3.5,
-                      height: AppSize.defaultSize! * 3.5,
+                      width: AppSize.defaultSize! *2.5,
+                      height: AppSize.defaultSize! * 2.5,
                     )),
               ),
             ],

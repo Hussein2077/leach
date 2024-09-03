@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
@@ -96,10 +94,7 @@ class _CommentViewState extends State<CommentView> {
                     InkWell(
                       onTap: () {
                         if (commentController.text.isNotEmpty) {
-                          BlocProvider.of<CommentBloc>(context).add(
-                              AddCommentEvent(
-                                  id: widget.postId, comment: commentController
-                                  .text));
+                          BlocProvider.of<CommentBloc>(context).add(AddCommentEvent(id: widget.postId, comment: commentController.text));
                           commentController.clear();
                         }
                       },
@@ -122,15 +117,8 @@ class _CommentViewState extends State<CommentView> {
                           itemCount: state.commentsModel.comments!.data!.length,
                           itemBuilder: (BuildContext context, int index) {
                             return CommentRow(
-                              text: state.commentsModel.comments?.data?[index]
-                                  .comment ??
-                                  "",
                               font: 'Gully',
-                              uuid: state.commentsModel.comments?.data?[index].uuid,
-                              image: state.commentsModel.comments?.data?[index]
-                                  .user
-                                  ?.profilePicture ??
-                                  "",
+                              commentData:  state.commentsModel.comments?.data?[index],
                               color: const Color.fromRGBO(112, 112, 112, 1),
                             );
                           },

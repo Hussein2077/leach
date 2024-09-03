@@ -131,14 +131,15 @@ class Methods {
     }
   }
 
-  showAlertDialog(BuildContext context,
-      {required String title, required VoidCallback? onPressed}) {
+  showAlertDialog(BuildContext context, {required String title, required VoidCallback? onPressed,}) {
     showDialog(
         context: context,
         builder: (context) {
           return CupertinoAlertDialog(
             title: CustomText(
               text: title,
+              overflow: TextOverflow.clip,
+              textAlign: TextAlign.center,
               fontWeight: FontWeight.w700,
               fontFamily: 'Gully',
               fontSize: 1.7 * AppSize.defaultSize!,

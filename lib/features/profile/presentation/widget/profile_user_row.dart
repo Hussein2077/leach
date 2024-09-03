@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leach/core/models/profile_data_model.dart';
 import 'package:leach/core/resource_manager/asset_path.dart';
 import 'package:leach/core/resource_manager/colors.dart';
 import 'package:leach/core/utils/app_size.dart';
+import 'package:leach/core/utils/methods.dart';
 import 'package:leach/core/widgets/cached_network_image.dart';
 import 'package:leach/core/widgets/cutom_text.dart';
 import 'package:leach/features/profile/presentation/controller/pending_friend_request_manager/pending_friend_request_bloc.dart';
@@ -101,7 +103,7 @@ class ProfileUserRow extends StatelessWidget {
           ],
         ),
         if (friendsView) const Spacer(),
-        if (friendsView) friendButton(context: context),
+        if (friendsView && UserModel.getInstance().uuid != uuid) friendButton(context: context),
       ],
     );
   }
@@ -114,8 +116,14 @@ class ProfileUserRow extends StatelessWidget {
         children: [
           IconButton(
               onPressed: (){
-                BlocProvider.of<GetFriendRequestBloc>(context).add(RemoveFriendEvent(id: uuid!));
-              },
+                Methods.instance.showAlertDialog(
+                  context,
+                  title: 'Are you sure you want to remove friend request?',
+                  onPressed: ()  {
+                    BlocProvider.of<GetFriendRequestBloc>(context).add(RemoveFriendEvent(id: uuid!));
+                  },
+                );
+                },
               icon: Icon(
                 Icons.watch_later_outlined,
                 color: Colors.white,

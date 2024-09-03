@@ -239,12 +239,14 @@ class _DogBreadState extends State<DogBread> {
                       child: Row(
                         children: [
                           CircularCheckbox(
+
                             text: StringManager.yes.tr(),
                             initialValue: state.breedingExperience == true,
                             onChanged: (value) {
                               cubit.setBreedingExperience(true);
                             },
                           ),
+                          SizedBox(width: AppSize.defaultSize! * 14.5,),
                           CircularCheckbox(
                             text: StringManager.no.tr(),
                             initialValue: state.breedingExperience == false,
@@ -266,6 +268,7 @@ class _DogBreadState extends State<DogBread> {
                               cubit.setBreedingAvailable(true);
                             },
                           ),
+                          SizedBox(width: AppSize.defaultSize! * 14.5,),
                           CircularCheckbox(
                             text: StringManager.no.tr(),
                             initialValue: state.breedingAvailable == false,
@@ -287,6 +290,7 @@ class _DogBreadState extends State<DogBread> {
                               cubit.setNeuteredSpayed(true);
                             },
                           ),
+                          SizedBox(width: AppSize.defaultSize! * 14.5,),
                           CircularCheckbox(
                             text: StringManager.no.tr(),
                             initialValue: state.neuteredSpayed == false,

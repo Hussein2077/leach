@@ -57,7 +57,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     nameController.dispose();
     usernameController.dispose();
     phoneController.dispose();
-     LoadingOverlay().hide();
+    LoadingOverlay().hide();
     super.dispose();
   }
 
@@ -71,6 +71,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           Navigator.pushNamedAndRemoveUntil(
             context,
             Routes.addPetScreen,
+            arguments: false,
             (route) => false,
           );
         } else if (state is SignUpWithEmailAndPasswordErrorMessageState) {
@@ -168,37 +169,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   );
                 }),
-
-                StatefulBuilder(
-                  builder: (context, setState) {
-                    return ColumnWithTextField(
-                      text: StringManager.city.tr(),
-                      child: CountryDropDown(
-                        countryOrCity: StringManager.citiesInEgypt,
-                        onChanged: (String? value) {
-                          setState(() {
-                            city = value;
-                          });
-                        },
-                        hint: StringManager.selectYourCity.tr(),
-                      ),
-                    );
-                  }
-                ), StatefulBuilder(
-                    builder: (context, setState) {
-                      return ColumnWithTextField(
-                        text: StringManager.area.tr(),
-                        child: CountryDropDown(
-                          countryOrCity: const ['6 Of October'],
-                          onChanged: (String? value) {
-                            setState(() {
-                              area = value;
-                            });
-                          },
-                        ),
-                      );
-                    }
-                ),
+                StatefulBuilder(builder: (context, setState) {
+                  return ColumnWithTextField(
+                    text: StringManager.city.tr(),
+                    child: CountryDropDown(
+                      countryOrCity: StringManager.citiesInEgypt,
+                      onChanged: (String? value) {
+                        setState(() {
+                          city = value;
+                        });
+                      },
+                      hint: StringManager.selectYourCity.tr(),
+                    ),
+                  );
+                }),
+                StatefulBuilder(builder: (context, setState) {
+                  return ColumnWithTextField(
+                    text: StringManager.area.tr(),
+                    child: CountryDropDown(
+                      countryOrCity: const ['6 Of October'],
+                      onChanged: (String? value) {
+                        setState(() {
+                          area = value;
+                        });
+                      },
+                    ),
+                  );
+                }),
                 SizedBox(height: AppSize.defaultSize! * 3),
                 Center(
                   child: MainButton(
