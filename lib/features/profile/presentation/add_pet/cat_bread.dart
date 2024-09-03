@@ -106,7 +106,7 @@ class _CatBreadState extends State<CatBread> {
                       fontSize: AppSize.defaultSize! * 4,
                     ),
                     CustomText(
-                      text: StringManager.enterPersonalInformation.tr(),
+                      text: StringManager.enterYourCatsInformation.tr(),
                       fontSize: AppSize.defaultSize! * 1.5,
                       color: AppColors.greyColor,
                     ),
@@ -311,7 +311,7 @@ class _CatBreadState extends State<CatBread> {
                       height: AppSize.defaultSize! * 2.5,
                     ),
                      MultiImagePickerWidget(
-                      initialText: StringManager.addAPicture.tr(),
+                      initialText: StringManager.add3Pictures.tr(),
                       onImagesPicked: (List<File> files) {
                         cubit.pickImages(files);
                       },

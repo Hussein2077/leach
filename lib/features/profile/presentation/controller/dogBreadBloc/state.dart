@@ -20,13 +20,13 @@ class BaseBreadState extends Equatable {
     this.isMale,
     this.pickedImages = const [],
     this.passportImageFile,
-    this.isPureBredSelected,
+    this.isPureBredSelected=true,
     this.sizeSelectedIndex,
-    this.breedingExperience,
+    this.breedingExperience = true,
     this.selectKind,
     this.selectSecondKind,
-    this.neuteredSpayed,
-    this.breedingAvailable
+    this.neuteredSpayed = true,
+    this.breedingAvailable  = true,
   });
 
   @override

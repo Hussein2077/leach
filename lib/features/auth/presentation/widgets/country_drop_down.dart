@@ -84,7 +84,8 @@ class _CountryDropDownState extends State<CountryDropDown> {
                 padding: EdgeInsets.only(left: AppSize.defaultSize!),
                 child: CustomText(
                   text: value,
-                  fontSize: AppSize.defaultSize! * 1.3,
+                  fontSize: AppSize.defaultSize! * 1.8,
+
                 ),
               ),
             );

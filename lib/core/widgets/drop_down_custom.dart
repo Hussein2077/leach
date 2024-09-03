@@ -32,8 +32,10 @@ class CustomDropdownButton2 extends StatelessWidget {
     this.scrollbarThickness,
     this.scrollbarAlwaysShow,
     this.offset = Offset.zero,
-    super.key, this.dropdownColor,
+    super.key,
+    this.dropdownColor,
   });
+
   final String hint;
   final String? value;
   final List<String> dropdownItems;
@@ -74,38 +76,42 @@ class CustomDropdownButton2 extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
             style: TextStyle(
-                fontSize: AppSize.defaultSize!*1.6,
-                fontWeight: FontWeight.w600,
-                // color: AppColors.black.withOpacity(.8)
+              fontSize: AppSize.defaultSize! * 1.6,
+              fontWeight: FontWeight.w600,
+              // color: AppColors.black.withOpacity(.8)
             ),
           ),
         ),
         value: value,
         items: dropdownItems
             .map((String item) => DropdownMenuItem<String>(
-          value: item,
-          child: Container(
-            alignment: valueAlignment,
-            child: Text(
-              item,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-              style:   TextStyle(
-                fontSize: AppSize.defaultSize!*1.4,
-              ),
-            ),
-          ),
-        ))
+                  value: item,
+                  child: Container(
+                    alignment: valueAlignment,
+                    child: Text(
+                      item,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: TextStyle(
+                        fontSize: AppSize.defaultSize! * 1.6,
+                        fontFamily: 'Gully',
+                      ),
+                    ),
+                  ),
+                ))
             .toList(),
         onChanged: onChanged,
         selectedItemBuilder: selectedItemBuilder,
         buttonStyleData: ButtonStyleData(
-          height: buttonHeight ?? AppSize.defaultSize!*4,
-          width: buttonWidth ?? AppSize.defaultSize!*14,
-          padding: buttonPadding ??   EdgeInsets.only(left: AppSize.defaultSize!*1.4, right: AppSize.defaultSize!*1.4),
+          height: buttonHeight ?? AppSize.defaultSize! * 4,
+          width: buttonWidth ?? AppSize.defaultSize! * 14,
+          padding: buttonPadding ??
+              EdgeInsets.only(
+                  left: AppSize.defaultSize! * 1.4,
+                  right: AppSize.defaultSize! * 1.4),
           decoration: buttonDecoration ??
               BoxDecoration(
-                borderRadius: BorderRadius.circular(AppSize.defaultSize!*1.4),
+                borderRadius: BorderRadius.circular(AppSize.defaultSize! * 1.4),
                 border: Border.all(
                   color: Colors.black45,
                 ),
@@ -120,19 +126,20 @@ class CustomDropdownButton2 extends StatelessWidget {
         ),
         dropdownStyleData: DropdownStyleData(
           //Max height for the dropdown menu & becoming scrollable if there are more items. If you pass Null it will take max height possible for the items.
-          maxHeight: dropdownHeight ?? AppSize.defaultSize!*20,
-          width: dropdownWidth ?? AppSize.defaultSize!*14,
+          maxHeight: dropdownHeight ?? AppSize.defaultSize! * 20,
+          width: dropdownWidth ?? AppSize.defaultSize! * 14,
           padding: dropdownPadding,
           decoration: dropdownDecoration ??
               BoxDecoration(
                 color: dropdownColor,
-                borderRadius: BorderRadius.circular(AppSize.defaultSize!*1.4),
+                borderRadius: BorderRadius.circular(AppSize.defaultSize! * 1.4),
               ),
           elevation: dropdownElevation ?? 8,
           //Null or Offset(0, 0) will open just under the button. You can edit as you want.
           offset: offset,
           scrollbarTheme: ScrollbarThemeData(
-            radius: scrollbarRadius ??   Radius.circular(AppSize.defaultSize!*4),
+            radius:
+                scrollbarRadius ?? Radius.circular(AppSize.defaultSize! * 4),
             thickness: scrollbarThickness != null
                 ? MaterialStateProperty.all<double>(scrollbarThickness!)
                 : null,
@@ -142,8 +149,11 @@ class CustomDropdownButton2 extends StatelessWidget {
           ),
         ),
         menuItemStyleData: MenuItemStyleData(
-          height: itemHeight ?? AppSize.defaultSize!*4,
-          padding: itemPadding ??   EdgeInsets.only(left: AppSize.defaultSize!*1.4, right: AppSize.defaultSize!*1.4),
+          height: itemHeight ?? AppSize.defaultSize! * 4,
+          padding: itemPadding ??
+              EdgeInsets.only(
+                  left: AppSize.defaultSize! * 1.4,
+                  right: AppSize.defaultSize! * 1.4),
         ),
       ),
     );

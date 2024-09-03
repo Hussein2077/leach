@@ -20,11 +20,11 @@ class CommentRow extends StatefulWidget {
 
   const CommentRow(
       {super.key,
-        this.textSize,
-        this.color,
-        this.onTap,
-        this.commentData,
-        this.font});
+      this.textSize,
+      this.color,
+      this.onTap,
+      this.commentData,
+      this.font});
 
   @override
   _CommentRowState createState() => _CommentRowState();
@@ -40,45 +40,56 @@ class _CommentRowState extends State<CommentRow> {
       child: _isDotsPressed
           ? _buildAlternativeContent()
           : Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(
-              left: AppSize.defaultSize! * 3,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: AppSize.defaultSize! * 3,
+                  ),
+                  child: (widget.commentData?.user?.profilePicture == null ||
+                          widget.commentData!.user!.profilePicture!.isEmpty)
+                      ? Image.asset(
+                        AssetPath.whiteProfileIcon,
+                        width: AppSize.defaultSize! * 3.8,
+                        height: AppSize.defaultSize! * 3.8,
+                      )
+                      : CachedNetworkCustom(
+                          url: widget.commentData?.user?.profilePicture ?? "",
+                          width: AppSize.defaultSize! * 3.8,
+                          height: AppSize.defaultSize! * 3.8,
+                          radius: AppSize.defaultSize! * 10,
+                        ),
+                ),
+                SizedBox(
+                  width: AppSize.defaultSize! * 1.2,
+                ),
+                CustomText(
+                  fontFamily: widget.font,
+                  text: widget.commentData?.comment ?? "",
+                  fontSize: widget.textSize ?? AppSize.defaultSize! * 1.5,
+                  color: widget.color,
+                  maxLines: 1,
+                  textAlign: TextAlign.start,
+                ),
+                if (widget.commentData!.user!.uuid ==
+                    UserModel.getInstance().uuid)
+                  const Spacer(),
+                if (widget.commentData!.user!.uuid ==
+                    UserModel.getInstance().uuid)
+                  Padding(
+                    padding: EdgeInsets.only(right: AppSize.defaultSize! * 2.5),
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _isDotsPressed = true;
+                        });
+                      },
+                      child: Image.asset(AssetPath.dots),
+                    ),
+                  ),
+              ],
             ),
-            child: CachedNetworkCustom(
-              url: widget.commentData?.user?.profilePicture??"",
-              width: AppSize.defaultSize! * 3.8,
-              height: AppSize.defaultSize! * 3.8,
-              radius: AppSize.defaultSize! * 10,
-            ),
-          ),
-          SizedBox(
-            width: AppSize.defaultSize! * 1.2,
-          ),
-          CustomText(
-            fontFamily: widget.font,
-            text: widget.commentData?.comment??"",
-            fontSize: widget.textSize ?? AppSize.defaultSize! * 1.5,
-            color: widget.color,
-            maxLines: 1,
-            textAlign: TextAlign.start,
-          ),
-          if(widget.commentData!.user!.uuid == UserModel.getInstance().uuid) const Spacer(),
-          if(widget.commentData!.user!.uuid == UserModel.getInstance().uuid) Padding(
-            padding: EdgeInsets.only(right: AppSize.defaultSize! * 2.5),
-            child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  _isDotsPressed = true;
-                });
-              },
-              child: Image.asset(AssetPath.dots),
-            ),
-          ),
-        ],
-      ),
     );
   }
 
@@ -86,7 +97,8 @@ class _CommentRowState extends State<CommentRow> {
     return GestureDetector(
       onTap: () {
         setState(() {
-          BlocProvider.of<DeleteCommentBloc>(context).add(DeleteCommentEvent(id: widget.commentData!.uuid!));
+          BlocProvider.of<DeleteCommentBloc>(context)
+              .add(DeleteCommentEvent(id: widget.commentData!.uuid!));
           _isDotsPressed = false;
         });
       },
@@ -100,8 +112,9 @@ class _CommentRowState extends State<CommentRow> {
             child: const Image(image: AssetImage(AssetPath.x)),
           ),
           SizedBox(width: AppSize.defaultSize! * 1.2),
-          CustomText(text: StringManager.deleteComment,
-          fontSize: AppSize.defaultSize! * 2.2,
+          CustomText(
+            text: StringManager.deleteComment,
+            fontSize: AppSize.defaultSize! * 2.2,
           ),
           const Spacer(),
           Padding(

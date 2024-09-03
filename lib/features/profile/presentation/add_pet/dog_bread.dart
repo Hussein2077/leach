@@ -103,7 +103,7 @@ class _DogBreadState extends State<DogBread> {
                       fontSize: AppSize.defaultSize! * 4,
                     ),
                     CustomText(
-                      text: StringManager.enterPersonalInformation.tr(),
+                      text: StringManager.enterYourDogsInformation.tr(),
                       fontSize: AppSize.defaultSize! * 1.5,
                       color: AppColors.greyColor,
                     ),
@@ -307,7 +307,7 @@ class _DogBreadState extends State<DogBread> {
                       height: AppSize.defaultSize! * 2.5,
                     ),
                     MultiImagePickerWidget(
-                      initialText: StringManager.addAPicture.tr(),
+                      initialText: StringManager.add3Pictures.tr(),
                       onImagesPicked: (List<File> files) {
                         cubit.pickImages(files);
                       },
