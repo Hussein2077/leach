@@ -69,7 +69,7 @@ class WelcomePage extends StatelessWidget {
                       child: CustomText(
                         text: StringManager.terms.tr(),
                         color: Colors.white,
-                        fontSize: AppSize.defaultSize! * .9,
+                        fontSize: AppSize.defaultSize! * 1.55,
                         textAlign: TextAlign.center,
                       ),
                     ),

@@ -100,7 +100,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 CustomText(
                   text: StringManager.enterPersonalInformation.tr(),
-                  fontSize: AppSize.defaultSize! * 1.5,
+                  fontSize: AppSize.defaultSize! * 1.7,
                   color: AppColors.greyColor,
                 ),
                 ColumnWithTextField(

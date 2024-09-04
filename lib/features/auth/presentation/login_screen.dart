@@ -84,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 CustomText(
                   text: StringManager.loginToContinue.tr(),
-                  fontSize: AppSize.defaultSize! * 1.5,
+                  fontSize: AppSize.defaultSize! * 1.8,
                   color: AppColors.greyColor,
                 ),
                 ColumnWithTextField(
@@ -123,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     child: CustomText(
                       text: StringManager.forgotPassword.tr(),
-                      fontSize: AppSize.defaultSize! * 1.5,
+                      fontSize: AppSize.defaultSize! * 1.8,
                       color: AppColors.primaryColor,
                     ),
                   ),

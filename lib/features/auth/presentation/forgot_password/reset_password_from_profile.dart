@@ -101,7 +101,7 @@ class _ResetPasswordScreenFromProfileState
                 ),
                 CustomText(
                   text: StringManager.enterYourInformation.tr(),
-                  fontSize: AppSize.defaultSize! * 1.5,
+                  fontSize: AppSize.defaultSize! * 1.8,
                   color: AppColors.greyColor,
                 ),
                 SizedBox(height: AppSize.defaultSize! * 2),
@@ -134,7 +134,7 @@ class _ResetPasswordScreenFromProfileState
                     },
                     child: CustomText(
                       text: StringManager.forgotPassword.tr(),
-                      fontSize: AppSize.defaultSize! * 1.5,
+                      fontSize: AppSize.defaultSize! * 1.7,
                       color: AppColors.primaryColor,
                     ),
                   ),

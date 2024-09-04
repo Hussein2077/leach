@@ -73,7 +73,7 @@ class _CountryDropDownState extends State<CountryDropDown> {
             child: Text(
               widget.hint ?? StringManager.selectYourCountry.tr(),
               style: TextStyle(
-                fontSize: AppSize.defaultSize! * 1.3,
+                fontSize: AppSize.defaultSize! * 1.7,
               ),
             ),
           ),
@@ -85,7 +85,6 @@ class _CountryDropDownState extends State<CountryDropDown> {
                 child: CustomText(
                   text: value,
                   fontSize: AppSize.defaultSize! * 1.8,
-
                 ),
               ),
             );
