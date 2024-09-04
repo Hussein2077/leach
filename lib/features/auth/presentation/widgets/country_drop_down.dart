@@ -9,7 +9,11 @@ import 'package:leach/core/widgets/cutom_text.dart';
 
 class CountryDropDown extends StatefulWidget {
   const CountryDropDown(
-      {super.key, this.countryOrCity, this.onChanged, this.hint, this.initialValue});
+      {super.key,
+      this.countryOrCity,
+      this.onChanged,
+      this.hint,
+      this.initialValue});
 
   final List<String>? countryOrCity;
   final String? hint;
@@ -70,11 +74,9 @@ class _CountryDropDownState extends State<CountryDropDown> {
           },
           hint: Padding(
             padding: EdgeInsets.only(left: AppSize.defaultSize!),
-            child: Text(
-              widget.hint ?? StringManager.selectYourCountry.tr(),
-              style: TextStyle(
-                fontSize: AppSize.defaultSize! * 1.7,
-              ),
+            child: CustomText(
+              text: widget.hint ?? StringManager.selectYourCountry.tr(),
+              fontSize: AppSize.defaultSize! * 1.7,
             ),
           ),
           items: widget.countryOrCity?.map((String value) {
