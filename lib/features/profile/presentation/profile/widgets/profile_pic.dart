@@ -36,7 +36,6 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
   void initState() {
     super.initState();
     _displayText = widget.initialText;
-    log('${widget.initialImageUrl}widget.initialImageUrl ${_imageFile}');
   }
 
   Future<void> _openImagePicker() async {

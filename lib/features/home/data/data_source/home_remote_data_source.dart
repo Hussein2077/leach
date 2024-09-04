@@ -74,7 +74,6 @@ class HomeRemotelyDateSource extends HomeBaseRemotelyDataSource {
   @override
   Future<List<HowToModel>> getHowTo(GetHowToParameter type) async {
     Map<String, String> headers = await DioHelper().header();
-    log('${type.petType} agagewrgq ${type.category}');
     final body = {"pet_type": type.petType, "category": type.category};
     try {
       final response = await Dio().post(ConstantApi.getHowToPosts,
@@ -94,7 +93,6 @@ class HomeRemotelyDateSource extends HomeBaseRemotelyDataSource {
   @override
   Future<void> requestBooking(RequestBookingParam requestBooking) async {
     Map<String, String> headers = await DioHelper().header();
-    log('${requestBooking.vendorId.toString()} agagewrgq ${requestBooking.date} ${requestBooking.time}');
     final body = {
       "vendor_id": requestBooking.vendorId.toString(),
       "date": requestBooking.date,
@@ -125,7 +123,6 @@ class HomeRemotelyDateSource extends HomeBaseRemotelyDataSource {
           headers: headers,
         ),
       );
-log('${response.data['data']} hushushsuhsuhsushushushsuhsu');
       return SearchUserResponse.fromJson(response.data['data']);
     } on DioException catch (e) {
       throw DioHelper.handleDioError(dioError: e, endpointName: 'getSearchUser');

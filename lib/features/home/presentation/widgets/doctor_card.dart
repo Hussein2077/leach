@@ -20,7 +20,6 @@ class DoctorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('${vendor.image}vendor.image');
     return InkWell(
       onTap: onTap,
       child: Padding(

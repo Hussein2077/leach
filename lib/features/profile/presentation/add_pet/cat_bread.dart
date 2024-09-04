@@ -389,7 +389,6 @@ class _CatBreadState extends State<CatBread> {
                                   .toString(),
                             ),
                           );
-                          log('message${state.sizeSelectedIndex}state.sizeSelectedIndex');
                         } else {
                           errorSnackBar(context, isValid);
                         }

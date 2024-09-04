@@ -48,12 +48,10 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
         options: options,
       );
       UserModel jsonData = UserModel.fromMap(response.data['data']['user']);
-log('thththththth ${response.data['data']['token']}');
       await Methods.instance
           .saveUserToken(authToken: response.data['data']['token']);
       return jsonData;
     } on DioException catch (e) {
-      log('${authModel.phoneOrEmail} sdnhejte ${authModel.password}');
 
       throw DioHelper.handleDioError(
           dioError: e, endpointName: "loginWithEmailAndPassword");
@@ -243,7 +241,6 @@ log('thththththth ${response.data['data']['token']}');
         ],
       );
     } catch (e) {
-      log(e.toString());
       throw SiginApplexception();
     }
 

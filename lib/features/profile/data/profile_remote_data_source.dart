@@ -125,9 +125,7 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
     FormData? formData;
 
     final Options options = await DioHelper().options();
-    log('updatePetRequest.uuid ${updatePetRequest.uuid}');
-    log('updatePetRequest.uuid ${updatePetRequest.uuid}');
-    log('updatePetRequest.uuid ${updatePetRequest.username}');
+
 
     formData = FormData.fromMap({
       'username': updatePetRequest.username,
@@ -166,7 +164,6 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
         ),
       ));
     }
-    log('$formData erherheh');
     try {
       final response = await Dio().post(
         ConstantApi.updatePet(updatePetRequest.uuid),
@@ -420,7 +417,6 @@ class ProfileRemotelyDateSource extends ProfileBaseRemotelyDataSource {
   @override
   Future<String> reportUser(ReportParameter reportParameter) async {
     Options options = await DioHelper().options();
-    log('${reportParameter.picture} beiughe ${reportParameter.type}');
     late FormData formData;
     if (reportParameter.picture == null &&
         (reportParameter.description == null) &&

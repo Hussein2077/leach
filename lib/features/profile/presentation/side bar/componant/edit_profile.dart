@@ -46,7 +46,6 @@ class _EditProfileState extends State<EditProfile> {
     bioController = TextEditingController(text: UserModel.getInstance().bio);
     city = UserModel.getInstance().city;
     area = UserModel.getInstance().area;
-    log('$area dsggerd $city');
     super.initState();
   }
 

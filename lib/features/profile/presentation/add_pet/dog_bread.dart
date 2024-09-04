@@ -384,7 +384,6 @@ class _DogBreadState extends State<DogBread> {
                                   .toString(),
                             ),
                           );
-                          log('message${state.sizeSelectedIndex}state.sizeSelectedIndex');
                         } else {
                           errorSnackBar(context, isValid);
                         }

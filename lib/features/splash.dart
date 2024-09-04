@@ -33,7 +33,6 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(  Duration(seconds:(token != "noToken" || token != null)?0: 3));
     bool firstOpen = await Methods.instance.returnFirstOpen();
 
-    log('$token mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm');
     _navigateBasedOnToken(firstOpen);
   }
 

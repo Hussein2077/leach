@@ -76,18 +76,15 @@ class _BookingHistoryState extends State<BookingHistory> {
                         .add(GetAllBookingEvent());
 
                     LoadingOverlay().hide();
-                    log('CancelBookingErrorState');
 
                     errorSnackBar(context, state.errorMessage);
                   } else if (state is CancelBookingSuccessState) {
                     BlocProvider.of<BookingBloc>(context)
                         .add(GetAllBookingEvent());
                     LoadingOverlay().hide();
-                    log('CancelBookingSuccessState');
                     successSnackBar(context, 'Booking canceled successfully');
                   } else if (state is CancelBookingLoadingState) {
                     LoadingOverlay().show(context);
-                    log('CancelBookingLoadingState');
                   }
                 },
                 builder: (context, state) {

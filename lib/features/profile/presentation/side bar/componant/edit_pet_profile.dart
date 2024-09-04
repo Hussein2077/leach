@@ -370,7 +370,6 @@ class _EditPetProfileState extends State<EditPetProfile> {
               MainButton(
                 text: StringManager.save.tr(),
                 onTap: () {
-                  log(' currentPet!.uuid  ${usernameController.text}');
                   BlocProvider.of<CreatePetBloc>(context).add(UpdatePetEvent(
                     uuid: currentPet?.uuid??widget.pets[0].uuid,
                     profilePicture: imageFile,

@@ -30,7 +30,6 @@ class _CalenderScreenState extends State<CalenderScreen> {
   String selectedTime = "";
   @override
   Widget build(BuildContext context) {
-    log('${selectedDate}selectedDate');
     return Scaffold(
       body: Padding(
           padding: EdgeInsets.only(

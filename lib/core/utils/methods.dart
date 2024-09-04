@@ -27,7 +27,6 @@ class Methods {
 
   Future<void> saveUserToken({String? authToken}) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    log('$authToken hussssssssssssssssmmm');
     if (authToken != null) {
       preferences.setString(StringManager.userTokenKey, authToken);
     } else {
@@ -40,7 +39,6 @@ class Methods {
 
     String tokenPref =
         preferences.getString(StringManager.userTokenKey) ?? "noToken";
-    log('$tokenPref dhjeyjeyjeyjye');
     return tokenPref;
   }
 
@@ -53,7 +51,6 @@ class Methods {
     SharedPreferences preferences = await SharedPreferences.getInstance();
 
     bool firstOpen = preferences.getBool('firstOpen') ?? true;
-    log('$firstOpen dhjeyjeyjeyjye');
     return firstOpen;
   }
 

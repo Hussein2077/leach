@@ -26,7 +26,6 @@ class DioHelper {
   Future<Map<String, String>> header() async {
     String token = await Methods.instance.returnUserToken();
     if (kDebugMode) {
-      log('husssssssssss $token');
     }
     Map<String, String> headers = {
       "Authorization": 'Bearer $token',
@@ -72,8 +71,6 @@ class DioHelper {
   static dynamic handleDioError(
       {DioException? dioError, String? endpointName}) {
     if (kDebugMode) {
-      log("dioError${dioError?.message}");
-      log('endpointName$endpointName');
     }
 
     switch (dioError!.type) {
@@ -96,11 +93,7 @@ class DioHelper {
 
   static Exception handleStatuesCodeResponse(
       {Response? response, String? endpointName}) {
-    if (kDebugMode) {
-      log("end point Name =$endpointName");
-      log("status code${response?.statusCode}");
-      log("error response${response?.data}");
-    }
+
     switch (response?.statusCode) {
       case 500:
         throw ServerException();
